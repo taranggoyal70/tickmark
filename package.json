@@ -11,7 +11,8 @@
     "typecheck": "tsc --noEmit",
     "selftest": "tsx --env-file-if-exists=.env.local scripts/selftest.ts",
     "check": "tsx --env-file-if-exists=.env.local scripts/probe.ts",
-    "verify:db": "tsx --env-file-if-exists=.env.local scripts/verify-db.ts"
+    "verify:db": "tsx --env-file-if-exists=.env.local scripts/verify-db.ts",
+    "publish": "tsx --env-file-if-exists=.env.local scripts/publish-run.ts"
   },
   "dependencies": {
     "@ai-sdk/anthropic": "^4.0.49",
@@ -24,6 +25,7 @@
     "clsx": "^2.1.1",
     "date-fns": "^4.4.0",
     "lucide-react": "^1.41.0",
+    "neatlogs": "^1.1.19",
     "next": "16.3.4",
     "react": "19.2.8",
     "react-dom": "19.2.8",
