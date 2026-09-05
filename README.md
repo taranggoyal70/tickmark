@@ -6,6 +6,11 @@ genuinely needs judgment, and compiles every correction they make into a determi
 rule — so the judgment gets made once, and then runs for free.
 </p>
 
+<p align="center">
+<b>Syndicate by Maximor</b> · <b>Track 2 — Autonomous Office of the CFO</b><br>
+Live: <a href="https://tickmark-kappa.vercel.app">tickmark-kappa.vercel.app</a>
+</p>
+
 ---
 
 > A **tickmark** is the small symbol an accountant puts beside a ledger line to say
@@ -117,6 +122,44 @@ period   cleared  coding  match   exc  llm  rules  cost      touch
 The headline metrics are auto-clear rate (up), cost per close (down), controller time
 (down) — and **auto-clear precision**, which must *not* move. Nobody reviews what the
 agent cleared unattended, so that number is the one that matters.
+
+## What improved across iterations
+
+The agent runs the same close four times. Nothing about the model changes between runs —
+only the Rulebook it has earned. Measured against ground truth it never sees:
+
+| | first close | fourth close |
+|---|---|---|
+| Auto-cleared without a human | — | — |
+| Exceptions reaching the controller | — | — |
+| Cost per close | — | — |
+| Controller time in the queue | — | — |
+| **Auto-clear precision** | — | — |
+
+> Numbers are filled in from `npm run simulate`. The dashboard renders whatever the last
+> run measured and labels its provenance; it never shows an illustrative figure.
+
+Auto-clear precision is the one that must *not* move. Nobody reviews what the agent
+cleared unattended, so a system that gets faster by getting sloppier is worse than no
+system at all.
+
+## The agent workflow
+
+```
+ingest bank feed + AP invoices + GL
+  │
+  ├─ Rulebook pass      deterministic, zero tokens — anything already learned
+  │
+  ├─ Model pass         only the residue, batched, TOON-encoded context
+  │
+  ├─ The gate           confidence AND materiality; rule-settled work is trusted
+  │                     to a higher ceiling because a backtest is the control
+  │
+  ├─ Tickmark           verified, append-only, with its evidence chain
+  └─ Exception queue    everything needing judgment, with one-click resolutions
+        │
+        └─ Correction → Gradient step → backtest → human gate → Rulebook
+```
 
 ## Stack
 
