@@ -9,7 +9,8 @@
     "lint": "eslint",
     "simulate": "tsx --env-file=.env.local scripts/simulate.ts",
     "typecheck": "tsc --noEmit",
-    "selftest": "tsx scripts/selftest.ts"
+    "selftest": "tsx scripts/selftest.ts",
+    "check": "tsx --env-file=.env.local scripts/probe.ts"
   },
   "dependencies": {
     "@ai-sdk/anthropic": "^4.0.49",
