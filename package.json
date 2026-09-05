@@ -7,10 +7,11 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "simulate": "tsx --env-file=.env.local scripts/simulate.ts",
+    "simulate": "tsx --env-file-if-exists=.env.local scripts/simulate.ts",
     "typecheck": "tsc --noEmit",
-    "selftest": "tsx scripts/selftest.ts",
-    "check": "tsx --env-file=.env.local scripts/probe.ts"
+    "selftest": "tsx --env-file-if-exists=.env.local scripts/selftest.ts",
+    "check": "tsx --env-file-if-exists=.env.local scripts/probe.ts",
+    "verify:db": "tsx --env-file-if-exists=.env.local scripts/verify-db.ts"
   },
   "dependencies": {
     "@ai-sdk/anthropic": "^4.0.49",

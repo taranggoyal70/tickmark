@@ -377,3 +377,18 @@ create table simulation_reports (
 );
 create index on simulation_reports (generated_at desc);
 alter table simulation_reports enable row level security;
+-- Data API grants.
+--
+-- The project was created with "automatically expose new tables" OFF, so no
+-- API role has privileges by default. That is the posture we want: the anon and
+-- authenticated roles must never reach a ledger row. Only service_role - which
+-- is server-side only, held by Next.js route handlers behind Clerk - is granted
+-- anything. RLS stays enabled on every table as defence in depth.
+revoke all on all tables in schema public from anon, authenticated;
+
+grant usage on schema public to service_role;
+grant all privileges on all tables    in schema public to service_role;
+grant all privileges on all sequences in schema public to service_role;
+
+alter default privileges in schema public grant all on tables    to service_role;
+alter default privileges in schema public grant all on sequences to service_role;
