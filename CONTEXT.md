@@ -142,6 +142,33 @@ Two of its constraints matter more in accounting than they do in code:
 - **Analysis never writes.** Proposing and applying are separate operations with
   separate authority. That is segregation of duties, which we get for free.
 
+### Standing Intent
+A controller's declaration, made while resolving one Exception, that this
+judgment should become a Rule. It is **not** a Rule and never acts on its own.
+
+It exists because the honest answer to "make this automatic" is often *"not
+yet"*. One correction is an anecdote. The Standing Intent is how the system says
+*I heard you, and I need to see it once more* without losing the instruction.
+When a second Correction matches, the Gradient Step proposes the Rule citing
+both.
+
+- Not a Rule. It never codes, matches, accrues, or posts anything.
+- Not a queue item. Resolving the Exception is complete; the intent rides along.
+- Not permanent. A controller can withdraw one.
+
+### Rule Adoption
+The act of moving a proposed Rule to `active`. The **agent** proposes; a
+**controller** adopts. Those are different parties, so preparer and approver are
+already distinct - Corrections are evidence, not the proposal.
+
+A Rule whose every citation came from the same person who adopted it is marked
+**self-evidenced** and stays marked. Nothing blocks it - the backtest is still
+the gate - but an auditor asking *"who decided this, and did anyone else look?"*
+gets an answer without having to reconstruct it.
+
+- Not the same as a Tickmark. A tickmark verifies one line; adoption changes how
+  every future line is decided.
+
 ### Backtest
 Before a proposed Rule is accepted, it is replayed against **all prior closed
 periods**. The controller sees exactly what it would have changed and what it
@@ -159,3 +186,5 @@ would have broken. No rule is adopted on a promise.
    Close Run (with its Evidence Chain). No orphan decisions.
 6. A Rule that has never been backtested cannot be activated.
 7. A Rule's evidence is the same kind as the Rule. Coding evidences coding.
+8. A Standing Intent never decides anything. Only an active Rule does.
+9. Adoption is attributable. Every active Rule names who adopted it and when.
