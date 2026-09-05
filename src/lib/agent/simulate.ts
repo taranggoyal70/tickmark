@@ -11,6 +11,7 @@ import { controllerReview, touchSeconds } from "./controller";
 import { applyToRulebook, gradientStep, wouldAdopt, type CorrectionRecord } from "./gradient";
 import type { ChartContext, VendorHistoryRow } from "./llm";
 import { DEFAULT_MODEL, type ModelId } from "./pricing";
+import { effectiveModelId } from "./provider";
 import { emptyRulebook } from "./rules";
 import { splitKey } from "./close";
 import type { Exception, Rule, RunStats } from "./types";
@@ -141,7 +142,7 @@ export async function simulate(opts: { model?: ModelId; provenance?: "model" | "
 
   return {
     provenance: opts.provenance ?? "model",
-    model, generatedAt: new Date().toISOString(), entity: ENTITY.name,
+    model: opts.provenance === "mock" ? model : effectiveModelId(model), generatedAt: new Date().toISOString(), entity: ENTITY.name,
     periods: reports, rulebook: rulebook.rules, totals,
   };
 }

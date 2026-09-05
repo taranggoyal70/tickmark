@@ -4,16 +4,19 @@
  *   npx tsx --env-file=.env.local scripts/simulate.ts [--model anthropic/claude-sonnet-5]
  */
 import { simulate } from "../src/lib/agent/simulate";
-import { fmtUsd, MODELS, type ModelId } from "../src/lib/agent/pricing";
-import { providerLabel } from "../src/lib/agent/provider";
+import { fmtUsd, MODELS, rateFor, type ModelId } from "../src/lib/agent/pricing";
+import { effectiveModelId, providerLabel } from "../src/lib/agent/provider";
 import { getStore } from "../src/lib/store";
 
 function parseModel(): ModelId | undefined {
   const i = process.argv.indexOf("--model");
   if (i === -1) return undefined;
   const v = process.argv[i + 1];
-  if (!v || !(v in MODELS)) {
+  if (!v) { console.error("--model needs a value"); process.exit(2); }
+  // A custom endpoint serves whatever it serves; only the built-in ids are checked.
+  if (!(v in MODELS) && !process.env.TICKMARK_BASE_URL) {
     console.error(`unknown model "${v}". known: ${Object.keys(MODELS).join(", ")}`);
+    console.error("(set TICKMARK_BASE_URL to use a model served by another endpoint)");
     process.exit(2);
   }
   return v as ModelId;
@@ -21,7 +24,13 @@ function parseModel(): ModelId | undefined {
 
 async function main() {
   const model = parseModel();
+  const effective = effectiveModelId(model ?? "anthropic/claude-opus-5");
+  const rate = rateFor(effective);
   console.log(`provider: ${providerLabel()}`);
+  console.log(`model:    ${effective}  ($${rate.inPerMTok}/$${rate.outPerMTok} per MTok)`);
+  if (rate.inPerMTok === 0 && rate.outPerMTok === 0) {
+    console.log("          no price configured, so cost reports as $0.00 - set TICKMARK_PRICE_IN/OUT to price it");
+  }
   const report = await simulate({ model, onProgress: (m) => console.log(m) });
 
   console.log("\n─────────────────────────────────────────────────────────────────────");

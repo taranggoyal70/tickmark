@@ -129,9 +129,21 @@ npm run simulate               # headless eval across four periods
 npm run dev                    # dashboard on http://localhost:3000
 ```
 
-**Required** — one model credential, either:
-- a card on the [Vercel AI Gateway](https://vercel.com/docs/ai-gateway) (the `vercel link` OIDC token then authenticates automatically), or
-- `ANTHROPIC_API_KEY=sk-ant-…` in `.env.local`
+**Required** — one model credential. Resolved in this order, so the same code
+runs against whatever the deployment has:
+
+1. `TICKMARK_BASE_URL` (+ `TICKMARK_API_KEY`, `TICKMARK_MODEL`) — any
+   OpenAI-compatible endpoint: a sponsor or in-house inference gateway,
+   OpenRouter, or a self-hosted model. Set `TICKMARK_PRICE_IN` /
+   `TICKMARK_PRICE_OUT` (USD per 1M tokens) so cost is priced honestly instead
+   of reported as `$0.00`.
+2. `ANTHROPIC_API_KEY` — the Anthropic API directly.
+3. Nothing set — the plain `provider/model` string routes through the
+   [Vercel AI Gateway](https://vercel.com/docs/ai-gateway), authenticated by the
+   `VERCEL_OIDC_TOKEN` that `vercel link` writes.
+
+A full four-period run is roughly 75k input / 21k output tokens — about **$0.18
+on Haiku 4.5, $0.90 on Opus 5**. That is the entire demo, not a monthly bill.
 
 **Optional** — `SUPABASE_URL` and `SUPABASE_SERVICE_ROLE_KEY`. Without them runs persist
 to `data/`. With them, apply `supabase/migrations/0001_init.sql` first.
