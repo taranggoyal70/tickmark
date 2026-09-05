@@ -1,5 +1,6 @@
 import { Badge, Money, Panel } from "@/components/kit";
 import { EmptyRun, Shell } from "@/components/shell";
+import { ProvenanceBanner } from "@/components/provenance";
 import { latestReport } from "@/lib/report";
 import type { Exception } from "@/lib/agent/types";
 
@@ -47,6 +48,7 @@ export default async function ExceptionsPage() {
 
   return (
     <Shell active="/close/exceptions">
+      <ProvenanceBanner report={report} />
       <div className="mb-6">
         <div className="eyebrow mb-2">Exception queue · {last.period}</div>
         <h1 className="headline text-ink">{queue.length} items need judgment</h1>

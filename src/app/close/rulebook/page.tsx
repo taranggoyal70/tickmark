@@ -1,5 +1,6 @@
 import { Badge, Panel } from "@/components/kit";
 import { EmptyRun, Shell } from "@/components/shell";
+import { ProvenanceBanner } from "@/components/provenance";
 import { latestReport } from "@/lib/report";
 import type { Rule } from "@/lib/agent/types";
 
@@ -37,6 +38,7 @@ export default async function RulebookPage() {
 
   return (
     <Shell active="/close/rulebook">
+      <ProvenanceBanner report={report} />
       <div className="mb-6">
         <div className="eyebrow mb-2">Rulebook · the weights</div>
         <h1 className="headline text-ink">{rules.length} rules, learned from corrections</h1>

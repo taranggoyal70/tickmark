@@ -19,6 +19,7 @@ export const CHART: ChartContext = {
   accounts: GL_ACCOUNTS.map((a) => ({ code: a.code, name: a.name, type: a.type })),
   departments: DEPARTMENTS.map((d) => ({ code: d.code, name: d.name })),
   materialityCents: ENTITY.materialityCents,
+  ruleCeilingCents: ENTITY.ruleCeilingCents,
 };
 
 /** What a human has already signed off in closed periods. */
@@ -66,6 +67,11 @@ export interface PeriodReport {
 }
 
 export interface SimulationReport {
+  /**
+   * "model" = a real run against a real model. "mock" = the mechanism test's
+   * deterministic stand-in. The UI must never present the two the same way.
+   */
+  provenance: "model" | "mock";
   model: ModelId;
   generatedAt: string;
   entity: string;
@@ -74,7 +80,7 @@ export interface SimulationReport {
   totals: { costMicros: number; llmCalls: number; ruleHits: number; touchSeconds: number };
 }
 
-export async function simulate(opts: { model?: ModelId; onProgress?: (m: string) => void } = {}): Promise<SimulationReport> {
+export async function simulate(opts: { model?: ModelId; provenance?: "model" | "mock"; onProgress?: (m: string) => void } = {}): Promise<SimulationReport> {
   const model = opts.model ?? DEFAULT_MODEL;
   const log = opts.onProgress ?? (() => {});
   const all = generateAll();
@@ -134,6 +140,7 @@ export async function simulate(opts: { model?: ModelId; onProgress?: (m: string)
   }
 
   return {
+    provenance: opts.provenance ?? "model",
     model, generatedAt: new Date().toISOString(), entity: ENTITY.name,
     periods: reports, rulebook: rulebook.rules, totals,
   };

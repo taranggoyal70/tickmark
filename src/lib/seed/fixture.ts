@@ -10,8 +10,17 @@
 export const ENTITY = {
   name: "Northwind Robotics, Inc.",
   baseCurrency: "USD",
-  /** $5,000. Above this a human reviews, whatever the model thinks. */
-  materialityCents: 500_000,
+  /**
+   * $25,000. A model-decided item above this gets a human, whatever its
+   * confidence. Sized against ~$700k of monthly operating spend, not plucked.
+   */
+  materialityCents: 2_500_000,
+  /**
+   * $250,000. A rule-settled item is allowed further, because the control there
+   * is not the dollar amount - it is a backtested rule carrying the evidence of
+   * the human corrections that authorised it. Above this, nobody is exempt.
+   */
+  ruleCeilingCents: 25_000_000,
   autoTickmarkThreshold: 0.9,
 } as const;
 

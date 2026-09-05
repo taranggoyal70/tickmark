@@ -51,7 +51,7 @@ niceties:
 
 | backpass constraint | what it means on the books |
 |---|---|
-| **Evidence-gated** — ≥ 2 distinct corrections, quoted verbatim | An auditor can trace any automated decision to the human judgment that authorised it |
+| **Evidence-gated** — ≥ 2 distinct corrections, quoted verbatim, and of the same kind as the rule | An auditor can trace any automated decision to the human judgment that authorised it |
 | **Analysis never writes** — proposing ≠ applying | Segregation of duties, for free |
 
 The agent's tool surface follows the ten [AXI](https://github.com/kunchenguid/axi)
@@ -72,7 +72,7 @@ These are enforced in the schema, not in a prompt:
 
 1. **Debits equal credits** — checked arithmetically by a database trigger, never taken from model output.
 2. **Tickmarks are append-only** — a trigger rejects every `UPDATE` and `DELETE`. You supersede a tickmark; you never edit one.
-3. **Materiality is a hard gate** — nothing above the threshold auto-posts, whatever the confidence.
+3. **Materiality is a hard gate** — nothing above the threshold auto-posts, whatever the confidence. A *backtested rule* is trusted to a higher ceiling than a fresh model judgment, because the replay and its evidence are the control; above that ceiling nobody is exempt.
 4. **Preparer ≠ approver** — a constraint, not a convention.
 5. **No rule activates without a backtest** and evidence from ≥ 2 corrections — also a trigger.
 6. **Every decision traces** to a Rule (with its corrections) or a Close Run (with its evidence chain).
@@ -89,8 +89,15 @@ Each period carries **ground truth the agent never sees**, so accuracy is measur
 than claimed:
 
 ```bash
-npm run simulate
+npm run simulate     # measured: real model, real numbers
+npm run selftest     # mechanism test: deterministic stand-in, no credential needed
 ```
+
+`selftest` substitutes a stand-in for the model so the whole loop — close run →
+gate → queue → corrections → gradient → backtest → rulebook → cheaper next close
+— can be exercised with no API key. It proves the machinery is wired; it says
+nothing about model quality. Reports carry a `provenance` field and the UI
+labels mock runs prominently so the two can never be confused.
 
 ```
 period   cleared  coding  match   exc  llm  rules  cost      touch

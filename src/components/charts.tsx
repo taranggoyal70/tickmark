@@ -24,10 +24,28 @@ const PW = W - PAD_L - PAD_R, PH = H - PAD_T - PAD_B;
 function niceMax(v: number) {
   if (v <= 0) return 1;
   const mag = 10 ** Math.floor(Math.log10(v));
-  return Math.ceil(v / mag) * mag;
+  for (const step of [1, 1.5, 2, 2.5, 3, 4, 5, 7.5, 10]) {
+    if (v <= step * mag) return step * mag;
+  }
+  return 10 * mag;
 }
 
 interface Point { label: string; value: number }
+
+/**
+ * Formatting is named, not passed as a function. Server Components cannot hand
+ * a closure across the boundary, so the chart owns the formatter and the page
+ * names which one it wants.
+ */
+export type FormatKind = "pct" | "pct1" | "usd3" | "minutes" | "count";
+
+const FORMATTERS: Record<FormatKind, (v: number) => string> = {
+  pct: (v) => `${(v * 100).toFixed(0)}%`,
+  pct1: (v) => `${(v * 100).toFixed(1)}%`,
+  usd3: (v) => `$${v.toFixed(3)}`,
+  minutes: (v) => `${Math.round(v)}m`,
+  count: (v) => String(Math.round(v)),
+};
 
 /**
  * One measure over time. A single series needs no legend - the title names it.
@@ -37,9 +55,10 @@ export function TrendLine({
   title, note, points, format, domainMax, goodDirection = "up",
 }: {
   title: string; note?: string; points: Point[];
-  format: (v: number) => string; domainMax?: number;
+  format: FormatKind; domainMax?: number;
   goodDirection?: "up" | "down" | "flat";
 }) {
+  const fmt = FORMATTERS[format];
   const [hover, setHover] = useState<number | null>(null);
   const [showTable, setShowTable] = useState(false);
   const id = useId();
@@ -54,7 +73,9 @@ export function TrendLine({
   const first = points[0]?.value ?? 0, last = points[points.length - 1]?.value ?? 0;
   const delta = last - first;
   const improving = goodDirection === "flat" ? Math.abs(delta) < 1e-9 : goodDirection === "up" ? delta > 0 : delta < 0;
-  const accent = goodDirection === "flat" ? SERIES.rule.color : improving ? "#0ca30c" : "#d03b3b";
+  // Categorical slot 1. Status hues are reserved for state and never paint a
+  // series; direction is carried by the caption below, in words.
+  const accent = SERIES.rule.color;
 
   return (
     <figure className="panel p-5 m-0">
@@ -76,7 +97,7 @@ export function TrendLine({
             {points.map((p) => (
               <tr key={p.label} className="border-t border-[var(--hairline)]">
                 <td className="py-1.5 text-ink-muted">{p.label}</td>
-                <td className="py-1.5 text-right text-ink">{format(p.value)}</td>
+                <td className="py-1.5 text-right text-ink">{fmt(p.value)}</td>
               </tr>
             ))}
           </tbody>
@@ -84,7 +105,7 @@ export function TrendLine({
       ) : (
         <div className="relative">
           <svg viewBox={`0 0 ${W} ${H}`} className="w-full h-auto block" role="img"
-               aria-label={`${title}. ${points.map((p) => `${p.label} ${format(p.value)}`).join(", ")}.`}>
+               aria-label={`${title}. ${points.map((p) => `${p.label} ${fmt(p.value)}`).join(", ")}.`}>
             <defs>
               <linearGradient id={`g-${id}`} x1="0" y1="0" x2="0" y2="1">
                 <stop offset="0%" stopColor={accent} stopOpacity="0.16" />
@@ -97,7 +118,7 @@ export function TrendLine({
               <g key={t}>
                 <line x1={PAD_L} x2={W - PAD_R} y1={PAD_T + PH * t} y2={PAD_T + PH * t} stroke={GRID} strokeWidth="1" />
                 <text x={PAD_L - 8} y={PAD_T + PH * t + 4} textAnchor="end" fontSize="10" fill={INK_SUBTLE} className="nums">
-                  {format(max * (1 - t))}
+                  {fmt(max * (1 - t))}
                 </text>
               </g>
             ))}
@@ -118,19 +139,36 @@ export function TrendLine({
             ))}
 
             {/* selective direct labels: the endpoints only, never every point */}
-            <text x={x(points.length - 1)} y={y(last) - 12} textAnchor="end" fontSize="12" fontWeight="600" fill={accent} className="nums">
-              {format(last)}
+            {/* keep the endpoint label off the top gridline label when the
+                series is pinned near the ceiling */}
+            <text
+              x={x(points.length - 1)}
+              y={y(last) - PAD_T < 20 ? y(last) + 20 : y(last) - 12}
+              textAnchor="end" fontSize="12" fontWeight="600" fill="#f7f8f8" className="nums"
+            >
+              {fmt(last)}
             </text>
           </svg>
 
           {hover !== null ? (
             <div className="pointer-events-none absolute top-2 right-2 rounded-[var(--radius-md)] border border-hairline bg-surface-2 px-2.5 py-1.5 text-[12px] shadow-lg">
               <div className="text-ink-subtle">{points[hover].label}</div>
-              <div className="nums font-medium text-ink">{format(points[hover].value)}</div>
+              <div className="nums font-medium text-ink">{fmt(points[hover].value)}</div>
             </div>
           ) : null}
         </div>
       )}
+
+      {goodDirection !== "flat" && !showTable ? (
+        <p className="mt-3 text-[12px] text-ink-tertiary">
+          {improving ? "Improving" : "Worsening"} — {fmt(first)} in {points[0]?.label} to {fmt(last)} in {points[points.length - 1]?.label}.
+        </p>
+      ) : null}
+      {goodDirection === "flat" && !showTable ? (
+        <p className="mt-3 text-[12px] text-ink-tertiary">
+          {improving ? "Held flat" : "Moved"} across all {points.length} periods. This one is supposed to stay put.
+        </p>
+      ) : null}
     </figure>
   );
 }

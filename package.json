@@ -8,7 +8,8 @@
     "start": "next start",
     "lint": "eslint",
     "simulate": "tsx --env-file=.env.local scripts/simulate.ts",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "selftest": "tsx scripts/selftest.ts"
   },
   "dependencies": {
     "@ai-sdk/anthropic": "^4.0.49",
@@ -34,6 +35,7 @@
     "eslint": "^9",
     "eslint-config-next": "16.3.4",
     "tailwindcss": "^4",
+    "tsx": "^4.23.13",
     "typescript": "^5"
   }
 }

@@ -183,24 +183,34 @@ export async function runClose(input: CloseInput): Promise<CloseRunResult> {
 
   // ── 4. the gate: confidence AND materiality, neither overriding the other ──
   let tickmarked = 0;
-  const gate = (ref: string, subjectType: Exception["subjectType"], conf: number, amountCents: number, proposal: unknown, options: Exception["options"]) => {
+  const gate = (
+    ref: string, subjectType: Exception["subjectType"], conf: number, amountCents: number,
+    decidedBy: "rule" | "agent" | "human", proposal: unknown, options: Exception["options"],
+  ) => {
+    const open = (cause: Exception["cause"]) => {
+      openException({ subjectType, subjectRef: ref, cause, amountCents, confidence: conf, proposal, options });
+      return false;
+    };
     const policy = forcesReview(rulebook, { description: ref, amountCents: Math.abs(amountCents) });
-    if (policy) { openException({ subjectType, subjectRef: ref, cause: "policy_requires_human", amountCents, confidence: conf, proposal, options }); return false; }
-    if (Math.abs(amountCents) > chart.materialityCents) { openException({ subjectType, subjectRef: ref, cause: "over_materiality", amountCents, confidence: conf, proposal, options }); return false; }
-    if (conf < autoThreshold) { openException({ subjectType, subjectRef: ref, cause: "low_confidence", amountCents, confidence: conf, proposal, options }); return false; }
+    if (policy) return open("policy_requires_human");
+    // A backtested rule carries its own control, so it is allowed further than a
+    // fresh model judgment - but never past the ceiling.
+    const ceiling = decidedBy === "rule" ? chart.ruleCeilingCents : chart.materialityCents;
+    if (Math.abs(amountCents) > ceiling) return open("over_materiality");
+    if (conf < autoThreshold) return open("low_confidence");
     tickmarked++; return true;
   };
 
   const autoCleared: { kind: "coding" | "match"; ref: string }[] = [];
   for (const c of codings) {
     const inv = period.apInvoices.find((i) => i.invoiceNumber === c.invoiceNumber);
-    const ok = gate(c.invoiceNumber, "ap_invoice", c.confidence, inv?.amountCents ?? 0, c,
+    const ok = gate(c.invoiceNumber, "ap_invoice", c.confidence, inv?.amountCents ?? 0, c.decidedBy, c,
       [{ label: `Accept ${c.glCode}`, value: c }, { label: "Recode", value: null }]);
     if (ok) autoCleared.push({ kind: "coding", ref: c.invoiceNumber });
   }
   for (const m of matches) {
     const total = m.bankExternalIds.reduce((s, id) => s + (period.bankLines.find((b) => b.externalId === id)?.amountCents ?? 0), 0);
-    const ok = gate(m.bankExternalIds.join("+"), "bank_line", m.confidence, total, m,
+    const ok = gate(m.bankExternalIds.join("+"), "bank_line", m.confidence, total, m.decidedBy, m,
       [{ label: "Accept match", value: m }, { label: "Reject", value: null }]);
     if (ok) autoCleared.push({ kind: "match", ref: m.bankExternalIds.join("+") });
   }

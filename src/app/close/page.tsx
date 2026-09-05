@@ -1,6 +1,7 @@
 import { DecisionMix, TrendLine } from "@/components/charts";
 import { Panel, Stat } from "@/components/kit";
 import { EmptyRun, Shell } from "@/components/shell";
+import { ProvenanceBanner } from "@/components/provenance";
 import { latestReport, minutes, pct, usdFromMicros } from "@/lib/report";
 
 export const dynamic = "force-dynamic";
@@ -19,6 +20,7 @@ export default async function ClosePage() {
 
   return (
     <Shell active="/close">
+      <ProvenanceBanner report={report} />
       <div className="mb-8 flex flex-wrap items-end justify-between gap-4">
         <div>
           <div className="eyebrow mb-2">Close performance · {report.entity}</div>
@@ -66,7 +68,7 @@ export default async function ClosePage() {
           title="Auto-clear rate"
           note="Share of decisions the agent finished on its own. The rest went to the exception queue."
           points={P.map((p, i) => ({ label: labels[i], value: p.stats.autoClearRate }))}
-          format={(v) => pct(v)}
+          format="pct"
           domainMax={1}
           goodDirection="up"
         />
@@ -74,7 +76,7 @@ export default async function ClosePage() {
           title="Auto-clear precision"
           note="Of the lines it cleared unattended, the share that was actually right. Nobody reviews these, so this is the number that must not fall."
           points={P.map((p, i) => ({ label: labels[i], value: p.stats.autoClearPrecision }))}
-          format={(v) => pct(v, 1)}
+          format="pct1"
           domainMax={1}
           goodDirection="flat"
         />
@@ -82,14 +84,14 @@ export default async function ClosePage() {
           title="Cost per close"
           note="Same model throughout. Cost falls because compiled rules retire model calls, not because the model got cheaper."
           points={P.map((p, i) => ({ label: labels[i], value: p.stats.costMicros / 1e6 }))}
-          format={(v) => `$${v.toFixed(3)}`}
+          format="usd3"
           goodDirection="down"
         />
         <TrendLine
           title="Controller time in the queue"
           note="Exceptions × observed median handling time. The line a CFO actually feels."
           points={P.map((p, i) => ({ label: labels[i], value: p.touchSeconds / 60 }))}
-          format={(v) => `${Math.round(v)}m`}
+          format="minutes"
           goodDirection="down"
         />
       </div>
@@ -119,7 +121,7 @@ export default async function ClosePage() {
                   <th className="pb-2 text-right font-medium">Exc</th>
                   <th className="pb-2 text-right font-medium">Calls</th>
                   <th className="pb-2 text-right font-medium">Cost</th>
-                  <th className="pb-2 text-right font-medium">v</th>
+                  <th className="pb-2 pl-3 text-right font-medium">Rulebook</th>
                 </tr>
               </thead>
               <tbody>
@@ -131,7 +133,7 @@ export default async function ClosePage() {
                     <td className="py-2 text-right text-ink">{p.stats.exceptionsOpened}</td>
                     <td className="py-2 text-right text-ink-muted">{p.stats.llmCalls}</td>
                     <td className="py-2 text-right text-ink-muted">{usdFromMicros(p.stats.costMicros)}</td>
-                    <td className="py-2 text-right text-ink-tertiary">{p.rulebookVersionOut}</td>
+                    <td className="py-2 pl-3 text-right text-ink-tertiary">v{p.rulebookVersionOut}</td>
                   </tr>
                 ))}
               </tbody>

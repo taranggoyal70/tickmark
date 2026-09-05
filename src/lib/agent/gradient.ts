@@ -155,8 +155,18 @@ export async function gradientStep(
     const rule = materialize(p);
     if (!rule) continue;
 
-    // evidence gate: >= 2 DISTINCT real corrections, quoted verbatim
-    const cited = [...new Set(p.fromCorrectionIds)].map((id) => byId.get(id)).filter((c): c is CorrectionRecord => !!c);
+    // Evidence gate: >= 2 DISTINCT real corrections, quoted verbatim - and the
+    // evidence has to be about the same thing the rule decides. A coding rule
+    // justified by reconciliation corrections is not evidenced, it is
+    // decorated, and an auditor would say so.
+    const wantKind: CorrectionRecord["kind"] | null =
+      rule.kind === "coding" ? "coding" :
+      rule.kind === "matching" ? "matching" :
+      rule.kind === "accrual" ? "accrual" : null;
+
+    const cited = [...new Set(p.fromCorrectionIds)]
+      .map((id) => byId.get(id))
+      .filter((c): c is CorrectionRecord => !!c && (wantKind === null || c.kind === wantKind));
     if (cited.length < 2) continue;
 
     rule.evidence = cited.map<EvidenceItem>((c) => ({

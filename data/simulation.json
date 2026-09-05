@@ -1,0 +1,6004 @@
+{
+  "provenance": "mock",
+  "model": "anthropic/claude-opus-5",
+  "generatedAt": "2026-09-05T20:13:32.003Z",
+  "entity": "Northwind Robotics, Inc.",
+  "periods": [
+    {
+      "period": "2026-01",
+      "rulebookVersionIn": 0,
+      "rulebookVersionOut": 0,
+      "activeRules": 0,
+      "modelDecisions": 62,
+      "exceptions": [
+        {
+          "id": "EX-2026-01-1",
+          "subjectType": "bank_line",
+          "subjectRef": "BNK-2026-01-0025",
+          "cause": "no_candidate",
+          "amountCents": -4714280,
+          "confidence": null,
+          "proposal": {
+            "description": "FLEXPORT, INC."
+          },
+          "options": [
+            {
+              "label": "Timing difference - carry forward",
+              "value": "timing"
+            }
+          ]
+        },
+        {
+          "id": "EX-2026-01-2",
+          "subjectType": "bank_line",
+          "subjectRef": "BNK-2026-01-0015",
+          "cause": "no_candidate",
+          "amountCents": -2425592,
+          "confidence": null,
+          "proposal": {
+            "description": "MOUSER ELECTRONI"
+          },
+          "options": [
+            {
+              "label": "Timing difference - carry forward",
+              "value": "timing"
+            }
+          ]
+        },
+        {
+          "id": "EX-2026-01-3",
+          "subjectType": "bank_line",
+          "subjectRef": "BNK-2026-01-0020",
+          "cause": "no_candidate",
+          "amountCents": -679007,
+          "confidence": null,
+          "proposal": {
+            "description": "DIGI-KEY CORP THIEF RIVER"
+          },
+          "options": [
+            {
+              "label": "Timing difference - carry forward",
+              "value": "timing"
+            }
+          ]
+        },
+        {
+          "id": "EX-2026-01-4",
+          "subjectType": "bank_line",
+          "subjectRef": "BNK-2026-01-0028",
+          "cause": "no_candidate",
+          "amountCents": -2690945,
+          "confidence": null,
+          "proposal": {
+            "description": "COOLEY LLP"
+          },
+          "options": [
+            {
+              "label": "Timing difference - carry forward",
+              "value": "timing"
+            }
+          ]
+        },
+        {
+          "id": "EX-2026-01-5",
+          "subjectType": "bank_line",
+          "subjectRef": "BNK-2026-01-0029",
+          "cause": "no_candidate",
+          "amountCents": -2694383,
+          "confidence": null,
+          "proposal": {
+            "description": "COOLEY LLP OPERATING"
+          },
+          "options": [
+            {
+              "label": "Timing difference - carry forward",
+              "value": "timing"
+            }
+          ]
+        },
+        {
+          "id": "EX-2026-01-6",
+          "subjectType": "bank_line",
+          "subjectRef": "BNK-2026-01-0053",
+          "cause": "no_candidate",
+          "amountCents": 1132635,
+          "confidence": null,
+          "proposal": {
+            "description": "DEPOSIT IN TRANSIT - LOCKBOX"
+          },
+          "options": [
+            {
+              "label": "Timing difference - carry forward",
+              "value": "timing"
+            }
+          ]
+        },
+        {
+          "id": "EX-2026-01-7",
+          "subjectType": "bank_line",
+          "subjectRef": "BNK-2026-01-0001",
+          "cause": "no_candidate",
+          "amountCents": -4870920,
+          "confidence": null,
+          "proposal": {
+            "description": "AMZN WEB SVCS"
+          },
+          "options": [
+            {
+              "label": "Timing difference - carry forward",
+              "value": "timing"
+            }
+          ]
+        },
+        {
+          "id": "EX-2026-01-8",
+          "subjectType": "bank_line",
+          "subjectRef": "BNK-2026-01-0003",
+          "cause": "no_candidate",
+          "amountCents": -417027,
+          "confidence": null,
+          "proposal": {
+            "description": "VERCEL INC. SAN FRANCISCO CA"
+          },
+          "options": [
+            {
+              "label": "Timing difference - carry forward",
+              "value": "timing"
+            }
+          ]
+        },
+        {
+          "id": "EX-2026-01-9",
+          "subjectType": "bank_line",
+          "subjectRef": "BNK-2026-01-0004",
+          "cause": "no_candidate",
+          "amountCents": -134165,
+          "confidence": null,
+          "proposal": {
+            "description": "FIGMA, INC."
+          },
+          "options": [
+            {
+              "label": "Timing difference - carry forward",
+              "value": "timing"
+            }
+          ]
+        },
+        {
+          "id": "EX-2026-01-10",
+          "subjectType": "bank_line",
+          "subjectRef": "BNK-2026-01-0005",
+          "cause": "no_candidate",
+          "amountCents": -95178,
+          "confidence": null,
+          "proposal": {
+            "description": "LINEAR.APP"
+          },
+          "options": [
+            {
+              "label": "Timing difference - carry forward",
+              "value": "timing"
+            }
+          ]
+        },
+        {
+          "id": "EX-2026-01-11",
+          "subjectType": "bank_line",
+          "subjectRef": "BNK-2026-01-0006",
+          "cause": "no_candidate",
+          "amountCents": -204520,
+          "confidence": null,
+          "proposal": {
+            "description": "SLACK T SALESFORCE"
+          },
+          "options": [
+            {
+              "label": "Timing difference - carry forward",
+              "value": "timing"
+            }
+          ]
+        },
+        {
+          "id": "EX-2026-01-12",
+          "subjectType": "bank_line",
+          "subjectRef": "BNK-2026-01-0007",
+          "cause": "no_candidate",
+          "amountCents": -177801,
+          "confidence": null,
+          "proposal": {
+            "description": "MSFT * GITHUB"
+          },
+          "options": [
+            {
+              "label": "Timing difference - carry forward",
+              "value": "timing"
+            }
+          ]
+        },
+        {
+          "id": "EX-2026-01-13",
+          "subjectType": "bank_line",
+          "subjectRef": "BNK-2026-01-0018",
+          "cause": "no_candidate",
+          "amountCents": -824529,
+          "confidence": null,
+          "proposal": {
+            "description": "DIGI-KEY CORP THIEF RIVER"
+          },
+          "options": [
+            {
+              "label": "Timing difference - carry forward",
+              "value": "timing"
+            }
+          ]
+        },
+        {
+          "id": "EX-2026-01-14",
+          "subjectType": "bank_line",
+          "subjectRef": "BNK-2026-01-0019",
+          "cause": "no_candidate",
+          "amountCents": -680024,
+          "confidence": null,
+          "proposal": {
+            "description": "DIGIKEY ELECTRONICS"
+          },
+          "options": [
+            {
+              "label": "Timing difference - carry forward",
+              "value": "timing"
+            }
+          ]
+        },
+        {
+          "id": "EX-2026-01-15",
+          "subjectType": "bank_line",
+          "subjectRef": "BNK-2026-01-0021",
+          "cause": "no_candidate",
+          "amountCents": -3357260,
+          "confidence": null,
+          "proposal": {
+            "description": "FLEXPORT INC SAN FRANCIS TRANCHE 1/2"
+          },
+          "options": [
+            {
+              "label": "Timing difference - carry forward",
+              "value": "timing"
+            }
+          ]
+        },
+        {
+          "id": "EX-2026-01-16",
+          "subjectType": "bank_line",
+          "subjectRef": "BNK-2026-01-0023",
+          "cause": "no_candidate",
+          "amountCents": -4244711,
+          "confidence": null,
+          "proposal": {
+            "description": "FLEXPORT INC SAN FRANCIS TRANCHE 1/2"
+          },
+          "options": [
+            {
+              "label": "Timing difference - carry forward",
+              "value": "timing"
+            }
+          ]
+        },
+        {
+          "id": "EX-2026-01-17",
+          "subjectType": "bank_line",
+          "subjectRef": "BNK-2026-01-0026",
+          "cause": "no_candidate",
+          "amountCents": -3463935,
+          "confidence": null,
+          "proposal": {
+            "description": "COOLEY LLP OPERATING"
+          },
+          "options": [
+            {
+              "label": "Timing difference - carry forward",
+              "value": "timing"
+            }
+          ]
+        },
+        {
+          "id": "EX-2026-01-18",
+          "subjectType": "bank_line",
+          "subjectRef": "BNK-2026-01-0037",
+          "cause": "no_candidate",
+          "amountCents": -48964,
+          "confidence": null,
+          "proposal": {
+            "description": "IRON MTN"
+          },
+          "options": [
+            {
+              "label": "Timing difference - carry forward",
+              "value": "timing"
+            }
+          ]
+        },
+        {
+          "id": "EX-2026-01-19",
+          "subjectType": "bank_line",
+          "subjectRef": "BNK-2026-01-0054",
+          "cause": "no_candidate",
+          "amountCents": -201014,
+          "confidence": null,
+          "proposal": {
+            "description": "ACH DEBIT PENDING VENDOR REF 88213"
+          },
+          "options": [
+            {
+              "label": "Timing difference - carry forward",
+              "value": "timing"
+            }
+          ]
+        },
+        {
+          "id": "EX-2026-01-20",
+          "subjectType": "bank_line",
+          "subjectRef": "BNK-2026-01-0022",
+          "cause": "no_candidate",
+          "amountCents": -2238174,
+          "confidence": null,
+          "proposal": {
+            "description": "FLEXPORT, INC. TRANCHE 2/2"
+          },
+          "options": [
+            {
+              "label": "Timing difference - carry forward",
+              "value": "timing"
+            }
+          ]
+        },
+        {
+          "id": "EX-2026-01-21",
+          "subjectType": "bank_line",
+          "subjectRef": "BNK-2026-01-0024",
+          "cause": "no_candidate",
+          "amountCents": -2829807,
+          "confidence": null,
+          "proposal": {
+            "description": "FLEXPORT, INC. TRANCHE 2/2"
+          },
+          "options": [
+            {
+              "label": "Timing difference - carry forward",
+              "value": "timing"
+            }
+          ]
+        },
+        {
+          "id": "EX-2026-01-22",
+          "subjectType": "ap_invoice",
+          "subjectRef": "AMA-202601-5427",
+          "cause": "over_materiality",
+          "amountCents": 4870920,
+          "confidence": 0.62,
+          "proposal": {
+            "invoiceNumber": "AMA-202601-5427",
+            "glCode": "6820",
+            "deptSplit": {
+              "ENG": 0.6,
+              "DATA": 0.25,
+              "PROD": 0.15
+            },
+            "confidence": 0.62,
+            "decidedBy": "agent",
+            "reasoning": "multi-department allocation, no precedent"
+          },
+          "options": [
+            {
+              "label": "Accept 6820",
+              "value": {
+                "invoiceNumber": "AMA-202601-5427",
+                "glCode": "6820",
+                "deptSplit": {
+                  "ENG": 0.6,
+                  "DATA": 0.25,
+                  "PROD": 0.15
+                },
+                "confidence": 0.62,
+                "decidedBy": "agent",
+                "reasoning": "multi-department allocation, no precedent"
+              }
+            },
+            {
+              "label": "Recode",
+              "value": null
+            }
+          ]
+        },
+        {
+          "id": "EX-2026-01-23",
+          "subjectType": "ap_invoice",
+          "subjectRef": "DAT-202601-6298",
+          "cause": "low_confidence",
+          "amountCents": 1216762,
+          "confidence": 0.62,
+          "proposal": {
+            "invoiceNumber": "DAT-202601-6298",
+            "glCode": "6820",
+            "deptSplit": {
+              "ENG": 0.7,
+              "DATA": 0.3
+            },
+            "confidence": 0.62,
+            "decidedBy": "agent",
+            "reasoning": "multi-department allocation, no precedent"
+          },
+          "options": [
+            {
+              "label": "Accept 6820",
+              "value": {
+                "invoiceNumber": "DAT-202601-6298",
+                "glCode": "6820",
+                "deptSplit": {
+                  "ENG": 0.7,
+                  "DATA": 0.3
+                },
+                "confidence": 0.62,
+                "decidedBy": "agent",
+                "reasoning": "multi-department allocation, no precedent"
+              }
+            },
+            {
+              "label": "Recode",
+              "value": null
+            }
+          ]
+        },
+        {
+          "id": "EX-2026-01-24",
+          "subjectType": "ap_invoice",
+          "subjectRef": "VER-202601-5484",
+          "cause": "low_confidence",
+          "amountCents": 417027,
+          "confidence": 0.62,
+          "proposal": {
+            "invoiceNumber": "VER-202601-5484",
+            "glCode": "6820",
+            "deptSplit": {
+              "ENG": 0.8,
+              "PROD": 0.2
+            },
+            "confidence": 0.62,
+            "decidedBy": "agent",
+            "reasoning": "multi-department allocation, no precedent"
+          },
+          "options": [
+            {
+              "label": "Accept 6820",
+              "value": {
+                "invoiceNumber": "VER-202601-5484",
+                "glCode": "6820",
+                "deptSplit": {
+                  "ENG": 0.8,
+                  "PROD": 0.2
+                },
+                "confidence": 0.62,
+                "decidedBy": "agent",
+                "reasoning": "multi-department allocation, no precedent"
+              }
+            },
+            {
+              "label": "Recode",
+              "value": null
+            }
+          ]
+        },
+        {
+          "id": "EX-2026-01-25",
+          "subjectType": "ap_invoice",
+          "subjectRef": "FIG-202601-3285",
+          "cause": "low_confidence",
+          "amountCents": 134165,
+          "confidence": 0.62,
+          "proposal": {
+            "invoiceNumber": "FIG-202601-3285",
+            "glCode": "6830",
+            "deptSplit": {
+              "PROD": 0.85,
+              "ENG": 0.15
+            },
+            "confidence": 0.62,
+            "decidedBy": "agent",
+            "reasoning": "multi-department allocation, no precedent"
+          },
+          "options": [
+            {
+              "label": "Accept 6830",
+              "value": {
+                "invoiceNumber": "FIG-202601-3285",
+                "glCode": "6830",
+                "deptSplit": {
+                  "PROD": 0.85,
+                  "ENG": 0.15
+                },
+                "confidence": 0.62,
+                "decidedBy": "agent",
+                "reasoning": "multi-department allocation, no precedent"
+              }
+            },
+            {
+              "label": "Recode",
+              "value": null
+            }
+          ]
+        },
+        {
+          "id": "EX-2026-01-26",
+          "subjectType": "ap_invoice",
+          "subjectRef": "LIN-202601-7232",
+          "cause": "low_confidence",
+          "amountCents": 95178,
+          "confidence": 0.62,
+          "proposal": {
+            "invoiceNumber": "LIN-202601-7232",
+            "glCode": "6830",
+            "deptSplit": {
+              "ENG": 0.55,
+              "PROD": 0.3,
+              "DATA": 0.15
+            },
+            "confidence": 0.62,
+            "decidedBy": "agent",
+            "reasoning": "multi-department allocation, no precedent"
+          },
+          "options": [
+            {
+              "label": "Accept 6830",
+              "value": {
+                "invoiceNumber": "LIN-202601-7232",
+                "glCode": "6830",
+                "deptSplit": {
+                  "ENG": 0.55,
+                  "PROD": 0.3,
+                  "DATA": 0.15
+                },
+                "confidence": 0.62,
+                "decidedBy": "agent",
+                "reasoning": "multi-department allocation, no precedent"
+              }
+            },
+            {
+              "label": "Recode",
+              "value": null
+            }
+          ]
+        },
+        {
+          "id": "EX-2026-01-27",
+          "subjectType": "ap_invoice",
+          "subjectRef": "SLA-202601-6983",
+          "cause": "low_confidence",
+          "amountCents": 204520,
+          "confidence": 0.62,
+          "proposal": {
+            "invoiceNumber": "SLA-202601-6983",
+            "glCode": "6830",
+            "deptSplit": {
+              "GA": 0.35,
+              "ENG": 0.25,
+              "GTM": 0.25,
+              "PROD": 0.15
+            },
+            "confidence": 0.62,
+            "decidedBy": "agent",
+            "reasoning": "multi-department allocation, no precedent"
+          },
+          "options": [
+            {
+              "label": "Accept 6830",
+              "value": {
+                "invoiceNumber": "SLA-202601-6983",
+                "glCode": "6830",
+                "deptSplit": {
+                  "GA": 0.35,
+                  "ENG": 0.25,
+                  "GTM": 0.25,
+                  "PROD": 0.15
+                },
+                "confidence": 0.62,
+                "decidedBy": "agent",
+                "reasoning": "multi-department allocation, no precedent"
+              }
+            },
+            {
+              "label": "Recode",
+              "value": null
+            }
+          ]
+        },
+        {
+          "id": "EX-2026-01-28",
+          "subjectType": "ap_invoice",
+          "subjectRef": "GIT-202601-8050",
+          "cause": "low_confidence",
+          "amountCents": 177801,
+          "confidence": 0.62,
+          "proposal": {
+            "invoiceNumber": "GIT-202601-8050",
+            "glCode": "6830",
+            "deptSplit": {
+              "ENG": 0.9,
+              "DATA": 0.1
+            },
+            "confidence": 0.62,
+            "decidedBy": "agent",
+            "reasoning": "multi-department allocation, no precedent"
+          },
+          "options": [
+            {
+              "label": "Accept 6830",
+              "value": {
+                "invoiceNumber": "GIT-202601-8050",
+                "glCode": "6830",
+                "deptSplit": {
+                  "ENG": 0.9,
+                  "DATA": 0.1
+                },
+                "confidence": 0.62,
+                "decidedBy": "agent",
+                "reasoning": "multi-department allocation, no precedent"
+              }
+            },
+            {
+              "label": "Recode",
+              "value": null
+            }
+          ]
+        },
+        {
+          "id": "EX-2026-01-29",
+          "subjectType": "ap_invoice",
+          "subjectRef": "WEW-202601-7230",
+          "cause": "over_materiality",
+          "amountCents": 3950000,
+          "confidence": 0.95,
+          "proposal": {
+            "invoiceNumber": "WEW-202601-7230",
+            "glCode": "6510",
+            "deptSplit": {
+              "GA": 1
+            },
+            "confidence": 0.95,
+            "decidedBy": "agent",
+            "reasoning": "unambiguous vendor"
+          },
+          "options": [
+            {
+              "label": "Accept 6510",
+              "value": {
+                "invoiceNumber": "WEW-202601-7230",
+                "glCode": "6510",
+                "deptSplit": {
+                  "GA": 1
+                },
+                "confidence": 0.95,
+                "decidedBy": "agent",
+                "reasoning": "unambiguous vendor"
+              }
+            },
+            {
+              "label": "Recode",
+              "value": null
+            }
+          ]
+        },
+        {
+          "id": "EX-2026-01-30",
+          "subjectType": "ap_invoice",
+          "subjectRef": "DEE-202601-4827",
+          "cause": "low_confidence",
+          "amountCents": 2049316,
+          "confidence": 0.62,
+          "proposal": {
+            "invoiceNumber": "DEE-202601-4827",
+            "glCode": "6010",
+            "deptSplit": {
+              "ENG": 0.65,
+              "DATA": 0.35
+            },
+            "confidence": 0.62,
+            "decidedBy": "agent",
+            "reasoning": "multi-department allocation, no precedent"
+          },
+          "options": [
+            {
+              "label": "Accept 6010",
+              "value": {
+                "invoiceNumber": "DEE-202601-4827",
+                "glCode": "6010",
+                "deptSplit": {
+                  "ENG": 0.65,
+                  "DATA": 0.35
+                },
+                "confidence": 0.62,
+                "decidedBy": "agent",
+                "reasoning": "multi-department allocation, no precedent"
+              }
+            },
+            {
+              "label": "Recode",
+              "value": null
+            }
+          ]
+        },
+        {
+          "id": "EX-2026-01-31",
+          "subjectType": "ap_invoice",
+          "subjectRef": "FLE-202601-4016",
+          "cause": "over_materiality",
+          "amountCents": 5595434,
+          "confidence": 0.95,
+          "proposal": {
+            "invoiceNumber": "FLE-202601-4016",
+            "glCode": "5020",
+            "deptSplit": {
+              "OPS": 1
+            },
+            "confidence": 0.95,
+            "decidedBy": "agent",
+            "reasoning": "unambiguous vendor"
+          },
+          "options": [
+            {
+              "label": "Accept 5020",
+              "value": {
+                "invoiceNumber": "FLE-202601-4016",
+                "glCode": "5020",
+                "deptSplit": {
+                  "OPS": 1
+                },
+                "confidence": 0.95,
+                "decidedBy": "agent",
+                "reasoning": "unambiguous vendor"
+              }
+            },
+            {
+              "label": "Recode",
+              "value": null
+            }
+          ]
+        },
+        {
+          "id": "EX-2026-01-32",
+          "subjectType": "ap_invoice",
+          "subjectRef": "FLE-202601-9265",
+          "cause": "over_materiality",
+          "amountCents": 7074518,
+          "confidence": 0.95,
+          "proposal": {
+            "invoiceNumber": "FLE-202601-9265",
+            "glCode": "5020",
+            "deptSplit": {
+              "OPS": 1
+            },
+            "confidence": 0.95,
+            "decidedBy": "agent",
+            "reasoning": "unambiguous vendor"
+          },
+          "options": [
+            {
+              "label": "Accept 5020",
+              "value": {
+                "invoiceNumber": "FLE-202601-9265",
+                "glCode": "5020",
+                "deptSplit": {
+                  "OPS": 1
+                },
+                "confidence": 0.95,
+                "decidedBy": "agent",
+                "reasoning": "unambiguous vendor"
+              }
+            },
+            {
+              "label": "Recode",
+              "value": null
+            }
+          ]
+        },
+        {
+          "id": "EX-2026-01-33",
+          "subjectType": "ap_invoice",
+          "subjectRef": "FLE-202601-9355",
+          "cause": "over_materiality",
+          "amountCents": 4714280,
+          "confidence": 0.95,
+          "proposal": {
+            "invoiceNumber": "FLE-202601-9355",
+            "glCode": "5020",
+            "deptSplit": {
+              "OPS": 1
+            },
+            "confidence": 0.95,
+            "decidedBy": "agent",
+            "reasoning": "unambiguous vendor"
+          },
+          "options": [
+            {
+              "label": "Accept 5020",
+              "value": {
+                "invoiceNumber": "FLE-202601-9355",
+                "glCode": "5020",
+                "deptSplit": {
+                  "OPS": 1
+                },
+                "confidence": 0.95,
+                "decidedBy": "agent",
+                "reasoning": "unambiguous vendor"
+              }
+            },
+            {
+              "label": "Recode",
+              "value": null
+            }
+          ]
+        },
+        {
+          "id": "EX-2026-01-34",
+          "subjectType": "ap_invoice",
+          "subjectRef": "COO-202601-7754",
+          "cause": "over_materiality",
+          "amountCents": 3463935,
+          "confidence": 0.95,
+          "proposal": {
+            "invoiceNumber": "COO-202601-7754",
+            "glCode": "6610",
+            "deptSplit": {
+              "GA": 1
+            },
+            "confidence": 0.95,
+            "decidedBy": "agent",
+            "reasoning": "unambiguous vendor"
+          },
+          "options": [
+            {
+              "label": "Accept 6610",
+              "value": {
+                "invoiceNumber": "COO-202601-7754",
+                "glCode": "6610",
+                "deptSplit": {
+                  "GA": 1
+                },
+                "confidence": 0.95,
+                "decidedBy": "agent",
+                "reasoning": "unambiguous vendor"
+              }
+            },
+            {
+              "label": "Recode",
+              "value": null
+            }
+          ]
+        },
+        {
+          "id": "EX-2026-01-35",
+          "subjectType": "ap_invoice",
+          "subjectRef": "COO-202601-9022",
+          "cause": "over_materiality",
+          "amountCents": 3021517,
+          "confidence": 0.95,
+          "proposal": {
+            "invoiceNumber": "COO-202601-9022",
+            "glCode": "6610",
+            "deptSplit": {
+              "GA": 1
+            },
+            "confidence": 0.95,
+            "decidedBy": "agent",
+            "reasoning": "unambiguous vendor"
+          },
+          "options": [
+            {
+              "label": "Accept 6610",
+              "value": {
+                "invoiceNumber": "COO-202601-9022",
+                "glCode": "6610",
+                "deptSplit": {
+                  "GA": 1
+                },
+                "confidence": 0.95,
+                "decidedBy": "agent",
+                "reasoning": "unambiguous vendor"
+              }
+            },
+            {
+              "label": "Recode",
+              "value": null
+            }
+          ]
+        },
+        {
+          "id": "EX-2026-01-36",
+          "subjectType": "ap_invoice",
+          "subjectRef": "COO-202601-9475",
+          "cause": "over_materiality",
+          "amountCents": 2690945,
+          "confidence": 0.95,
+          "proposal": {
+            "invoiceNumber": "COO-202601-9475",
+            "glCode": "6610",
+            "deptSplit": {
+              "GA": 1
+            },
+            "confidence": 0.95,
+            "decidedBy": "agent",
+            "reasoning": "unambiguous vendor"
+          },
+          "options": [
+            {
+              "label": "Accept 6610",
+              "value": {
+                "invoiceNumber": "COO-202601-9475",
+                "glCode": "6610",
+                "deptSplit": {
+                  "GA": 1
+                },
+                "confidence": 0.95,
+                "decidedBy": "agent",
+                "reasoning": "unambiguous vendor"
+              }
+            },
+            {
+              "label": "Recode",
+              "value": null
+            }
+          ]
+        },
+        {
+          "id": "EX-2026-01-37",
+          "subjectType": "ap_invoice",
+          "subjectRef": "COO-202601-8421",
+          "cause": "over_materiality",
+          "amountCents": 2694383,
+          "confidence": 0.95,
+          "proposal": {
+            "invoiceNumber": "COO-202601-8421",
+            "glCode": "6610",
+            "deptSplit": {
+              "GA": 1
+            },
+            "confidence": 0.95,
+            "decidedBy": "agent",
+            "reasoning": "unambiguous vendor"
+          },
+          "options": [
+            {
+              "label": "Accept 6610",
+              "value": {
+                "invoiceNumber": "COO-202601-8421",
+                "glCode": "6610",
+                "deptSplit": {
+                  "GA": 1
+                },
+                "confidence": 0.95,
+                "decidedBy": "agent",
+                "reasoning": "unambiguous vendor"
+              }
+            },
+            {
+              "label": "Recode",
+              "value": null
+            }
+          ]
+        },
+        {
+          "id": "EX-2026-01-38",
+          "subjectType": "ap_invoice",
+          "subjectRef": "COO-202601-2266",
+          "cause": "over_materiality",
+          "amountCents": 2532892,
+          "confidence": 0.95,
+          "proposal": {
+            "invoiceNumber": "COO-202601-2266",
+            "glCode": "6610",
+            "deptSplit": {
+              "GA": 1
+            },
+            "confidence": 0.95,
+            "decidedBy": "agent",
+            "reasoning": "unambiguous vendor"
+          },
+          "options": [
+            {
+              "label": "Accept 6610",
+              "value": {
+                "invoiceNumber": "COO-202601-2266",
+                "glCode": "6610",
+                "deptSplit": {
+                  "GA": 1
+                },
+                "confidence": 0.95,
+                "decidedBy": "agent",
+                "reasoning": "unambiguous vendor"
+              }
+            },
+            {
+              "label": "Recode",
+              "value": null
+            }
+          ]
+        },
+        {
+          "id": "EX-2026-01-39",
+          "subjectType": "ap_invoice",
+          "subjectRef": "UNI-202601-6249",
+          "cause": "low_confidence",
+          "amountCents": 157155,
+          "confidence": 0.62,
+          "proposal": {
+            "invoiceNumber": "UNI-202601-6249",
+            "glCode": "6910",
+            "deptSplit": {
+              "GTM": 0.6,
+              "OPS": 0.4
+            },
+            "confidence": 0.62,
+            "decidedBy": "agent",
+            "reasoning": "multi-department allocation, no precedent"
+          },
+          "options": [
+            {
+              "label": "Accept 6910",
+              "value": {
+                "invoiceNumber": "UNI-202601-6249",
+                "glCode": "6910",
+                "deptSplit": {
+                  "GTM": 0.6,
+                  "OPS": 0.4
+                },
+                "confidence": 0.62,
+                "decidedBy": "agent",
+                "reasoning": "multi-department allocation, no precedent"
+              }
+            },
+            {
+              "label": "Recode",
+              "value": null
+            }
+          ]
+        },
+        {
+          "id": "EX-2026-01-40",
+          "subjectType": "ap_invoice",
+          "subjectRef": "UNI-202601-5362",
+          "cause": "low_confidence",
+          "amountCents": 146878,
+          "confidence": 0.62,
+          "proposal": {
+            "invoiceNumber": "UNI-202601-5362",
+            "glCode": "6910",
+            "deptSplit": {
+              "GTM": 0.6,
+              "OPS": 0.4
+            },
+            "confidence": 0.62,
+            "decidedBy": "agent",
+            "reasoning": "multi-department allocation, no precedent"
+          },
+          "options": [
+            {
+              "label": "Accept 6910",
+              "value": {
+                "invoiceNumber": "UNI-202601-5362",
+                "glCode": "6910",
+                "deptSplit": {
+                  "GTM": 0.6,
+                  "OPS": 0.4
+                },
+                "confidence": 0.62,
+                "decidedBy": "agent",
+                "reasoning": "multi-department allocation, no precedent"
+              }
+            },
+            {
+              "label": "Recode",
+              "value": null
+            }
+          ]
+        },
+        {
+          "id": "EX-2026-01-41",
+          "subjectType": "ap_invoice",
+          "subjectRef": "UNI-202601-7712",
+          "cause": "low_confidence",
+          "amountCents": 242141,
+          "confidence": 0.62,
+          "proposal": {
+            "invoiceNumber": "UNI-202601-7712",
+            "glCode": "6910",
+            "deptSplit": {
+              "GTM": 0.6,
+              "OPS": 0.4
+            },
+            "confidence": 0.62,
+            "decidedBy": "agent",
+            "reasoning": "multi-department allocation, no precedent"
+          },
+          "options": [
+            {
+              "label": "Accept 6910",
+              "value": {
+                "invoiceNumber": "UNI-202601-7712",
+                "glCode": "6910",
+                "deptSplit": {
+                  "GTM": 0.6,
+                  "OPS": 0.4
+                },
+                "confidence": 0.62,
+                "decidedBy": "agent",
+                "reasoning": "multi-department allocation, no precedent"
+              }
+            },
+            {
+              "label": "Recode",
+              "value": null
+            }
+          ]
+        },
+        {
+          "id": "EX-2026-01-42",
+          "subjectType": "bank_line",
+          "subjectRef": "BNK-2026-01-0009",
+          "cause": "over_materiality",
+          "amountCents": 7599505,
+          "confidence": 0.58,
+          "proposal": {
+            "bankExternalIds": [
+              "BNK-2026-01-0009"
+            ],
+            "ledgerExternalIds": [
+              "GL-2026-01-0020",
+              "GL-2026-01-0021"
+            ],
+            "cardinality": "1:many",
+            "amountDeltaCents": 0,
+            "deltaReason": "bank_fee",
+            "confidence": 0.58,
+            "decidedBy": "agent",
+            "reasoning": "residual present, cause not certain"
+          },
+          "options": [
+            {
+              "label": "Accept match",
+              "value": {
+                "bankExternalIds": [
+                  "BNK-2026-01-0009"
+                ],
+                "ledgerExternalIds": [
+                  "GL-2026-01-0020",
+                  "GL-2026-01-0021"
+                ],
+                "cardinality": "1:many",
+                "amountDeltaCents": 0,
+                "deltaReason": "bank_fee",
+                "confidence": 0.58,
+                "decidedBy": "agent",
+                "reasoning": "residual present, cause not certain"
+              }
+            },
+            {
+              "label": "Reject",
+              "value": null
+            }
+          ]
+        },
+        {
+          "id": "EX-2026-01-43",
+          "subjectType": "bank_line",
+          "subjectRef": "BNK-2026-01-0010",
+          "cause": "over_materiality",
+          "amountCents": 11265287,
+          "confidence": 0.58,
+          "proposal": {
+            "bankExternalIds": [
+              "BNK-2026-01-0010"
+            ],
+            "ledgerExternalIds": [
+              "GL-2026-01-0022",
+              "GL-2026-01-0023"
+            ],
+            "cardinality": "1:many",
+            "amountDeltaCents": 0,
+            "deltaReason": "bank_fee",
+            "confidence": 0.58,
+            "decidedBy": "agent",
+            "reasoning": "residual present, cause not certain"
+          },
+          "options": [
+            {
+              "label": "Accept match",
+              "value": {
+                "bankExternalIds": [
+                  "BNK-2026-01-0010"
+                ],
+                "ledgerExternalIds": [
+                  "GL-2026-01-0022",
+                  "GL-2026-01-0023"
+                ],
+                "cardinality": "1:many",
+                "amountDeltaCents": 0,
+                "deltaReason": "bank_fee",
+                "confidence": 0.58,
+                "decidedBy": "agent",
+                "reasoning": "residual present, cause not certain"
+              }
+            },
+            {
+              "label": "Reject",
+              "value": null
+            }
+          ]
+        },
+        {
+          "id": "EX-2026-01-44",
+          "subjectType": "bank_line",
+          "subjectRef": "BNK-2026-01-0031",
+          "cause": "over_materiality",
+          "amountCents": -20797503,
+          "confidence": 0.96,
+          "proposal": {
+            "bankExternalIds": [
+              "BNK-2026-01-0031"
+            ],
+            "ledgerExternalIds": [
+              "GL-2026-01-0045",
+              "GL-2026-01-0046"
+            ],
+            "cardinality": "1:many",
+            "amountDeltaCents": 0,
+            "deltaReason": null,
+            "confidence": 0.96,
+            "decidedBy": "agent",
+            "reasoning": "clean tie-out"
+          },
+          "options": [
+            {
+              "label": "Accept match",
+              "value": {
+                "bankExternalIds": [
+                  "BNK-2026-01-0031"
+                ],
+                "ledgerExternalIds": [
+                  "GL-2026-01-0045",
+                  "GL-2026-01-0046"
+                ],
+                "cardinality": "1:many",
+                "amountDeltaCents": 0,
+                "deltaReason": null,
+                "confidence": 0.96,
+                "decidedBy": "agent",
+                "reasoning": "clean tie-out"
+              }
+            },
+            {
+              "label": "Reject",
+              "value": null
+            }
+          ]
+        },
+        {
+          "id": "EX-2026-01-45",
+          "subjectType": "bank_line",
+          "subjectRef": "BNK-2026-01-0008",
+          "cause": "over_materiality",
+          "amountCents": -3950000,
+          "confidence": 0.96,
+          "proposal": {
+            "bankExternalIds": [
+              "BNK-2026-01-0008"
+            ],
+            "ledgerExternalIds": [
+              "GL-2026-01-0019"
+            ],
+            "cardinality": "1:1",
+            "amountDeltaCents": 0,
+            "deltaReason": null,
+            "confidence": 0.96,
+            "decidedBy": "agent",
+            "reasoning": "clean tie-out"
+          },
+          "options": [
+            {
+              "label": "Accept match",
+              "value": {
+                "bankExternalIds": [
+                  "BNK-2026-01-0008"
+                ],
+                "ledgerExternalIds": [
+                  "GL-2026-01-0019"
+                ],
+                "cardinality": "1:1",
+                "amountDeltaCents": 0,
+                "deltaReason": null,
+                "confidence": 0.96,
+                "decidedBy": "agent",
+                "reasoning": "clean tie-out"
+              }
+            },
+            {
+              "label": "Reject",
+              "value": null
+            }
+          ]
+        },
+        {
+          "id": "EX-2026-01-46",
+          "subjectType": "bank_line",
+          "subjectRef": "BNK-2026-01-0011",
+          "cause": "over_materiality",
+          "amountCents": 7432128,
+          "confidence": 0.58,
+          "proposal": {
+            "bankExternalIds": [
+              "BNK-2026-01-0011"
+            ],
+            "ledgerExternalIds": [
+              "GL-2026-01-0024",
+              "GL-2026-01-0025"
+            ],
+            "cardinality": "1:many",
+            "amountDeltaCents": 0,
+            "deltaReason": "bank_fee",
+            "confidence": 0.58,
+            "decidedBy": "agent",
+            "reasoning": "residual present, cause not certain"
+          },
+          "options": [
+            {
+              "label": "Accept match",
+              "value": {
+                "bankExternalIds": [
+                  "BNK-2026-01-0011"
+                ],
+                "ledgerExternalIds": [
+                  "GL-2026-01-0024",
+                  "GL-2026-01-0025"
+                ],
+                "cardinality": "1:many",
+                "amountDeltaCents": 0,
+                "deltaReason": "bank_fee",
+                "confidence": 0.58,
+                "decidedBy": "agent",
+                "reasoning": "residual present, cause not certain"
+              }
+            },
+            {
+              "label": "Reject",
+              "value": null
+            }
+          ]
+        },
+        {
+          "id": "EX-2026-01-47",
+          "subjectType": "bank_line",
+          "subjectRef": "BNK-2026-01-0027",
+          "cause": "over_materiality",
+          "amountCents": -3021517,
+          "confidence": 0.96,
+          "proposal": {
+            "bankExternalIds": [
+              "BNK-2026-01-0027"
+            ],
+            "ledgerExternalIds": [
+              "GL-2026-01-0041"
+            ],
+            "cardinality": "1:1",
+            "amountDeltaCents": 0,
+            "deltaReason": null,
+            "confidence": 0.96,
+            "decidedBy": "agent",
+            "reasoning": "clean tie-out"
+          },
+          "options": [
+            {
+              "label": "Accept match",
+              "value": {
+                "bankExternalIds": [
+                  "BNK-2026-01-0027"
+                ],
+                "ledgerExternalIds": [
+                  "GL-2026-01-0041"
+                ],
+                "cardinality": "1:1",
+                "amountDeltaCents": 0,
+                "deltaReason": null,
+                "confidence": 0.96,
+                "decidedBy": "agent",
+                "reasoning": "clean tie-out"
+              }
+            },
+            {
+              "label": "Reject",
+              "value": null
+            }
+          ]
+        },
+        {
+          "id": "EX-2026-01-48",
+          "subjectType": "bank_line",
+          "subjectRef": "BNK-2026-01-0012",
+          "cause": "over_materiality",
+          "amountCents": 9101329,
+          "confidence": 0.58,
+          "proposal": {
+            "bankExternalIds": [
+              "BNK-2026-01-0012"
+            ],
+            "ledgerExternalIds": [
+              "GL-2026-01-0026",
+              "GL-2026-01-0027"
+            ],
+            "cardinality": "1:many",
+            "amountDeltaCents": 0,
+            "deltaReason": "bank_fee",
+            "confidence": 0.58,
+            "decidedBy": "agent",
+            "reasoning": "residual present, cause not certain"
+          },
+          "options": [
+            {
+              "label": "Accept match",
+              "value": {
+                "bankExternalIds": [
+                  "BNK-2026-01-0012"
+                ],
+                "ledgerExternalIds": [
+                  "GL-2026-01-0026",
+                  "GL-2026-01-0027"
+                ],
+                "cardinality": "1:many",
+                "amountDeltaCents": 0,
+                "deltaReason": "bank_fee",
+                "confidence": 0.58,
+                "decidedBy": "agent",
+                "reasoning": "residual present, cause not certain"
+              }
+            },
+            {
+              "label": "Reject",
+              "value": null
+            }
+          ]
+        },
+        {
+          "id": "EX-2026-01-49",
+          "subjectType": "bank_line",
+          "subjectRef": "BNK-2026-01-0013",
+          "cause": "low_confidence",
+          "amountCents": -2229208,
+          "confidence": 0.58,
+          "proposal": {
+            "bankExternalIds": [
+              "BNK-2026-01-0013"
+            ],
+            "ledgerExternalIds": [
+              "GL-2026-01-0028",
+              "GL-2026-01-0029"
+            ],
+            "cardinality": "1:many",
+            "amountDeltaCents": -7749,
+            "deltaReason": "fx",
+            "confidence": 0.58,
+            "decidedBy": "agent",
+            "reasoning": "residual present, cause not certain"
+          },
+          "options": [
+            {
+              "label": "Accept match",
+              "value": {
+                "bankExternalIds": [
+                  "BNK-2026-01-0013"
+                ],
+                "ledgerExternalIds": [
+                  "GL-2026-01-0028",
+                  "GL-2026-01-0029"
+                ],
+                "cardinality": "1:many",
+                "amountDeltaCents": -7749,
+                "deltaReason": "fx",
+                "confidence": 0.58,
+                "decidedBy": "agent",
+                "reasoning": "residual present, cause not certain"
+              }
+            },
+            {
+              "label": "Reject",
+              "value": null
+            }
+          ]
+        },
+        {
+          "id": "EX-2026-01-50",
+          "subjectType": "bank_line",
+          "subjectRef": "BNK-2026-01-0030",
+          "cause": "over_materiality",
+          "amountCents": -2532892,
+          "confidence": 0.96,
+          "proposal": {
+            "bankExternalIds": [
+              "BNK-2026-01-0030"
+            ],
+            "ledgerExternalIds": [
+              "GL-2026-01-0044"
+            ],
+            "cardinality": "1:1",
+            "amountDeltaCents": 0,
+            "deltaReason": null,
+            "confidence": 0.96,
+            "decidedBy": "agent",
+            "reasoning": "clean tie-out"
+          },
+          "options": [
+            {
+              "label": "Accept match",
+              "value": {
+                "bankExternalIds": [
+                  "BNK-2026-01-0030"
+                ],
+                "ledgerExternalIds": [
+                  "GL-2026-01-0044"
+                ],
+                "cardinality": "1:1",
+                "amountDeltaCents": 0,
+                "deltaReason": null,
+                "confidence": 0.96,
+                "decidedBy": "agent",
+                "reasoning": "clean tie-out"
+              }
+            },
+            {
+              "label": "Reject",
+              "value": null
+            }
+          ]
+        },
+        {
+          "id": "EX-2026-01-51",
+          "subjectType": "bank_line",
+          "subjectRef": "BNK-2026-01-0032",
+          "cause": "over_materiality",
+          "amountCents": -20140181,
+          "confidence": 0.96,
+          "proposal": {
+            "bankExternalIds": [
+              "BNK-2026-01-0032"
+            ],
+            "ledgerExternalIds": [
+              "GL-2026-01-0047",
+              "GL-2026-01-0048"
+            ],
+            "cardinality": "1:many",
+            "amountDeltaCents": 0,
+            "deltaReason": null,
+            "confidence": 0.96,
+            "decidedBy": "agent",
+            "reasoning": "clean tie-out"
+          },
+          "options": [
+            {
+              "label": "Accept match",
+              "value": {
+                "bankExternalIds": [
+                  "BNK-2026-01-0032"
+                ],
+                "ledgerExternalIds": [
+                  "GL-2026-01-0047",
+                  "GL-2026-01-0048"
+                ],
+                "cardinality": "1:many",
+                "amountDeltaCents": 0,
+                "deltaReason": null,
+                "confidence": 0.96,
+                "decidedBy": "agent",
+                "reasoning": "clean tie-out"
+              }
+            },
+            {
+              "label": "Reject",
+              "value": null
+            }
+          ]
+        }
+      ],
+      "stats": {
+        "llmCalls": 7,
+        "ruleHits": 0,
+        "tokensIn": 6300,
+        "tokensOut": 1820,
+        "costMicros": 77000,
+        "durationMs": 25,
+        "codingAccuracy": 1,
+        "matchAccuracy": 0.66,
+        "autoClearRate": 0.5161290322580645,
+        "autoClearPrecision": 1,
+        "exceptionsOpened": 51
+      },
+      "corrections": 51,
+      "touchSeconds": 2295,
+      "gradientCostMicros": 11000,
+      "proposals": [
+        {
+          "name": "Flexport → 5020 (OPS:100)",
+          "kind": "coding",
+          "adopted": false,
+          "precision": 0,
+          "fired": 0,
+          "evidence": 3
+        },
+        {
+          "name": "Flexport settles installments",
+          "kind": "matching",
+          "adopted": false,
+          "precision": 0,
+          "fired": 0,
+          "evidence": 4
+        },
+        {
+          "name": "Cooley LLP → 6610 (GA:100)",
+          "kind": "coding",
+          "adopted": false,
+          "precision": 0,
+          "fired": 0,
+          "evidence": 4
+        },
+        {
+          "name": "United Airlines → 6910 (GTM:60/OPS:40)",
+          "kind": "coding",
+          "adopted": false,
+          "precision": 0,
+          "fired": 0,
+          "evidence": 3
+        },
+        {
+          "name": "Stripe settles same day settlement",
+          "kind": "matching",
+          "adopted": false,
+          "precision": 0,
+          "fired": 0,
+          "evidence": 4
+        },
+        {
+          "name": "Gusto settles by invoice",
+          "kind": "matching",
+          "adopted": false,
+          "precision": 0,
+          "fired": 0,
+          "evidence": 2
+        }
+      ]
+    },
+    {
+      "period": "2026-02",
+      "rulebookVersionIn": 0,
+      "rulebookVersionOut": 1,
+      "activeRules": 3,
+      "modelDecisions": 67,
+      "exceptions": [
+        {
+          "id": "EX-2026-02-1",
+          "subjectType": "bank_line",
+          "subjectRef": "BNK-2026-02-0004",
+          "cause": "no_candidate",
+          "amountCents": -129921,
+          "confidence": null,
+          "proposal": {
+            "description": "FIGMA INC HTTPSFIGMA.C"
+          },
+          "options": [
+            {
+              "label": "Timing difference - carry forward",
+              "value": "timing"
+            }
+          ]
+        },
+        {
+          "id": "EX-2026-02-2",
+          "subjectType": "bank_line",
+          "subjectRef": "BNK-2026-02-0025",
+          "cause": "no_candidate",
+          "amountCents": -4052495,
+          "confidence": null,
+          "proposal": {
+            "description": "FLEXPORT, INC. TRANCHE 1/2"
+          },
+          "options": [
+            {
+              "label": "Timing difference - carry forward",
+              "value": "timing"
+            }
+          ]
+        },
+        {
+          "id": "EX-2026-02-3",
+          "subjectType": "bank_line",
+          "subjectRef": "BNK-2026-02-0031",
+          "cause": "no_candidate",
+          "amountCents": -2093987,
+          "confidence": null,
+          "proposal": {
+            "description": "COOLEY LLP"
+          },
+          "options": [
+            {
+              "label": "Timing difference - carry forward",
+              "value": "timing"
+            }
+          ]
+        },
+        {
+          "id": "EX-2026-02-4",
+          "subjectType": "bank_line",
+          "subjectRef": "BNK-2026-02-0040",
+          "cause": "no_candidate",
+          "amountCents": -49000,
+          "confidence": null,
+          "proposal": {
+            "description": "IRON MTN"
+          },
+          "options": [
+            {
+              "label": "Timing difference - carry forward",
+              "value": "timing"
+            }
+          ]
+        },
+        {
+          "id": "EX-2026-02-5",
+          "subjectType": "bank_line",
+          "subjectRef": "BNK-2026-02-0014",
+          "cause": "no_candidate",
+          "amountCents": -1763615,
+          "confidence": null,
+          "proposal": {
+            "description": "MOUSER ELECTRONICS 800-346"
+          },
+          "options": [
+            {
+              "label": "Timing difference - carry forward",
+              "value": "timing"
+            }
+          ]
+        },
+        {
+          "id": "EX-2026-02-6",
+          "subjectType": "bank_line",
+          "subjectRef": "BNK-2026-02-0027",
+          "cause": "no_candidate",
+          "amountCents": -3742372,
+          "confidence": null,
+          "proposal": {
+            "description": "FLEXPORT, INC. TRANCHE 1/2"
+          },
+          "options": [
+            {
+              "label": "Timing difference - carry forward",
+              "value": "timing"
+            }
+          ]
+        },
+        {
+          "id": "EX-2026-02-7",
+          "subjectType": "bank_line",
+          "subjectRef": "BNK-2026-02-0056",
+          "cause": "no_candidate",
+          "amountCents": 1086227,
+          "confidence": null,
+          "proposal": {
+            "description": "DEPOSIT IN TRANSIT - LOCKBOX"
+          },
+          "options": [
+            {
+              "label": "Timing difference - carry forward",
+              "value": "timing"
+            }
+          ]
+        },
+        {
+          "id": "EX-2026-02-8",
+          "subjectType": "bank_line",
+          "subjectRef": "BNK-2026-02-0002",
+          "cause": "no_candidate",
+          "amountCents": -1236205,
+          "confidence": null,
+          "proposal": {
+            "description": "DATADOG, INC."
+          },
+          "options": [
+            {
+              "label": "Timing difference - carry forward",
+              "value": "timing"
+            }
+          ]
+        },
+        {
+          "id": "EX-2026-02-9",
+          "subjectType": "bank_line",
+          "subjectRef": "BNK-2026-02-0005",
+          "cause": "no_candidate",
+          "amountCents": -97928,
+          "confidence": null,
+          "proposal": {
+            "description": "LINEAR.APP"
+          },
+          "options": [
+            {
+              "label": "Timing difference - carry forward",
+              "value": "timing"
+            }
+          ]
+        },
+        {
+          "id": "EX-2026-02-10",
+          "subjectType": "bank_line",
+          "subjectRef": "BNK-2026-02-0015",
+          "cause": "no_candidate",
+          "amountCents": -1554109,
+          "confidence": null,
+          "proposal": {
+            "description": "MOUSER ELECTRONICS 800-346"
+          },
+          "options": [
+            {
+              "label": "Timing difference - carry forward",
+              "value": "timing"
+            }
+          ]
+        },
+        {
+          "id": "EX-2026-02-11",
+          "subjectType": "bank_line",
+          "subjectRef": "BNK-2026-02-0019",
+          "cause": "no_candidate",
+          "amountCents": -1041357,
+          "confidence": null,
+          "proposal": {
+            "description": "DIGIKEY ELECTRONICS"
+          },
+          "options": [
+            {
+              "label": "Timing difference - carry forward",
+              "value": "timing"
+            }
+          ]
+        },
+        {
+          "id": "EX-2026-02-12",
+          "subjectType": "bank_line",
+          "subjectRef": "BNK-2026-02-0020",
+          "cause": "no_candidate",
+          "amountCents": -641181,
+          "confidence": null,
+          "proposal": {
+            "description": "DIGI-KEY CORP THIEF RIVER"
+          },
+          "options": [
+            {
+              "label": "Timing difference - carry forward",
+              "value": "timing"
+            }
+          ]
+        },
+        {
+          "id": "EX-2026-02-13",
+          "subjectType": "bank_line",
+          "subjectRef": "BNK-2026-02-0022",
+          "cause": "no_candidate",
+          "amountCents": -865082,
+          "confidence": null,
+          "proposal": {
+            "description": "DIGI-KEY CORP THIEF RIVER"
+          },
+          "options": [
+            {
+              "label": "Timing difference - carry forward",
+              "value": "timing"
+            }
+          ]
+        },
+        {
+          "id": "EX-2026-02-14",
+          "subjectType": "bank_line",
+          "subjectRef": "BNK-2026-02-0023",
+          "cause": "no_candidate",
+          "amountCents": -1326497,
+          "confidence": null,
+          "proposal": {
+            "description": "DIGI-KEY CORP THIEF RIVER"
+          },
+          "options": [
+            {
+              "label": "Timing difference - carry forward",
+              "value": "timing"
+            }
+          ]
+        },
+        {
+          "id": "EX-2026-02-15",
+          "subjectType": "bank_line",
+          "subjectRef": "BNK-2026-02-0024",
+          "cause": "no_candidate",
+          "amountCents": -4653296,
+          "confidence": null,
+          "proposal": {
+            "description": "FLEXPORT INC SAN FRANCIS"
+          },
+          "options": [
+            {
+              "label": "Timing difference - carry forward",
+              "value": "timing"
+            }
+          ]
+        },
+        {
+          "id": "EX-2026-02-16",
+          "subjectType": "bank_line",
+          "subjectRef": "BNK-2026-02-0030",
+          "cause": "no_candidate",
+          "amountCents": -1951489,
+          "confidence": null,
+          "proposal": {
+            "description": "COOLEY LLP"
+          },
+          "options": [
+            {
+              "label": "Timing difference - carry forward",
+              "value": "timing"
+            }
+          ]
+        },
+        {
+          "id": "EX-2026-02-17",
+          "subjectType": "bank_line",
+          "subjectRef": "BNK-2026-02-0032",
+          "cause": "no_candidate",
+          "amountCents": -2267196,
+          "confidence": null,
+          "proposal": {
+            "description": "COOLEY LLP"
+          },
+          "options": [
+            {
+              "label": "Timing difference - carry forward",
+              "value": "timing"
+            }
+          ]
+        },
+        {
+          "id": "EX-2026-02-18",
+          "subjectType": "bank_line",
+          "subjectRef": "BNK-2026-02-0033",
+          "cause": "no_candidate",
+          "amountCents": -4551358,
+          "confidence": null,
+          "proposal": {
+            "description": "DELOITTE LLP AP"
+          },
+          "options": [
+            {
+              "label": "Timing difference - carry forward",
+              "value": "timing"
+            }
+          ]
+        },
+        {
+          "id": "EX-2026-02-19",
+          "subjectType": "bank_line",
+          "subjectRef": "BNK-2026-02-0039",
+          "cause": "no_candidate",
+          "amountCents": -1970857,
+          "confidence": null,
+          "proposal": {
+            "description": "GOOGLE ADS4829174 CC@GOOGL"
+          },
+          "options": [
+            {
+              "label": "Timing difference - carry forward",
+              "value": "timing"
+            }
+          ]
+        },
+        {
+          "id": "EX-2026-02-20",
+          "subjectType": "bank_line",
+          "subjectRef": "BNK-2026-02-0057",
+          "cause": "no_candidate",
+          "amountCents": -424410,
+          "confidence": null,
+          "proposal": {
+            "description": "ACH DEBIT PENDING VENDOR REF 88213"
+          },
+          "options": [
+            {
+              "label": "Timing difference - carry forward",
+              "value": "timing"
+            }
+          ]
+        },
+        {
+          "id": "EX-2026-02-21",
+          "subjectType": "bank_line",
+          "subjectRef": "BNK-2026-02-0026",
+          "cause": "no_candidate",
+          "amountCents": -2701664,
+          "confidence": null,
+          "proposal": {
+            "description": "FLEXPORT, INC. TRANCHE 2/2"
+          },
+          "options": [
+            {
+              "label": "Timing difference - carry forward",
+              "value": "timing"
+            }
+          ]
+        },
+        {
+          "id": "EX-2026-02-22",
+          "subjectType": "bank_line",
+          "subjectRef": "BNK-2026-02-0028",
+          "cause": "no_candidate",
+          "amountCents": -2494915,
+          "confidence": null,
+          "proposal": {
+            "description": "FLEXPORT, INC. TRANCHE 2/2"
+          },
+          "options": [
+            {
+              "label": "Timing difference - carry forward",
+              "value": "timing"
+            }
+          ]
+        },
+        {
+          "id": "EX-2026-02-23",
+          "subjectType": "ap_invoice",
+          "subjectRef": "AMA-202602-3782",
+          "cause": "over_materiality",
+          "amountCents": 4548054,
+          "confidence": 0.62,
+          "proposal": {
+            "invoiceNumber": "AMA-202602-3782",
+            "glCode": "6820",
+            "deptSplit": {
+              "ENG": 0.6,
+              "DATA": 0.25,
+              "PROD": 0.15
+            },
+            "confidence": 0.62,
+            "decidedBy": "agent",
+            "reasoning": "multi-department allocation, no precedent"
+          },
+          "options": [
+            {
+              "label": "Accept 6820",
+              "value": {
+                "invoiceNumber": "AMA-202602-3782",
+                "glCode": "6820",
+                "deptSplit": {
+                  "ENG": 0.6,
+                  "DATA": 0.25,
+                  "PROD": 0.15
+                },
+                "confidence": 0.62,
+                "decidedBy": "agent",
+                "reasoning": "multi-department allocation, no precedent"
+              }
+            },
+            {
+              "label": "Recode",
+              "value": null
+            }
+          ]
+        },
+        {
+          "id": "EX-2026-02-24",
+          "subjectType": "ap_invoice",
+          "subjectRef": "DAT-202602-1226",
+          "cause": "low_confidence",
+          "amountCents": 1236205,
+          "confidence": 0.62,
+          "proposal": {
+            "invoiceNumber": "DAT-202602-1226",
+            "glCode": "6820",
+            "deptSplit": {
+              "ENG": 0.7,
+              "DATA": 0.3
+            },
+            "confidence": 0.62,
+            "decidedBy": "agent",
+            "reasoning": "multi-department allocation, no precedent"
+          },
+          "options": [
+            {
+              "label": "Accept 6820",
+              "value": {
+                "invoiceNumber": "DAT-202602-1226",
+                "glCode": "6820",
+                "deptSplit": {
+                  "ENG": 0.7,
+                  "DATA": 0.3
+                },
+                "confidence": 0.62,
+                "decidedBy": "agent",
+                "reasoning": "multi-department allocation, no precedent"
+              }
+            },
+            {
+              "label": "Recode",
+              "value": null
+            }
+          ]
+        },
+        {
+          "id": "EX-2026-02-25",
+          "subjectType": "ap_invoice",
+          "subjectRef": "VER-202602-8460",
+          "cause": "low_confidence",
+          "amountCents": 401587,
+          "confidence": 0.62,
+          "proposal": {
+            "invoiceNumber": "VER-202602-8460",
+            "glCode": "6820",
+            "deptSplit": {
+              "ENG": 0.8,
+              "PROD": 0.2
+            },
+            "confidence": 0.62,
+            "decidedBy": "agent",
+            "reasoning": "multi-department allocation, no precedent"
+          },
+          "options": [
+            {
+              "label": "Accept 6820",
+              "value": {
+                "invoiceNumber": "VER-202602-8460",
+                "glCode": "6820",
+                "deptSplit": {
+                  "ENG": 0.8,
+                  "PROD": 0.2
+                },
+                "confidence": 0.62,
+                "decidedBy": "agent",
+                "reasoning": "multi-department allocation, no precedent"
+              }
+            },
+            {
+              "label": "Recode",
+              "value": null
+            }
+          ]
+        },
+        {
+          "id": "EX-2026-02-26",
+          "subjectType": "ap_invoice",
+          "subjectRef": "FIG-202602-4584",
+          "cause": "low_confidence",
+          "amountCents": 129921,
+          "confidence": 0.62,
+          "proposal": {
+            "invoiceNumber": "FIG-202602-4584",
+            "glCode": "6830",
+            "deptSplit": {
+              "PROD": 0.85,
+              "ENG": 0.15
+            },
+            "confidence": 0.62,
+            "decidedBy": "agent",
+            "reasoning": "multi-department allocation, no precedent"
+          },
+          "options": [
+            {
+              "label": "Accept 6830",
+              "value": {
+                "invoiceNumber": "FIG-202602-4584",
+                "glCode": "6830",
+                "deptSplit": {
+                  "PROD": 0.85,
+                  "ENG": 0.15
+                },
+                "confidence": 0.62,
+                "decidedBy": "agent",
+                "reasoning": "multi-department allocation, no precedent"
+              }
+            },
+            {
+              "label": "Recode",
+              "value": null
+            }
+          ]
+        },
+        {
+          "id": "EX-2026-02-27",
+          "subjectType": "ap_invoice",
+          "subjectRef": "LIN-202602-5174",
+          "cause": "low_confidence",
+          "amountCents": 97928,
+          "confidence": 0.62,
+          "proposal": {
+            "invoiceNumber": "LIN-202602-5174",
+            "glCode": "6830",
+            "deptSplit": {
+              "ENG": 0.55,
+              "PROD": 0.3,
+              "DATA": 0.15
+            },
+            "confidence": 0.62,
+            "decidedBy": "agent",
+            "reasoning": "multi-department allocation, no precedent"
+          },
+          "options": [
+            {
+              "label": "Accept 6830",
+              "value": {
+                "invoiceNumber": "LIN-202602-5174",
+                "glCode": "6830",
+                "deptSplit": {
+                  "ENG": 0.55,
+                  "PROD": 0.3,
+                  "DATA": 0.15
+                },
+                "confidence": 0.62,
+                "decidedBy": "agent",
+                "reasoning": "multi-department allocation, no precedent"
+              }
+            },
+            {
+              "label": "Recode",
+              "value": null
+            }
+          ]
+        },
+        {
+          "id": "EX-2026-02-28",
+          "subjectType": "ap_invoice",
+          "subjectRef": "SLA-202602-8581",
+          "cause": "low_confidence",
+          "amountCents": 224020,
+          "confidence": 0.62,
+          "proposal": {
+            "invoiceNumber": "SLA-202602-8581",
+            "glCode": "6830",
+            "deptSplit": {
+              "GA": 0.35,
+              "ENG": 0.25,
+              "GTM": 0.25,
+              "PROD": 0.15
+            },
+            "confidence": 0.62,
+            "decidedBy": "agent",
+            "reasoning": "multi-department allocation, no precedent"
+          },
+          "options": [
+            {
+              "label": "Accept 6830",
+              "value": {
+                "invoiceNumber": "SLA-202602-8581",
+                "glCode": "6830",
+                "deptSplit": {
+                  "GA": 0.35,
+                  "ENG": 0.25,
+                  "GTM": 0.25,
+                  "PROD": 0.15
+                },
+                "confidence": 0.62,
+                "decidedBy": "agent",
+                "reasoning": "multi-department allocation, no precedent"
+              }
+            },
+            {
+              "label": "Recode",
+              "value": null
+            }
+          ]
+        },
+        {
+          "id": "EX-2026-02-29",
+          "subjectType": "ap_invoice",
+          "subjectRef": "GIT-202602-2924",
+          "cause": "low_confidence",
+          "amountCents": 169492,
+          "confidence": 0.62,
+          "proposal": {
+            "invoiceNumber": "GIT-202602-2924",
+            "glCode": "6830",
+            "deptSplit": {
+              "ENG": 0.9,
+              "DATA": 0.1
+            },
+            "confidence": 0.62,
+            "decidedBy": "agent",
+            "reasoning": "multi-department allocation, no precedent"
+          },
+          "options": [
+            {
+              "label": "Accept 6830",
+              "value": {
+                "invoiceNumber": "GIT-202602-2924",
+                "glCode": "6830",
+                "deptSplit": {
+                  "ENG": 0.9,
+                  "DATA": 0.1
+                },
+                "confidence": 0.62,
+                "decidedBy": "agent",
+                "reasoning": "multi-department allocation, no precedent"
+              }
+            },
+            {
+              "label": "Recode",
+              "value": null
+            }
+          ]
+        },
+        {
+          "id": "EX-2026-02-30",
+          "subjectType": "ap_invoice",
+          "subjectRef": "WEW-202602-5306",
+          "cause": "over_materiality",
+          "amountCents": 3950000,
+          "confidence": 0.95,
+          "proposal": {
+            "invoiceNumber": "WEW-202602-5306",
+            "glCode": "6510",
+            "deptSplit": {
+              "GA": 1
+            },
+            "confidence": 0.95,
+            "decidedBy": "agent",
+            "reasoning": "unambiguous vendor"
+          },
+          "options": [
+            {
+              "label": "Accept 6510",
+              "value": {
+                "invoiceNumber": "WEW-202602-5306",
+                "glCode": "6510",
+                "deptSplit": {
+                  "GA": 1
+                },
+                "confidence": 0.95,
+                "decidedBy": "agent",
+                "reasoning": "unambiguous vendor"
+              }
+            },
+            {
+              "label": "Recode",
+              "value": null
+            }
+          ]
+        },
+        {
+          "id": "EX-2026-02-31",
+          "subjectType": "ap_invoice",
+          "subjectRef": "DEE-202602-6664",
+          "cause": "low_confidence",
+          "amountCents": 1920587,
+          "confidence": 0.62,
+          "proposal": {
+            "invoiceNumber": "DEE-202602-6664",
+            "glCode": "6010",
+            "deptSplit": {
+              "ENG": 0.65,
+              "DATA": 0.35
+            },
+            "confidence": 0.62,
+            "decidedBy": "agent",
+            "reasoning": "multi-department allocation, no precedent"
+          },
+          "options": [
+            {
+              "label": "Accept 6010",
+              "value": {
+                "invoiceNumber": "DEE-202602-6664",
+                "glCode": "6010",
+                "deptSplit": {
+                  "ENG": 0.65,
+                  "DATA": 0.35
+                },
+                "confidence": 0.62,
+                "decidedBy": "agent",
+                "reasoning": "multi-department allocation, no precedent"
+              }
+            },
+            {
+              "label": "Recode",
+              "value": null
+            }
+          ]
+        },
+        {
+          "id": "EX-2026-02-32",
+          "subjectType": "ap_invoice",
+          "subjectRef": "MOU-202602-7557",
+          "cause": "over_materiality",
+          "amountCents": 2501738,
+          "confidence": 0.95,
+          "proposal": {
+            "invoiceNumber": "MOU-202602-7557",
+            "glCode": "5010",
+            "deptSplit": {
+              "OPS": 1
+            },
+            "confidence": 0.95,
+            "decidedBy": "agent",
+            "reasoning": "unambiguous vendor"
+          },
+          "options": [
+            {
+              "label": "Accept 5010",
+              "value": {
+                "invoiceNumber": "MOU-202602-7557",
+                "glCode": "5010",
+                "deptSplit": {
+                  "OPS": 1
+                },
+                "confidence": 0.95,
+                "decidedBy": "agent",
+                "reasoning": "unambiguous vendor"
+              }
+            },
+            {
+              "label": "Recode",
+              "value": null
+            }
+          ]
+        },
+        {
+          "id": "EX-2026-02-33",
+          "subjectType": "ap_invoice",
+          "subjectRef": "MOU-202602-7907",
+          "cause": "over_materiality",
+          "amountCents": 2602585,
+          "confidence": 0.95,
+          "proposal": {
+            "invoiceNumber": "MOU-202602-7907",
+            "glCode": "5010",
+            "deptSplit": {
+              "OPS": 1
+            },
+            "confidence": 0.95,
+            "decidedBy": "agent",
+            "reasoning": "unambiguous vendor"
+          },
+          "options": [
+            {
+              "label": "Accept 5010",
+              "value": {
+                "invoiceNumber": "MOU-202602-7907",
+                "glCode": "5010",
+                "deptSplit": {
+                  "OPS": 1
+                },
+                "confidence": 0.95,
+                "decidedBy": "agent",
+                "reasoning": "unambiguous vendor"
+              }
+            },
+            {
+              "label": "Recode",
+              "value": null
+            }
+          ]
+        },
+        {
+          "id": "EX-2026-02-34",
+          "subjectType": "ap_invoice",
+          "subjectRef": "FLE-202602-3258",
+          "cause": "over_materiality",
+          "amountCents": 4653296,
+          "confidence": 0.95,
+          "proposal": {
+            "invoiceNumber": "FLE-202602-3258",
+            "glCode": "5020",
+            "deptSplit": {
+              "OPS": 1
+            },
+            "confidence": 0.95,
+            "decidedBy": "agent",
+            "reasoning": "unambiguous vendor"
+          },
+          "options": [
+            {
+              "label": "Accept 5020",
+              "value": {
+                "invoiceNumber": "FLE-202602-3258",
+                "glCode": "5020",
+                "deptSplit": {
+                  "OPS": 1
+                },
+                "confidence": 0.95,
+                "decidedBy": "agent",
+                "reasoning": "unambiguous vendor"
+              }
+            },
+            {
+              "label": "Recode",
+              "value": null
+            }
+          ]
+        },
+        {
+          "id": "EX-2026-02-35",
+          "subjectType": "ap_invoice",
+          "subjectRef": "FLE-202602-5421",
+          "cause": "over_materiality",
+          "amountCents": 6754159,
+          "confidence": 0.95,
+          "proposal": {
+            "invoiceNumber": "FLE-202602-5421",
+            "glCode": "5020",
+            "deptSplit": {
+              "OPS": 1
+            },
+            "confidence": 0.95,
+            "decidedBy": "agent",
+            "reasoning": "unambiguous vendor"
+          },
+          "options": [
+            {
+              "label": "Accept 5020",
+              "value": {
+                "invoiceNumber": "FLE-202602-5421",
+                "glCode": "5020",
+                "deptSplit": {
+                  "OPS": 1
+                },
+                "confidence": 0.95,
+                "decidedBy": "agent",
+                "reasoning": "unambiguous vendor"
+              }
+            },
+            {
+              "label": "Recode",
+              "value": null
+            }
+          ]
+        },
+        {
+          "id": "EX-2026-02-36",
+          "subjectType": "ap_invoice",
+          "subjectRef": "FLE-202602-5155",
+          "cause": "over_materiality",
+          "amountCents": 6237287,
+          "confidence": 0.95,
+          "proposal": {
+            "invoiceNumber": "FLE-202602-5155",
+            "glCode": "5020",
+            "deptSplit": {
+              "OPS": 1
+            },
+            "confidence": 0.95,
+            "decidedBy": "agent",
+            "reasoning": "unambiguous vendor"
+          },
+          "options": [
+            {
+              "label": "Accept 5020",
+              "value": {
+                "invoiceNumber": "FLE-202602-5155",
+                "glCode": "5020",
+                "deptSplit": {
+                  "OPS": 1
+                },
+                "confidence": 0.95,
+                "decidedBy": "agent",
+                "reasoning": "unambiguous vendor"
+              }
+            },
+            {
+              "label": "Recode",
+              "value": null
+            }
+          ]
+        },
+        {
+          "id": "EX-2026-02-37",
+          "subjectType": "ap_invoice",
+          "subjectRef": "DEL-202602-5205",
+          "cause": "over_materiality",
+          "amountCents": 4551358,
+          "confidence": 0.95,
+          "proposal": {
+            "invoiceNumber": "DEL-202602-5205",
+            "glCode": "6610",
+            "deptSplit": {
+              "GA": 1
+            },
+            "confidence": 0.95,
+            "decidedBy": "agent",
+            "reasoning": "unambiguous vendor"
+          },
+          "options": [
+            {
+              "label": "Accept 6610",
+              "value": {
+                "invoiceNumber": "DEL-202602-5205",
+                "glCode": "6610",
+                "deptSplit": {
+                  "GA": 1
+                },
+                "confidence": 0.95,
+                "decidedBy": "agent",
+                "reasoning": "unambiguous vendor"
+              }
+            },
+            {
+              "label": "Recode",
+              "value": null
+            }
+          ]
+        },
+        {
+          "id": "EX-2026-02-38",
+          "subjectType": "ap_invoice",
+          "subjectRef": "SAL-202602-4136",
+          "cause": "over_materiality",
+          "amountCents": 24000000,
+          "confidence": 0.95,
+          "proposal": {
+            "invoiceNumber": "SAL-202602-4136",
+            "glCode": "1400",
+            "deptSplit": {
+              "GTM": 1
+            },
+            "confidence": 0.95,
+            "decidedBy": "agent",
+            "reasoning": "unambiguous vendor"
+          },
+          "options": [
+            {
+              "label": "Accept 1400",
+              "value": {
+                "invoiceNumber": "SAL-202602-4136",
+                "glCode": "1400",
+                "deptSplit": {
+                  "GTM": 1
+                },
+                "confidence": 0.95,
+                "decidedBy": "agent",
+                "reasoning": "unambiguous vendor"
+              }
+            },
+            {
+              "label": "Recode",
+              "value": null
+            }
+          ]
+        },
+        {
+          "id": "EX-2026-02-39",
+          "subjectType": "ap_invoice",
+          "subjectRef": "UNI-202602-8251",
+          "cause": "low_confidence",
+          "amountCents": 233952,
+          "confidence": 0.62,
+          "proposal": {
+            "invoiceNumber": "UNI-202602-8251",
+            "glCode": "6910",
+            "deptSplit": {
+              "GTM": 0.6,
+              "OPS": 0.4
+            },
+            "confidence": 0.62,
+            "decidedBy": "agent",
+            "reasoning": "multi-department allocation, no precedent"
+          },
+          "options": [
+            {
+              "label": "Accept 6910",
+              "value": {
+                "invoiceNumber": "UNI-202602-8251",
+                "glCode": "6910",
+                "deptSplit": {
+                  "GTM": 0.6,
+                  "OPS": 0.4
+                },
+                "confidence": 0.62,
+                "decidedBy": "agent",
+                "reasoning": "multi-department allocation, no precedent"
+              }
+            },
+            {
+              "label": "Recode",
+              "value": null
+            }
+          ]
+        },
+        {
+          "id": "EX-2026-02-40",
+          "subjectType": "ap_invoice",
+          "subjectRef": "UNI-202602-4915",
+          "cause": "low_confidence",
+          "amountCents": 228416,
+          "confidence": 0.62,
+          "proposal": {
+            "invoiceNumber": "UNI-202602-4915",
+            "glCode": "6910",
+            "deptSplit": {
+              "GTM": 0.6,
+              "OPS": 0.4
+            },
+            "confidence": 0.62,
+            "decidedBy": "agent",
+            "reasoning": "multi-department allocation, no precedent"
+          },
+          "options": [
+            {
+              "label": "Accept 6910",
+              "value": {
+                "invoiceNumber": "UNI-202602-4915",
+                "glCode": "6910",
+                "deptSplit": {
+                  "GTM": 0.6,
+                  "OPS": 0.4
+                },
+                "confidence": 0.62,
+                "decidedBy": "agent",
+                "reasoning": "multi-department allocation, no precedent"
+              }
+            },
+            {
+              "label": "Recode",
+              "value": null
+            }
+          ]
+        },
+        {
+          "id": "EX-2026-02-41",
+          "subjectType": "bank_line",
+          "subjectRef": "BNK-2026-02-0009",
+          "cause": "over_materiality",
+          "amountCents": 9675748,
+          "confidence": 0.58,
+          "proposal": {
+            "bankExternalIds": [
+              "BNK-2026-02-0009"
+            ],
+            "ledgerExternalIds": [
+              "GL-2026-02-0020",
+              "GL-2026-02-0021"
+            ],
+            "cardinality": "1:many",
+            "amountDeltaCents": 0,
+            "deltaReason": "bank_fee",
+            "confidence": 0.58,
+            "decidedBy": "agent",
+            "reasoning": "residual present, cause not certain"
+          },
+          "options": [
+            {
+              "label": "Accept match",
+              "value": {
+                "bankExternalIds": [
+                  "BNK-2026-02-0009"
+                ],
+                "ledgerExternalIds": [
+                  "GL-2026-02-0020",
+                  "GL-2026-02-0021"
+                ],
+                "cardinality": "1:many",
+                "amountDeltaCents": 0,
+                "deltaReason": "bank_fee",
+                "confidence": 0.58,
+                "decidedBy": "agent",
+                "reasoning": "residual present, cause not certain"
+              }
+            },
+            {
+              "label": "Reject",
+              "value": null
+            }
+          ]
+        },
+        {
+          "id": "EX-2026-02-42",
+          "subjectType": "bank_line",
+          "subjectRef": "BNK-2026-02-0008",
+          "cause": "over_materiality",
+          "amountCents": -3950000,
+          "confidence": 0.96,
+          "proposal": {
+            "bankExternalIds": [
+              "BNK-2026-02-0008"
+            ],
+            "ledgerExternalIds": [
+              "GL-2026-02-0019"
+            ],
+            "cardinality": "1:1",
+            "amountDeltaCents": 0,
+            "deltaReason": null,
+            "confidence": 0.96,
+            "decidedBy": "agent",
+            "reasoning": "clean tie-out"
+          },
+          "options": [
+            {
+              "label": "Accept match",
+              "value": {
+                "bankExternalIds": [
+                  "BNK-2026-02-0008"
+                ],
+                "ledgerExternalIds": [
+                  "GL-2026-02-0019"
+                ],
+                "cardinality": "1:1",
+                "amountDeltaCents": 0,
+                "deltaReason": null,
+                "confidence": 0.96,
+                "decidedBy": "agent",
+                "reasoning": "clean tie-out"
+              }
+            },
+            {
+              "label": "Reject",
+              "value": null
+            }
+          ]
+        },
+        {
+          "id": "EX-2026-02-43",
+          "subjectType": "bank_line",
+          "subjectRef": "BNK-2026-02-0010",
+          "cause": "over_materiality",
+          "amountCents": 11015675,
+          "confidence": 0.58,
+          "proposal": {
+            "bankExternalIds": [
+              "BNK-2026-02-0010"
+            ],
+            "ledgerExternalIds": [
+              "GL-2026-02-0022",
+              "GL-2026-02-0023"
+            ],
+            "cardinality": "1:many",
+            "amountDeltaCents": 0,
+            "deltaReason": "bank_fee",
+            "confidence": 0.58,
+            "decidedBy": "agent",
+            "reasoning": "residual present, cause not certain"
+          },
+          "options": [
+            {
+              "label": "Accept match",
+              "value": {
+                "bankExternalIds": [
+                  "BNK-2026-02-0010"
+                ],
+                "ledgerExternalIds": [
+                  "GL-2026-02-0022",
+                  "GL-2026-02-0023"
+                ],
+                "cardinality": "1:many",
+                "amountDeltaCents": 0,
+                "deltaReason": "bank_fee",
+                "confidence": 0.58,
+                "decidedBy": "agent",
+                "reasoning": "residual present, cause not certain"
+              }
+            },
+            {
+              "label": "Reject",
+              "value": null
+            }
+          ]
+        },
+        {
+          "id": "EX-2026-02-44",
+          "subjectType": "bank_line",
+          "subjectRef": "BNK-2026-02-0011",
+          "cause": "over_materiality",
+          "amountCents": 8726826,
+          "confidence": 0.58,
+          "proposal": {
+            "bankExternalIds": [
+              "BNK-2026-02-0011"
+            ],
+            "ledgerExternalIds": [
+              "GL-2026-02-0024",
+              "GL-2026-02-0025"
+            ],
+            "cardinality": "1:many",
+            "amountDeltaCents": 0,
+            "deltaReason": "bank_fee",
+            "confidence": 0.58,
+            "decidedBy": "agent",
+            "reasoning": "residual present, cause not certain"
+          },
+          "options": [
+            {
+              "label": "Accept match",
+              "value": {
+                "bankExternalIds": [
+                  "BNK-2026-02-0011"
+                ],
+                "ledgerExternalIds": [
+                  "GL-2026-02-0024",
+                  "GL-2026-02-0025"
+                ],
+                "cardinality": "1:many",
+                "amountDeltaCents": 0,
+                "deltaReason": "bank_fee",
+                "confidence": 0.58,
+                "decidedBy": "agent",
+                "reasoning": "residual present, cause not certain"
+              }
+            },
+            {
+              "label": "Reject",
+              "value": null
+            }
+          ]
+        },
+        {
+          "id": "EX-2026-02-45",
+          "subjectType": "bank_line",
+          "subjectRef": "BNK-2026-02-0013",
+          "cause": "low_confidence",
+          "amountCents": -2061731,
+          "confidence": 0.58,
+          "proposal": {
+            "bankExternalIds": [
+              "BNK-2026-02-0013"
+            ],
+            "ledgerExternalIds": [
+              "GL-2026-02-0028",
+              "GL-2026-02-0029"
+            ],
+            "cardinality": "1:many",
+            "amountDeltaCents": 20185,
+            "deltaReason": "fx",
+            "confidence": 0.58,
+            "decidedBy": "agent",
+            "reasoning": "residual present, cause not certain"
+          },
+          "options": [
+            {
+              "label": "Accept match",
+              "value": {
+                "bankExternalIds": [
+                  "BNK-2026-02-0013"
+                ],
+                "ledgerExternalIds": [
+                  "GL-2026-02-0028",
+                  "GL-2026-02-0029"
+                ],
+                "cardinality": "1:many",
+                "amountDeltaCents": 20185,
+                "deltaReason": "fx",
+                "confidence": 0.58,
+                "decidedBy": "agent",
+                "reasoning": "residual present, cause not certain"
+              }
+            },
+            {
+              "label": "Reject",
+              "value": null
+            }
+          ]
+        },
+        {
+          "id": "EX-2026-02-46",
+          "subjectType": "bank_line",
+          "subjectRef": "BNK-2026-02-0035",
+          "cause": "over_materiality",
+          "amountCents": -20401212,
+          "confidence": 0.96,
+          "proposal": {
+            "bankExternalIds": [
+              "BNK-2026-02-0035"
+            ],
+            "ledgerExternalIds": [
+              "GL-2026-02-0049",
+              "GL-2026-02-0050"
+            ],
+            "cardinality": "1:many",
+            "amountDeltaCents": 0,
+            "deltaReason": null,
+            "confidence": 0.96,
+            "decidedBy": "agent",
+            "reasoning": "clean tie-out"
+          },
+          "options": [
+            {
+              "label": "Accept match",
+              "value": {
+                "bankExternalIds": [
+                  "BNK-2026-02-0035"
+                ],
+                "ledgerExternalIds": [
+                  "GL-2026-02-0049",
+                  "GL-2026-02-0050"
+                ],
+                "cardinality": "1:many",
+                "amountDeltaCents": 0,
+                "deltaReason": null,
+                "confidence": 0.96,
+                "decidedBy": "agent",
+                "reasoning": "clean tie-out"
+              }
+            },
+            {
+              "label": "Reject",
+              "value": null
+            }
+          ]
+        },
+        {
+          "id": "EX-2026-02-47",
+          "subjectType": "bank_line",
+          "subjectRef": "BNK-2026-02-0001",
+          "cause": "over_materiality",
+          "amountCents": -4548054,
+          "confidence": 0.96,
+          "proposal": {
+            "bankExternalIds": [
+              "BNK-2026-02-0001"
+            ],
+            "ledgerExternalIds": [
+              "GL-2026-02-0001",
+              "GL-2026-02-0002",
+              "GL-2026-02-0003"
+            ],
+            "cardinality": "1:many",
+            "amountDeltaCents": 0,
+            "deltaReason": null,
+            "confidence": 0.96,
+            "decidedBy": "agent",
+            "reasoning": "clean tie-out"
+          },
+          "options": [
+            {
+              "label": "Accept match",
+              "value": {
+                "bankExternalIds": [
+                  "BNK-2026-02-0001"
+                ],
+                "ledgerExternalIds": [
+                  "GL-2026-02-0001",
+                  "GL-2026-02-0002",
+                  "GL-2026-02-0003"
+                ],
+                "cardinality": "1:many",
+                "amountDeltaCents": 0,
+                "deltaReason": null,
+                "confidence": 0.96,
+                "decidedBy": "agent",
+                "reasoning": "clean tie-out"
+              }
+            },
+            {
+              "label": "Reject",
+              "value": null
+            }
+          ]
+        },
+        {
+          "id": "EX-2026-02-48",
+          "subjectType": "bank_line",
+          "subjectRef": "BNK-2026-02-0012",
+          "cause": "over_materiality",
+          "amountCents": 7789664,
+          "confidence": 0.58,
+          "proposal": {
+            "bankExternalIds": [
+              "BNK-2026-02-0012"
+            ],
+            "ledgerExternalIds": [
+              "GL-2026-02-0026",
+              "GL-2026-02-0027"
+            ],
+            "cardinality": "1:many",
+            "amountDeltaCents": 0,
+            "deltaReason": "bank_fee",
+            "confidence": 0.58,
+            "decidedBy": "agent",
+            "reasoning": "residual present, cause not certain"
+          },
+          "options": [
+            {
+              "label": "Accept match",
+              "value": {
+                "bankExternalIds": [
+                  "BNK-2026-02-0012"
+                ],
+                "ledgerExternalIds": [
+                  "GL-2026-02-0026",
+                  "GL-2026-02-0027"
+                ],
+                "cardinality": "1:many",
+                "amountDeltaCents": 0,
+                "deltaReason": "bank_fee",
+                "confidence": 0.58,
+                "decidedBy": "agent",
+                "reasoning": "residual present, cause not certain"
+              }
+            },
+            {
+              "label": "Reject",
+              "value": null
+            }
+          ]
+        },
+        {
+          "id": "EX-2026-02-49",
+          "subjectType": "bank_line",
+          "subjectRef": "BNK-2026-02-0016",
+          "cause": "over_materiality",
+          "amountCents": -2501738,
+          "confidence": 0.96,
+          "proposal": {
+            "bankExternalIds": [
+              "BNK-2026-02-0016"
+            ],
+            "ledgerExternalIds": [
+              "GL-2026-02-0032"
+            ],
+            "cardinality": "1:1",
+            "amountDeltaCents": 0,
+            "deltaReason": null,
+            "confidence": 0.96,
+            "decidedBy": "agent",
+            "reasoning": "clean tie-out"
+          },
+          "options": [
+            {
+              "label": "Accept match",
+              "value": {
+                "bankExternalIds": [
+                  "BNK-2026-02-0016"
+                ],
+                "ledgerExternalIds": [
+                  "GL-2026-02-0032"
+                ],
+                "cardinality": "1:1",
+                "amountDeltaCents": 0,
+                "deltaReason": null,
+                "confidence": 0.96,
+                "decidedBy": "agent",
+                "reasoning": "clean tie-out"
+              }
+            },
+            {
+              "label": "Reject",
+              "value": null
+            }
+          ]
+        },
+        {
+          "id": "EX-2026-02-50",
+          "subjectType": "bank_line",
+          "subjectRef": "BNK-2026-02-0017",
+          "cause": "over_materiality",
+          "amountCents": -2602585,
+          "confidence": 0.96,
+          "proposal": {
+            "bankExternalIds": [
+              "BNK-2026-02-0017"
+            ],
+            "ledgerExternalIds": [
+              "GL-2026-02-0033"
+            ],
+            "cardinality": "1:1",
+            "amountDeltaCents": 0,
+            "deltaReason": null,
+            "confidence": 0.96,
+            "decidedBy": "agent",
+            "reasoning": "clean tie-out"
+          },
+          "options": [
+            {
+              "label": "Accept match",
+              "value": {
+                "bankExternalIds": [
+                  "BNK-2026-02-0017"
+                ],
+                "ledgerExternalIds": [
+                  "GL-2026-02-0033"
+                ],
+                "cardinality": "1:1",
+                "amountDeltaCents": 0,
+                "deltaReason": null,
+                "confidence": 0.96,
+                "decidedBy": "agent",
+                "reasoning": "clean tie-out"
+              }
+            },
+            {
+              "label": "Reject",
+              "value": null
+            }
+          ]
+        },
+        {
+          "id": "EX-2026-02-51",
+          "subjectType": "bank_line",
+          "subjectRef": "BNK-2026-02-0034",
+          "cause": "over_materiality",
+          "amountCents": -24000000,
+          "confidence": 0.96,
+          "proposal": {
+            "bankExternalIds": [
+              "BNK-2026-02-0034"
+            ],
+            "ledgerExternalIds": [
+              "GL-2026-02-0048"
+            ],
+            "cardinality": "1:1",
+            "amountDeltaCents": 0,
+            "deltaReason": null,
+            "confidence": 0.96,
+            "decidedBy": "agent",
+            "reasoning": "clean tie-out"
+          },
+          "options": [
+            {
+              "label": "Accept match",
+              "value": {
+                "bankExternalIds": [
+                  "BNK-2026-02-0034"
+                ],
+                "ledgerExternalIds": [
+                  "GL-2026-02-0048"
+                ],
+                "cardinality": "1:1",
+                "amountDeltaCents": 0,
+                "deltaReason": null,
+                "confidence": 0.96,
+                "decidedBy": "agent",
+                "reasoning": "clean tie-out"
+              }
+            },
+            {
+              "label": "Reject",
+              "value": null
+            }
+          ]
+        },
+        {
+          "id": "EX-2026-02-52",
+          "subjectType": "bank_line",
+          "subjectRef": "BNK-2026-02-0036",
+          "cause": "over_materiality",
+          "amountCents": -20752346,
+          "confidence": 0.96,
+          "proposal": {
+            "bankExternalIds": [
+              "BNK-2026-02-0036"
+            ],
+            "ledgerExternalIds": [
+              "GL-2026-02-0051",
+              "GL-2026-02-0052"
+            ],
+            "cardinality": "1:many",
+            "amountDeltaCents": 0,
+            "deltaReason": null,
+            "confidence": 0.96,
+            "decidedBy": "agent",
+            "reasoning": "clean tie-out"
+          },
+          "options": [
+            {
+              "label": "Accept match",
+              "value": {
+                "bankExternalIds": [
+                  "BNK-2026-02-0036"
+                ],
+                "ledgerExternalIds": [
+                  "GL-2026-02-0051",
+                  "GL-2026-02-0052"
+                ],
+                "cardinality": "1:many",
+                "amountDeltaCents": 0,
+                "deltaReason": null,
+                "confidence": 0.96,
+                "decidedBy": "agent",
+                "reasoning": "clean tie-out"
+              }
+            },
+            {
+              "label": "Reject",
+              "value": null
+            }
+          ]
+        }
+      ],
+      "stats": {
+        "llmCalls": 7,
+        "ruleHits": 0,
+        "tokensIn": 6300,
+        "tokensOut": 1820,
+        "costMicros": 77000,
+        "durationMs": 5,
+        "codingAccuracy": 1,
+        "matchAccuracy": 0.660377358490566,
+        "autoClearRate": 0.5522388059701493,
+        "autoClearPrecision": 1,
+        "exceptionsOpened": 52
+      },
+      "corrections": 52,
+      "touchSeconds": 2340,
+      "gradientCostMicros": 11000,
+      "proposals": [
+        {
+          "name": "Mouser Electronics → 5010 (OPS:100)",
+          "kind": "coding",
+          "adopted": true,
+          "precision": 1,
+          "fired": 2,
+          "evidence": 2
+        },
+        {
+          "name": "Flexport → 5020 (OPS:100)",
+          "kind": "coding",
+          "adopted": true,
+          "precision": 1,
+          "fired": 3,
+          "evidence": 3
+        },
+        {
+          "name": "Flexport settles installments",
+          "kind": "matching",
+          "adopted": false,
+          "precision": 0,
+          "fired": 1,
+          "evidence": 4
+        },
+        {
+          "name": "United Airlines → 6910 (GTM:60/OPS:40)",
+          "kind": "coding",
+          "adopted": true,
+          "precision": 1,
+          "fired": 3,
+          "evidence": 2
+        },
+        {
+          "name": "Stripe settles same day settlement",
+          "kind": "matching",
+          "adopted": false,
+          "precision": 0.3333333333333333,
+          "fired": 3,
+          "evidence": 4
+        },
+        {
+          "name": "Gusto settles by invoice",
+          "kind": "matching",
+          "adopted": false,
+          "precision": 0,
+          "fired": 0,
+          "evidence": 2
+        }
+      ]
+    },
+    {
+      "period": "2026-03",
+      "rulebookVersionIn": 1,
+      "rulebookVersionOut": 2,
+      "activeRules": 4,
+      "modelDecisions": 53,
+      "exceptions": [
+        {
+          "id": "EX-2026-03-1",
+          "subjectType": "bank_line",
+          "subjectRef": "BNK-2026-03-0002",
+          "cause": "no_candidate",
+          "amountCents": -1332987,
+          "confidence": null,
+          "proposal": {
+            "description": "DATADOG INC 866-329-4466"
+          },
+          "options": [
+            {
+              "label": "Timing difference - carry forward",
+              "value": "timing"
+            }
+          ]
+        },
+        {
+          "id": "EX-2026-03-2",
+          "subjectType": "bank_line",
+          "subjectRef": "BNK-2026-03-0015",
+          "cause": "no_candidate",
+          "amountCents": -1506856,
+          "confidence": null,
+          "proposal": {
+            "description": "MOUSER ELECTRONICS 800-346"
+          },
+          "options": [
+            {
+              "label": "Timing difference - carry forward",
+              "value": "timing"
+            }
+          ]
+        },
+        {
+          "id": "EX-2026-03-3",
+          "subjectType": "bank_line",
+          "subjectRef": "BNK-2026-03-0016",
+          "cause": "no_candidate",
+          "amountCents": -2561886,
+          "confidence": null,
+          "proposal": {
+            "description": "MOUSER ELECTRONICS 800-346"
+          },
+          "options": [
+            {
+              "label": "Timing difference - carry forward",
+              "value": "timing"
+            }
+          ]
+        },
+        {
+          "id": "EX-2026-03-4",
+          "subjectType": "bank_line",
+          "subjectRef": "BNK-2026-03-0028",
+          "cause": "no_candidate",
+          "amountCents": -3288170,
+          "confidence": null,
+          "proposal": {
+            "description": "FLEXPORT INC SAN FRANCIS TRANCHE 1/2"
+          },
+          "options": [
+            {
+              "label": "Timing difference - carry forward",
+              "value": "timing"
+            }
+          ]
+        },
+        {
+          "id": "EX-2026-03-5",
+          "subjectType": "bank_line",
+          "subjectRef": "BNK-2026-03-0019",
+          "cause": "no_candidate",
+          "amountCents": -543258,
+          "confidence": null,
+          "proposal": {
+            "description": "DIGIKEY ELECTRONICS"
+          },
+          "options": [
+            {
+              "label": "Timing difference - carry forward",
+              "value": "timing"
+            }
+          ]
+        },
+        {
+          "id": "EX-2026-03-6",
+          "subjectType": "bank_line",
+          "subjectRef": "BNK-2026-03-0038",
+          "cause": "no_candidate",
+          "amountCents": -1570409,
+          "confidence": null,
+          "proposal": {
+            "description": "GOOGLE *ADS"
+          },
+          "options": [
+            {
+              "label": "Timing difference - carry forward",
+              "value": "timing"
+            }
+          ]
+        },
+        {
+          "id": "EX-2026-03-7",
+          "subjectType": "bank_line",
+          "subjectRef": "BNK-2026-03-0058",
+          "cause": "no_candidate",
+          "amountCents": 977129,
+          "confidence": null,
+          "proposal": {
+            "description": "DEPOSIT IN TRANSIT - LOCKBOX"
+          },
+          "options": [
+            {
+              "label": "Timing difference - carry forward",
+              "value": "timing"
+            }
+          ]
+        },
+        {
+          "id": "EX-2026-03-8",
+          "subjectType": "bank_line",
+          "subjectRef": "BNK-2026-03-0001",
+          "cause": "no_candidate",
+          "amountCents": -5483736,
+          "confidence": null,
+          "proposal": {
+            "description": "AMZN WEB SVCS"
+          },
+          "options": [
+            {
+              "label": "Timing difference - carry forward",
+              "value": "timing"
+            }
+          ]
+        },
+        {
+          "id": "EX-2026-03-9",
+          "subjectType": "bank_line",
+          "subjectRef": "BNK-2026-03-0003",
+          "cause": "no_candidate",
+          "amountCents": -371343,
+          "confidence": null,
+          "proposal": {
+            "description": "VERCEL INC"
+          },
+          "options": [
+            {
+              "label": "Timing difference - carry forward",
+              "value": "timing"
+            }
+          ]
+        },
+        {
+          "id": "EX-2026-03-10",
+          "subjectType": "bank_line",
+          "subjectRef": "BNK-2026-03-0017",
+          "cause": "no_candidate",
+          "amountCents": -2405111,
+          "confidence": null,
+          "proposal": {
+            "description": "MOUSER ELECTRONICS 800-346"
+          },
+          "options": [
+            {
+              "label": "Timing difference - carry forward",
+              "value": "timing"
+            }
+          ]
+        },
+        {
+          "id": "EX-2026-03-11",
+          "subjectType": "bank_line",
+          "subjectRef": "BNK-2026-03-0018",
+          "cause": "no_candidate",
+          "amountCents": -1413233,
+          "confidence": null,
+          "proposal": {
+            "description": "MOUSER ELECTRONICS 800-346"
+          },
+          "options": [
+            {
+              "label": "Timing difference - carry forward",
+              "value": "timing"
+            }
+          ]
+        },
+        {
+          "id": "EX-2026-03-12",
+          "subjectType": "bank_line",
+          "subjectRef": "BNK-2026-03-0021",
+          "cause": "no_candidate",
+          "amountCents": -3044030,
+          "confidence": null,
+          "proposal": {
+            "description": "FLEXPORT INC SAN FRANCIS TRANCHE 1/2"
+          },
+          "options": [
+            {
+              "label": "Timing difference - carry forward",
+              "value": "timing"
+            }
+          ]
+        },
+        {
+          "id": "EX-2026-03-13",
+          "subjectType": "bank_line",
+          "subjectRef": "BNK-2026-03-0023",
+          "cause": "no_candidate",
+          "amountCents": -4976563,
+          "confidence": null,
+          "proposal": {
+            "description": "FLEXPORT INC SAN FRANCIS TRANCHE 1/2"
+          },
+          "options": [
+            {
+              "label": "Timing difference - carry forward",
+              "value": "timing"
+            }
+          ]
+        },
+        {
+          "id": "EX-2026-03-14",
+          "subjectType": "bank_line",
+          "subjectRef": "BNK-2026-03-0025",
+          "cause": "no_candidate",
+          "amountCents": -4674729,
+          "confidence": null,
+          "proposal": {
+            "description": "FLEXPORT, INC."
+          },
+          "options": [
+            {
+              "label": "Timing difference - carry forward",
+              "value": "timing"
+            }
+          ]
+        },
+        {
+          "id": "EX-2026-03-15",
+          "subjectType": "bank_line",
+          "subjectRef": "BNK-2026-03-0026",
+          "cause": "no_candidate",
+          "amountCents": -4428694,
+          "confidence": null,
+          "proposal": {
+            "description": "FLEXPORT, INC. TRANCHE 1/2"
+          },
+          "options": [
+            {
+              "label": "Timing difference - carry forward",
+              "value": "timing"
+            }
+          ]
+        },
+        {
+          "id": "EX-2026-03-16",
+          "subjectType": "bank_line",
+          "subjectRef": "BNK-2026-03-0031",
+          "cause": "no_candidate",
+          "amountCents": -3261857,
+          "confidence": null,
+          "proposal": {
+            "description": "COOLEY LLP OPERATING"
+          },
+          "options": [
+            {
+              "label": "Timing difference - carry forward",
+              "value": "timing"
+            }
+          ]
+        },
+        {
+          "id": "EX-2026-03-17",
+          "subjectType": "bank_line",
+          "subjectRef": "BNK-2026-03-0059",
+          "cause": "no_candidate",
+          "amountCents": -335280,
+          "confidence": null,
+          "proposal": {
+            "description": "ACH DEBIT PENDING VENDOR REF 88213"
+          },
+          "options": [
+            {
+              "label": "Timing difference - carry forward",
+              "value": "timing"
+            }
+          ]
+        },
+        {
+          "id": "EX-2026-03-18",
+          "subjectType": "bank_line",
+          "subjectRef": "BNK-2026-03-0029",
+          "cause": "no_candidate",
+          "amountCents": -2192113,
+          "confidence": null,
+          "proposal": {
+            "description": "FLEXPORT INC SAN FRANCIS TRANCHE 2/2"
+          },
+          "options": [
+            {
+              "label": "Timing difference - carry forward",
+              "value": "timing"
+            }
+          ]
+        },
+        {
+          "id": "EX-2026-03-19",
+          "subjectType": "bank_line",
+          "subjectRef": "BNK-2026-03-0022",
+          "cause": "no_candidate",
+          "amountCents": -2029354,
+          "confidence": null,
+          "proposal": {
+            "description": "FLEXPORT INC SAN FRANCIS TRANCHE 2/2"
+          },
+          "options": [
+            {
+              "label": "Timing difference - carry forward",
+              "value": "timing"
+            }
+          ]
+        },
+        {
+          "id": "EX-2026-03-20",
+          "subjectType": "bank_line",
+          "subjectRef": "BNK-2026-03-0024",
+          "cause": "no_candidate",
+          "amountCents": -3317708,
+          "confidence": null,
+          "proposal": {
+            "description": "FLEXPORT, INC. TRANCHE 2/2"
+          },
+          "options": [
+            {
+              "label": "Timing difference - carry forward",
+              "value": "timing"
+            }
+          ]
+        },
+        {
+          "id": "EX-2026-03-21",
+          "subjectType": "bank_line",
+          "subjectRef": "BNK-2026-03-0027",
+          "cause": "no_candidate",
+          "amountCents": -2952463,
+          "confidence": null,
+          "proposal": {
+            "description": "FLEXPORT INC SAN FRANCIS TRANCHE 2/2"
+          },
+          "options": [
+            {
+              "label": "Timing difference - carry forward",
+              "value": "timing"
+            }
+          ]
+        },
+        {
+          "id": "EX-2026-03-22",
+          "subjectType": "ap_invoice",
+          "subjectRef": "AMA-202603-6378",
+          "cause": "over_materiality",
+          "amountCents": 5483736,
+          "confidence": 0.62,
+          "proposal": {
+            "invoiceNumber": "AMA-202603-6378",
+            "glCode": "6820",
+            "deptSplit": {
+              "ENG": 0.6,
+              "DATA": 0.25,
+              "PROD": 0.15
+            },
+            "confidence": 0.62,
+            "decidedBy": "agent",
+            "reasoning": "multi-department allocation, no precedent"
+          },
+          "options": [
+            {
+              "label": "Accept 6820",
+              "value": {
+                "invoiceNumber": "AMA-202603-6378",
+                "glCode": "6820",
+                "deptSplit": {
+                  "ENG": 0.6,
+                  "DATA": 0.25,
+                  "PROD": 0.15
+                },
+                "confidence": 0.62,
+                "decidedBy": "agent",
+                "reasoning": "multi-department allocation, no precedent"
+              }
+            },
+            {
+              "label": "Recode",
+              "value": null
+            }
+          ]
+        },
+        {
+          "id": "EX-2026-03-23",
+          "subjectType": "ap_invoice",
+          "subjectRef": "DAT-202603-4324",
+          "cause": "low_confidence",
+          "amountCents": 1332987,
+          "confidence": 0.62,
+          "proposal": {
+            "invoiceNumber": "DAT-202603-4324",
+            "glCode": "6820",
+            "deptSplit": {
+              "ENG": 0.7,
+              "DATA": 0.3
+            },
+            "confidence": 0.62,
+            "decidedBy": "agent",
+            "reasoning": "multi-department allocation, no precedent"
+          },
+          "options": [
+            {
+              "label": "Accept 6820",
+              "value": {
+                "invoiceNumber": "DAT-202603-4324",
+                "glCode": "6820",
+                "deptSplit": {
+                  "ENG": 0.7,
+                  "DATA": 0.3
+                },
+                "confidence": 0.62,
+                "decidedBy": "agent",
+                "reasoning": "multi-department allocation, no precedent"
+              }
+            },
+            {
+              "label": "Recode",
+              "value": null
+            }
+          ]
+        },
+        {
+          "id": "EX-2026-03-24",
+          "subjectType": "ap_invoice",
+          "subjectRef": "VER-202603-2987",
+          "cause": "low_confidence",
+          "amountCents": 371343,
+          "confidence": 0.62,
+          "proposal": {
+            "invoiceNumber": "VER-202603-2987",
+            "glCode": "6820",
+            "deptSplit": {
+              "ENG": 0.8,
+              "PROD": 0.2
+            },
+            "confidence": 0.62,
+            "decidedBy": "agent",
+            "reasoning": "multi-department allocation, no precedent"
+          },
+          "options": [
+            {
+              "label": "Accept 6820",
+              "value": {
+                "invoiceNumber": "VER-202603-2987",
+                "glCode": "6820",
+                "deptSplit": {
+                  "ENG": 0.8,
+                  "PROD": 0.2
+                },
+                "confidence": 0.62,
+                "decidedBy": "agent",
+                "reasoning": "multi-department allocation, no precedent"
+              }
+            },
+            {
+              "label": "Recode",
+              "value": null
+            }
+          ]
+        },
+        {
+          "id": "EX-2026-03-25",
+          "subjectType": "ap_invoice",
+          "subjectRef": "FIG-202603-7018",
+          "cause": "low_confidence",
+          "amountCents": 134233,
+          "confidence": 0.62,
+          "proposal": {
+            "invoiceNumber": "FIG-202603-7018",
+            "glCode": "6830",
+            "deptSplit": {
+              "PROD": 0.85,
+              "ENG": 0.15
+            },
+            "confidence": 0.62,
+            "decidedBy": "agent",
+            "reasoning": "multi-department allocation, no precedent"
+          },
+          "options": [
+            {
+              "label": "Accept 6830",
+              "value": {
+                "invoiceNumber": "FIG-202603-7018",
+                "glCode": "6830",
+                "deptSplit": {
+                  "PROD": 0.85,
+                  "ENG": 0.15
+                },
+                "confidence": 0.62,
+                "decidedBy": "agent",
+                "reasoning": "multi-department allocation, no precedent"
+              }
+            },
+            {
+              "label": "Recode",
+              "value": null
+            }
+          ]
+        },
+        {
+          "id": "EX-2026-03-26",
+          "subjectType": "ap_invoice",
+          "subjectRef": "LIN-202603-2269",
+          "cause": "low_confidence",
+          "amountCents": 93803,
+          "confidence": 0.62,
+          "proposal": {
+            "invoiceNumber": "LIN-202603-2269",
+            "glCode": "6830",
+            "deptSplit": {
+              "ENG": 0.55,
+              "PROD": 0.3,
+              "DATA": 0.15
+            },
+            "confidence": 0.62,
+            "decidedBy": "agent",
+            "reasoning": "multi-department allocation, no precedent"
+          },
+          "options": [
+            {
+              "label": "Accept 6830",
+              "value": {
+                "invoiceNumber": "LIN-202603-2269",
+                "glCode": "6830",
+                "deptSplit": {
+                  "ENG": 0.55,
+                  "PROD": 0.3,
+                  "DATA": 0.15
+                },
+                "confidence": 0.62,
+                "decidedBy": "agent",
+                "reasoning": "multi-department allocation, no precedent"
+              }
+            },
+            {
+              "label": "Recode",
+              "value": null
+            }
+          ]
+        },
+        {
+          "id": "EX-2026-03-27",
+          "subjectType": "ap_invoice",
+          "subjectRef": "SLA-202603-1677",
+          "cause": "low_confidence",
+          "amountCents": 214194,
+          "confidence": 0.62,
+          "proposal": {
+            "invoiceNumber": "SLA-202603-1677",
+            "glCode": "6830",
+            "deptSplit": {
+              "GA": 0.35,
+              "ENG": 0.25,
+              "GTM": 0.25,
+              "PROD": 0.15
+            },
+            "confidence": 0.62,
+            "decidedBy": "agent",
+            "reasoning": "multi-department allocation, no precedent"
+          },
+          "options": [
+            {
+              "label": "Accept 6830",
+              "value": {
+                "invoiceNumber": "SLA-202603-1677",
+                "glCode": "6830",
+                "deptSplit": {
+                  "GA": 0.35,
+                  "ENG": 0.25,
+                  "GTM": 0.25,
+                  "PROD": 0.15
+                },
+                "confidence": 0.62,
+                "decidedBy": "agent",
+                "reasoning": "multi-department allocation, no precedent"
+              }
+            },
+            {
+              "label": "Recode",
+              "value": null
+            }
+          ]
+        },
+        {
+          "id": "EX-2026-03-28",
+          "subjectType": "ap_invoice",
+          "subjectRef": "GIT-202603-8799",
+          "cause": "low_confidence",
+          "amountCents": 174970,
+          "confidence": 0.62,
+          "proposal": {
+            "invoiceNumber": "GIT-202603-8799",
+            "glCode": "6830",
+            "deptSplit": {
+              "ENG": 0.9,
+              "DATA": 0.1
+            },
+            "confidence": 0.62,
+            "decidedBy": "agent",
+            "reasoning": "multi-department allocation, no precedent"
+          },
+          "options": [
+            {
+              "label": "Accept 6830",
+              "value": {
+                "invoiceNumber": "GIT-202603-8799",
+                "glCode": "6830",
+                "deptSplit": {
+                  "ENG": 0.9,
+                  "DATA": 0.1
+                },
+                "confidence": 0.62,
+                "decidedBy": "agent",
+                "reasoning": "multi-department allocation, no precedent"
+              }
+            },
+            {
+              "label": "Recode",
+              "value": null
+            }
+          ]
+        },
+        {
+          "id": "EX-2026-03-29",
+          "subjectType": "ap_invoice",
+          "subjectRef": "WEW-202603-2593",
+          "cause": "over_materiality",
+          "amountCents": 3950000,
+          "confidence": 0.95,
+          "proposal": {
+            "invoiceNumber": "WEW-202603-2593",
+            "glCode": "6510",
+            "deptSplit": {
+              "GA": 1
+            },
+            "confidence": 0.95,
+            "decidedBy": "agent",
+            "reasoning": "unambiguous vendor"
+          },
+          "options": [
+            {
+              "label": "Accept 6510",
+              "value": {
+                "invoiceNumber": "WEW-202603-2593",
+                "glCode": "6510",
+                "deptSplit": {
+                  "GA": 1
+                },
+                "confidence": 0.95,
+                "decidedBy": "agent",
+                "reasoning": "unambiguous vendor"
+              }
+            },
+            {
+              "label": "Recode",
+              "value": null
+            }
+          ]
+        },
+        {
+          "id": "EX-2026-03-30",
+          "subjectType": "ap_invoice",
+          "subjectRef": "DEE-202603-3077",
+          "cause": "low_confidence",
+          "amountCents": 2386212,
+          "confidence": 0.62,
+          "proposal": {
+            "invoiceNumber": "DEE-202603-3077",
+            "glCode": "6010",
+            "deptSplit": {
+              "ENG": 0.65,
+              "DATA": 0.35
+            },
+            "confidence": 0.62,
+            "decidedBy": "agent",
+            "reasoning": "multi-department allocation, no precedent"
+          },
+          "options": [
+            {
+              "label": "Accept 6010",
+              "value": {
+                "invoiceNumber": "DEE-202603-3077",
+                "glCode": "6010",
+                "deptSplit": {
+                  "ENG": 0.65,
+                  "DATA": 0.35
+                },
+                "confidence": 0.62,
+                "decidedBy": "agent",
+                "reasoning": "multi-department allocation, no precedent"
+              }
+            },
+            {
+              "label": "Recode",
+              "value": null
+            }
+          ]
+        },
+        {
+          "id": "EX-2026-03-31",
+          "subjectType": "ap_invoice",
+          "subjectRef": "COO-202603-8524",
+          "cause": "over_materiality",
+          "amountCents": 2547160,
+          "confidence": 0.95,
+          "proposal": {
+            "invoiceNumber": "COO-202603-8524",
+            "glCode": "6610",
+            "deptSplit": {
+              "GA": 1
+            },
+            "confidence": 0.95,
+            "decidedBy": "agent",
+            "reasoning": "unambiguous vendor"
+          },
+          "options": [
+            {
+              "label": "Accept 6610",
+              "value": {
+                "invoiceNumber": "COO-202603-8524",
+                "glCode": "6610",
+                "deptSplit": {
+                  "GA": 1
+                },
+                "confidence": 0.95,
+                "decidedBy": "agent",
+                "reasoning": "unambiguous vendor"
+              }
+            },
+            {
+              "label": "Recode",
+              "value": null
+            }
+          ]
+        },
+        {
+          "id": "EX-2026-03-32",
+          "subjectType": "ap_invoice",
+          "subjectRef": "COO-202603-1084",
+          "cause": "over_materiality",
+          "amountCents": 3261857,
+          "confidence": 0.95,
+          "proposal": {
+            "invoiceNumber": "COO-202603-1084",
+            "glCode": "6610",
+            "deptSplit": {
+              "GA": 1
+            },
+            "confidence": 0.95,
+            "decidedBy": "agent",
+            "reasoning": "unambiguous vendor"
+          },
+          "options": [
+            {
+              "label": "Accept 6610",
+              "value": {
+                "invoiceNumber": "COO-202603-1084",
+                "glCode": "6610",
+                "deptSplit": {
+                  "GA": 1
+                },
+                "confidence": 0.95,
+                "decidedBy": "agent",
+                "reasoning": "unambiguous vendor"
+              }
+            },
+            {
+              "label": "Recode",
+              "value": null
+            }
+          ]
+        },
+        {
+          "id": "EX-2026-03-33",
+          "subjectType": "bank_line",
+          "subjectRef": "BNK-2026-03-0009",
+          "cause": "over_materiality",
+          "amountCents": 9804519,
+          "confidence": 0.58,
+          "proposal": {
+            "bankExternalIds": [
+              "BNK-2026-03-0009"
+            ],
+            "ledgerExternalIds": [
+              "GL-2026-03-0020",
+              "GL-2026-03-0021"
+            ],
+            "cardinality": "1:many",
+            "amountDeltaCents": 0,
+            "deltaReason": "bank_fee",
+            "confidence": 0.58,
+            "decidedBy": "agent",
+            "reasoning": "residual present, cause not certain"
+          },
+          "options": [
+            {
+              "label": "Accept match",
+              "value": {
+                "bankExternalIds": [
+                  "BNK-2026-03-0009"
+                ],
+                "ledgerExternalIds": [
+                  "GL-2026-03-0020",
+                  "GL-2026-03-0021"
+                ],
+                "cardinality": "1:many",
+                "amountDeltaCents": 0,
+                "deltaReason": "bank_fee",
+                "confidence": 0.58,
+                "decidedBy": "agent",
+                "reasoning": "residual present, cause not certain"
+              }
+            },
+            {
+              "label": "Reject",
+              "value": null
+            }
+          ]
+        },
+        {
+          "id": "EX-2026-03-34",
+          "subjectType": "bank_line",
+          "subjectRef": "BNK-2026-03-0008",
+          "cause": "over_materiality",
+          "amountCents": -3950000,
+          "confidence": 0.96,
+          "proposal": {
+            "bankExternalIds": [
+              "BNK-2026-03-0008"
+            ],
+            "ledgerExternalIds": [
+              "GL-2026-03-0019"
+            ],
+            "cardinality": "1:1",
+            "amountDeltaCents": 0,
+            "deltaReason": null,
+            "confidence": 0.96,
+            "decidedBy": "agent",
+            "reasoning": "clean tie-out"
+          },
+          "options": [
+            {
+              "label": "Accept match",
+              "value": {
+                "bankExternalIds": [
+                  "BNK-2026-03-0008"
+                ],
+                "ledgerExternalIds": [
+                  "GL-2026-03-0019"
+                ],
+                "cardinality": "1:1",
+                "amountDeltaCents": 0,
+                "deltaReason": null,
+                "confidence": 0.96,
+                "decidedBy": "agent",
+                "reasoning": "clean tie-out"
+              }
+            },
+            {
+              "label": "Reject",
+              "value": null
+            }
+          ]
+        },
+        {
+          "id": "EX-2026-03-35",
+          "subjectType": "bank_line",
+          "subjectRef": "BNK-2026-03-0010",
+          "cause": "over_materiality",
+          "amountCents": 11836472,
+          "confidence": 0.58,
+          "proposal": {
+            "bankExternalIds": [
+              "BNK-2026-03-0010"
+            ],
+            "ledgerExternalIds": [
+              "GL-2026-03-0022",
+              "GL-2026-03-0023"
+            ],
+            "cardinality": "1:many",
+            "amountDeltaCents": 0,
+            "deltaReason": "bank_fee",
+            "confidence": 0.58,
+            "decidedBy": "agent",
+            "reasoning": "residual present, cause not certain"
+          },
+          "options": [
+            {
+              "label": "Accept match",
+              "value": {
+                "bankExternalIds": [
+                  "BNK-2026-03-0010"
+                ],
+                "ledgerExternalIds": [
+                  "GL-2026-03-0022",
+                  "GL-2026-03-0023"
+                ],
+                "cardinality": "1:many",
+                "amountDeltaCents": 0,
+                "deltaReason": "bank_fee",
+                "confidence": 0.58,
+                "decidedBy": "agent",
+                "reasoning": "residual present, cause not certain"
+              }
+            },
+            {
+              "label": "Reject",
+              "value": null
+            }
+          ]
+        },
+        {
+          "id": "EX-2026-03-36",
+          "subjectType": "bank_line",
+          "subjectRef": "BNK-2026-03-0011",
+          "cause": "over_materiality",
+          "amountCents": 10266093,
+          "confidence": 0.58,
+          "proposal": {
+            "bankExternalIds": [
+              "BNK-2026-03-0011"
+            ],
+            "ledgerExternalIds": [
+              "GL-2026-03-0024",
+              "GL-2026-03-0025"
+            ],
+            "cardinality": "1:many",
+            "amountDeltaCents": 0,
+            "deltaReason": "bank_fee",
+            "confidence": 0.58,
+            "decidedBy": "agent",
+            "reasoning": "residual present, cause not certain"
+          },
+          "options": [
+            {
+              "label": "Accept match",
+              "value": {
+                "bankExternalIds": [
+                  "BNK-2026-03-0011"
+                ],
+                "ledgerExternalIds": [
+                  "GL-2026-03-0024",
+                  "GL-2026-03-0025"
+                ],
+                "cardinality": "1:many",
+                "amountDeltaCents": 0,
+                "deltaReason": "bank_fee",
+                "confidence": 0.58,
+                "decidedBy": "agent",
+                "reasoning": "residual present, cause not certain"
+              }
+            },
+            {
+              "label": "Reject",
+              "value": null
+            }
+          ]
+        },
+        {
+          "id": "EX-2026-03-37",
+          "subjectType": "bank_line",
+          "subjectRef": "BNK-2026-03-0032",
+          "cause": "over_materiality",
+          "amountCents": -20018111,
+          "confidence": 0.96,
+          "proposal": {
+            "bankExternalIds": [
+              "BNK-2026-03-0032"
+            ],
+            "ledgerExternalIds": [
+              "GL-2026-03-0044",
+              "GL-2026-03-0045"
+            ],
+            "cardinality": "1:many",
+            "amountDeltaCents": 0,
+            "deltaReason": null,
+            "confidence": 0.96,
+            "decidedBy": "agent",
+            "reasoning": "clean tie-out"
+          },
+          "options": [
+            {
+              "label": "Accept match",
+              "value": {
+                "bankExternalIds": [
+                  "BNK-2026-03-0032"
+                ],
+                "ledgerExternalIds": [
+                  "GL-2026-03-0044",
+                  "GL-2026-03-0045"
+                ],
+                "cardinality": "1:many",
+                "amountDeltaCents": 0,
+                "deltaReason": null,
+                "confidence": 0.96,
+                "decidedBy": "agent",
+                "reasoning": "clean tie-out"
+              }
+            },
+            {
+              "label": "Reject",
+              "value": null
+            }
+          ]
+        },
+        {
+          "id": "EX-2026-03-38",
+          "subjectType": "bank_line",
+          "subjectRef": "BNK-2026-03-0012",
+          "cause": "over_materiality",
+          "amountCents": 8753660,
+          "confidence": 0.58,
+          "proposal": {
+            "bankExternalIds": [
+              "BNK-2026-03-0012"
+            ],
+            "ledgerExternalIds": [
+              "GL-2026-03-0026",
+              "GL-2026-03-0027"
+            ],
+            "cardinality": "1:many",
+            "amountDeltaCents": 0,
+            "deltaReason": "bank_fee",
+            "confidence": 0.58,
+            "decidedBy": "agent",
+            "reasoning": "residual present, cause not certain"
+          },
+          "options": [
+            {
+              "label": "Accept match",
+              "value": {
+                "bankExternalIds": [
+                  "BNK-2026-03-0012"
+                ],
+                "ledgerExternalIds": [
+                  "GL-2026-03-0026",
+                  "GL-2026-03-0027"
+                ],
+                "cardinality": "1:many",
+                "amountDeltaCents": 0,
+                "deltaReason": "bank_fee",
+                "confidence": 0.58,
+                "decidedBy": "agent",
+                "reasoning": "residual present, cause not certain"
+              }
+            },
+            {
+              "label": "Reject",
+              "value": null
+            }
+          ]
+        },
+        {
+          "id": "EX-2026-03-39",
+          "subjectType": "bank_line",
+          "subjectRef": "BNK-2026-03-0013",
+          "cause": "over_materiality",
+          "amountCents": -2607983,
+          "confidence": 0.58,
+          "proposal": {
+            "bankExternalIds": [
+              "BNK-2026-03-0013"
+            ],
+            "ledgerExternalIds": [
+              "GL-2026-03-0028",
+              "GL-2026-03-0029"
+            ],
+            "cardinality": "1:many",
+            "amountDeltaCents": -21329,
+            "deltaReason": "fx",
+            "confidence": 0.58,
+            "decidedBy": "agent",
+            "reasoning": "residual present, cause not certain"
+          },
+          "options": [
+            {
+              "label": "Accept match",
+              "value": {
+                "bankExternalIds": [
+                  "BNK-2026-03-0013"
+                ],
+                "ledgerExternalIds": [
+                  "GL-2026-03-0028",
+                  "GL-2026-03-0029"
+                ],
+                "cardinality": "1:many",
+                "amountDeltaCents": -21329,
+                "deltaReason": "fx",
+                "confidence": 0.58,
+                "decidedBy": "agent",
+                "reasoning": "residual present, cause not certain"
+              }
+            },
+            {
+              "label": "Reject",
+              "value": null
+            }
+          ]
+        },
+        {
+          "id": "EX-2026-03-40",
+          "subjectType": "bank_line",
+          "subjectRef": "BNK-2026-03-0030",
+          "cause": "over_materiality",
+          "amountCents": -2547160,
+          "confidence": 0.96,
+          "proposal": {
+            "bankExternalIds": [
+              "BNK-2026-03-0030"
+            ],
+            "ledgerExternalIds": [
+              "GL-2026-03-0042"
+            ],
+            "cardinality": "1:1",
+            "amountDeltaCents": 0,
+            "deltaReason": null,
+            "confidence": 0.96,
+            "decidedBy": "agent",
+            "reasoning": "clean tie-out"
+          },
+          "options": [
+            {
+              "label": "Accept match",
+              "value": {
+                "bankExternalIds": [
+                  "BNK-2026-03-0030"
+                ],
+                "ledgerExternalIds": [
+                  "GL-2026-03-0042"
+                ],
+                "cardinality": "1:1",
+                "amountDeltaCents": 0,
+                "deltaReason": null,
+                "confidence": 0.96,
+                "decidedBy": "agent",
+                "reasoning": "clean tie-out"
+              }
+            },
+            {
+              "label": "Reject",
+              "value": null
+            }
+          ]
+        },
+        {
+          "id": "EX-2026-03-41",
+          "subjectType": "bank_line",
+          "subjectRef": "BNK-2026-03-0033",
+          "cause": "over_materiality",
+          "amountCents": -21131271,
+          "confidence": 0.96,
+          "proposal": {
+            "bankExternalIds": [
+              "BNK-2026-03-0033"
+            ],
+            "ledgerExternalIds": [
+              "GL-2026-03-0046",
+              "GL-2026-03-0047"
+            ],
+            "cardinality": "1:many",
+            "amountDeltaCents": 0,
+            "deltaReason": null,
+            "confidence": 0.96,
+            "decidedBy": "agent",
+            "reasoning": "clean tie-out"
+          },
+          "options": [
+            {
+              "label": "Accept match",
+              "value": {
+                "bankExternalIds": [
+                  "BNK-2026-03-0033"
+                ],
+                "ledgerExternalIds": [
+                  "GL-2026-03-0046",
+                  "GL-2026-03-0047"
+                ],
+                "cardinality": "1:many",
+                "amountDeltaCents": 0,
+                "deltaReason": null,
+                "confidence": 0.96,
+                "decidedBy": "agent",
+                "reasoning": "clean tie-out"
+              }
+            },
+            {
+              "label": "Reject",
+              "value": null
+            }
+          ]
+        }
+      ],
+      "stats": {
+        "llmCalls": 6,
+        "ruleHits": 14,
+        "tokensIn": 5400,
+        "tokensOut": 1560,
+        "costMicros": 66000,
+        "durationMs": 5,
+        "codingAccuracy": 1,
+        "matchAccuracy": 0.7169811320754716,
+        "autoClearRate": 0.7014925373134329,
+        "autoClearPrecision": 1,
+        "exceptionsOpened": 41
+      },
+      "corrections": 41,
+      "touchSeconds": 1845,
+      "gradientCostMicros": 11000,
+      "proposals": [
+        {
+          "name": "Cooley LLP → 6610 (GA:100)",
+          "kind": "coding",
+          "adopted": true,
+          "precision": 1,
+          "fired": 9,
+          "evidence": 2
+        },
+        {
+          "name": "Flexport settles installments",
+          "kind": "matching",
+          "adopted": false,
+          "precision": 0,
+          "fired": 1,
+          "evidence": 4
+        },
+        {
+          "name": "Stripe settles same day settlement",
+          "kind": "matching",
+          "adopted": false,
+          "precision": 0.2,
+          "fired": 5,
+          "evidence": 4
+        },
+        {
+          "name": "Gusto settles by invoice",
+          "kind": "matching",
+          "adopted": false,
+          "precision": 0,
+          "fired": 0,
+          "evidence": 2
+        }
+      ]
+    },
+    {
+      "period": "2026-04",
+      "rulebookVersionIn": 2,
+      "rulebookVersionOut": 2,
+      "activeRules": 4,
+      "modelDecisions": 50,
+      "exceptions": [
+        {
+          "id": "EX-2026-04-1",
+          "subjectType": "bank_line",
+          "subjectRef": "BNK-2026-04-0027",
+          "cause": "no_candidate",
+          "amountCents": -4956937,
+          "confidence": null,
+          "proposal": {
+            "description": "FLEXPORT INC SAN FRANCIS"
+          },
+          "options": [
+            {
+              "label": "Timing difference - carry forward",
+              "value": "timing"
+            }
+          ]
+        },
+        {
+          "id": "EX-2026-04-2",
+          "subjectType": "bank_line",
+          "subjectRef": "BNK-2026-04-0001",
+          "cause": "no_candidate",
+          "amountCents": -5624858,
+          "confidence": null,
+          "proposal": {
+            "description": "AMAZON WEB SERVICES AWS EMEA SARL LUXEMBOURG"
+          },
+          "options": [
+            {
+              "label": "Timing difference - carry forward",
+              "value": "timing"
+            }
+          ]
+        },
+        {
+          "id": "EX-2026-04-3",
+          "subjectType": "bank_line",
+          "subjectRef": "BNK-2026-04-0014",
+          "cause": "no_candidate",
+          "amountCents": -2276454,
+          "confidence": null,
+          "proposal": {
+            "description": "MOUSER ELECTRONI"
+          },
+          "options": [
+            {
+              "label": "Timing difference - carry forward",
+              "value": "timing"
+            }
+          ]
+        },
+        {
+          "id": "EX-2026-04-4",
+          "subjectType": "bank_line",
+          "subjectRef": "BNK-2026-04-0022",
+          "cause": "no_candidate",
+          "amountCents": -603780,
+          "confidence": null,
+          "proposal": {
+            "description": "DIGI-KEY CORP THIEF RIVER"
+          },
+          "options": [
+            {
+              "label": "Timing difference - carry forward",
+              "value": "timing"
+            }
+          ]
+        },
+        {
+          "id": "EX-2026-04-5",
+          "subjectType": "bank_line",
+          "subjectRef": "BNK-2026-04-0030",
+          "cause": "no_candidate",
+          "amountCents": -2109585,
+          "confidence": null,
+          "proposal": {
+            "description": "COOLEY LLP OPERATING"
+          },
+          "options": [
+            {
+              "label": "Timing difference - carry forward",
+              "value": "timing"
+            }
+          ]
+        },
+        {
+          "id": "EX-2026-04-6",
+          "subjectType": "bank_line",
+          "subjectRef": "BNK-2026-04-0013",
+          "cause": "no_candidate",
+          "amountCents": -1625953,
+          "confidence": null,
+          "proposal": {
+            "description": "MOUSER ELECTRONI"
+          },
+          "options": [
+            {
+              "label": "Timing difference - carry forward",
+              "value": "timing"
+            }
+          ]
+        },
+        {
+          "id": "EX-2026-04-7",
+          "subjectType": "bank_line",
+          "subjectRef": "BNK-2026-04-0006",
+          "cause": "no_candidate",
+          "amountCents": -175739,
+          "confidence": null,
+          "proposal": {
+            "description": "MSFT * GITHUB"
+          },
+          "options": [
+            {
+              "label": "Timing difference - carry forward",
+              "value": "timing"
+            }
+          ]
+        },
+        {
+          "id": "EX-2026-04-8",
+          "subjectType": "bank_line",
+          "subjectRef": "BNK-2026-04-0057",
+          "cause": "no_candidate",
+          "amountCents": 1625290,
+          "confidence": null,
+          "proposal": {
+            "description": "DEPOSIT IN TRANSIT - LOCKBOX"
+          },
+          "options": [
+            {
+              "label": "Timing difference - carry forward",
+              "value": "timing"
+            }
+          ]
+        },
+        {
+          "id": "EX-2026-04-9",
+          "subjectType": "bank_line",
+          "subjectRef": "BNK-2026-04-0012",
+          "cause": "no_candidate",
+          "amountCents": -2430053,
+          "confidence": null,
+          "proposal": {
+            "description": "DEEL INC EUR CONTRACTOR EUR22589.40"
+          },
+          "options": [
+            {
+              "label": "Timing difference - carry forward",
+              "value": "timing"
+            }
+          ]
+        },
+        {
+          "id": "EX-2026-04-10",
+          "subjectType": "bank_line",
+          "subjectRef": "BNK-2026-04-0016",
+          "cause": "no_candidate",
+          "amountCents": -2365592,
+          "confidence": null,
+          "proposal": {
+            "description": "MOUSER ELECTRONI"
+          },
+          "options": [
+            {
+              "label": "Timing difference - carry forward",
+              "value": "timing"
+            }
+          ]
+        },
+        {
+          "id": "EX-2026-04-11",
+          "subjectType": "bank_line",
+          "subjectRef": "BNK-2026-04-0017",
+          "cause": "no_candidate",
+          "amountCents": -2289659,
+          "confidence": null,
+          "proposal": {
+            "description": "MOUSER ELECTRONICS 800-346"
+          },
+          "options": [
+            {
+              "label": "Timing difference - carry forward",
+              "value": "timing"
+            }
+          ]
+        },
+        {
+          "id": "EX-2026-04-12",
+          "subjectType": "bank_line",
+          "subjectRef": "BNK-2026-04-0019",
+          "cause": "no_candidate",
+          "amountCents": -1344445,
+          "confidence": null,
+          "proposal": {
+            "description": "DIGI-KEY CORP THIEF RIVER"
+          },
+          "options": [
+            {
+              "label": "Timing difference - carry forward",
+              "value": "timing"
+            }
+          ]
+        },
+        {
+          "id": "EX-2026-04-13",
+          "subjectType": "bank_line",
+          "subjectRef": "BNK-2026-04-0020",
+          "cause": "no_candidate",
+          "amountCents": -649943,
+          "confidence": null,
+          "proposal": {
+            "description": "DIGIKEY ELECTRONICS"
+          },
+          "options": [
+            {
+              "label": "Timing difference - carry forward",
+              "value": "timing"
+            }
+          ]
+        },
+        {
+          "id": "EX-2026-04-14",
+          "subjectType": "bank_line",
+          "subjectRef": "BNK-2026-04-0021",
+          "cause": "no_candidate",
+          "amountCents": -856540,
+          "confidence": null,
+          "proposal": {
+            "description": "DIGI-KEY CORP THIEF RIVER"
+          },
+          "options": [
+            {
+              "label": "Timing difference - carry forward",
+              "value": "timing"
+            }
+          ]
+        },
+        {
+          "id": "EX-2026-04-15",
+          "subjectType": "bank_line",
+          "subjectRef": "BNK-2026-04-0023",
+          "cause": "no_candidate",
+          "amountCents": -3426452,
+          "confidence": null,
+          "proposal": {
+            "description": "FLEXPORT INC SAN FRANCIS TRANCHE 1/2"
+          },
+          "options": [
+            {
+              "label": "Timing difference - carry forward",
+              "value": "timing"
+            }
+          ]
+        },
+        {
+          "id": "EX-2026-04-16",
+          "subjectType": "bank_line",
+          "subjectRef": "BNK-2026-04-0025",
+          "cause": "no_candidate",
+          "amountCents": -3119485,
+          "confidence": null,
+          "proposal": {
+            "description": "FLEXPORT INC SAN FRANCIS TRANCHE 1/2"
+          },
+          "options": [
+            {
+              "label": "Timing difference - carry forward",
+              "value": "timing"
+            }
+          ]
+        },
+        {
+          "id": "EX-2026-04-17",
+          "subjectType": "bank_line",
+          "subjectRef": "BNK-2026-04-0029",
+          "cause": "no_candidate",
+          "amountCents": -2170614,
+          "confidence": null,
+          "proposal": {
+            "description": "COOLEY LLP"
+          },
+          "options": [
+            {
+              "label": "Timing difference - carry forward",
+              "value": "timing"
+            }
+          ]
+        },
+        {
+          "id": "EX-2026-04-18",
+          "subjectType": "bank_line",
+          "subjectRef": "BNK-2026-04-0032",
+          "cause": "no_candidate",
+          "amountCents": -1978149,
+          "confidence": null,
+          "proposal": {
+            "description": "COOLEY LLP OPERATING"
+          },
+          "options": [
+            {
+              "label": "Timing difference - carry forward",
+              "value": "timing"
+            }
+          ]
+        },
+        {
+          "id": "EX-2026-04-19",
+          "subjectType": "bank_line",
+          "subjectRef": "BNK-2026-04-0039",
+          "cause": "no_candidate",
+          "amountCents": -1979681,
+          "confidence": null,
+          "proposal": {
+            "description": "GOOGLE ADS4829174 CC@GOOGL"
+          },
+          "options": [
+            {
+              "label": "Timing difference - carry forward",
+              "value": "timing"
+            }
+          ]
+        },
+        {
+          "id": "EX-2026-04-20",
+          "subjectType": "bank_line",
+          "subjectRef": "BNK-2026-04-0040",
+          "cause": "no_candidate",
+          "amountCents": -47723,
+          "confidence": null,
+          "proposal": {
+            "description": "IRON MTN"
+          },
+          "options": [
+            {
+              "label": "Timing difference - carry forward",
+              "value": "timing"
+            }
+          ]
+        },
+        {
+          "id": "EX-2026-04-21",
+          "subjectType": "bank_line",
+          "subjectRef": "BNK-2026-04-0058",
+          "cause": "no_candidate",
+          "amountCents": -307661,
+          "confidence": null,
+          "proposal": {
+            "description": "ACH DEBIT PENDING VENDOR REF 88213"
+          },
+          "options": [
+            {
+              "label": "Timing difference - carry forward",
+              "value": "timing"
+            }
+          ]
+        },
+        {
+          "id": "EX-2026-04-22",
+          "subjectType": "bank_line",
+          "subjectRef": "BNK-2026-04-0024",
+          "cause": "no_candidate",
+          "amountCents": -2284302,
+          "confidence": null,
+          "proposal": {
+            "description": "FLEXPORT INC SAN FRANCIS TRANCHE 2/2"
+          },
+          "options": [
+            {
+              "label": "Timing difference - carry forward",
+              "value": "timing"
+            }
+          ]
+        },
+        {
+          "id": "EX-2026-04-23",
+          "subjectType": "bank_line",
+          "subjectRef": "BNK-2026-04-0026",
+          "cause": "no_candidate",
+          "amountCents": -2079657,
+          "confidence": null,
+          "proposal": {
+            "description": "FLEXPORT INC SAN FRANCIS TRANCHE 2/2"
+          },
+          "options": [
+            {
+              "label": "Timing difference - carry forward",
+              "value": "timing"
+            }
+          ]
+        },
+        {
+          "id": "EX-2026-04-24",
+          "subjectType": "accrual",
+          "subjectRef": "Datadog",
+          "cause": "policy_requires_human",
+          "amountCents": 1261985,
+          "confidence": null,
+          "proposal": {
+            "vendorName": "Datadog",
+            "suggestedCents": 1261985,
+            "basis": "trailing_avg_3"
+          },
+          "options": [
+            {
+              "label": "Accrue 12619.85",
+              "value": {
+                "accrue": 1261985
+              }
+            },
+            {
+              "label": "No accrual - service stopped",
+              "value": {
+                "accrue": 0
+              }
+            }
+          ]
+        },
+        {
+          "id": "EX-2026-04-25",
+          "subjectType": "ap_invoice",
+          "subjectRef": "AMA-202604-5183",
+          "cause": "over_materiality",
+          "amountCents": 5624858,
+          "confidence": 0.62,
+          "proposal": {
+            "invoiceNumber": "AMA-202604-5183",
+            "glCode": "6820",
+            "deptSplit": {
+              "ENG": 0.6,
+              "DATA": 0.25,
+              "PROD": 0.15
+            },
+            "confidence": 0.62,
+            "decidedBy": "agent",
+            "reasoning": "multi-department allocation, no precedent"
+          },
+          "options": [
+            {
+              "label": "Accept 6820",
+              "value": {
+                "invoiceNumber": "AMA-202604-5183",
+                "glCode": "6820",
+                "deptSplit": {
+                  "ENG": 0.6,
+                  "DATA": 0.25,
+                  "PROD": 0.15
+                },
+                "confidence": 0.62,
+                "decidedBy": "agent",
+                "reasoning": "multi-department allocation, no precedent"
+              }
+            },
+            {
+              "label": "Recode",
+              "value": null
+            }
+          ]
+        },
+        {
+          "id": "EX-2026-04-26",
+          "subjectType": "ap_invoice",
+          "subjectRef": "VER-202604-7415",
+          "cause": "low_confidence",
+          "amountCents": 409723,
+          "confidence": 0.62,
+          "proposal": {
+            "invoiceNumber": "VER-202604-7415",
+            "glCode": "6820",
+            "deptSplit": {
+              "ENG": 0.8,
+              "PROD": 0.2
+            },
+            "confidence": 0.62,
+            "decidedBy": "agent",
+            "reasoning": "multi-department allocation, no precedent"
+          },
+          "options": [
+            {
+              "label": "Accept 6820",
+              "value": {
+                "invoiceNumber": "VER-202604-7415",
+                "glCode": "6820",
+                "deptSplit": {
+                  "ENG": 0.8,
+                  "PROD": 0.2
+                },
+                "confidence": 0.62,
+                "decidedBy": "agent",
+                "reasoning": "multi-department allocation, no precedent"
+              }
+            },
+            {
+              "label": "Recode",
+              "value": null
+            }
+          ]
+        },
+        {
+          "id": "EX-2026-04-27",
+          "subjectType": "ap_invoice",
+          "subjectRef": "FIG-202604-9921",
+          "cause": "low_confidence",
+          "amountCents": 129790,
+          "confidence": 0.62,
+          "proposal": {
+            "invoiceNumber": "FIG-202604-9921",
+            "glCode": "6830",
+            "deptSplit": {
+              "PROD": 0.85,
+              "ENG": 0.15
+            },
+            "confidence": 0.62,
+            "decidedBy": "agent",
+            "reasoning": "multi-department allocation, no precedent"
+          },
+          "options": [
+            {
+              "label": "Accept 6830",
+              "value": {
+                "invoiceNumber": "FIG-202604-9921",
+                "glCode": "6830",
+                "deptSplit": {
+                  "PROD": 0.85,
+                  "ENG": 0.15
+                },
+                "confidence": 0.62,
+                "decidedBy": "agent",
+                "reasoning": "multi-department allocation, no precedent"
+              }
+            },
+            {
+              "label": "Recode",
+              "value": null
+            }
+          ]
+        },
+        {
+          "id": "EX-2026-04-28",
+          "subjectType": "ap_invoice",
+          "subjectRef": "LIN-202604-2556",
+          "cause": "low_confidence",
+          "amountCents": 93018,
+          "confidence": 0.62,
+          "proposal": {
+            "invoiceNumber": "LIN-202604-2556",
+            "glCode": "6830",
+            "deptSplit": {
+              "ENG": 0.55,
+              "PROD": 0.3,
+              "DATA": 0.15
+            },
+            "confidence": 0.62,
+            "decidedBy": "agent",
+            "reasoning": "multi-department allocation, no precedent"
+          },
+          "options": [
+            {
+              "label": "Accept 6830",
+              "value": {
+                "invoiceNumber": "LIN-202604-2556",
+                "glCode": "6830",
+                "deptSplit": {
+                  "ENG": 0.55,
+                  "PROD": 0.3,
+                  "DATA": 0.15
+                },
+                "confidence": 0.62,
+                "decidedBy": "agent",
+                "reasoning": "multi-department allocation, no precedent"
+              }
+            },
+            {
+              "label": "Recode",
+              "value": null
+            }
+          ]
+        },
+        {
+          "id": "EX-2026-04-29",
+          "subjectType": "ap_invoice",
+          "subjectRef": "SLA-202604-9481",
+          "cause": "low_confidence",
+          "amountCents": 225388,
+          "confidence": 0.62,
+          "proposal": {
+            "invoiceNumber": "SLA-202604-9481",
+            "glCode": "6830",
+            "deptSplit": {
+              "GA": 0.35,
+              "ENG": 0.25,
+              "GTM": 0.25,
+              "PROD": 0.15
+            },
+            "confidence": 0.62,
+            "decidedBy": "agent",
+            "reasoning": "multi-department allocation, no precedent"
+          },
+          "options": [
+            {
+              "label": "Accept 6830",
+              "value": {
+                "invoiceNumber": "SLA-202604-9481",
+                "glCode": "6830",
+                "deptSplit": {
+                  "GA": 0.35,
+                  "ENG": 0.25,
+                  "GTM": 0.25,
+                  "PROD": 0.15
+                },
+                "confidence": 0.62,
+                "decidedBy": "agent",
+                "reasoning": "multi-department allocation, no precedent"
+              }
+            },
+            {
+              "label": "Recode",
+              "value": null
+            }
+          ]
+        },
+        {
+          "id": "EX-2026-04-30",
+          "subjectType": "ap_invoice",
+          "subjectRef": "GIT-202604-1450",
+          "cause": "low_confidence",
+          "amountCents": 175739,
+          "confidence": 0.62,
+          "proposal": {
+            "invoiceNumber": "GIT-202604-1450",
+            "glCode": "6830",
+            "deptSplit": {
+              "ENG": 0.9,
+              "DATA": 0.1
+            },
+            "confidence": 0.62,
+            "decidedBy": "agent",
+            "reasoning": "multi-department allocation, no precedent"
+          },
+          "options": [
+            {
+              "label": "Accept 6830",
+              "value": {
+                "invoiceNumber": "GIT-202604-1450",
+                "glCode": "6830",
+                "deptSplit": {
+                  "ENG": 0.9,
+                  "DATA": 0.1
+                },
+                "confidence": 0.62,
+                "decidedBy": "agent",
+                "reasoning": "multi-department allocation, no precedent"
+              }
+            },
+            {
+              "label": "Recode",
+              "value": null
+            }
+          ]
+        },
+        {
+          "id": "EX-2026-04-31",
+          "subjectType": "ap_invoice",
+          "subjectRef": "WEW-202604-4467",
+          "cause": "over_materiality",
+          "amountCents": 3950000,
+          "confidence": 0.95,
+          "proposal": {
+            "invoiceNumber": "WEW-202604-4467",
+            "glCode": "6510",
+            "deptSplit": {
+              "GA": 1
+            },
+            "confidence": 0.95,
+            "decidedBy": "agent",
+            "reasoning": "unambiguous vendor"
+          },
+          "options": [
+            {
+              "label": "Accept 6510",
+              "value": {
+                "invoiceNumber": "WEW-202604-4467",
+                "glCode": "6510",
+                "deptSplit": {
+                  "GA": 1
+                },
+                "confidence": 0.95,
+                "decidedBy": "agent",
+                "reasoning": "unambiguous vendor"
+              }
+            },
+            {
+              "label": "Recode",
+              "value": null
+            }
+          ]
+        },
+        {
+          "id": "EX-2026-04-32",
+          "subjectType": "ap_invoice",
+          "subjectRef": "DEE-202604-7347",
+          "cause": "low_confidence",
+          "amountCents": 2258940,
+          "confidence": 0.62,
+          "proposal": {
+            "invoiceNumber": "DEE-202604-7347",
+            "glCode": "6010",
+            "deptSplit": {
+              "ENG": 0.65,
+              "DATA": 0.35
+            },
+            "confidence": 0.62,
+            "decidedBy": "agent",
+            "reasoning": "multi-department allocation, no precedent"
+          },
+          "options": [
+            {
+              "label": "Accept 6010",
+              "value": {
+                "invoiceNumber": "DEE-202604-7347",
+                "glCode": "6010",
+                "deptSplit": {
+                  "ENG": 0.65,
+                  "DATA": 0.35
+                },
+                "confidence": 0.62,
+                "decidedBy": "agent",
+                "reasoning": "multi-department allocation, no precedent"
+              }
+            },
+            {
+              "label": "Recode",
+              "value": null
+            }
+          ]
+        },
+        {
+          "id": "EX-2026-04-33",
+          "subjectType": "bank_line",
+          "subjectRef": "BNK-2026-04-0008",
+          "cause": "over_materiality",
+          "amountCents": 11650496,
+          "confidence": 0.58,
+          "proposal": {
+            "bankExternalIds": [
+              "BNK-2026-04-0008"
+            ],
+            "ledgerExternalIds": [
+              "GL-2026-04-0018",
+              "GL-2026-04-0019"
+            ],
+            "cardinality": "1:many",
+            "amountDeltaCents": 0,
+            "deltaReason": "bank_fee",
+            "confidence": 0.58,
+            "decidedBy": "agent",
+            "reasoning": "residual present, cause not certain"
+          },
+          "options": [
+            {
+              "label": "Accept match",
+              "value": {
+                "bankExternalIds": [
+                  "BNK-2026-04-0008"
+                ],
+                "ledgerExternalIds": [
+                  "GL-2026-04-0018",
+                  "GL-2026-04-0019"
+                ],
+                "cardinality": "1:many",
+                "amountDeltaCents": 0,
+                "deltaReason": "bank_fee",
+                "confidence": 0.58,
+                "decidedBy": "agent",
+                "reasoning": "residual present, cause not certain"
+              }
+            },
+            {
+              "label": "Reject",
+              "value": null
+            }
+          ]
+        },
+        {
+          "id": "EX-2026-04-34",
+          "subjectType": "bank_line",
+          "subjectRef": "BNK-2026-04-0009",
+          "cause": "over_materiality",
+          "amountCents": 11007058,
+          "confidence": 0.58,
+          "proposal": {
+            "bankExternalIds": [
+              "BNK-2026-04-0009"
+            ],
+            "ledgerExternalIds": [
+              "GL-2026-04-0020",
+              "GL-2026-04-0021"
+            ],
+            "cardinality": "1:many",
+            "amountDeltaCents": 0,
+            "deltaReason": "bank_fee",
+            "confidence": 0.58,
+            "decidedBy": "agent",
+            "reasoning": "residual present, cause not certain"
+          },
+          "options": [
+            {
+              "label": "Accept match",
+              "value": {
+                "bankExternalIds": [
+                  "BNK-2026-04-0009"
+                ],
+                "ledgerExternalIds": [
+                  "GL-2026-04-0020",
+                  "GL-2026-04-0021"
+                ],
+                "cardinality": "1:many",
+                "amountDeltaCents": 0,
+                "deltaReason": "bank_fee",
+                "confidence": 0.58,
+                "decidedBy": "agent",
+                "reasoning": "residual present, cause not certain"
+              }
+            },
+            {
+              "label": "Reject",
+              "value": null
+            }
+          ]
+        },
+        {
+          "id": "EX-2026-04-35",
+          "subjectType": "bank_line",
+          "subjectRef": "BNK-2026-04-0033",
+          "cause": "over_materiality",
+          "amountCents": -20264129,
+          "confidence": 0.96,
+          "proposal": {
+            "bankExternalIds": [
+              "BNK-2026-04-0033"
+            ],
+            "ledgerExternalIds": [
+              "GL-2026-04-0046",
+              "GL-2026-04-0047"
+            ],
+            "cardinality": "1:many",
+            "amountDeltaCents": 0,
+            "deltaReason": null,
+            "confidence": 0.96,
+            "decidedBy": "agent",
+            "reasoning": "clean tie-out"
+          },
+          "options": [
+            {
+              "label": "Accept match",
+              "value": {
+                "bankExternalIds": [
+                  "BNK-2026-04-0033"
+                ],
+                "ledgerExternalIds": [
+                  "GL-2026-04-0046",
+                  "GL-2026-04-0047"
+                ],
+                "cardinality": "1:many",
+                "amountDeltaCents": 0,
+                "deltaReason": null,
+                "confidence": 0.96,
+                "decidedBy": "agent",
+                "reasoning": "clean tie-out"
+              }
+            },
+            {
+              "label": "Reject",
+              "value": null
+            }
+          ]
+        },
+        {
+          "id": "EX-2026-04-36",
+          "subjectType": "bank_line",
+          "subjectRef": "BNK-2026-04-0007",
+          "cause": "over_materiality",
+          "amountCents": -3950000,
+          "confidence": 0.96,
+          "proposal": {
+            "bankExternalIds": [
+              "BNK-2026-04-0007"
+            ],
+            "ledgerExternalIds": [
+              "GL-2026-04-0017"
+            ],
+            "cardinality": "1:1",
+            "amountDeltaCents": 0,
+            "deltaReason": null,
+            "confidence": 0.96,
+            "decidedBy": "agent",
+            "reasoning": "clean tie-out"
+          },
+          "options": [
+            {
+              "label": "Accept match",
+              "value": {
+                "bankExternalIds": [
+                  "BNK-2026-04-0007"
+                ],
+                "ledgerExternalIds": [
+                  "GL-2026-04-0017"
+                ],
+                "cardinality": "1:1",
+                "amountDeltaCents": 0,
+                "deltaReason": null,
+                "confidence": 0.96,
+                "decidedBy": "agent",
+                "reasoning": "clean tie-out"
+              }
+            },
+            {
+              "label": "Reject",
+              "value": null
+            }
+          ]
+        },
+        {
+          "id": "EX-2026-04-37",
+          "subjectType": "bank_line",
+          "subjectRef": "BNK-2026-04-0010",
+          "cause": "over_materiality",
+          "amountCents": 10722884,
+          "confidence": 0.58,
+          "proposal": {
+            "bankExternalIds": [
+              "BNK-2026-04-0010"
+            ],
+            "ledgerExternalIds": [
+              "GL-2026-04-0022",
+              "GL-2026-04-0023"
+            ],
+            "cardinality": "1:many",
+            "amountDeltaCents": 0,
+            "deltaReason": "bank_fee",
+            "confidence": 0.58,
+            "decidedBy": "agent",
+            "reasoning": "residual present, cause not certain"
+          },
+          "options": [
+            {
+              "label": "Accept match",
+              "value": {
+                "bankExternalIds": [
+                  "BNK-2026-04-0010"
+                ],
+                "ledgerExternalIds": [
+                  "GL-2026-04-0022",
+                  "GL-2026-04-0023"
+                ],
+                "cardinality": "1:many",
+                "amountDeltaCents": 0,
+                "deltaReason": "bank_fee",
+                "confidence": 0.58,
+                "decidedBy": "agent",
+                "reasoning": "residual present, cause not certain"
+              }
+            },
+            {
+              "label": "Reject",
+              "value": null
+            }
+          ]
+        },
+        {
+          "id": "EX-2026-04-38",
+          "subjectType": "bank_line",
+          "subjectRef": "BNK-2026-04-0011",
+          "cause": "over_materiality",
+          "amountCents": 8116216,
+          "confidence": 0.58,
+          "proposal": {
+            "bankExternalIds": [
+              "BNK-2026-04-0011"
+            ],
+            "ledgerExternalIds": [
+              "GL-2026-04-0024",
+              "GL-2026-04-0025"
+            ],
+            "cardinality": "1:many",
+            "amountDeltaCents": 0,
+            "deltaReason": "bank_fee",
+            "confidence": 0.58,
+            "decidedBy": "agent",
+            "reasoning": "residual present, cause not certain"
+          },
+          "options": [
+            {
+              "label": "Accept match",
+              "value": {
+                "bankExternalIds": [
+                  "BNK-2026-04-0011"
+                ],
+                "ledgerExternalIds": [
+                  "GL-2026-04-0024",
+                  "GL-2026-04-0025"
+                ],
+                "cardinality": "1:many",
+                "amountDeltaCents": 0,
+                "deltaReason": "bank_fee",
+                "confidence": 0.58,
+                "decidedBy": "agent",
+                "reasoning": "residual present, cause not certain"
+              }
+            },
+            {
+              "label": "Reject",
+              "value": null
+            }
+          ]
+        },
+        {
+          "id": "EX-2026-04-39",
+          "subjectType": "bank_line",
+          "subjectRef": "BNK-2026-04-0031",
+          "cause": "over_materiality",
+          "amountCents": -2512508,
+          "confidence": 0.96,
+          "proposal": {
+            "bankExternalIds": [
+              "BNK-2026-04-0031"
+            ],
+            "ledgerExternalIds": [
+              "GL-2026-04-0044"
+            ],
+            "cardinality": "1:1",
+            "amountDeltaCents": 0,
+            "deltaReason": null,
+            "confidence": 0.96,
+            "decidedBy": "agent",
+            "reasoning": "clean tie-out"
+          },
+          "options": [
+            {
+              "label": "Accept match",
+              "value": {
+                "bankExternalIds": [
+                  "BNK-2026-04-0031"
+                ],
+                "ledgerExternalIds": [
+                  "GL-2026-04-0044"
+                ],
+                "cardinality": "1:1",
+                "amountDeltaCents": 0,
+                "deltaReason": null,
+                "confidence": 0.96,
+                "decidedBy": "agent",
+                "reasoning": "clean tie-out"
+              }
+            },
+            {
+              "label": "Reject",
+              "value": null
+            }
+          ]
+        },
+        {
+          "id": "EX-2026-04-40",
+          "subjectType": "bank_line",
+          "subjectRef": "BNK-2026-04-0034",
+          "cause": "over_materiality",
+          "amountCents": -20822975,
+          "confidence": 0.96,
+          "proposal": {
+            "bankExternalIds": [
+              "BNK-2026-04-0034"
+            ],
+            "ledgerExternalIds": [
+              "GL-2026-04-0048",
+              "GL-2026-04-0049"
+            ],
+            "cardinality": "1:many",
+            "amountDeltaCents": 0,
+            "deltaReason": null,
+            "confidence": 0.96,
+            "decidedBy": "agent",
+            "reasoning": "clean tie-out"
+          },
+          "options": [
+            {
+              "label": "Accept match",
+              "value": {
+                "bankExternalIds": [
+                  "BNK-2026-04-0034"
+                ],
+                "ledgerExternalIds": [
+                  "GL-2026-04-0048",
+                  "GL-2026-04-0049"
+                ],
+                "cardinality": "1:many",
+                "amountDeltaCents": 0,
+                "deltaReason": null,
+                "confidence": 0.96,
+                "decidedBy": "agent",
+                "reasoning": "clean tie-out"
+              }
+            },
+            {
+              "label": "Reject",
+              "value": null
+            }
+          ]
+        }
+      ],
+      "stats": {
+        "llmCalls": 6,
+        "ruleHits": 17,
+        "tokensIn": 5400,
+        "tokensOut": 1560,
+        "costMicros": 66000,
+        "durationMs": 4,
+        "codingAccuracy": 1,
+        "matchAccuracy": 0.6481481481481481,
+        "autoClearRate": 0.7611940298507462,
+        "autoClearPrecision": 1,
+        "exceptionsOpened": 40
+      },
+      "corrections": 40,
+      "touchSeconds": 1800,
+      "gradientCostMicros": 11000,
+      "proposals": [
+        {
+          "name": "Flexport settles installments",
+          "kind": "matching",
+          "adopted": false,
+          "precision": 0,
+          "fired": 2,
+          "evidence": 4
+        },
+        {
+          "name": "Stripe settles same day settlement",
+          "kind": "matching",
+          "adopted": false,
+          "precision": 0.3333333333333333,
+          "fired": 9,
+          "evidence": 4
+        },
+        {
+          "name": "Gusto settles by invoice",
+          "kind": "matching",
+          "adopted": false,
+          "precision": 0,
+          "fired": 0,
+          "evidence": 2
+        }
+      ]
+    }
+  ],
+  "rulebook": [
+    {
+      "id": "RULE-007",
+      "kind": "coding",
+      "name": "Mouser Electronics → 5010 (OPS:100)",
+      "predicate": [
+        {
+          "op": "vendor_is",
+          "value": "Mouser Electronics"
+        }
+      ],
+      "action": {
+        "type": "code",
+        "glCode": "5010",
+        "deptSplit": {
+          "OPS": 1
+        }
+      },
+      "status": "active",
+      "version": 1,
+      "evidence": [
+        {
+          "correctionId": "COR-2026-02-032",
+          "periodCode": "2026-02",
+          "subjectRef": "MOU-202602-7557",
+          "quote": "agent said \"5010|OPS:100\", controller set \"5010|OPS:100\" - confirmed"
+        },
+        {
+          "correctionId": "COR-2026-02-033",
+          "periodCode": "2026-02",
+          "subjectRef": "MOU-202602-7907",
+          "quote": "agent said \"5010|OPS:100\", controller set \"5010|OPS:100\" - confirmed"
+        }
+      ],
+      "backtest": {
+        "periodsReplayed": [
+          "2026-01"
+        ],
+        "wouldHaveFired": 2,
+        "wouldHaveBeenCorrect": 2,
+        "wouldHaveBeenWrong": 0,
+        "regressions": [],
+        "precision": 1
+      },
+      "hitCount": 0,
+      "createdAt": "2026-09-05T20:13:31.985Z",
+      "activatedAt": "2026-09-05T20:13:31.986Z"
+    },
+    {
+      "id": "RULE-008",
+      "kind": "coding",
+      "name": "Flexport → 5020 (OPS:100)",
+      "predicate": [
+        {
+          "op": "vendor_is",
+          "value": "Flexport"
+        }
+      ],
+      "action": {
+        "type": "code",
+        "glCode": "5020",
+        "deptSplit": {
+          "OPS": 1
+        }
+      },
+      "status": "active",
+      "version": 1,
+      "evidence": [
+        {
+          "correctionId": "COR-2026-02-034",
+          "periodCode": "2026-02",
+          "subjectRef": "FLE-202602-3258",
+          "quote": "agent said \"5020|OPS:100\", controller set \"5020|OPS:100\" - confirmed"
+        },
+        {
+          "correctionId": "COR-2026-02-035",
+          "periodCode": "2026-02",
+          "subjectRef": "FLE-202602-5421",
+          "quote": "agent said \"5020|OPS:100\", controller set \"5020|OPS:100\" - confirmed"
+        },
+        {
+          "correctionId": "COR-2026-02-036",
+          "periodCode": "2026-02",
+          "subjectRef": "FLE-202602-5155",
+          "quote": "agent said \"5020|OPS:100\", controller set \"5020|OPS:100\" - confirmed"
+        }
+      ],
+      "backtest": {
+        "periodsReplayed": [
+          "2026-01"
+        ],
+        "wouldHaveFired": 3,
+        "wouldHaveBeenCorrect": 3,
+        "wouldHaveBeenWrong": 0,
+        "regressions": [],
+        "precision": 1
+      },
+      "hitCount": 0,
+      "createdAt": "2026-09-05T20:13:31.985Z",
+      "activatedAt": "2026-09-05T20:13:31.986Z"
+    },
+    {
+      "id": "RULE-010",
+      "kind": "coding",
+      "name": "United Airlines → 6910 (GTM:60/OPS:40)",
+      "predicate": [
+        {
+          "op": "vendor_is",
+          "value": "United Airlines"
+        }
+      ],
+      "action": {
+        "type": "code",
+        "glCode": "6910",
+        "deptSplit": {
+          "GTM": 0.6,
+          "OPS": 0.4
+        }
+      },
+      "status": "active",
+      "version": 1,
+      "evidence": [
+        {
+          "correctionId": "COR-2026-02-039",
+          "periodCode": "2026-02",
+          "subjectRef": "UNI-202602-8251",
+          "quote": "agent said \"6910|GTM:60/OPS:40\", controller set \"6910|GTM:60/OPS:40\" - confirmed"
+        },
+        {
+          "correctionId": "COR-2026-02-040",
+          "periodCode": "2026-02",
+          "subjectRef": "UNI-202602-4915",
+          "quote": "agent said \"6910|GTM:60/OPS:40\", controller set \"6910|GTM:60/OPS:40\" - confirmed"
+        }
+      ],
+      "backtest": {
+        "periodsReplayed": [
+          "2026-01"
+        ],
+        "wouldHaveFired": 3,
+        "wouldHaveBeenCorrect": 3,
+        "wouldHaveBeenWrong": 0,
+        "regressions": [],
+        "precision": 1
+      },
+      "hitCount": 0,
+      "createdAt": "2026-09-05T20:13:31.986Z",
+      "activatedAt": "2026-09-05T20:13:31.986Z"
+    },
+    {
+      "id": "RULE-013",
+      "kind": "coding",
+      "name": "Cooley LLP → 6610 (GA:100)",
+      "predicate": [
+        {
+          "op": "vendor_is",
+          "value": "Cooley LLP"
+        }
+      ],
+      "action": {
+        "type": "code",
+        "glCode": "6610",
+        "deptSplit": {
+          "GA": 1
+        }
+      },
+      "status": "active",
+      "version": 1,
+      "evidence": [
+        {
+          "correctionId": "COR-2026-03-031",
+          "periodCode": "2026-03",
+          "subjectRef": "COO-202603-8524",
+          "quote": "agent said \"6610|GA:100\", controller set \"6610|GA:100\" - confirmed"
+        },
+        {
+          "correctionId": "COR-2026-03-032",
+          "periodCode": "2026-03",
+          "subjectRef": "COO-202603-1084",
+          "quote": "agent said \"6610|GA:100\", controller set \"6610|GA:100\" - confirmed"
+        }
+      ],
+      "backtest": {
+        "periodsReplayed": [
+          "2026-01",
+          "2026-02"
+        ],
+        "wouldHaveFired": 9,
+        "wouldHaveBeenCorrect": 9,
+        "wouldHaveBeenWrong": 0,
+        "regressions": [],
+        "precision": 1
+      },
+      "hitCount": 0,
+      "createdAt": "2026-09-05T20:13:31.994Z",
+      "activatedAt": "2026-09-05T20:13:31.995Z"
+    }
+  ],
+  "totals": {
+    "costMicros": 330000,
+    "llmCalls": 30,
+    "ruleHits": 31,
+    "touchSeconds": 8280
+  }
+}

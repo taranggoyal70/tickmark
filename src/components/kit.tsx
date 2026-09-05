@@ -15,15 +15,22 @@ export function Eyebrow({ children }: { children: ReactNode }) {
 export function Stat({
   label, value, sub, tone = "neutral",
 }: { label: string; value: ReactNode; sub?: ReactNode; tone?: "neutral" | "good" | "warn" | "bad" }) {
-  const toneClass =
-    tone === "good" ? "text-[var(--success)]" :
-    tone === "warn" ? "text-[var(--warning)]" :
-    tone === "bad"  ? "text-[var(--danger)]"  : "text-ink";
+  // The number stays in ink. State is carried by a dot plus words in the
+  // caption, never by colour alone.
+  const dot =
+    tone === "good" ? "bg-[#0ca30c]" :
+    tone === "warn" ? "bg-[#fab219]" :
+    tone === "bad"  ? "bg-[#d03b3b]" : "bg-[var(--ink-tertiary)]";
   return (
     <div className="panel p-5">
       <div className="eyebrow mb-2">{label}</div>
-      <div className={`nums text-[32px] font-semibold leading-none tracking-[-0.02em] ${toneClass}`}>{value}</div>
-      {sub ? <div className="mt-2 text-[13px] text-ink-subtle leading-snug">{sub}</div> : null}
+      <div className="nums text-[32px] font-semibold leading-none tracking-[-0.02em] text-ink">{value}</div>
+      {sub ? (
+        <div className="mt-2.5 flex items-start gap-2 text-[13px] leading-snug text-ink-subtle">
+          <span className={`mt-[6px] h-1.5 w-1.5 shrink-0 rounded-full ${dot}`} aria-hidden="true" />
+          <span>{sub}</span>
+        </div>
+      ) : null}
     </div>
   );
 }

@@ -31,6 +31,7 @@ export interface ChartContext {
   accounts: { code: string; name: string; type: string }[];
   departments: { code: string; name: string }[];
   materialityCents: number;
+  ruleCeilingCents: number;
 }
 
 const chartBlock = (c: ChartContext) => [

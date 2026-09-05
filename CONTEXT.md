@@ -80,6 +80,19 @@ This is how real controllers allocate attention, and it is a hard gate, not a
 tiebreaker. A $12 bank fee and a $2.4M wire do not deserve the same scrutiny.
 
 - Not a confidence threshold. They compose; neither overrides the other.
+- Not one number. See Rule Ceiling.
+
+### Rule Ceiling
+The higher threshold that applies when a decision was settled by a **Rule**
+rather than by the model. A backtested rule carries its own control - the
+replay, plus the corrections that authorised it - so it is trusted further than
+a fresh model judgment on an item it has never seen.
+
+This is the mechanism by which learning actually buys automation: a vendor only
+becomes hands-off once there is evidence and a passing replay behind it.
+
+- Not an exemption. Nothing clears above the ceiling, ever.
+- Not a confidence bonus. The rule still has to fire cleanly or it hands off.
 
 ### Journal Entry (JE)
 A proposed accounting entry. Debits must equal credits - checked arithmetically,
@@ -123,8 +136,9 @@ Borrowed, with credit, from [backpass](https://github.com/kunchenguid/backpass).
 Two of its constraints matter more in accounting than they do in code:
 
 - **Evidence-gated.** Every proposed Rule cites >= 2 distinct real Corrections,
-  verbatim. An auditor can trace any automated decision to the human judgment
-  that authorised it.
+  verbatim, **and those Corrections must be about the same kind of decision the
+  Rule makes**. A coding rule justified by reconciliation corrections is not
+  evidenced, it is decorated, and an auditor would say so.
 - **Analysis never writes.** Proposing and applying are separate operations with
   separate authority. That is segregation of duties, which we get for free.
 
@@ -144,3 +158,4 @@ would have broken. No rule is adopted on a promise.
 5. Every automated decision traces to either a Rule (with its Corrections) or a
    Close Run (with its Evidence Chain). No orphan decisions.
 6. A Rule that has never been backtested cannot be activated.
+7. A Rule's evidence is the same kind as the Rule. Coding evidences coding.
