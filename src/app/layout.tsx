@@ -17,6 +17,12 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <ClerkProvider
       appearance={clerkAppearance}
+      // Clerk titles the widget with the application name, which the Vercel
+      // integration created as "tickmark-auth". Say the product's name instead.
+      localization={{
+        signIn: { start: { title: "Sign in to Tickmark" } },
+        signUp: { start: { title: "Create your Tickmark account" } },
+      }}
       // keep sign-in inside the product rather than bouncing to a Clerk-hosted
       // domain; set in code so it holds on Vercel without extra env vars
       signInUrl="/sign-in"
