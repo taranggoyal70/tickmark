@@ -13,7 +13,7 @@ const db = createClient(process.env.SUPABASE_URL!, process.env.SUPABASE_SERVICE_
 
 let pass = 0, fail = 0;
 const check = (name: string, ok: boolean, detail = "") => {
-  ok ? pass++ : fail++;
+  if (ok) pass++; else fail++;
   console.log(`  ${ok ? "PASS" : "FAIL"}  ${name.padEnd(46)} ${detail}`);
 };
 
