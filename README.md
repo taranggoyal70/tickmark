@@ -143,6 +143,43 @@ Auto-clear precision is the one that must *not* move. Nobody reviews what the ag
 cleared unattended, so a system that gets faster by getting sloppier is worse than no
 system at all.
 
+## The human gate, in practice
+
+The part of this a controller actually touches. It is the answer to *"is the
+human judgment side intuitive?"* — and the place where most agent demos quietly
+cheat.
+
+1. The queue shows only what the agent **declined to assert**, each with the
+   proposal, the confidence, and why it stopped.
+2. Resolving one writes a **Correction** — structured, attributable, persisted.
+3. Ticking **"always do this"** does *not* make a rule. The first ask records a
+   **Standing Intent** and says so:
+
+   > *Noted — but not yet a rule. One correction is an anecdote. I'll propose a
+   > rule the next time a correction agrees with it.*
+
+4. The second agreeing correction proposes a **Rule**, citing both verbatim,
+   with a **backtest** already replayed against every closed period.
+5. The controller adopts or rejects. Adoption names its approver — a database
+   trigger refuses an anonymous activation — and a rule whose evidence all came
+   from its own adopter is marked **self-evidenced** forever.
+6. **A proposal that failed the replay cannot be adopted at all.** The queue says
+   so instead of offering the button, and keeps the instruction for a later
+   period.
+
+`npm run verify:gate` runs that entire sequence against the live database and
+restores the queue afterwards:
+
+```
+PASS  first 'always do this' does NOT create a rule        outcome: intent_recorded
+PASS  rule count unchanged after one correction            0 → 0
+PASS  second correction proposes a rule                    cites both, backtested
+PASS  proposed rule is not active until adopted            status: proposed
+PASS  two different controllers → not self-evidenced
+PASS  activating without an approver is refused            database trigger
+PASS  adoptRule refuses a rule that failed the replay      fired 0× at 0%
+```
+
 ## The agent workflow
 
 ```
