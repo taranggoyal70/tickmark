@@ -1,36 +1,155 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+<h1 align="center">Tickmark</h1>
+<p align="center"><b>The month-end close that gets cheaper every month.</b></p>
+<p align="center">
+An agent that codes the AP ledger and reconciles the bank, hands a controller only what
+genuinely needs judgment, and compiles every correction they make into a deterministic
+rule — so the judgment gets made once, and then runs for free.
+</p>
 
-## Getting Started
+---
 
-First, run the development server:
+> A **tickmark** is the small symbol an accountant puts beside a ledger line to say
+> *"I checked this, and here is how."* Auditors have used them for a century. This
+> product issues tickmarks — and earns the right to issue them without asking.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+## The problem
+
+Month-end close is 5–10 days of a controller doing the same three things they did last
+month: tying the bank statement to the general ledger, deciding which GL account and
+department each vendor invoice hits, and hunting for costs that were incurred but never
+invoiced. The judgment involved is real, but it is also *repetitive* — the same vendor,
+the same split, the same weird settlement pattern, every single month.
+
+Rules engines in NetSuite and QuickBooks are too brittle to capture it. So the knowledge
+stays in one person's head, and the close costs the same every month forever.
+
+## What makes this different
+
+Most agents "learn" by growing a prompt. Every lesson makes the next call longer, slower,
+and more expensive — and none of it can be audited.
+
+**Tickmark compiles learning into deterministic rules instead.** A correction becomes a
+predicate and an action: versioned, human-readable, and executable with **zero model
+calls**. The month the agent learns that AWS codes to `6820` split 60/25/15 across
+Engineering, Data and Product, that decision stops costing anything — permanently.
+
+The cost curve bends the right way. More learning means *fewer* calls, not bigger ones.
+
+```
+Rulebook (the weights)
+  → Close Run                     (forward pass)
+  → Corrections in the queue      (loss signal)
+  → distil + aggregate            (gradient)
+  → proposed Rule diffs, backtested
+  → controller accepts / rejects  (the human gate)
+  → back to the Rulebook
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Two constraints are borrowed, with credit, from
+[backpass](https://github.com/kunchenguid/backpass). In accounting they are not
+niceties:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+| backpass constraint | what it means on the books |
+|---|---|
+| **Evidence-gated** — ≥ 2 distinct corrections, quoted verbatim | An auditor can trace any automated decision to the human judgment that authorised it |
+| **Analysis never writes** — proposing ≠ applying | Segregation of duties, for free |
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+The agent's tool surface follows the ten [AXI](https://github.com/kunchenguid/axi)
+principles — TOON-encoded context, minimal schemas, precomputed aggregates, definitive
+empty states — which is worth roughly 40% of the input tokens on every batch.
 
-## Learn More
+## The three workflows
 
-To learn more about Next.js, take a look at the following resources:
+| | What it handles |
+|---|---|
+| **Bank reconciliation** | All four cardinalities — one payment, an ACH batch against six invoices, an invoice settled in two tranches, a lockbox deposit. Names every residual as `fx`, `bank_fee`, `partial` or `timing`, or refuses the match. |
+| **AP invoice coding** | GL account, department and class per invoice — including split allocations that are pure tribal knowledge. |
+| **Accrual completeness** | Finds the recurring cost incurred but not invoiced before cut-off, sizes it off trailing actuals, books it as a balanced entry with distinct preparer and approver. |
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Guardrails
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+These are enforced in the schema, not in a prompt:
 
-## Deploy on Vercel
+1. **Debits equal credits** — checked arithmetically by a database trigger, never taken from model output.
+2. **Tickmarks are append-only** — a trigger rejects every `UPDATE` and `DELETE`. You supersede a tickmark; you never edit one.
+3. **Materiality is a hard gate** — nothing above the threshold auto-posts, whatever the confidence.
+4. **Preparer ≠ approver** — a constraint, not a convention.
+5. **No rule activates without a backtest** and evidence from ≥ 2 corrections — also a trigger.
+6. **Every decision traces** to a Rule (with its corrections) or a Close Run (with its evidence chain).
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Measured, not asserted
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+The fixture entity generates four periods of deliberately messy data — bank aliases that
+never match the legal name, Stripe deposits arriving net of fees, EUR contractor invoices
+settling at a different rate than they accrued, freight invoices paid in two tranches,
+and one recurring vendor that goes silent in the final period so accrual completeness has
+something real to catch.
+
+Each period carries **ground truth the agent never sees**, so accuracy is measured rather
+than claimed:
+
+```bash
+npm run simulate
+```
+
+```
+period   cleared  coding  match   exc  llm  rules  cost      touch
+2026-01      …       …       …      …    …      …      …        …
+```
+
+The headline metrics are auto-clear rate (up), cost per close (down), controller time
+(down) — and **auto-clear precision**, which must *not* move. Nobody reviews what the
+agent cleared unattended, so that number is the one that matters.
+
+## Stack
+
+- **Next.js 16** (App Router, React 19) on Vercel
+- **AI SDK v7** — `claude-opus-5` via Vercel AI Gateway, or a direct `ANTHROPIC_API_KEY`
+- **Supabase** Postgres as the system of record, reached through a storage seam so runs
+  land on the filesystem when it is not provisioned
+- **Clerk** for auth
+- Design tokens ported from
+  [awesome-design-md](https://github.com/VoltAgent/awesome-design-md) → `linear.app`
+- Chart palette validated for colour-vision deficiency with the `dataviz` validator
+  (lightness band, chroma floor, adjacent CVD ΔE, contrast)
+
+## Running it
+
+```bash
+npm install
+cp .env.example .env.local     # then fill in the values below
+npm run simulate               # headless eval across four periods
+npm run dev                    # dashboard on http://localhost:3000
+```
+
+**Required** — one model credential, either:
+- a card on the [Vercel AI Gateway](https://vercel.com/docs/ai-gateway) (the `vercel link` OIDC token then authenticates automatically), or
+- `ANTHROPIC_API_KEY=sk-ant-…` in `.env.local`
+
+**Optional** — `SUPABASE_URL` and `SUPABASE_SERVICE_ROLE_KEY`. Without them runs persist
+to `data/`. With them, apply `supabase/migrations/0001_init.sql` first.
+
+## Layout
+
+```
+src/lib/seed/       fixture entity + deterministic period generator (with ground truth)
+src/lib/agent/
+  rules.ts          the deterministic Rulebook engine — zero tokens
+  llm.ts            the model-backed residue, TOON-encoded
+  close.ts          one Close Run: rules first, model second, then the gate
+  gradient.ts       corrections → candidate rules → backtest
+  controller.ts     the human gate, simulated from ground truth
+  simulate.ts       the multi-period eval harness
+src/lib/store/      Supabase adapter + filesystem fallback behind one interface
+supabase/migrations one SQL file; the invariants live here as triggers
+CONTEXT.md          the domain model — read before naming anything
+```
+
+## Domain language
+
+Terms are load-bearing and each one records what it must not be confused with. See
+[CONTEXT.md](CONTEXT.md). The three that matter most:
+
+- An **Exception** is not an error — it is the system correctly asking for judgment.
+- A **Tickmark** is not an approval — verification and authority to post are different controls.
+- A **Rule** is not a prompt — it is deterministic, inspectable, and free to run.
