@@ -1,7 +1,7 @@
 {
   "provenance": "mock",
   "model": "anthropic/claude-opus-5",
-  "generatedAt": "2026-09-05T20:13:32.003Z",
+  "generatedAt": "2026-09-05T20:14:45.200Z",
   "entity": "Northwind Robotics, Inc.",
   "periods": [
     {
@@ -9,95 +9,10 @@
       "rulebookVersionIn": 0,
       "rulebookVersionOut": 0,
       "activeRules": 0,
-      "modelDecisions": 62,
+      "modelDecisions": 77,
       "exceptions": [
         {
           "id": "EX-2026-01-1",
-          "subjectType": "bank_line",
-          "subjectRef": "BNK-2026-01-0025",
-          "cause": "no_candidate",
-          "amountCents": -4714280,
-          "confidence": null,
-          "proposal": {
-            "description": "FLEXPORT, INC."
-          },
-          "options": [
-            {
-              "label": "Timing difference - carry forward",
-              "value": "timing"
-            }
-          ]
-        },
-        {
-          "id": "EX-2026-01-2",
-          "subjectType": "bank_line",
-          "subjectRef": "BNK-2026-01-0015",
-          "cause": "no_candidate",
-          "amountCents": -2425592,
-          "confidence": null,
-          "proposal": {
-            "description": "MOUSER ELECTRONI"
-          },
-          "options": [
-            {
-              "label": "Timing difference - carry forward",
-              "value": "timing"
-            }
-          ]
-        },
-        {
-          "id": "EX-2026-01-3",
-          "subjectType": "bank_line",
-          "subjectRef": "BNK-2026-01-0020",
-          "cause": "no_candidate",
-          "amountCents": -679007,
-          "confidence": null,
-          "proposal": {
-            "description": "DIGI-KEY CORP THIEF RIVER"
-          },
-          "options": [
-            {
-              "label": "Timing difference - carry forward",
-              "value": "timing"
-            }
-          ]
-        },
-        {
-          "id": "EX-2026-01-4",
-          "subjectType": "bank_line",
-          "subjectRef": "BNK-2026-01-0028",
-          "cause": "no_candidate",
-          "amountCents": -2690945,
-          "confidence": null,
-          "proposal": {
-            "description": "COOLEY LLP"
-          },
-          "options": [
-            {
-              "label": "Timing difference - carry forward",
-              "value": "timing"
-            }
-          ]
-        },
-        {
-          "id": "EX-2026-01-5",
-          "subjectType": "bank_line",
-          "subjectRef": "BNK-2026-01-0029",
-          "cause": "no_candidate",
-          "amountCents": -2694383,
-          "confidence": null,
-          "proposal": {
-            "description": "COOLEY LLP OPERATING"
-          },
-          "options": [
-            {
-              "label": "Timing difference - carry forward",
-              "value": "timing"
-            }
-          ]
-        },
-        {
-          "id": "EX-2026-01-6",
           "subjectType": "bank_line",
           "subjectRef": "BNK-2026-01-0053",
           "cause": "no_candidate",
@@ -114,143 +29,7 @@
           ]
         },
         {
-          "id": "EX-2026-01-7",
-          "subjectType": "bank_line",
-          "subjectRef": "BNK-2026-01-0001",
-          "cause": "no_candidate",
-          "amountCents": -4870920,
-          "confidence": null,
-          "proposal": {
-            "description": "AMZN WEB SVCS"
-          },
-          "options": [
-            {
-              "label": "Timing difference - carry forward",
-              "value": "timing"
-            }
-          ]
-        },
-        {
-          "id": "EX-2026-01-8",
-          "subjectType": "bank_line",
-          "subjectRef": "BNK-2026-01-0003",
-          "cause": "no_candidate",
-          "amountCents": -417027,
-          "confidence": null,
-          "proposal": {
-            "description": "VERCEL INC. SAN FRANCISCO CA"
-          },
-          "options": [
-            {
-              "label": "Timing difference - carry forward",
-              "value": "timing"
-            }
-          ]
-        },
-        {
-          "id": "EX-2026-01-9",
-          "subjectType": "bank_line",
-          "subjectRef": "BNK-2026-01-0004",
-          "cause": "no_candidate",
-          "amountCents": -134165,
-          "confidence": null,
-          "proposal": {
-            "description": "FIGMA, INC."
-          },
-          "options": [
-            {
-              "label": "Timing difference - carry forward",
-              "value": "timing"
-            }
-          ]
-        },
-        {
-          "id": "EX-2026-01-10",
-          "subjectType": "bank_line",
-          "subjectRef": "BNK-2026-01-0005",
-          "cause": "no_candidate",
-          "amountCents": -95178,
-          "confidence": null,
-          "proposal": {
-            "description": "LINEAR.APP"
-          },
-          "options": [
-            {
-              "label": "Timing difference - carry forward",
-              "value": "timing"
-            }
-          ]
-        },
-        {
-          "id": "EX-2026-01-11",
-          "subjectType": "bank_line",
-          "subjectRef": "BNK-2026-01-0006",
-          "cause": "no_candidate",
-          "amountCents": -204520,
-          "confidence": null,
-          "proposal": {
-            "description": "SLACK T SALESFORCE"
-          },
-          "options": [
-            {
-              "label": "Timing difference - carry forward",
-              "value": "timing"
-            }
-          ]
-        },
-        {
-          "id": "EX-2026-01-12",
-          "subjectType": "bank_line",
-          "subjectRef": "BNK-2026-01-0007",
-          "cause": "no_candidate",
-          "amountCents": -177801,
-          "confidence": null,
-          "proposal": {
-            "description": "MSFT * GITHUB"
-          },
-          "options": [
-            {
-              "label": "Timing difference - carry forward",
-              "value": "timing"
-            }
-          ]
-        },
-        {
-          "id": "EX-2026-01-13",
-          "subjectType": "bank_line",
-          "subjectRef": "BNK-2026-01-0018",
-          "cause": "no_candidate",
-          "amountCents": -824529,
-          "confidence": null,
-          "proposal": {
-            "description": "DIGI-KEY CORP THIEF RIVER"
-          },
-          "options": [
-            {
-              "label": "Timing difference - carry forward",
-              "value": "timing"
-            }
-          ]
-        },
-        {
-          "id": "EX-2026-01-14",
-          "subjectType": "bank_line",
-          "subjectRef": "BNK-2026-01-0019",
-          "cause": "no_candidate",
-          "amountCents": -680024,
-          "confidence": null,
-          "proposal": {
-            "description": "DIGIKEY ELECTRONICS"
-          },
-          "options": [
-            {
-              "label": "Timing difference - carry forward",
-              "value": "timing"
-            }
-          ]
-        },
-        {
-          "id": "EX-2026-01-15",
+          "id": "EX-2026-01-2",
           "subjectType": "bank_line",
           "subjectRef": "BNK-2026-01-0021",
           "cause": "no_candidate",
@@ -267,7 +46,7 @@
           ]
         },
         {
-          "id": "EX-2026-01-16",
+          "id": "EX-2026-01-3",
           "subjectType": "bank_line",
           "subjectRef": "BNK-2026-01-0023",
           "cause": "no_candidate",
@@ -284,41 +63,7 @@
           ]
         },
         {
-          "id": "EX-2026-01-17",
-          "subjectType": "bank_line",
-          "subjectRef": "BNK-2026-01-0026",
-          "cause": "no_candidate",
-          "amountCents": -3463935,
-          "confidence": null,
-          "proposal": {
-            "description": "COOLEY LLP OPERATING"
-          },
-          "options": [
-            {
-              "label": "Timing difference - carry forward",
-              "value": "timing"
-            }
-          ]
-        },
-        {
-          "id": "EX-2026-01-18",
-          "subjectType": "bank_line",
-          "subjectRef": "BNK-2026-01-0037",
-          "cause": "no_candidate",
-          "amountCents": -48964,
-          "confidence": null,
-          "proposal": {
-            "description": "IRON MTN"
-          },
-          "options": [
-            {
-              "label": "Timing difference - carry forward",
-              "value": "timing"
-            }
-          ]
-        },
-        {
-          "id": "EX-2026-01-19",
+          "id": "EX-2026-01-4",
           "subjectType": "bank_line",
           "subjectRef": "BNK-2026-01-0054",
           "cause": "no_candidate",
@@ -335,7 +80,7 @@
           ]
         },
         {
-          "id": "EX-2026-01-20",
+          "id": "EX-2026-01-5",
           "subjectType": "bank_line",
           "subjectRef": "BNK-2026-01-0022",
           "cause": "no_candidate",
@@ -352,7 +97,7 @@
           ]
         },
         {
-          "id": "EX-2026-01-21",
+          "id": "EX-2026-01-6",
           "subjectType": "bank_line",
           "subjectRef": "BNK-2026-01-0024",
           "cause": "no_candidate",
@@ -369,7 +114,7 @@
           ]
         },
         {
-          "id": "EX-2026-01-22",
+          "id": "EX-2026-01-7",
           "subjectType": "ap_invoice",
           "subjectRef": "AMA-202601-5427",
           "cause": "over_materiality",
@@ -410,7 +155,7 @@
           ]
         },
         {
-          "id": "EX-2026-01-23",
+          "id": "EX-2026-01-8",
           "subjectType": "ap_invoice",
           "subjectRef": "DAT-202601-6298",
           "cause": "low_confidence",
@@ -449,7 +194,7 @@
           ]
         },
         {
-          "id": "EX-2026-01-24",
+          "id": "EX-2026-01-9",
           "subjectType": "ap_invoice",
           "subjectRef": "VER-202601-5484",
           "cause": "low_confidence",
@@ -488,7 +233,7 @@
           ]
         },
         {
-          "id": "EX-2026-01-25",
+          "id": "EX-2026-01-10",
           "subjectType": "ap_invoice",
           "subjectRef": "FIG-202601-3285",
           "cause": "low_confidence",
@@ -527,7 +272,7 @@
           ]
         },
         {
-          "id": "EX-2026-01-26",
+          "id": "EX-2026-01-11",
           "subjectType": "ap_invoice",
           "subjectRef": "LIN-202601-7232",
           "cause": "low_confidence",
@@ -568,7 +313,7 @@
           ]
         },
         {
-          "id": "EX-2026-01-27",
+          "id": "EX-2026-01-12",
           "subjectType": "ap_invoice",
           "subjectRef": "SLA-202601-6983",
           "cause": "low_confidence",
@@ -611,7 +356,7 @@
           ]
         },
         {
-          "id": "EX-2026-01-28",
+          "id": "EX-2026-01-13",
           "subjectType": "ap_invoice",
           "subjectRef": "GIT-202601-8050",
           "cause": "low_confidence",
@@ -650,7 +395,7 @@
           ]
         },
         {
-          "id": "EX-2026-01-29",
+          "id": "EX-2026-01-14",
           "subjectType": "ap_invoice",
           "subjectRef": "WEW-202601-7230",
           "cause": "over_materiality",
@@ -687,7 +432,7 @@
           ]
         },
         {
-          "id": "EX-2026-01-30",
+          "id": "EX-2026-01-15",
           "subjectType": "ap_invoice",
           "subjectRef": "DEE-202601-4827",
           "cause": "low_confidence",
@@ -726,7 +471,7 @@
           ]
         },
         {
-          "id": "EX-2026-01-31",
+          "id": "EX-2026-01-16",
           "subjectType": "ap_invoice",
           "subjectRef": "FLE-202601-4016",
           "cause": "over_materiality",
@@ -763,7 +508,7 @@
           ]
         },
         {
-          "id": "EX-2026-01-32",
+          "id": "EX-2026-01-17",
           "subjectType": "ap_invoice",
           "subjectRef": "FLE-202601-9265",
           "cause": "over_materiality",
@@ -800,7 +545,7 @@
           ]
         },
         {
-          "id": "EX-2026-01-33",
+          "id": "EX-2026-01-18",
           "subjectType": "ap_invoice",
           "subjectRef": "FLE-202601-9355",
           "cause": "over_materiality",
@@ -837,7 +582,7 @@
           ]
         },
         {
-          "id": "EX-2026-01-34",
+          "id": "EX-2026-01-19",
           "subjectType": "ap_invoice",
           "subjectRef": "COO-202601-7754",
           "cause": "over_materiality",
@@ -874,7 +619,7 @@
           ]
         },
         {
-          "id": "EX-2026-01-35",
+          "id": "EX-2026-01-20",
           "subjectType": "ap_invoice",
           "subjectRef": "COO-202601-9022",
           "cause": "over_materiality",
@@ -911,7 +656,7 @@
           ]
         },
         {
-          "id": "EX-2026-01-36",
+          "id": "EX-2026-01-21",
           "subjectType": "ap_invoice",
           "subjectRef": "COO-202601-9475",
           "cause": "over_materiality",
@@ -948,7 +693,7 @@
           ]
         },
         {
-          "id": "EX-2026-01-37",
+          "id": "EX-2026-01-22",
           "subjectType": "ap_invoice",
           "subjectRef": "COO-202601-8421",
           "cause": "over_materiality",
@@ -985,7 +730,7 @@
           ]
         },
         {
-          "id": "EX-2026-01-38",
+          "id": "EX-2026-01-23",
           "subjectType": "ap_invoice",
           "subjectRef": "COO-202601-2266",
           "cause": "over_materiality",
@@ -1022,7 +767,7 @@
           ]
         },
         {
-          "id": "EX-2026-01-39",
+          "id": "EX-2026-01-24",
           "subjectType": "ap_invoice",
           "subjectRef": "UNI-202601-6249",
           "cause": "low_confidence",
@@ -1061,7 +806,7 @@
           ]
         },
         {
-          "id": "EX-2026-01-40",
+          "id": "EX-2026-01-25",
           "subjectType": "ap_invoice",
           "subjectRef": "UNI-202601-5362",
           "cause": "low_confidence",
@@ -1100,7 +845,7 @@
           ]
         },
         {
-          "id": "EX-2026-01-41",
+          "id": "EX-2026-01-26",
           "subjectType": "ap_invoice",
           "subjectRef": "UNI-202601-7712",
           "cause": "low_confidence",
@@ -1139,7 +884,7 @@
           ]
         },
         {
-          "id": "EX-2026-01-42",
+          "id": "EX-2026-01-27",
           "subjectType": "bank_line",
           "subjectRef": "BNK-2026-01-0009",
           "cause": "over_materiality",
@@ -1186,7 +931,7 @@
           ]
         },
         {
-          "id": "EX-2026-01-43",
+          "id": "EX-2026-01-28",
           "subjectType": "bank_line",
           "subjectRef": "BNK-2026-01-0010",
           "cause": "over_materiality",
@@ -1233,7 +978,7 @@
           ]
         },
         {
-          "id": "EX-2026-01-44",
+          "id": "EX-2026-01-29",
           "subjectType": "bank_line",
           "subjectRef": "BNK-2026-01-0031",
           "cause": "over_materiality",
@@ -1280,7 +1025,7 @@
           ]
         },
         {
-          "id": "EX-2026-01-45",
+          "id": "EX-2026-01-30",
           "subjectType": "bank_line",
           "subjectRef": "BNK-2026-01-0008",
           "cause": "over_materiality",
@@ -1325,7 +1070,7 @@
           ]
         },
         {
-          "id": "EX-2026-01-46",
+          "id": "EX-2026-01-31",
           "subjectType": "bank_line",
           "subjectRef": "BNK-2026-01-0011",
           "cause": "over_materiality",
@@ -1372,7 +1117,52 @@
           ]
         },
         {
-          "id": "EX-2026-01-47",
+          "id": "EX-2026-01-32",
+          "subjectType": "bank_line",
+          "subjectRef": "BNK-2026-01-0025",
+          "cause": "over_materiality",
+          "amountCents": -4714280,
+          "confidence": 0.96,
+          "proposal": {
+            "bankExternalIds": [
+              "BNK-2026-01-0025"
+            ],
+            "ledgerExternalIds": [
+              "GL-2026-01-0039"
+            ],
+            "cardinality": "1:1",
+            "amountDeltaCents": 0,
+            "deltaReason": null,
+            "confidence": 0.96,
+            "decidedBy": "agent",
+            "reasoning": "clean tie-out"
+          },
+          "options": [
+            {
+              "label": "Accept match",
+              "value": {
+                "bankExternalIds": [
+                  "BNK-2026-01-0025"
+                ],
+                "ledgerExternalIds": [
+                  "GL-2026-01-0039"
+                ],
+                "cardinality": "1:1",
+                "amountDeltaCents": 0,
+                "deltaReason": null,
+                "confidence": 0.96,
+                "decidedBy": "agent",
+                "reasoning": "clean tie-out"
+              }
+            },
+            {
+              "label": "Reject",
+              "value": null
+            }
+          ]
+        },
+        {
+          "id": "EX-2026-01-33",
           "subjectType": "bank_line",
           "subjectRef": "BNK-2026-01-0027",
           "cause": "over_materiality",
@@ -1417,7 +1207,146 @@
           ]
         },
         {
-          "id": "EX-2026-01-48",
+          "id": "EX-2026-01-34",
+          "subjectType": "bank_line",
+          "subjectRef": "BNK-2026-01-0001",
+          "cause": "over_materiality",
+          "amountCents": -4870920,
+          "confidence": 0.96,
+          "proposal": {
+            "bankExternalIds": [
+              "BNK-2026-01-0001"
+            ],
+            "ledgerExternalIds": [
+              "GL-2026-01-0001",
+              "GL-2026-01-0002",
+              "GL-2026-01-0003"
+            ],
+            "cardinality": "1:many",
+            "amountDeltaCents": 0,
+            "deltaReason": null,
+            "confidence": 0.96,
+            "decidedBy": "agent",
+            "reasoning": "clean tie-out"
+          },
+          "options": [
+            {
+              "label": "Accept match",
+              "value": {
+                "bankExternalIds": [
+                  "BNK-2026-01-0001"
+                ],
+                "ledgerExternalIds": [
+                  "GL-2026-01-0001",
+                  "GL-2026-01-0002",
+                  "GL-2026-01-0003"
+                ],
+                "cardinality": "1:many",
+                "amountDeltaCents": 0,
+                "deltaReason": null,
+                "confidence": 0.96,
+                "decidedBy": "agent",
+                "reasoning": "clean tie-out"
+              }
+            },
+            {
+              "label": "Reject",
+              "value": null
+            }
+          ]
+        },
+        {
+          "id": "EX-2026-01-35",
+          "subjectType": "bank_line",
+          "subjectRef": "BNK-2026-01-0028",
+          "cause": "over_materiality",
+          "amountCents": -2690945,
+          "confidence": 0.96,
+          "proposal": {
+            "bankExternalIds": [
+              "BNK-2026-01-0028"
+            ],
+            "ledgerExternalIds": [
+              "GL-2026-01-0042"
+            ],
+            "cardinality": "1:1",
+            "amountDeltaCents": 0,
+            "deltaReason": null,
+            "confidence": 0.96,
+            "decidedBy": "agent",
+            "reasoning": "clean tie-out"
+          },
+          "options": [
+            {
+              "label": "Accept match",
+              "value": {
+                "bankExternalIds": [
+                  "BNK-2026-01-0028"
+                ],
+                "ledgerExternalIds": [
+                  "GL-2026-01-0042"
+                ],
+                "cardinality": "1:1",
+                "amountDeltaCents": 0,
+                "deltaReason": null,
+                "confidence": 0.96,
+                "decidedBy": "agent",
+                "reasoning": "clean tie-out"
+              }
+            },
+            {
+              "label": "Reject",
+              "value": null
+            }
+          ]
+        },
+        {
+          "id": "EX-2026-01-36",
+          "subjectType": "bank_line",
+          "subjectRef": "BNK-2026-01-0029",
+          "cause": "over_materiality",
+          "amountCents": -2694383,
+          "confidence": 0.96,
+          "proposal": {
+            "bankExternalIds": [
+              "BNK-2026-01-0029"
+            ],
+            "ledgerExternalIds": [
+              "GL-2026-01-0043"
+            ],
+            "cardinality": "1:1",
+            "amountDeltaCents": 0,
+            "deltaReason": null,
+            "confidence": 0.96,
+            "decidedBy": "agent",
+            "reasoning": "clean tie-out"
+          },
+          "options": [
+            {
+              "label": "Accept match",
+              "value": {
+                "bankExternalIds": [
+                  "BNK-2026-01-0029"
+                ],
+                "ledgerExternalIds": [
+                  "GL-2026-01-0043"
+                ],
+                "cardinality": "1:1",
+                "amountDeltaCents": 0,
+                "deltaReason": null,
+                "confidence": 0.96,
+                "decidedBy": "agent",
+                "reasoning": "clean tie-out"
+              }
+            },
+            {
+              "label": "Reject",
+              "value": null
+            }
+          ]
+        },
+        {
+          "id": "EX-2026-01-37",
           "subjectType": "bank_line",
           "subjectRef": "BNK-2026-01-0012",
           "cause": "over_materiality",
@@ -1464,7 +1393,7 @@
           ]
         },
         {
-          "id": "EX-2026-01-49",
+          "id": "EX-2026-01-38",
           "subjectType": "bank_line",
           "subjectRef": "BNK-2026-01-0013",
           "cause": "low_confidence",
@@ -1511,7 +1440,52 @@
           ]
         },
         {
-          "id": "EX-2026-01-50",
+          "id": "EX-2026-01-39",
+          "subjectType": "bank_line",
+          "subjectRef": "BNK-2026-01-0026",
+          "cause": "over_materiality",
+          "amountCents": -3463935,
+          "confidence": 0.96,
+          "proposal": {
+            "bankExternalIds": [
+              "BNK-2026-01-0026"
+            ],
+            "ledgerExternalIds": [
+              "GL-2026-01-0040"
+            ],
+            "cardinality": "1:1",
+            "amountDeltaCents": 0,
+            "deltaReason": null,
+            "confidence": 0.96,
+            "decidedBy": "agent",
+            "reasoning": "clean tie-out"
+          },
+          "options": [
+            {
+              "label": "Accept match",
+              "value": {
+                "bankExternalIds": [
+                  "BNK-2026-01-0026"
+                ],
+                "ledgerExternalIds": [
+                  "GL-2026-01-0040"
+                ],
+                "cardinality": "1:1",
+                "amountDeltaCents": 0,
+                "deltaReason": null,
+                "confidence": 0.96,
+                "decidedBy": "agent",
+                "reasoning": "clean tie-out"
+              }
+            },
+            {
+              "label": "Reject",
+              "value": null
+            }
+          ]
+        },
+        {
+          "id": "EX-2026-01-40",
           "subjectType": "bank_line",
           "subjectRef": "BNK-2026-01-0030",
           "cause": "over_materiality",
@@ -1556,7 +1530,7 @@
           ]
         },
         {
-          "id": "EX-2026-01-51",
+          "id": "EX-2026-01-41",
           "subjectType": "bank_line",
           "subjectRef": "BNK-2026-01-0032",
           "cause": "over_materiality",
@@ -1609,15 +1583,15 @@
         "tokensIn": 6300,
         "tokensOut": 1820,
         "costMicros": 77000,
-        "durationMs": 25,
+        "durationMs": 22,
         "codingAccuracy": 1,
-        "matchAccuracy": 0.66,
-        "autoClearRate": 0.5161290322580645,
+        "matchAccuracy": 0.96,
+        "autoClearRate": 0.5454545454545454,
         "autoClearPrecision": 1,
-        "exceptionsOpened": 51
+        "exceptionsOpened": 41
       },
-      "corrections": 51,
-      "touchSeconds": 2295,
+      "corrections": 41,
+      "touchSeconds": 1845,
       "gradientCostMicros": 11000,
       "proposals": [
         {
@@ -1674,28 +1648,11 @@
       "period": "2026-02",
       "rulebookVersionIn": 0,
       "rulebookVersionOut": 1,
-      "activeRules": 3,
-      "modelDecisions": 67,
+      "activeRules": 4,
+      "modelDecisions": 83,
       "exceptions": [
         {
           "id": "EX-2026-02-1",
-          "subjectType": "bank_line",
-          "subjectRef": "BNK-2026-02-0004",
-          "cause": "no_candidate",
-          "amountCents": -129921,
-          "confidence": null,
-          "proposal": {
-            "description": "FIGMA INC HTTPSFIGMA.C"
-          },
-          "options": [
-            {
-              "label": "Timing difference - carry forward",
-              "value": "timing"
-            }
-          ]
-        },
-        {
-          "id": "EX-2026-02-2",
           "subjectType": "bank_line",
           "subjectRef": "BNK-2026-02-0025",
           "cause": "no_candidate",
@@ -1712,58 +1669,7 @@
           ]
         },
         {
-          "id": "EX-2026-02-3",
-          "subjectType": "bank_line",
-          "subjectRef": "BNK-2026-02-0031",
-          "cause": "no_candidate",
-          "amountCents": -2093987,
-          "confidence": null,
-          "proposal": {
-            "description": "COOLEY LLP"
-          },
-          "options": [
-            {
-              "label": "Timing difference - carry forward",
-              "value": "timing"
-            }
-          ]
-        },
-        {
-          "id": "EX-2026-02-4",
-          "subjectType": "bank_line",
-          "subjectRef": "BNK-2026-02-0040",
-          "cause": "no_candidate",
-          "amountCents": -49000,
-          "confidence": null,
-          "proposal": {
-            "description": "IRON MTN"
-          },
-          "options": [
-            {
-              "label": "Timing difference - carry forward",
-              "value": "timing"
-            }
-          ]
-        },
-        {
-          "id": "EX-2026-02-5",
-          "subjectType": "bank_line",
-          "subjectRef": "BNK-2026-02-0014",
-          "cause": "no_candidate",
-          "amountCents": -1763615,
-          "confidence": null,
-          "proposal": {
-            "description": "MOUSER ELECTRONICS 800-346"
-          },
-          "options": [
-            {
-              "label": "Timing difference - carry forward",
-              "value": "timing"
-            }
-          ]
-        },
-        {
-          "id": "EX-2026-02-6",
+          "id": "EX-2026-02-2",
           "subjectType": "bank_line",
           "subjectRef": "BNK-2026-02-0027",
           "cause": "no_candidate",
@@ -1780,7 +1686,7 @@
           ]
         },
         {
-          "id": "EX-2026-02-7",
+          "id": "EX-2026-02-3",
           "subjectType": "bank_line",
           "subjectRef": "BNK-2026-02-0056",
           "cause": "no_candidate",
@@ -1797,211 +1703,7 @@
           ]
         },
         {
-          "id": "EX-2026-02-8",
-          "subjectType": "bank_line",
-          "subjectRef": "BNK-2026-02-0002",
-          "cause": "no_candidate",
-          "amountCents": -1236205,
-          "confidence": null,
-          "proposal": {
-            "description": "DATADOG, INC."
-          },
-          "options": [
-            {
-              "label": "Timing difference - carry forward",
-              "value": "timing"
-            }
-          ]
-        },
-        {
-          "id": "EX-2026-02-9",
-          "subjectType": "bank_line",
-          "subjectRef": "BNK-2026-02-0005",
-          "cause": "no_candidate",
-          "amountCents": -97928,
-          "confidence": null,
-          "proposal": {
-            "description": "LINEAR.APP"
-          },
-          "options": [
-            {
-              "label": "Timing difference - carry forward",
-              "value": "timing"
-            }
-          ]
-        },
-        {
-          "id": "EX-2026-02-10",
-          "subjectType": "bank_line",
-          "subjectRef": "BNK-2026-02-0015",
-          "cause": "no_candidate",
-          "amountCents": -1554109,
-          "confidence": null,
-          "proposal": {
-            "description": "MOUSER ELECTRONICS 800-346"
-          },
-          "options": [
-            {
-              "label": "Timing difference - carry forward",
-              "value": "timing"
-            }
-          ]
-        },
-        {
-          "id": "EX-2026-02-11",
-          "subjectType": "bank_line",
-          "subjectRef": "BNK-2026-02-0019",
-          "cause": "no_candidate",
-          "amountCents": -1041357,
-          "confidence": null,
-          "proposal": {
-            "description": "DIGIKEY ELECTRONICS"
-          },
-          "options": [
-            {
-              "label": "Timing difference - carry forward",
-              "value": "timing"
-            }
-          ]
-        },
-        {
-          "id": "EX-2026-02-12",
-          "subjectType": "bank_line",
-          "subjectRef": "BNK-2026-02-0020",
-          "cause": "no_candidate",
-          "amountCents": -641181,
-          "confidence": null,
-          "proposal": {
-            "description": "DIGI-KEY CORP THIEF RIVER"
-          },
-          "options": [
-            {
-              "label": "Timing difference - carry forward",
-              "value": "timing"
-            }
-          ]
-        },
-        {
-          "id": "EX-2026-02-13",
-          "subjectType": "bank_line",
-          "subjectRef": "BNK-2026-02-0022",
-          "cause": "no_candidate",
-          "amountCents": -865082,
-          "confidence": null,
-          "proposal": {
-            "description": "DIGI-KEY CORP THIEF RIVER"
-          },
-          "options": [
-            {
-              "label": "Timing difference - carry forward",
-              "value": "timing"
-            }
-          ]
-        },
-        {
-          "id": "EX-2026-02-14",
-          "subjectType": "bank_line",
-          "subjectRef": "BNK-2026-02-0023",
-          "cause": "no_candidate",
-          "amountCents": -1326497,
-          "confidence": null,
-          "proposal": {
-            "description": "DIGI-KEY CORP THIEF RIVER"
-          },
-          "options": [
-            {
-              "label": "Timing difference - carry forward",
-              "value": "timing"
-            }
-          ]
-        },
-        {
-          "id": "EX-2026-02-15",
-          "subjectType": "bank_line",
-          "subjectRef": "BNK-2026-02-0024",
-          "cause": "no_candidate",
-          "amountCents": -4653296,
-          "confidence": null,
-          "proposal": {
-            "description": "FLEXPORT INC SAN FRANCIS"
-          },
-          "options": [
-            {
-              "label": "Timing difference - carry forward",
-              "value": "timing"
-            }
-          ]
-        },
-        {
-          "id": "EX-2026-02-16",
-          "subjectType": "bank_line",
-          "subjectRef": "BNK-2026-02-0030",
-          "cause": "no_candidate",
-          "amountCents": -1951489,
-          "confidence": null,
-          "proposal": {
-            "description": "COOLEY LLP"
-          },
-          "options": [
-            {
-              "label": "Timing difference - carry forward",
-              "value": "timing"
-            }
-          ]
-        },
-        {
-          "id": "EX-2026-02-17",
-          "subjectType": "bank_line",
-          "subjectRef": "BNK-2026-02-0032",
-          "cause": "no_candidate",
-          "amountCents": -2267196,
-          "confidence": null,
-          "proposal": {
-            "description": "COOLEY LLP"
-          },
-          "options": [
-            {
-              "label": "Timing difference - carry forward",
-              "value": "timing"
-            }
-          ]
-        },
-        {
-          "id": "EX-2026-02-18",
-          "subjectType": "bank_line",
-          "subjectRef": "BNK-2026-02-0033",
-          "cause": "no_candidate",
-          "amountCents": -4551358,
-          "confidence": null,
-          "proposal": {
-            "description": "DELOITTE LLP AP"
-          },
-          "options": [
-            {
-              "label": "Timing difference - carry forward",
-              "value": "timing"
-            }
-          ]
-        },
-        {
-          "id": "EX-2026-02-19",
-          "subjectType": "bank_line",
-          "subjectRef": "BNK-2026-02-0039",
-          "cause": "no_candidate",
-          "amountCents": -1970857,
-          "confidence": null,
-          "proposal": {
-            "description": "GOOGLE ADS4829174 CC@GOOGL"
-          },
-          "options": [
-            {
-              "label": "Timing difference - carry forward",
-              "value": "timing"
-            }
-          ]
-        },
-        {
-          "id": "EX-2026-02-20",
+          "id": "EX-2026-02-4",
           "subjectType": "bank_line",
           "subjectRef": "BNK-2026-02-0057",
           "cause": "no_candidate",
@@ -2018,7 +1720,7 @@
           ]
         },
         {
-          "id": "EX-2026-02-21",
+          "id": "EX-2026-02-5",
           "subjectType": "bank_line",
           "subjectRef": "BNK-2026-02-0026",
           "cause": "no_candidate",
@@ -2035,7 +1737,7 @@
           ]
         },
         {
-          "id": "EX-2026-02-22",
+          "id": "EX-2026-02-6",
           "subjectType": "bank_line",
           "subjectRef": "BNK-2026-02-0028",
           "cause": "no_candidate",
@@ -2052,7 +1754,7 @@
           ]
         },
         {
-          "id": "EX-2026-02-23",
+          "id": "EX-2026-02-7",
           "subjectType": "ap_invoice",
           "subjectRef": "AMA-202602-3782",
           "cause": "over_materiality",
@@ -2093,7 +1795,7 @@
           ]
         },
         {
-          "id": "EX-2026-02-24",
+          "id": "EX-2026-02-8",
           "subjectType": "ap_invoice",
           "subjectRef": "DAT-202602-1226",
           "cause": "low_confidence",
@@ -2132,7 +1834,7 @@
           ]
         },
         {
-          "id": "EX-2026-02-25",
+          "id": "EX-2026-02-9",
           "subjectType": "ap_invoice",
           "subjectRef": "VER-202602-8460",
           "cause": "low_confidence",
@@ -2171,7 +1873,7 @@
           ]
         },
         {
-          "id": "EX-2026-02-26",
+          "id": "EX-2026-02-10",
           "subjectType": "ap_invoice",
           "subjectRef": "FIG-202602-4584",
           "cause": "low_confidence",
@@ -2210,7 +1912,7 @@
           ]
         },
         {
-          "id": "EX-2026-02-27",
+          "id": "EX-2026-02-11",
           "subjectType": "ap_invoice",
           "subjectRef": "LIN-202602-5174",
           "cause": "low_confidence",
@@ -2251,7 +1953,7 @@
           ]
         },
         {
-          "id": "EX-2026-02-28",
+          "id": "EX-2026-02-12",
           "subjectType": "ap_invoice",
           "subjectRef": "SLA-202602-8581",
           "cause": "low_confidence",
@@ -2294,7 +1996,7 @@
           ]
         },
         {
-          "id": "EX-2026-02-29",
+          "id": "EX-2026-02-13",
           "subjectType": "ap_invoice",
           "subjectRef": "GIT-202602-2924",
           "cause": "low_confidence",
@@ -2333,7 +2035,7 @@
           ]
         },
         {
-          "id": "EX-2026-02-30",
+          "id": "EX-2026-02-14",
           "subjectType": "ap_invoice",
           "subjectRef": "WEW-202602-5306",
           "cause": "over_materiality",
@@ -2370,7 +2072,7 @@
           ]
         },
         {
-          "id": "EX-2026-02-31",
+          "id": "EX-2026-02-15",
           "subjectType": "ap_invoice",
           "subjectRef": "DEE-202602-6664",
           "cause": "low_confidence",
@@ -2409,7 +2111,7 @@
           ]
         },
         {
-          "id": "EX-2026-02-32",
+          "id": "EX-2026-02-16",
           "subjectType": "ap_invoice",
           "subjectRef": "MOU-202602-7557",
           "cause": "over_materiality",
@@ -2446,7 +2148,7 @@
           ]
         },
         {
-          "id": "EX-2026-02-33",
+          "id": "EX-2026-02-17",
           "subjectType": "ap_invoice",
           "subjectRef": "MOU-202602-7907",
           "cause": "over_materiality",
@@ -2483,7 +2185,7 @@
           ]
         },
         {
-          "id": "EX-2026-02-34",
+          "id": "EX-2026-02-18",
           "subjectType": "ap_invoice",
           "subjectRef": "FLE-202602-3258",
           "cause": "over_materiality",
@@ -2520,7 +2222,7 @@
           ]
         },
         {
-          "id": "EX-2026-02-35",
+          "id": "EX-2026-02-19",
           "subjectType": "ap_invoice",
           "subjectRef": "FLE-202602-5421",
           "cause": "over_materiality",
@@ -2557,7 +2259,7 @@
           ]
         },
         {
-          "id": "EX-2026-02-36",
+          "id": "EX-2026-02-20",
           "subjectType": "ap_invoice",
           "subjectRef": "FLE-202602-5155",
           "cause": "over_materiality",
@@ -2594,7 +2296,7 @@
           ]
         },
         {
-          "id": "EX-2026-02-37",
+          "id": "EX-2026-02-21",
           "subjectType": "ap_invoice",
           "subjectRef": "DEL-202602-5205",
           "cause": "over_materiality",
@@ -2631,7 +2333,7 @@
           ]
         },
         {
-          "id": "EX-2026-02-38",
+          "id": "EX-2026-02-22",
           "subjectType": "ap_invoice",
           "subjectRef": "SAL-202602-4136",
           "cause": "over_materiality",
@@ -2668,7 +2370,7 @@
           ]
         },
         {
-          "id": "EX-2026-02-39",
+          "id": "EX-2026-02-23",
           "subjectType": "ap_invoice",
           "subjectRef": "UNI-202602-8251",
           "cause": "low_confidence",
@@ -2707,7 +2409,7 @@
           ]
         },
         {
-          "id": "EX-2026-02-40",
+          "id": "EX-2026-02-24",
           "subjectType": "ap_invoice",
           "subjectRef": "UNI-202602-4915",
           "cause": "low_confidence",
@@ -2746,7 +2448,7 @@
           ]
         },
         {
-          "id": "EX-2026-02-41",
+          "id": "EX-2026-02-25",
           "subjectType": "bank_line",
           "subjectRef": "BNK-2026-02-0009",
           "cause": "over_materiality",
@@ -2793,7 +2495,7 @@
           ]
         },
         {
-          "id": "EX-2026-02-42",
+          "id": "EX-2026-02-26",
           "subjectType": "bank_line",
           "subjectRef": "BNK-2026-02-0008",
           "cause": "over_materiality",
@@ -2838,7 +2540,7 @@
           ]
         },
         {
-          "id": "EX-2026-02-43",
+          "id": "EX-2026-02-27",
           "subjectType": "bank_line",
           "subjectRef": "BNK-2026-02-0010",
           "cause": "over_materiality",
@@ -2885,7 +2587,7 @@
           ]
         },
         {
-          "id": "EX-2026-02-44",
+          "id": "EX-2026-02-28",
           "subjectType": "bank_line",
           "subjectRef": "BNK-2026-02-0011",
           "cause": "over_materiality",
@@ -2932,7 +2634,7 @@
           ]
         },
         {
-          "id": "EX-2026-02-45",
+          "id": "EX-2026-02-29",
           "subjectType": "bank_line",
           "subjectRef": "BNK-2026-02-0013",
           "cause": "low_confidence",
@@ -2979,7 +2681,7 @@
           ]
         },
         {
-          "id": "EX-2026-02-46",
+          "id": "EX-2026-02-30",
           "subjectType": "bank_line",
           "subjectRef": "BNK-2026-02-0035",
           "cause": "over_materiality",
@@ -3026,7 +2728,7 @@
           ]
         },
         {
-          "id": "EX-2026-02-47",
+          "id": "EX-2026-02-31",
           "subjectType": "bank_line",
           "subjectRef": "BNK-2026-02-0001",
           "cause": "over_materiality",
@@ -3075,7 +2777,7 @@
           ]
         },
         {
-          "id": "EX-2026-02-48",
+          "id": "EX-2026-02-32",
           "subjectType": "bank_line",
           "subjectRef": "BNK-2026-02-0012",
           "cause": "over_materiality",
@@ -3122,7 +2824,7 @@
           ]
         },
         {
-          "id": "EX-2026-02-49",
+          "id": "EX-2026-02-33",
           "subjectType": "bank_line",
           "subjectRef": "BNK-2026-02-0016",
           "cause": "over_materiality",
@@ -3167,7 +2869,7 @@
           ]
         },
         {
-          "id": "EX-2026-02-50",
+          "id": "EX-2026-02-34",
           "subjectType": "bank_line",
           "subjectRef": "BNK-2026-02-0017",
           "cause": "over_materiality",
@@ -3212,7 +2914,97 @@
           ]
         },
         {
-          "id": "EX-2026-02-51",
+          "id": "EX-2026-02-35",
+          "subjectType": "bank_line",
+          "subjectRef": "BNK-2026-02-0024",
+          "cause": "over_materiality",
+          "amountCents": -4653296,
+          "confidence": 0.96,
+          "proposal": {
+            "bankExternalIds": [
+              "BNK-2026-02-0024"
+            ],
+            "ledgerExternalIds": [
+              "GL-2026-02-0040"
+            ],
+            "cardinality": "1:1",
+            "amountDeltaCents": 0,
+            "deltaReason": null,
+            "confidence": 0.96,
+            "decidedBy": "agent",
+            "reasoning": "clean tie-out"
+          },
+          "options": [
+            {
+              "label": "Accept match",
+              "value": {
+                "bankExternalIds": [
+                  "BNK-2026-02-0024"
+                ],
+                "ledgerExternalIds": [
+                  "GL-2026-02-0040"
+                ],
+                "cardinality": "1:1",
+                "amountDeltaCents": 0,
+                "deltaReason": null,
+                "confidence": 0.96,
+                "decidedBy": "agent",
+                "reasoning": "clean tie-out"
+              }
+            },
+            {
+              "label": "Reject",
+              "value": null
+            }
+          ]
+        },
+        {
+          "id": "EX-2026-02-36",
+          "subjectType": "bank_line",
+          "subjectRef": "BNK-2026-02-0033",
+          "cause": "over_materiality",
+          "amountCents": -4551358,
+          "confidence": 0.96,
+          "proposal": {
+            "bankExternalIds": [
+              "BNK-2026-02-0033"
+            ],
+            "ledgerExternalIds": [
+              "GL-2026-02-0047"
+            ],
+            "cardinality": "1:1",
+            "amountDeltaCents": 0,
+            "deltaReason": null,
+            "confidence": 0.96,
+            "decidedBy": "agent",
+            "reasoning": "clean tie-out"
+          },
+          "options": [
+            {
+              "label": "Accept match",
+              "value": {
+                "bankExternalIds": [
+                  "BNK-2026-02-0033"
+                ],
+                "ledgerExternalIds": [
+                  "GL-2026-02-0047"
+                ],
+                "cardinality": "1:1",
+                "amountDeltaCents": 0,
+                "deltaReason": null,
+                "confidence": 0.96,
+                "decidedBy": "agent",
+                "reasoning": "clean tie-out"
+              }
+            },
+            {
+              "label": "Reject",
+              "value": null
+            }
+          ]
+        },
+        {
+          "id": "EX-2026-02-37",
           "subjectType": "bank_line",
           "subjectRef": "BNK-2026-02-0034",
           "cause": "over_materiality",
@@ -3257,7 +3049,7 @@
           ]
         },
         {
-          "id": "EX-2026-02-52",
+          "id": "EX-2026-02-38",
           "subjectType": "bank_line",
           "subjectRef": "BNK-2026-02-0036",
           "cause": "over_materiality",
@@ -3312,13 +3104,13 @@
         "costMicros": 77000,
         "durationMs": 5,
         "codingAccuracy": 1,
-        "matchAccuracy": 0.660377358490566,
-        "autoClearRate": 0.5522388059701493,
+        "matchAccuracy": 0.9622641509433962,
+        "autoClearRate": 0.6144578313253012,
         "autoClearPrecision": 1,
-        "exceptionsOpened": 52
+        "exceptionsOpened": 38
       },
-      "corrections": 52,
-      "touchSeconds": 2340,
+      "corrections": 38,
+      "touchSeconds": 1710,
       "gradientCostMicros": 11000,
       "proposals": [
         {
@@ -3340,9 +3132,9 @@
         {
           "name": "Flexport settles installments",
           "kind": "matching",
-          "adopted": false,
-          "precision": 0,
-          "fired": 1,
+          "adopted": true,
+          "precision": 1,
+          "fired": 3,
           "evidence": 4
         },
         {
@@ -3375,113 +3167,11 @@
       "period": "2026-03",
       "rulebookVersionIn": 1,
       "rulebookVersionOut": 2,
-      "activeRules": 4,
-      "modelDecisions": 53,
+      "activeRules": 6,
+      "modelDecisions": 63,
       "exceptions": [
         {
           "id": "EX-2026-03-1",
-          "subjectType": "bank_line",
-          "subjectRef": "BNK-2026-03-0002",
-          "cause": "no_candidate",
-          "amountCents": -1332987,
-          "confidence": null,
-          "proposal": {
-            "description": "DATADOG INC 866-329-4466"
-          },
-          "options": [
-            {
-              "label": "Timing difference - carry forward",
-              "value": "timing"
-            }
-          ]
-        },
-        {
-          "id": "EX-2026-03-2",
-          "subjectType": "bank_line",
-          "subjectRef": "BNK-2026-03-0015",
-          "cause": "no_candidate",
-          "amountCents": -1506856,
-          "confidence": null,
-          "proposal": {
-            "description": "MOUSER ELECTRONICS 800-346"
-          },
-          "options": [
-            {
-              "label": "Timing difference - carry forward",
-              "value": "timing"
-            }
-          ]
-        },
-        {
-          "id": "EX-2026-03-3",
-          "subjectType": "bank_line",
-          "subjectRef": "BNK-2026-03-0016",
-          "cause": "no_candidate",
-          "amountCents": -2561886,
-          "confidence": null,
-          "proposal": {
-            "description": "MOUSER ELECTRONICS 800-346"
-          },
-          "options": [
-            {
-              "label": "Timing difference - carry forward",
-              "value": "timing"
-            }
-          ]
-        },
-        {
-          "id": "EX-2026-03-4",
-          "subjectType": "bank_line",
-          "subjectRef": "BNK-2026-03-0028",
-          "cause": "no_candidate",
-          "amountCents": -3288170,
-          "confidence": null,
-          "proposal": {
-            "description": "FLEXPORT INC SAN FRANCIS TRANCHE 1/2"
-          },
-          "options": [
-            {
-              "label": "Timing difference - carry forward",
-              "value": "timing"
-            }
-          ]
-        },
-        {
-          "id": "EX-2026-03-5",
-          "subjectType": "bank_line",
-          "subjectRef": "BNK-2026-03-0019",
-          "cause": "no_candidate",
-          "amountCents": -543258,
-          "confidence": null,
-          "proposal": {
-            "description": "DIGIKEY ELECTRONICS"
-          },
-          "options": [
-            {
-              "label": "Timing difference - carry forward",
-              "value": "timing"
-            }
-          ]
-        },
-        {
-          "id": "EX-2026-03-6",
-          "subjectType": "bank_line",
-          "subjectRef": "BNK-2026-03-0038",
-          "cause": "no_candidate",
-          "amountCents": -1570409,
-          "confidence": null,
-          "proposal": {
-            "description": "GOOGLE *ADS"
-          },
-          "options": [
-            {
-              "label": "Timing difference - carry forward",
-              "value": "timing"
-            }
-          ]
-        },
-        {
-          "id": "EX-2026-03-7",
           "subjectType": "bank_line",
           "subjectRef": "BNK-2026-03-0058",
           "cause": "no_candidate",
@@ -3498,75 +3188,7 @@
           ]
         },
         {
-          "id": "EX-2026-03-8",
-          "subjectType": "bank_line",
-          "subjectRef": "BNK-2026-03-0001",
-          "cause": "no_candidate",
-          "amountCents": -5483736,
-          "confidence": null,
-          "proposal": {
-            "description": "AMZN WEB SVCS"
-          },
-          "options": [
-            {
-              "label": "Timing difference - carry forward",
-              "value": "timing"
-            }
-          ]
-        },
-        {
-          "id": "EX-2026-03-9",
-          "subjectType": "bank_line",
-          "subjectRef": "BNK-2026-03-0003",
-          "cause": "no_candidate",
-          "amountCents": -371343,
-          "confidence": null,
-          "proposal": {
-            "description": "VERCEL INC"
-          },
-          "options": [
-            {
-              "label": "Timing difference - carry forward",
-              "value": "timing"
-            }
-          ]
-        },
-        {
-          "id": "EX-2026-03-10",
-          "subjectType": "bank_line",
-          "subjectRef": "BNK-2026-03-0017",
-          "cause": "no_candidate",
-          "amountCents": -2405111,
-          "confidence": null,
-          "proposal": {
-            "description": "MOUSER ELECTRONICS 800-346"
-          },
-          "options": [
-            {
-              "label": "Timing difference - carry forward",
-              "value": "timing"
-            }
-          ]
-        },
-        {
-          "id": "EX-2026-03-11",
-          "subjectType": "bank_line",
-          "subjectRef": "BNK-2026-03-0018",
-          "cause": "no_candidate",
-          "amountCents": -1413233,
-          "confidence": null,
-          "proposal": {
-            "description": "MOUSER ELECTRONICS 800-346"
-          },
-          "options": [
-            {
-              "label": "Timing difference - carry forward",
-              "value": "timing"
-            }
-          ]
-        },
-        {
-          "id": "EX-2026-03-12",
+          "id": "EX-2026-03-2",
           "subjectType": "bank_line",
           "subjectRef": "BNK-2026-03-0021",
           "cause": "no_candidate",
@@ -3583,41 +3205,7 @@
           ]
         },
         {
-          "id": "EX-2026-03-13",
-          "subjectType": "bank_line",
-          "subjectRef": "BNK-2026-03-0023",
-          "cause": "no_candidate",
-          "amountCents": -4976563,
-          "confidence": null,
-          "proposal": {
-            "description": "FLEXPORT INC SAN FRANCIS TRANCHE 1/2"
-          },
-          "options": [
-            {
-              "label": "Timing difference - carry forward",
-              "value": "timing"
-            }
-          ]
-        },
-        {
-          "id": "EX-2026-03-14",
-          "subjectType": "bank_line",
-          "subjectRef": "BNK-2026-03-0025",
-          "cause": "no_candidate",
-          "amountCents": -4674729,
-          "confidence": null,
-          "proposal": {
-            "description": "FLEXPORT, INC."
-          },
-          "options": [
-            {
-              "label": "Timing difference - carry forward",
-              "value": "timing"
-            }
-          ]
-        },
-        {
-          "id": "EX-2026-03-15",
+          "id": "EX-2026-03-3",
           "subjectType": "bank_line",
           "subjectRef": "BNK-2026-03-0026",
           "cause": "no_candidate",
@@ -3634,24 +3222,7 @@
           ]
         },
         {
-          "id": "EX-2026-03-16",
-          "subjectType": "bank_line",
-          "subjectRef": "BNK-2026-03-0031",
-          "cause": "no_candidate",
-          "amountCents": -3261857,
-          "confidence": null,
-          "proposal": {
-            "description": "COOLEY LLP OPERATING"
-          },
-          "options": [
-            {
-              "label": "Timing difference - carry forward",
-              "value": "timing"
-            }
-          ]
-        },
-        {
-          "id": "EX-2026-03-17",
+          "id": "EX-2026-03-4",
           "subjectType": "bank_line",
           "subjectRef": "BNK-2026-03-0059",
           "cause": "no_candidate",
@@ -3668,24 +3239,7 @@
           ]
         },
         {
-          "id": "EX-2026-03-18",
-          "subjectType": "bank_line",
-          "subjectRef": "BNK-2026-03-0029",
-          "cause": "no_candidate",
-          "amountCents": -2192113,
-          "confidence": null,
-          "proposal": {
-            "description": "FLEXPORT INC SAN FRANCIS TRANCHE 2/2"
-          },
-          "options": [
-            {
-              "label": "Timing difference - carry forward",
-              "value": "timing"
-            }
-          ]
-        },
-        {
-          "id": "EX-2026-03-19",
+          "id": "EX-2026-03-5",
           "subjectType": "bank_line",
           "subjectRef": "BNK-2026-03-0022",
           "cause": "no_candidate",
@@ -3702,7 +3256,7 @@
           ]
         },
         {
-          "id": "EX-2026-03-20",
+          "id": "EX-2026-03-6",
           "subjectType": "bank_line",
           "subjectRef": "BNK-2026-03-0024",
           "cause": "no_candidate",
@@ -3719,7 +3273,7 @@
           ]
         },
         {
-          "id": "EX-2026-03-21",
+          "id": "EX-2026-03-7",
           "subjectType": "bank_line",
           "subjectRef": "BNK-2026-03-0027",
           "cause": "no_candidate",
@@ -3736,7 +3290,7 @@
           ]
         },
         {
-          "id": "EX-2026-03-22",
+          "id": "EX-2026-03-8",
           "subjectType": "ap_invoice",
           "subjectRef": "AMA-202603-6378",
           "cause": "over_materiality",
@@ -3777,7 +3331,7 @@
           ]
         },
         {
-          "id": "EX-2026-03-23",
+          "id": "EX-2026-03-9",
           "subjectType": "ap_invoice",
           "subjectRef": "DAT-202603-4324",
           "cause": "low_confidence",
@@ -3816,7 +3370,7 @@
           ]
         },
         {
-          "id": "EX-2026-03-24",
+          "id": "EX-2026-03-10",
           "subjectType": "ap_invoice",
           "subjectRef": "VER-202603-2987",
           "cause": "low_confidence",
@@ -3855,7 +3409,7 @@
           ]
         },
         {
-          "id": "EX-2026-03-25",
+          "id": "EX-2026-03-11",
           "subjectType": "ap_invoice",
           "subjectRef": "FIG-202603-7018",
           "cause": "low_confidence",
@@ -3894,7 +3448,7 @@
           ]
         },
         {
-          "id": "EX-2026-03-26",
+          "id": "EX-2026-03-12",
           "subjectType": "ap_invoice",
           "subjectRef": "LIN-202603-2269",
           "cause": "low_confidence",
@@ -3935,7 +3489,7 @@
           ]
         },
         {
-          "id": "EX-2026-03-27",
+          "id": "EX-2026-03-13",
           "subjectType": "ap_invoice",
           "subjectRef": "SLA-202603-1677",
           "cause": "low_confidence",
@@ -3978,7 +3532,7 @@
           ]
         },
         {
-          "id": "EX-2026-03-28",
+          "id": "EX-2026-03-14",
           "subjectType": "ap_invoice",
           "subjectRef": "GIT-202603-8799",
           "cause": "low_confidence",
@@ -4017,7 +3571,7 @@
           ]
         },
         {
-          "id": "EX-2026-03-29",
+          "id": "EX-2026-03-15",
           "subjectType": "ap_invoice",
           "subjectRef": "WEW-202603-2593",
           "cause": "over_materiality",
@@ -4054,7 +3608,7 @@
           ]
         },
         {
-          "id": "EX-2026-03-30",
+          "id": "EX-2026-03-16",
           "subjectType": "ap_invoice",
           "subjectRef": "DEE-202603-3077",
           "cause": "low_confidence",
@@ -4093,7 +3647,7 @@
           ]
         },
         {
-          "id": "EX-2026-03-31",
+          "id": "EX-2026-03-17",
           "subjectType": "ap_invoice",
           "subjectRef": "COO-202603-8524",
           "cause": "over_materiality",
@@ -4130,7 +3684,7 @@
           ]
         },
         {
-          "id": "EX-2026-03-32",
+          "id": "EX-2026-03-18",
           "subjectType": "ap_invoice",
           "subjectRef": "COO-202603-1084",
           "cause": "over_materiality",
@@ -4167,7 +3721,7 @@
           ]
         },
         {
-          "id": "EX-2026-03-33",
+          "id": "EX-2026-03-19",
           "subjectType": "bank_line",
           "subjectRef": "BNK-2026-03-0009",
           "cause": "over_materiality",
@@ -4214,7 +3768,7 @@
           ]
         },
         {
-          "id": "EX-2026-03-34",
+          "id": "EX-2026-03-20",
           "subjectType": "bank_line",
           "subjectRef": "BNK-2026-03-0008",
           "cause": "over_materiality",
@@ -4259,7 +3813,7 @@
           ]
         },
         {
-          "id": "EX-2026-03-35",
+          "id": "EX-2026-03-21",
           "subjectType": "bank_line",
           "subjectRef": "BNK-2026-03-0010",
           "cause": "over_materiality",
@@ -4306,7 +3860,7 @@
           ]
         },
         {
-          "id": "EX-2026-03-36",
+          "id": "EX-2026-03-22",
           "subjectType": "bank_line",
           "subjectRef": "BNK-2026-03-0011",
           "cause": "over_materiality",
@@ -4353,7 +3907,7 @@
           ]
         },
         {
-          "id": "EX-2026-03-37",
+          "id": "EX-2026-03-23",
           "subjectType": "bank_line",
           "subjectRef": "BNK-2026-03-0032",
           "cause": "over_materiality",
@@ -4400,7 +3954,101 @@
           ]
         },
         {
-          "id": "EX-2026-03-38",
+          "id": "EX-2026-03-24",
+          "subjectType": "bank_line",
+          "subjectRef": "BNK-2026-03-0001",
+          "cause": "over_materiality",
+          "amountCents": -5483736,
+          "confidence": 0.96,
+          "proposal": {
+            "bankExternalIds": [
+              "BNK-2026-03-0001"
+            ],
+            "ledgerExternalIds": [
+              "GL-2026-03-0001",
+              "GL-2026-03-0002",
+              "GL-2026-03-0003"
+            ],
+            "cardinality": "1:many",
+            "amountDeltaCents": 0,
+            "deltaReason": null,
+            "confidence": 0.96,
+            "decidedBy": "agent",
+            "reasoning": "clean tie-out"
+          },
+          "options": [
+            {
+              "label": "Accept match",
+              "value": {
+                "bankExternalIds": [
+                  "BNK-2026-03-0001"
+                ],
+                "ledgerExternalIds": [
+                  "GL-2026-03-0001",
+                  "GL-2026-03-0002",
+                  "GL-2026-03-0003"
+                ],
+                "cardinality": "1:many",
+                "amountDeltaCents": 0,
+                "deltaReason": null,
+                "confidence": 0.96,
+                "decidedBy": "agent",
+                "reasoning": "clean tie-out"
+              }
+            },
+            {
+              "label": "Reject",
+              "value": null
+            }
+          ]
+        },
+        {
+          "id": "EX-2026-03-25",
+          "subjectType": "bank_line",
+          "subjectRef": "BNK-2026-03-0016",
+          "cause": "over_materiality",
+          "amountCents": -2561886,
+          "confidence": 0.96,
+          "proposal": {
+            "bankExternalIds": [
+              "BNK-2026-03-0016"
+            ],
+            "ledgerExternalIds": [
+              "GL-2026-03-0032"
+            ],
+            "cardinality": "1:1",
+            "amountDeltaCents": 0,
+            "deltaReason": null,
+            "confidence": 0.96,
+            "decidedBy": "agent",
+            "reasoning": "clean tie-out"
+          },
+          "options": [
+            {
+              "label": "Accept match",
+              "value": {
+                "bankExternalIds": [
+                  "BNK-2026-03-0016"
+                ],
+                "ledgerExternalIds": [
+                  "GL-2026-03-0032"
+                ],
+                "cardinality": "1:1",
+                "amountDeltaCents": 0,
+                "deltaReason": null,
+                "confidence": 0.96,
+                "decidedBy": "agent",
+                "reasoning": "clean tie-out"
+              }
+            },
+            {
+              "label": "Reject",
+              "value": null
+            }
+          ]
+        },
+        {
+          "id": "EX-2026-03-26",
           "subjectType": "bank_line",
           "subjectRef": "BNK-2026-03-0012",
           "cause": "over_materiality",
@@ -4447,7 +4095,7 @@
           ]
         },
         {
-          "id": "EX-2026-03-39",
+          "id": "EX-2026-03-27",
           "subjectType": "bank_line",
           "subjectRef": "BNK-2026-03-0013",
           "cause": "over_materiality",
@@ -4494,7 +4142,7 @@
           ]
         },
         {
-          "id": "EX-2026-03-40",
+          "id": "EX-2026-03-28",
           "subjectType": "bank_line",
           "subjectRef": "BNK-2026-03-0030",
           "cause": "over_materiality",
@@ -4539,7 +4187,52 @@
           ]
         },
         {
-          "id": "EX-2026-03-41",
+          "id": "EX-2026-03-29",
+          "subjectType": "bank_line",
+          "subjectRef": "BNK-2026-03-0031",
+          "cause": "over_materiality",
+          "amountCents": -3261857,
+          "confidence": 0.96,
+          "proposal": {
+            "bankExternalIds": [
+              "BNK-2026-03-0031"
+            ],
+            "ledgerExternalIds": [
+              "GL-2026-03-0043"
+            ],
+            "cardinality": "1:1",
+            "amountDeltaCents": 0,
+            "deltaReason": null,
+            "confidence": 0.96,
+            "decidedBy": "agent",
+            "reasoning": "clean tie-out"
+          },
+          "options": [
+            {
+              "label": "Accept match",
+              "value": {
+                "bankExternalIds": [
+                  "BNK-2026-03-0031"
+                ],
+                "ledgerExternalIds": [
+                  "GL-2026-03-0043"
+                ],
+                "cardinality": "1:1",
+                "amountDeltaCents": 0,
+                "deltaReason": null,
+                "confidence": 0.96,
+                "decidedBy": "agent",
+                "reasoning": "clean tie-out"
+              }
+            },
+            {
+              "label": "Reject",
+              "value": null
+            }
+          ]
+        },
+        {
+          "id": "EX-2026-03-30",
           "subjectType": "bank_line",
           "subjectRef": "BNK-2026-03-0033",
           "cause": "over_materiality",
@@ -4588,19 +4281,19 @@
       ],
       "stats": {
         "llmCalls": 6,
-        "ruleHits": 14,
+        "ruleHits": 17,
         "tokensIn": 5400,
         "tokensOut": 1560,
         "costMicros": 66000,
         "durationMs": 5,
         "codingAccuracy": 1,
-        "matchAccuracy": 0.7169811320754716,
-        "autoClearRate": 0.7014925373134329,
-        "autoClearPrecision": 1,
-        "exceptionsOpened": 41
+        "matchAccuracy": 0.9433962264150944,
+        "autoClearRate": 0.7125,
+        "autoClearPrecision": 0.9824561403508771,
+        "exceptionsOpened": 30
       },
-      "corrections": 41,
-      "touchSeconds": 1845,
+      "corrections": 30,
+      "touchSeconds": 1350,
       "gradientCostMicros": 11000,
       "proposals": [
         {
@@ -4614,9 +4307,9 @@
         {
           "name": "Flexport settles installments",
           "kind": "matching",
-          "adopted": false,
-          "precision": 0,
-          "fired": 1,
+          "adopted": true,
+          "precision": 1,
+          "fired": 6,
           "evidence": 4
         },
         {
@@ -4641,130 +4334,11 @@
       "period": "2026-04",
       "rulebookVersionIn": 2,
       "rulebookVersionOut": 2,
-      "activeRules": 4,
-      "modelDecisions": 50,
+      "activeRules": 6,
+      "modelDecisions": 66,
       "exceptions": [
         {
           "id": "EX-2026-04-1",
-          "subjectType": "bank_line",
-          "subjectRef": "BNK-2026-04-0027",
-          "cause": "no_candidate",
-          "amountCents": -4956937,
-          "confidence": null,
-          "proposal": {
-            "description": "FLEXPORT INC SAN FRANCIS"
-          },
-          "options": [
-            {
-              "label": "Timing difference - carry forward",
-              "value": "timing"
-            }
-          ]
-        },
-        {
-          "id": "EX-2026-04-2",
-          "subjectType": "bank_line",
-          "subjectRef": "BNK-2026-04-0001",
-          "cause": "no_candidate",
-          "amountCents": -5624858,
-          "confidence": null,
-          "proposal": {
-            "description": "AMAZON WEB SERVICES AWS EMEA SARL LUXEMBOURG"
-          },
-          "options": [
-            {
-              "label": "Timing difference - carry forward",
-              "value": "timing"
-            }
-          ]
-        },
-        {
-          "id": "EX-2026-04-3",
-          "subjectType": "bank_line",
-          "subjectRef": "BNK-2026-04-0014",
-          "cause": "no_candidate",
-          "amountCents": -2276454,
-          "confidence": null,
-          "proposal": {
-            "description": "MOUSER ELECTRONI"
-          },
-          "options": [
-            {
-              "label": "Timing difference - carry forward",
-              "value": "timing"
-            }
-          ]
-        },
-        {
-          "id": "EX-2026-04-4",
-          "subjectType": "bank_line",
-          "subjectRef": "BNK-2026-04-0022",
-          "cause": "no_candidate",
-          "amountCents": -603780,
-          "confidence": null,
-          "proposal": {
-            "description": "DIGI-KEY CORP THIEF RIVER"
-          },
-          "options": [
-            {
-              "label": "Timing difference - carry forward",
-              "value": "timing"
-            }
-          ]
-        },
-        {
-          "id": "EX-2026-04-5",
-          "subjectType": "bank_line",
-          "subjectRef": "BNK-2026-04-0030",
-          "cause": "no_candidate",
-          "amountCents": -2109585,
-          "confidence": null,
-          "proposal": {
-            "description": "COOLEY LLP OPERATING"
-          },
-          "options": [
-            {
-              "label": "Timing difference - carry forward",
-              "value": "timing"
-            }
-          ]
-        },
-        {
-          "id": "EX-2026-04-6",
-          "subjectType": "bank_line",
-          "subjectRef": "BNK-2026-04-0013",
-          "cause": "no_candidate",
-          "amountCents": -1625953,
-          "confidence": null,
-          "proposal": {
-            "description": "MOUSER ELECTRONI"
-          },
-          "options": [
-            {
-              "label": "Timing difference - carry forward",
-              "value": "timing"
-            }
-          ]
-        },
-        {
-          "id": "EX-2026-04-7",
-          "subjectType": "bank_line",
-          "subjectRef": "BNK-2026-04-0006",
-          "cause": "no_candidate",
-          "amountCents": -175739,
-          "confidence": null,
-          "proposal": {
-            "description": "MSFT * GITHUB"
-          },
-          "options": [
-            {
-              "label": "Timing difference - carry forward",
-              "value": "timing"
-            }
-          ]
-        },
-        {
-          "id": "EX-2026-04-8",
           "subjectType": "bank_line",
           "subjectRef": "BNK-2026-04-0057",
           "cause": "no_candidate",
@@ -4781,211 +4355,7 @@
           ]
         },
         {
-          "id": "EX-2026-04-9",
-          "subjectType": "bank_line",
-          "subjectRef": "BNK-2026-04-0012",
-          "cause": "no_candidate",
-          "amountCents": -2430053,
-          "confidence": null,
-          "proposal": {
-            "description": "DEEL INC EUR CONTRACTOR EUR22589.40"
-          },
-          "options": [
-            {
-              "label": "Timing difference - carry forward",
-              "value": "timing"
-            }
-          ]
-        },
-        {
-          "id": "EX-2026-04-10",
-          "subjectType": "bank_line",
-          "subjectRef": "BNK-2026-04-0016",
-          "cause": "no_candidate",
-          "amountCents": -2365592,
-          "confidence": null,
-          "proposal": {
-            "description": "MOUSER ELECTRONI"
-          },
-          "options": [
-            {
-              "label": "Timing difference - carry forward",
-              "value": "timing"
-            }
-          ]
-        },
-        {
-          "id": "EX-2026-04-11",
-          "subjectType": "bank_line",
-          "subjectRef": "BNK-2026-04-0017",
-          "cause": "no_candidate",
-          "amountCents": -2289659,
-          "confidence": null,
-          "proposal": {
-            "description": "MOUSER ELECTRONICS 800-346"
-          },
-          "options": [
-            {
-              "label": "Timing difference - carry forward",
-              "value": "timing"
-            }
-          ]
-        },
-        {
-          "id": "EX-2026-04-12",
-          "subjectType": "bank_line",
-          "subjectRef": "BNK-2026-04-0019",
-          "cause": "no_candidate",
-          "amountCents": -1344445,
-          "confidence": null,
-          "proposal": {
-            "description": "DIGI-KEY CORP THIEF RIVER"
-          },
-          "options": [
-            {
-              "label": "Timing difference - carry forward",
-              "value": "timing"
-            }
-          ]
-        },
-        {
-          "id": "EX-2026-04-13",
-          "subjectType": "bank_line",
-          "subjectRef": "BNK-2026-04-0020",
-          "cause": "no_candidate",
-          "amountCents": -649943,
-          "confidence": null,
-          "proposal": {
-            "description": "DIGIKEY ELECTRONICS"
-          },
-          "options": [
-            {
-              "label": "Timing difference - carry forward",
-              "value": "timing"
-            }
-          ]
-        },
-        {
-          "id": "EX-2026-04-14",
-          "subjectType": "bank_line",
-          "subjectRef": "BNK-2026-04-0021",
-          "cause": "no_candidate",
-          "amountCents": -856540,
-          "confidence": null,
-          "proposal": {
-            "description": "DIGI-KEY CORP THIEF RIVER"
-          },
-          "options": [
-            {
-              "label": "Timing difference - carry forward",
-              "value": "timing"
-            }
-          ]
-        },
-        {
-          "id": "EX-2026-04-15",
-          "subjectType": "bank_line",
-          "subjectRef": "BNK-2026-04-0023",
-          "cause": "no_candidate",
-          "amountCents": -3426452,
-          "confidence": null,
-          "proposal": {
-            "description": "FLEXPORT INC SAN FRANCIS TRANCHE 1/2"
-          },
-          "options": [
-            {
-              "label": "Timing difference - carry forward",
-              "value": "timing"
-            }
-          ]
-        },
-        {
-          "id": "EX-2026-04-16",
-          "subjectType": "bank_line",
-          "subjectRef": "BNK-2026-04-0025",
-          "cause": "no_candidate",
-          "amountCents": -3119485,
-          "confidence": null,
-          "proposal": {
-            "description": "FLEXPORT INC SAN FRANCIS TRANCHE 1/2"
-          },
-          "options": [
-            {
-              "label": "Timing difference - carry forward",
-              "value": "timing"
-            }
-          ]
-        },
-        {
-          "id": "EX-2026-04-17",
-          "subjectType": "bank_line",
-          "subjectRef": "BNK-2026-04-0029",
-          "cause": "no_candidate",
-          "amountCents": -2170614,
-          "confidence": null,
-          "proposal": {
-            "description": "COOLEY LLP"
-          },
-          "options": [
-            {
-              "label": "Timing difference - carry forward",
-              "value": "timing"
-            }
-          ]
-        },
-        {
-          "id": "EX-2026-04-18",
-          "subjectType": "bank_line",
-          "subjectRef": "BNK-2026-04-0032",
-          "cause": "no_candidate",
-          "amountCents": -1978149,
-          "confidence": null,
-          "proposal": {
-            "description": "COOLEY LLP OPERATING"
-          },
-          "options": [
-            {
-              "label": "Timing difference - carry forward",
-              "value": "timing"
-            }
-          ]
-        },
-        {
-          "id": "EX-2026-04-19",
-          "subjectType": "bank_line",
-          "subjectRef": "BNK-2026-04-0039",
-          "cause": "no_candidate",
-          "amountCents": -1979681,
-          "confidence": null,
-          "proposal": {
-            "description": "GOOGLE ADS4829174 CC@GOOGL"
-          },
-          "options": [
-            {
-              "label": "Timing difference - carry forward",
-              "value": "timing"
-            }
-          ]
-        },
-        {
-          "id": "EX-2026-04-20",
-          "subjectType": "bank_line",
-          "subjectRef": "BNK-2026-04-0040",
-          "cause": "no_candidate",
-          "amountCents": -47723,
-          "confidence": null,
-          "proposal": {
-            "description": "IRON MTN"
-          },
-          "options": [
-            {
-              "label": "Timing difference - carry forward",
-              "value": "timing"
-            }
-          ]
-        },
-        {
-          "id": "EX-2026-04-21",
+          "id": "EX-2026-04-2",
           "subjectType": "bank_line",
           "subjectRef": "BNK-2026-04-0058",
           "cause": "no_candidate",
@@ -5002,41 +4372,7 @@
           ]
         },
         {
-          "id": "EX-2026-04-22",
-          "subjectType": "bank_line",
-          "subjectRef": "BNK-2026-04-0024",
-          "cause": "no_candidate",
-          "amountCents": -2284302,
-          "confidence": null,
-          "proposal": {
-            "description": "FLEXPORT INC SAN FRANCIS TRANCHE 2/2"
-          },
-          "options": [
-            {
-              "label": "Timing difference - carry forward",
-              "value": "timing"
-            }
-          ]
-        },
-        {
-          "id": "EX-2026-04-23",
-          "subjectType": "bank_line",
-          "subjectRef": "BNK-2026-04-0026",
-          "cause": "no_candidate",
-          "amountCents": -2079657,
-          "confidence": null,
-          "proposal": {
-            "description": "FLEXPORT INC SAN FRANCIS TRANCHE 2/2"
-          },
-          "options": [
-            {
-              "label": "Timing difference - carry forward",
-              "value": "timing"
-            }
-          ]
-        },
-        {
-          "id": "EX-2026-04-24",
+          "id": "EX-2026-04-3",
           "subjectType": "accrual",
           "subjectRef": "Datadog",
           "cause": "policy_requires_human",
@@ -5063,7 +4399,7 @@
           ]
         },
         {
-          "id": "EX-2026-04-25",
+          "id": "EX-2026-04-4",
           "subjectType": "ap_invoice",
           "subjectRef": "AMA-202604-5183",
           "cause": "over_materiality",
@@ -5104,7 +4440,7 @@
           ]
         },
         {
-          "id": "EX-2026-04-26",
+          "id": "EX-2026-04-5",
           "subjectType": "ap_invoice",
           "subjectRef": "VER-202604-7415",
           "cause": "low_confidence",
@@ -5143,7 +4479,7 @@
           ]
         },
         {
-          "id": "EX-2026-04-27",
+          "id": "EX-2026-04-6",
           "subjectType": "ap_invoice",
           "subjectRef": "FIG-202604-9921",
           "cause": "low_confidence",
@@ -5182,7 +4518,7 @@
           ]
         },
         {
-          "id": "EX-2026-04-28",
+          "id": "EX-2026-04-7",
           "subjectType": "ap_invoice",
           "subjectRef": "LIN-202604-2556",
           "cause": "low_confidence",
@@ -5223,7 +4559,7 @@
           ]
         },
         {
-          "id": "EX-2026-04-29",
+          "id": "EX-2026-04-8",
           "subjectType": "ap_invoice",
           "subjectRef": "SLA-202604-9481",
           "cause": "low_confidence",
@@ -5266,7 +4602,7 @@
           ]
         },
         {
-          "id": "EX-2026-04-30",
+          "id": "EX-2026-04-9",
           "subjectType": "ap_invoice",
           "subjectRef": "GIT-202604-1450",
           "cause": "low_confidence",
@@ -5305,7 +4641,7 @@
           ]
         },
         {
-          "id": "EX-2026-04-31",
+          "id": "EX-2026-04-10",
           "subjectType": "ap_invoice",
           "subjectRef": "WEW-202604-4467",
           "cause": "over_materiality",
@@ -5342,7 +4678,7 @@
           ]
         },
         {
-          "id": "EX-2026-04-32",
+          "id": "EX-2026-04-11",
           "subjectType": "ap_invoice",
           "subjectRef": "DEE-202604-7347",
           "cause": "low_confidence",
@@ -5381,7 +4717,7 @@
           ]
         },
         {
-          "id": "EX-2026-04-33",
+          "id": "EX-2026-04-12",
           "subjectType": "bank_line",
           "subjectRef": "BNK-2026-04-0008",
           "cause": "over_materiality",
@@ -5428,7 +4764,7 @@
           ]
         },
         {
-          "id": "EX-2026-04-34",
+          "id": "EX-2026-04-13",
           "subjectType": "bank_line",
           "subjectRef": "BNK-2026-04-0009",
           "cause": "over_materiality",
@@ -5475,7 +4811,7 @@
           ]
         },
         {
-          "id": "EX-2026-04-35",
+          "id": "EX-2026-04-14",
           "subjectType": "bank_line",
           "subjectRef": "BNK-2026-04-0033",
           "cause": "over_materiality",
@@ -5522,7 +4858,7 @@
           ]
         },
         {
-          "id": "EX-2026-04-36",
+          "id": "EX-2026-04-15",
           "subjectType": "bank_line",
           "subjectRef": "BNK-2026-04-0007",
           "cause": "over_materiality",
@@ -5567,7 +4903,7 @@
           ]
         },
         {
-          "id": "EX-2026-04-37",
+          "id": "EX-2026-04-16",
           "subjectType": "bank_line",
           "subjectRef": "BNK-2026-04-0010",
           "cause": "over_materiality",
@@ -5614,7 +4950,56 @@
           ]
         },
         {
-          "id": "EX-2026-04-38",
+          "id": "EX-2026-04-17",
+          "subjectType": "bank_line",
+          "subjectRef": "BNK-2026-04-0001",
+          "cause": "over_materiality",
+          "amountCents": -5624858,
+          "confidence": 0.96,
+          "proposal": {
+            "bankExternalIds": [
+              "BNK-2026-04-0001"
+            ],
+            "ledgerExternalIds": [
+              "GL-2026-04-0001",
+              "GL-2026-04-0002",
+              "GL-2026-04-0003"
+            ],
+            "cardinality": "1:many",
+            "amountDeltaCents": 1,
+            "deltaReason": null,
+            "confidence": 0.96,
+            "decidedBy": "agent",
+            "reasoning": "clean tie-out"
+          },
+          "options": [
+            {
+              "label": "Accept match",
+              "value": {
+                "bankExternalIds": [
+                  "BNK-2026-04-0001"
+                ],
+                "ledgerExternalIds": [
+                  "GL-2026-04-0001",
+                  "GL-2026-04-0002",
+                  "GL-2026-04-0003"
+                ],
+                "cardinality": "1:many",
+                "amountDeltaCents": 1,
+                "deltaReason": null,
+                "confidence": 0.96,
+                "decidedBy": "agent",
+                "reasoning": "clean tie-out"
+              }
+            },
+            {
+              "label": "Reject",
+              "value": null
+            }
+          ]
+        },
+        {
+          "id": "EX-2026-04-18",
           "subjectType": "bank_line",
           "subjectRef": "BNK-2026-04-0011",
           "cause": "over_materiality",
@@ -5661,7 +5046,54 @@
           ]
         },
         {
-          "id": "EX-2026-04-39",
+          "id": "EX-2026-04-19",
+          "subjectType": "bank_line",
+          "subjectRef": "BNK-2026-04-0012",
+          "cause": "low_confidence",
+          "amountCents": -2430053,
+          "confidence": 0.58,
+          "proposal": {
+            "bankExternalIds": [
+              "BNK-2026-04-0012"
+            ],
+            "ledgerExternalIds": [
+              "GL-2026-04-0026",
+              "GL-2026-04-0027"
+            ],
+            "cardinality": "1:many",
+            "amountDeltaCents": 18638,
+            "deltaReason": "fx",
+            "confidence": 0.58,
+            "decidedBy": "agent",
+            "reasoning": "residual present, cause not certain"
+          },
+          "options": [
+            {
+              "label": "Accept match",
+              "value": {
+                "bankExternalIds": [
+                  "BNK-2026-04-0012"
+                ],
+                "ledgerExternalIds": [
+                  "GL-2026-04-0026",
+                  "GL-2026-04-0027"
+                ],
+                "cardinality": "1:many",
+                "amountDeltaCents": 18638,
+                "deltaReason": "fx",
+                "confidence": 0.58,
+                "decidedBy": "agent",
+                "reasoning": "residual present, cause not certain"
+              }
+            },
+            {
+              "label": "Reject",
+              "value": null
+            }
+          ]
+        },
+        {
+          "id": "EX-2026-04-20",
           "subjectType": "bank_line",
           "subjectRef": "BNK-2026-04-0031",
           "cause": "over_materiality",
@@ -5706,7 +5138,7 @@
           ]
         },
         {
-          "id": "EX-2026-04-40",
+          "id": "EX-2026-04-21",
           "subjectType": "bank_line",
           "subjectRef": "BNK-2026-04-0034",
           "cause": "over_materiality",
@@ -5755,29 +5187,21 @@
       ],
       "stats": {
         "llmCalls": 6,
-        "ruleHits": 17,
+        "ruleHits": 20,
         "tokensIn": 5400,
         "tokensOut": 1560,
         "costMicros": 66000,
-        "durationMs": 4,
+        "durationMs": 6,
         "codingAccuracy": 1,
-        "matchAccuracy": 0.6481481481481481,
-        "autoClearRate": 0.7611940298507462,
+        "matchAccuracy": 1,
+        "autoClearRate": 0.7906976744186046,
         "autoClearPrecision": 1,
-        "exceptionsOpened": 40
+        "exceptionsOpened": 21
       },
-      "corrections": 40,
-      "touchSeconds": 1800,
+      "corrections": 21,
+      "touchSeconds": 945,
       "gradientCostMicros": 11000,
       "proposals": [
-        {
-          "name": "Flexport settles installments",
-          "kind": "matching",
-          "adopted": false,
-          "precision": 0,
-          "fired": 2,
-          "evidence": 4
-        },
         {
           "name": "Stripe settles same day settlement",
           "kind": "matching",
@@ -5819,13 +5243,13 @@
       "version": 1,
       "evidence": [
         {
-          "correctionId": "COR-2026-02-032",
+          "correctionId": "COR-2026-02-016",
           "periodCode": "2026-02",
           "subjectRef": "MOU-202602-7557",
           "quote": "agent said \"5010|OPS:100\", controller set \"5010|OPS:100\" - confirmed"
         },
         {
-          "correctionId": "COR-2026-02-033",
+          "correctionId": "COR-2026-02-017",
           "periodCode": "2026-02",
           "subjectRef": "MOU-202602-7907",
           "quote": "agent said \"5010|OPS:100\", controller set \"5010|OPS:100\" - confirmed"
@@ -5842,8 +5266,8 @@
         "precision": 1
       },
       "hitCount": 0,
-      "createdAt": "2026-09-05T20:13:31.985Z",
-      "activatedAt": "2026-09-05T20:13:31.986Z"
+      "createdAt": "2026-09-05T20:14:45.180Z",
+      "activatedAt": "2026-09-05T20:14:45.181Z"
     },
     {
       "id": "RULE-008",
@@ -5866,19 +5290,19 @@
       "version": 1,
       "evidence": [
         {
-          "correctionId": "COR-2026-02-034",
+          "correctionId": "COR-2026-02-018",
           "periodCode": "2026-02",
           "subjectRef": "FLE-202602-3258",
           "quote": "agent said \"5020|OPS:100\", controller set \"5020|OPS:100\" - confirmed"
         },
         {
-          "correctionId": "COR-2026-02-035",
+          "correctionId": "COR-2026-02-019",
           "periodCode": "2026-02",
           "subjectRef": "FLE-202602-5421",
           "quote": "agent said \"5020|OPS:100\", controller set \"5020|OPS:100\" - confirmed"
         },
         {
-          "correctionId": "COR-2026-02-036",
+          "correctionId": "COR-2026-02-020",
           "periodCode": "2026-02",
           "subjectRef": "FLE-202602-5155",
           "quote": "agent said \"5020|OPS:100\", controller set \"5020|OPS:100\" - confirmed"
@@ -5895,8 +5319,67 @@
         "precision": 1
       },
       "hitCount": 0,
-      "createdAt": "2026-09-05T20:13:31.985Z",
-      "activatedAt": "2026-09-05T20:13:31.986Z"
+      "createdAt": "2026-09-05T20:14:45.180Z",
+      "activatedAt": "2026-09-05T20:14:45.181Z"
+    },
+    {
+      "id": "RULE-009",
+      "kind": "matching",
+      "name": "Flexport settles installments",
+      "predicate": [
+        {
+          "op": "desc_contains",
+          "value": "FLEXPORT INC"
+        }
+      ],
+      "action": {
+        "type": "match",
+        "vendorName": "Flexport",
+        "strategy": "installments",
+        "deltaReason": "partial",
+        "tolerancePct": 0.03
+      },
+      "status": "active",
+      "version": 1,
+      "evidence": [
+        {
+          "correctionId": "COR-2026-02-001",
+          "periodCode": "2026-02",
+          "subjectRef": "BNK-2026-02-0025",
+          "quote": "agent said \"unmatched\", controller set \"many:1 against 1 ledger line(s), residual is partial\" - difference is partial, not an error"
+        },
+        {
+          "correctionId": "COR-2026-02-002",
+          "periodCode": "2026-02",
+          "subjectRef": "BNK-2026-02-0027",
+          "quote": "agent said \"unmatched\", controller set \"many:1 against 1 ledger line(s), residual is partial\" - difference is partial, not an error"
+        },
+        {
+          "correctionId": "COR-2026-02-005",
+          "periodCode": "2026-02",
+          "subjectRef": "BNK-2026-02-0026",
+          "quote": "agent said \"unmatched\", controller set \"many:1 against 1 ledger line(s), residual is partial\" - difference is partial, not an error"
+        },
+        {
+          "correctionId": "COR-2026-02-006",
+          "periodCode": "2026-02",
+          "subjectRef": "BNK-2026-02-0028",
+          "quote": "agent said \"unmatched\", controller set \"many:1 against 1 ledger line(s), residual is partial\" - difference is partial, not an error"
+        }
+      ],
+      "backtest": {
+        "periodsReplayed": [
+          "2026-01"
+        ],
+        "wouldHaveFired": 3,
+        "wouldHaveBeenCorrect": 3,
+        "wouldHaveBeenWrong": 0,
+        "regressions": [],
+        "precision": 1
+      },
+      "hitCount": 0,
+      "createdAt": "2026-09-05T20:14:45.180Z",
+      "activatedAt": "2026-09-05T20:14:45.181Z"
     },
     {
       "id": "RULE-010",
@@ -5920,13 +5403,13 @@
       "version": 1,
       "evidence": [
         {
-          "correctionId": "COR-2026-02-039",
+          "correctionId": "COR-2026-02-023",
           "periodCode": "2026-02",
           "subjectRef": "UNI-202602-8251",
           "quote": "agent said \"6910|GTM:60/OPS:40\", controller set \"6910|GTM:60/OPS:40\" - confirmed"
         },
         {
-          "correctionId": "COR-2026-02-040",
+          "correctionId": "COR-2026-02-024",
           "periodCode": "2026-02",
           "subjectRef": "UNI-202602-4915",
           "quote": "agent said \"6910|GTM:60/OPS:40\", controller set \"6910|GTM:60/OPS:40\" - confirmed"
@@ -5943,8 +5426,8 @@
         "precision": 1
       },
       "hitCount": 0,
-      "createdAt": "2026-09-05T20:13:31.986Z",
-      "activatedAt": "2026-09-05T20:13:31.986Z"
+      "createdAt": "2026-09-05T20:14:45.181Z",
+      "activatedAt": "2026-09-05T20:14:45.181Z"
     },
     {
       "id": "RULE-013",
@@ -5967,13 +5450,13 @@
       "version": 1,
       "evidence": [
         {
-          "correctionId": "COR-2026-03-031",
+          "correctionId": "COR-2026-03-017",
           "periodCode": "2026-03",
           "subjectRef": "COO-202603-8524",
           "quote": "agent said \"6610|GA:100\", controller set \"6610|GA:100\" - confirmed"
         },
         {
-          "correctionId": "COR-2026-03-032",
+          "correctionId": "COR-2026-03-018",
           "periodCode": "2026-03",
           "subjectRef": "COO-202603-1084",
           "quote": "agent said \"6610|GA:100\", controller set \"6610|GA:100\" - confirmed"
@@ -5991,14 +5474,74 @@
         "precision": 1
       },
       "hitCount": 0,
-      "createdAt": "2026-09-05T20:13:31.994Z",
-      "activatedAt": "2026-09-05T20:13:31.995Z"
+      "createdAt": "2026-09-05T20:14:45.189Z",
+      "activatedAt": "2026-09-05T20:14:45.191Z"
+    },
+    {
+      "id": "RULE-014",
+      "kind": "matching",
+      "name": "Flexport settles installments",
+      "predicate": [
+        {
+          "op": "desc_contains",
+          "value": "FLEXPORT INC"
+        }
+      ],
+      "action": {
+        "type": "match",
+        "vendorName": "Flexport",
+        "strategy": "installments",
+        "deltaReason": "partial",
+        "tolerancePct": 0.03
+      },
+      "status": "active",
+      "version": 1,
+      "evidence": [
+        {
+          "correctionId": "COR-2026-03-002",
+          "periodCode": "2026-03",
+          "subjectRef": "BNK-2026-03-0021",
+          "quote": "agent said \"unmatched\", controller set \"many:1 against 1 ledger line(s), residual is partial\" - difference is partial, not an error"
+        },
+        {
+          "correctionId": "COR-2026-03-003",
+          "periodCode": "2026-03",
+          "subjectRef": "BNK-2026-03-0026",
+          "quote": "agent said \"unmatched\", controller set \"many:1 against 1 ledger line(s), residual is partial\" - difference is partial, not an error"
+        },
+        {
+          "correctionId": "COR-2026-03-005",
+          "periodCode": "2026-03",
+          "subjectRef": "BNK-2026-03-0022",
+          "quote": "agent said \"unmatched\", controller set \"many:1 against 1 ledger line(s), residual is partial\" - difference is partial, not an error"
+        },
+        {
+          "correctionId": "COR-2026-03-006",
+          "periodCode": "2026-03",
+          "subjectRef": "BNK-2026-03-0024",
+          "quote": "agent said \"unmatched\", controller set \"many:1 against 1 ledger line(s), residual is partial\" - difference is partial, not an error"
+        }
+      ],
+      "backtest": {
+        "periodsReplayed": [
+          "2026-01",
+          "2026-02"
+        ],
+        "wouldHaveFired": 6,
+        "wouldHaveBeenCorrect": 6,
+        "wouldHaveBeenWrong": 0,
+        "regressions": [],
+        "precision": 1
+      },
+      "hitCount": 0,
+      "createdAt": "2026-09-05T20:14:45.189Z",
+      "activatedAt": "2026-09-05T20:14:45.191Z"
     }
   ],
   "totals": {
     "costMicros": 330000,
     "llmCalls": 30,
-    "ruleHits": 31,
-    "touchSeconds": 8280
+    "ruleHits": 37,
+    "touchSeconds": 5850
   }
 }

@@ -87,6 +87,13 @@ const groupByMemo = (entries: LedgerEntry[]) => {
   return [...g.values()];
 };
 
+/**
+ * How far apart a bank line and the ledger entries explaining it may sit.
+ * Ordinary AP terms are net-30 to net-45, so a tight window silently hides the
+ * correct answer and manufactures "no match found" exceptions.
+ */
+export const MATCH_WINDOW_DAYS = 45;
+
 export interface MatchWorkspace {
   bankLines: BankLine[];
   ledger: LedgerEntry[];
@@ -110,7 +117,7 @@ export function applyMatchingRule(rule: Rule, bank: BankLine, ws: MatchWorkspace
   if (!evaluate(rule.predicate, { description: bank.description, amountCents: bank.amountCents })) return null;
 
   const { vendorName, strategy, deltaReason, tolerancePct } = rule.action;
-  const avail = ws.ledger.filter((e) => !ws.consumedLedger.has(e.externalId) && daysBetween(e.entryDate, bank.postedDate) <= 12);
+  const avail = ws.ledger.filter((e) => !ws.consumedLedger.has(e.externalId) && daysBetween(e.entryDate, bank.postedDate) <= MATCH_WINDOW_DAYS);
 
   const decide = (bankIds: string[], entries: LedgerEntry[], bankTotal: number): MatchDecision | null => {
     const led = entries.reduce((s, e) => s + e.amountCents, 0);

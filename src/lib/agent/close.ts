@@ -10,7 +10,7 @@
 import type { GeneratedPeriod } from "../seed/generate";
 import { codeInvoices, matchBankLines, zeroUsage, addUsage, type ChartContext, type Usage, type VendorHistoryRow } from "./llm";
 import { DEFAULT_MODEL, type ModelId } from "./pricing";
-import { applyAccrualRules, applyCodingRules, applyMatchingRules, consume, forcesReview, type MatchWorkspace } from "./rules";
+import { applyAccrualRules, applyCodingRules, applyMatchingRules, consume, forcesReview, MATCH_WINDOW_DAYS, type MatchWorkspace } from "./rules";
 import type {
   AccrualProposal, CloseRunResult, CodingDecision, Exception, LedgerEntry,
   MatchDecision, RunStats, Rulebook,
@@ -103,7 +103,7 @@ export async function runClose(input: CloseInput): Promise<CloseRunResult> {
   const residualBank = period.bankLines.filter((b) => !ws.consumedBank.has(b.externalId));
   for (const batch of chunk(residualBank, input.matchBatch ?? 12)) {
     const candidates: LedgerEntry[] = period.ledgerEntries.filter(
-      (e) => !ws.consumedLedger.has(e.externalId) && batch.some((b) => daysBetween(e.entryDate, b.postedDate) <= 12),
+      (e) => !ws.consumedLedger.has(e.externalId) && batch.some((b) => daysBetween(e.entryDate, b.postedDate) <= MATCH_WINDOW_DAYS),
     );
     if (candidates.length === 0) {
       for (const b of batch) {
