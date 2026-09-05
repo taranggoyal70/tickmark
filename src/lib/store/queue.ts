@@ -1,6 +1,7 @@
 import { createClient } from "@supabase/supabase-js";
 import { generateAll } from "../seed/generate";
-import { backtest } from "../agent/gradient";
+import { VENDORS } from "../seed/fixture";
+import { ADOPTION, backtest } from "../agent/gradient";
 import { splitKey } from "../agent/close";
 import type { Rule, RuleKind } from "../agent/types";
 import type { SimulationReport } from "../agent/simulate";
@@ -158,7 +159,7 @@ export const listRules = async (): Promise<(Rule & { adoptedBy?: string; selfEvi
 export type ResolveOutcome =
   | { kind: "resolved" }
   | { kind: "intent_recorded"; scope: string }
-  | { kind: "rule_proposed"; ruleId: string; ruleName: string; precision: number; fired: number };
+  | { kind: "rule_proposed"; ruleId: string; ruleName: string; precision: number; fired: number; adoptable: boolean };
 
 /**
  * Resolve one exception. If the controller asked for it to become standing
@@ -223,6 +224,7 @@ export async function resolveException(
   return {
     kind: "rule_proposed", ruleId: saved!.id as string, ruleName: rule.name,
     precision: rule.backtest?.precision ?? 0, fired: rule.backtest?.wouldHaveFired ?? 0,
+    adoptable: meetsAdoptionBar(rule.backtest),
   };
 }
 
@@ -235,16 +237,28 @@ async function proposeRuleFor(kind: RuleKind, vendor: string, correctionIds: str
     p.apInvoices.filter((i) => i.vendorName === vendor).map((i) => p.truth.coding[i.invoiceNumber]),
   ).find(Boolean);
 
+  const spec = VENDORS.find((v) => v.name === vendor);
+  // A matching rule has to encode how this vendor actually settles, or it fires
+  // on nothing and is worth less than no rule at all.
+  const strategy = spec?.quirk === "net_settlement" ? "same_day_settlement"
+    : spec?.quirk === "installments" ? "installments" : "by_invoice";
+  const deltaReason = spec?.quirk === "fx" ? "fx"
+    : spec?.quirk === "net_settlement" ? "bank_fee"
+    : spec?.quirk === "installments" ? "partial" : null;
+  const alias = spec?.bankAliases[0]?.slice(0, 12) ?? vendor;
+
   const rule: Rule = {
     id: crypto.randomUUID(),
     kind,
     name: kind === "coding" && sample
       ? `${vendor} → ${sample.glCode} (${splitKey(sample.deptSplit)})`
-      : `${vendor} — ${kind}`,
-    predicate: [{ op: kind === "coding" ? "vendor_is" : "desc_contains", value: vendor }],
+      : `${vendor} settles ${strategy.replace(/_/g, " ")}`,
+    predicate: [ kind === "coding"
+      ? { op: "vendor_is" as const, value: vendor }
+      : { op: "desc_contains" as const, value: alias } ],
     action: kind === "coding" && sample
       ? { type: "code", glCode: sample.glCode, deptSplit: sample.deptSplit }
-      : { type: "always_review", reason: `${vendor} needs a human` },
+      : { type: "match", vendorName: vendor, strategy, deltaReason, tolerancePct: 0.03 },
     status: "proposed", version: 1,
     evidence: correctionIds.map((id) => ({
       correctionId: id, periodCode: periods[periods.length - 1].code,
@@ -257,12 +271,31 @@ async function proposeRuleFor(kind: RuleKind, vendor: string, correctionIds: str
 }
 
 /** The human gate. Adoption names its approver; the trigger enforces that. */
+export const meetsAdoptionBar = (b: Rule["backtest"]) =>
+  !!b && b.wouldHaveFired >= ADOPTION.minFired && b.precision >= ADOPTION.minPrecision;
+
+/**
+ * The human gate. Adoption names its approver - the trigger enforces that - and
+ * a rule that did not survive the replay cannot be adopted at all. Having *a*
+ * backtest is not the bar; passing it is.
+ */
 export async function adoptRule(ruleId: string, actor: string, accept: boolean) {
   const c = db();
   if (!accept) {
     await c.from("rules").update({ status: "rejected" }).eq("id", ruleId);
     return;
   }
+
+  const { data: rule } = await c.from("rules").select("name, backtest").eq("id", ruleId).single();
+  const b = (rule?.backtest ?? null) as Rule["backtest"];
+  if (!meetsAdoptionBar(b)) {
+    throw new Error(
+      `"${rule?.name}" cannot be adopted: the replay fired ${b?.wouldHaveFired ?? 0}× at ` +
+      `${((b?.precision ?? 0) * 100).toFixed(0)}% precision, below the bar of ` +
+      `${ADOPTION.minFired}× at ${ADOPTION.minPrecision * 100}%.`,
+    );
+  }
+
   const { error } = await c.from("rules")
     .update({ status: "active", adopted_by: actor, activated_at: new Date().toISOString() })
     .eq("id", ruleId);

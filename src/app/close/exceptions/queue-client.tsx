@@ -55,21 +55,32 @@ function Outcome({ outcome, onAdopt, busy }: {
       </div>
     );
   }
+  const weak = !outcome.adoptable;
   return (
-    <div className="rounded-[var(--radius-md)] border border-[var(--primary)]/40 bg-[var(--primary)]/8 p-3">
-      <p className="text-[13px] text-[#a8b0f5]">Seconded — rule proposed.</p>
+    <div className={`rounded-[var(--radius-md)] border p-3 ${weak ? "border-[var(--danger)]/35 bg-[var(--danger)]/8" : "border-[var(--primary)]/40 bg-[var(--primary)]/8"}`}>
+      <p className={`text-[13px] ${weak ? "text-[#ef8686]" : "text-[#a8b0f5]"}`}>
+        {weak ? "Seconded — but the replay says no." : "Seconded — rule proposed."}
+      </p>
       <p className="mt-1 nums text-[12px] text-ink-muted">
         <span className="text-ink">{outcome.ruleName}</span>
         <span className="text-ink-tertiary"> · backtest fired {outcome.fired}× at {(outcome.precision * 100).toFixed(0)}% precision</span>
       </p>
+      {weak ? (
+        <p className="mt-1.5 text-[12px] leading-snug text-ink-muted">
+          It did not clear the bar against closed periods, so it cannot be adopted. The instruction is kept —
+          a later period may give it the evidence it needs.
+        </p>
+      ) : null}
       <div className="mt-2.5 flex gap-2">
-        <button disabled={busy} onClick={() => onAdopt(outcome.ruleId, true)}
-          className="focus-ring rounded-[var(--radius-sm)] bg-[var(--primary)] px-2.5 py-1 text-[12px] font-medium text-[var(--on-primary)] hover:bg-[var(--primary-hover)] disabled:opacity-50">
-          Adopt rule
-        </button>
+        {weak ? null : (
+          <button disabled={busy} onClick={() => onAdopt(outcome.ruleId, true)}
+            className="focus-ring rounded-[var(--radius-sm)] bg-[var(--primary)] px-2.5 py-1 text-[12px] font-medium text-[var(--on-primary)] hover:bg-[var(--primary-hover)] disabled:opacity-50">
+            Adopt rule
+          </button>
+        )}
         <button disabled={busy} onClick={() => onAdopt(outcome.ruleId, false)}
           className="focus-ring rounded-[var(--radius-sm)] border border-hairline bg-surface-2 px-2.5 py-1 text-[12px] text-ink-subtle hover:bg-surface-3 disabled:opacity-50">
-          Reject
+          {weak ? "Discard proposal" : "Reject"}
         </button>
       </div>
     </div>

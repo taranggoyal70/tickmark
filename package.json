@@ -12,7 +12,8 @@
     "selftest": "tsx --env-file-if-exists=.env.local scripts/selftest.ts",
     "check": "tsx --env-file-if-exists=.env.local scripts/probe.ts",
     "verify:db": "tsx --env-file-if-exists=.env.local scripts/verify-db.ts",
-    "publish": "tsx --env-file-if-exists=.env.local scripts/publish-run.ts"
+    "publish": "tsx --env-file-if-exists=.env.local scripts/publish-run.ts",
+    "verify:gate": "tsx --env-file-if-exists=.env.local scripts/verify-gate.ts"
   },
   "dependencies": {
     "@ai-sdk/anthropic": "^4.0.49",
