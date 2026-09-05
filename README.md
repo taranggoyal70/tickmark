@@ -68,7 +68,8 @@ empty states — which is worth roughly 40% of the input tokens on every batch.
 
 ## Guardrails
 
-These are enforced in the schema, not in a prompt:
+These are enforced in the schema, not in a prompt — and `npm run verify:db` proves it by
+deliberately violating each one and requiring the database to reject it:
 
 1. **Debits equal credits** — checked arithmetically by a database trigger, never taken from model output.
 2. **Tickmarks are append-only** — a trigger rejects every `UPDATE` and `DELETE`. You supersede a tickmark; you never edit one.
@@ -76,6 +77,15 @@ These are enforced in the schema, not in a prompt:
 4. **Preparer ≠ approver** — a constraint, not a convention.
 5. **No rule activates without a backtest** and evidence from ≥ 2 corrections — also a trigger.
 6. **Every decision traces** to a Rule (with its corrections) or a Close Run (with its evidence chain).
+
+```
+PASS  unbalanced journal entry is refused            debits 100 <> credits 0
+PASS  preparer == approver is refused                segregation of duties
+PASS  updating a tickmark is refused                 tickmarks are append-only
+PASS  deleting a tickmark is refused                 tickmarks are append-only
+PASS  activating an unbacktested rule is refused     invariant 6
+PASS  activating a rule with 1 correction is refused evidence gate
+```
 
 ## Measured, not asserted
 
@@ -125,7 +135,10 @@ agent cleared unattended, so that number is the one that matters.
 ```bash
 npm install
 cp .env.example .env.local     # then fill in the values below
-npm run simulate               # headless eval across four periods
+npm run check                  # does a model credential resolve?
+npm run selftest               # full loop against a stand-in - no credential needed
+npm run simulate               # measured eval across four periods
+npm run verify:db              # prove the invariants against the live database
 npm run dev                    # dashboard on http://localhost:3000
 ```
 
@@ -147,6 +160,12 @@ on Haiku 4.5, $0.90 on Opus 5**. That is the entire demo, not a monthly bill.
 
 **Optional** — `SUPABASE_URL` and `SUPABASE_SERVICE_ROLE_KEY`. Without them runs persist
 to `data/`. With them, apply `supabase/migrations/0001_init.sql` first.
+
+Create the Supabase project with the Data API's *"automatically expose new tables"*
+switched **off**. The migration then grants only `service_role` — held server-side by
+route handlers behind Clerk — and explicitly revokes `anon` and `authenticated`, so the
+publishable key cannot reach a ledger row. RLS is enabled on every table as defence in
+depth.
 
 ## Layout
 
