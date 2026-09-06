@@ -145,12 +145,24 @@ export async function persistRun(
   const closeRunId = run!.id as string;
 
   if (result.matches.length) {
+    // Store the actual rows a match links, not a description of them. A
+    // reconciliation has to be recomputable from the ledger, and a text field
+    // is not joinable.
+    const [{ data: bankRows }, { data: ledRows }] = await Promise.all([
+      c.from("bank_lines").select("id, external_id").eq("entity_id", entityId).eq("period_id", periodId),
+      c.from("ledger_entries").select("id, external_id").eq("entity_id", entityId).eq("period_id", periodId),
+    ]);
+    const bankId = new Map((bankRows ?? []).map((r) => [String(r.external_id), String(r.id)]));
+    const ledId = new Map((ledRows ?? []).map((r) => [String(r.external_id), String(r.id)]));
+
     const { error } = await c.from("matches").insert(result.matches.map((m) => ({
       entity_id: entityId, period_id: periodId, close_run_id: closeRunId,
-      bank_line_ids: [], ledger_entry_ids: [],
+      bank_line_ids: m.bankExternalIds.map((x) => bankId.get(x)).filter(Boolean),
+      ledger_entry_ids: m.ledgerExternalIds.map((x) => ledId.get(x)).filter(Boolean),
       cardinality: m.cardinality, amount_delta_cents: m.amountDeltaCents,
       delta_reason: m.deltaReason, confidence: m.confidence,
-      decided_by: m.decidedBy, reasoning: `${m.bankExternalIds.join("+")} ← ${m.ledgerExternalIds.join("+")}${m.reasoning ? ` · ${m.reasoning}` : ""}`,
+      decided_by: m.decidedBy,
+      reasoning: `${m.bankExternalIds.join("+")} ← ${m.ledgerExternalIds.join("+")}${m.reasoning ? ` · ${m.reasoning}` : ""}`,
     })));
     if (error) throw new Error(`matches: ${error.message}`);
   }
@@ -232,18 +244,37 @@ export async function closePeriod(entityName: string, code: string, model: Model
   return { entityId, result, persisted, rulebookVersion: rulebook.version };
 }
 
-/** Entities with ingested books, and the periods available to close. */
+/**
+ * Entities with books someone could actually close.
+ *
+ * A period on its own is not books - a verification suite leaves entities
+ * behind precisely because tickmarks refuse deletion, and those must never
+ * surface as something to reconcile. An entity counts only once transactions
+ * have been ingested against it.
+ */
 export async function listEntitiesWithPeriods(): Promise<{ name: string; periods: string[] }[]> {
   const c = db();
-  const { data: ents } = await c.from("entities").select("id, name").order("name");
+  const [{ data: ents }, { data: pers }, { data: bank }, { data: inv }] = await Promise.all([
+    c.from("entities").select("id, name").order("name"),
+    c.from("periods").select("entity_id, code").order("code"),
+    c.from("bank_lines").select("entity_id"),
+    c.from("ap_invoices").select("entity_id"),
+  ]);
   if (!ents?.length) return [];
-  const { data: pers } = await c.from("periods").select("entity_id, code").order("code");
+
+  const withBooks = new Set<string>([
+    ...(bank ?? []).map((r) => String(r.entity_id)),
+    ...(inv ?? []).map((r) => String(r.entity_id)),
+  ]);
+
   const byEntity = new Map<string, string[]>();
   for (const p of pers ?? []) {
     const k = String(p.entity_id);
     (byEntity.get(k) ?? byEntity.set(k, []).get(k)!).push(String(p.code));
   }
+
   return ents
+    .filter((e) => withBooks.has(String(e.id)))
     .map((e) => ({ name: String(e.name), periods: byEntity.get(String(e.id)) ?? [] }))
     .filter((e) => e.periods.length);
 }

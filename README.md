@@ -197,6 +197,24 @@ settles everything it has earned and the remainder goes to the controller under
 confidence. A close that stops because a dependency is down is worse than one
 that does less.
 
+### The reconciliation a controller signs
+
+`/close/reconciliation` is not a dashboard metric. It states what ties, what does
+not, and why — with every unreconciled line listed at its amount, because
+"97% reconciled" is not something anyone can sign:
+
+```
+58 statement lines · 4 explained · movement −$540,656.74 · unexplained $0.07
+
+Outstanding on the statement          In the ledger, not on the statement
+  STRIPE PAYOUT88368363  116,504.96     Product revenue — card settlements  −119,984.82
+  WEWORK COMPANIES LLC   −39,500.00     Flexport FLE-202604-3281              57,107.54
+```
+
+Residuals inside a match are reported separately and **named** — `fx`,
+`bank_fee`, `partial` — because a difference that has been explained is not the
+same as one that has not.
+
 ### It works out how your vendors settle
 
 A matching rule's settlement shape is not declared anywhere. When a correction
