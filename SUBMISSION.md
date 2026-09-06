@@ -116,8 +116,10 @@ measurements.
 
 - Vercel AI Gateway currently refuses inference until the linked team has a
   valid payment card. No billing change was made for this submission.
-- The latest local real-model measurement attempt failed before model inference.
-  It produced no model-quality metrics and the safety gate did not publish it as
+- The hosted run was rejected before inference. A local `llama3.2` run first
+  returned schema-invalid output; after structured mode was enabled, a second
+  run timed out after 15 minutes without completing its first period. Neither
+  produced model-quality metrics, and the safety gate published neither as
   measured evidence.
 - The live database's latest report has model provenance but is degraded: 28
   failed model batches and four skipped gradient steps across four closes. It
