@@ -15,6 +15,7 @@ const STAGES: Stage[] = [
   { name: "loop wiring",   cmd: "npm", args: ["run", "selftest"] },
   { name: "db invariants", cmd: "npm", args: ["run", "verify:db"],   needsDb: true },
   { name: "evidence gate", cmd: "npm", args: ["run", "verify:gate"], needsDb: true },
+  { name: "close loop",    cmd: "npm", args: ["run", "verify:loop"], needsDb: true },
 ];
 
 const hasDb = Boolean(process.env.SUPABASE_URL && process.env.SUPABASE_SERVICE_ROLE_KEY);

@@ -100,8 +100,17 @@ async function main() {
       check("report round-trips through Supabase", false, "no local report to round-trip");
     }
   } finally {
-    await db.from("entities").delete().eq("id", entityId);   // cascades
-    console.log("\n  scratch entity removed");
+    // Invariant 2 has a consequence worth stating: because a tickmark refuses
+    // DELETE, a cascade from its entity refuses too. Verification history
+    // outlives the thing it verified, which is the correct behaviour for a
+    // ledger and an inconvenience for a test. Clean up what is erasable and
+    // leave the rest, rather than pretend the delete worked.
+    await db.from("journal_entries").delete().eq("entity_id", entityId);
+    await db.from("rules").delete().eq("entity_id", entityId);
+    const { error: entErr } = await db.from("entities").delete().eq("id", entityId);
+    console.log(entErr
+      ? "\n  scratch entity retained: its tickmarks are append-only, as designed"
+      : "\n  scratch entity removed");
   }
 
   console.log(`\n${fail === 0 ? "all invariants enforced by the database" : `${fail} check(s) failed`}  (${pass} passed)`);
