@@ -63,7 +63,7 @@ so no measured report or exception queue was published.
   zero-failure accounting, and at least one successful model call before save.
 - Queue publication applies the same gate, preventing an older mock or degraded
   report from being materialised after a failed measurement attempt.
-- The mechanism test covers rejection of both mock and degraded reports.
+- The mechanism test covers rejection of mock, degraded, and zero-call reports.
 - Clean-install typechecking now runs `next typegen` before `tsc --noEmit`, as
   required for the Next.js 16 generated `PageProps` and `LayoutProps` globals.
 
