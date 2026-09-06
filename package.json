@@ -17,7 +17,8 @@
     "verify:all": "tsx --env-file-if-exists=.env.local scripts/verify-all.ts",
     "ingest": "tsx --env-file-if-exists=.env.local scripts/ingest.ts",
     "close": "tsx --env-file-if-exists=.env.local scripts/close.ts",
-    "verify:loop": "tsx --env-file-if-exists=.env.local scripts/verify-loop.ts"
+    "verify:loop": "tsx --env-file-if-exists=.env.local scripts/verify-loop.ts",
+    "verify:import": "tsx --env-file-if-exists=.env.local scripts/verify-import.ts"
   },
   "dependencies": {
     "@ai-sdk/anthropic": "^4.0.49",

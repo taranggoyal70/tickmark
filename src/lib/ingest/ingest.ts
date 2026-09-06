@@ -1,5 +1,5 @@
 import { createClient, type SupabaseClient } from "@supabase/supabase-js";
-import { BankRow, InvoiceRow, LedgerRow, parseCsv } from "./schema";
+import { BankRow, InvoiceRow, LedgerRow, MALFORMED, parseCsv } from "./schema";
 
 /**
  * Loading someone's books.
@@ -119,6 +119,8 @@ export async function ingestPeriod(entityId: string, code: string, input: Period
 
   // ── bank ──────────────────────────────────────────────────────────────────
   const bank = rowsOf(input.bank).flatMap((r, i) => {
+    const bad = (r as Record<string, string>)[MALFORMED];
+    if (bad) { rejected.push({ table: "bank_lines", row: i + 2, reason: bad }); return []; }
     const parsed = BankRow.safeParse(r);
     if (!parsed.success) { rejected.push({ table: "bank_lines", row: i + 2, reason: parsed.error.issues[0].message }); return []; }
     const b = parsed.data;
@@ -131,6 +133,8 @@ export async function ingestPeriod(entityId: string, code: string, input: Period
 
   // ── ledger ────────────────────────────────────────────────────────────────
   const ledger = rowsOf(input.ledger).flatMap((r, i) => {
+    const bad = (r as Record<string, string>)[MALFORMED];
+    if (bad) { rejected.push({ table: "ledger_entries", row: i + 2, reason: bad }); return []; }
     const parsed = LedgerRow.safeParse(r);
     if (!parsed.success) { rejected.push({ table: "ledger_entries", row: i + 2, reason: parsed.error.issues[0].message }); return []; }
     const l = parsed.data;
@@ -150,6 +154,8 @@ export async function ingestPeriod(entityId: string, code: string, input: Period
 
   // ── invoices ──────────────────────────────────────────────────────────────
   const invoices = rowsOf(input.invoices).flatMap((r, i) => {
+    const bad = (r as Record<string, string>)[MALFORMED];
+    if (bad) { rejected.push({ table: "ap_invoices", row: i + 2, reason: bad }); return []; }
     const parsed = InvoiceRow.safeParse(r);
     if (!parsed.success) { rejected.push({ table: "ap_invoices", row: i + 2, reason: parsed.error.issues[0].message }); return []; }
     const v = parsed.data;

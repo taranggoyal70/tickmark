@@ -76,6 +76,9 @@ export type BankRowIn = z.input<typeof BankRow>;
 export type LedgerRowIn = z.input<typeof LedgerRow>;
 export type InvoiceRowIn = z.input<typeof InvoiceRow>;
 
+/** Set on a row whose field count disagrees with the header. */
+export const MALFORMED = "__malformed";
+
 /** Minimal RFC4180 reader: quoted fields, escaped quotes, CRLF. */
 export function parseCsv(text: string): Record<string, string>[] {
   const rows: string[][] = [];
@@ -107,7 +110,22 @@ export function parseCsv(text: string): Record<string, string>[] {
 
   // headers are normalised so "Posted Date", "posted_date" and "POSTED-DATE" agree
   const headers = rows[0].map((h) => h.trim().toLowerCase().replace(/[\s-]+/g, "_"));
-  return rows.slice(1).map((r) =>
-    Object.fromEntries(headers.map((h, i) => [h, (r[i] ?? "").trim()])),
-  );
+
+  return rows.slice(1).map((r) => {
+    const out: Record<string, string> = Object.fromEntries(
+      headers.map((h, i) => [h, (r[i] ?? "").trim()]),
+    );
+    /*
+     * A row with the wrong number of fields is not a row we may guess at. The
+     * usual cause is an unquoted thousands separator - "$1,240.00" written
+     * without quotes splits into "$1" and "240.00", and reading that as one
+     * dollar is an accounting error, not a parsing inconvenience. Flag it and
+     * let the caller reject it with a reason.
+     */
+    if (r.length !== headers.length) {
+      out[MALFORMED] = `expected ${headers.length} columns, found ${r.length}` +
+        (r.length > headers.length ? " — an unquoted comma inside a value, perhaps a thousands separator?" : "");
+    }
+    return out;
+  });
 }
