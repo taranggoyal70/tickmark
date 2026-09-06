@@ -1,158 +1,139 @@
-# Demo script — 3 minutes
+# Demo script — 4 minutes
 
 Syndicate by Maximor · Track 2, Autonomous Office of the CFO.
 
-Three minutes is short. This is cut to open with the **close room** — the one
-thing that makes the argument visceral rather than intellectual — and to land
-the **refusal to learn from one example** at 1:10, while attention is still
-high. Everything else supports those two beats.
+Record at 1440×900. Have the production site, a signed-in queue tab, a terminal,
+and the AO window open before recording.
 
-Record at 1440×900. Have `npm run dev`, a signed-in browser, and the AO window
-open **before** you hit record.
+## Current release condition
 
----
+The live report was recorded with `provenance: "model"`, but it is degraded:
+AI Gateway rejected inference because the linked team has no valid billing card.
+Across the four recorded closes, all 28 model batches failed and all four
+gradient steps were skipped. Tickmark failed closed and routed undecided work to
+review. Leave the provenance banner visible and describe this as fail-safe
+behavior, never as model quality.
 
-## 0:00–0:20 · The problem, stated like an accountant would
-
-> "Month-end close is five to ten days of a controller doing the same three
-> things they did last month: tying the bank statement to the ledger, coding
-> vendor invoices, and hunting for costs that were incurred but never invoiced.
-> The judgment is real. It's also identical every month — and it lives in one
-> person's head."
-
-**On screen:** the landing page. Don't scroll. Let the headline sit.
+The deterministic `npm run selftest` remains useful proof that the full learning
+loop is wired. Its 55% → 79% auto-clear curve and 41 → 21 exception curve are
+mechanism-test results, not real-model measurements.
 
 ---
 
-## 0:15–0:35 · It takes your books, not a fixture
+## 0:00–0:25 · The problem
 
-**On screen:** `/setup`. Drop a bank CSV and an invoice CSV, pick a period, hit import.
+**On screen:** [the production landing page](https://tickmark-kappa.vercel.app).
 
-> "This is a month exported from a bank and a bookkeeping system. Headers don't
-> have to match, dollar signs and parenthesised negatives are fine — and a row it
-> can't read is reported with its line number, not dropped. If it can't read an
-> amount it refuses the row, because reading twelve hundred as twelve is an
-> accounting error, not a parsing inconvenience."
+> "Month-end close is days of a controller repeating the same judgments: tying
+> the bank to the ledger, coding invoices, and finding costs that arrived before
+> their invoices. Tickmark turns reviewed corrections into deterministic rules,
+> so the judgment is traceable and only has to be made once."
 
----
+If the amber banner is visible, point to it immediately:
 
-## 0:35–1:05 · The hook — run both closes
+> "This report is intentionally labeled. The model provider is unavailable, so
+> these figures show the system failing closed—not model quality."
 
-**On screen:** `/close/run`. Press **Run both closes** and stop talking for three
-seconds. Let them watch.
+## 0:25–0:55 · It takes exported books
 
-> "Same company, same books, same model. On the left, January — the agent has
-> learned nothing. On the right, April, after three months of a controller
-> correcting it."
+**On screen:** `/setup`. Show the bank, ledger, invoice, and optional settlement
+inputs; do not upload during the recording unless the account is already signed
+in and the sample files have been preflighted.
 
-Point at the counters as they move.
+> "The same ingestion path handles the bundled sample company and customer CSVs.
+> Headers and accounting number formats are normalized, but unreadable rows are
+> reported with their line number rather than silently dropped."
 
-> "Blue rows are decisions settled by a rule it learned. They cost nothing and
-> take no time. Watch the right-hand queue —"
+## 0:55–1:30 · Rules first, model residue second
 
-Let it finish.
+**On screen:** `/close/run`.
 
-> "— it hands back half as many items, for less money, on the same model."
+> "Every close starts with the Rulebook. Earned rules execute deterministically
+> with zero model calls. Only the residue reaches the model, and confidence plus
+> materiality decide what can clear without a controller."
 
----
+With the current billing limitation, a signed-in **Run both closes** action
+should complete in degraded mode instead of pretending to decide:
 
-## 1:05–1:45 · The moment — make this beat count
+> "The provider refused inference. Tickmark still records the close, labels the
+> outage, and sends every undecided line to review. That is the safe accounting
+> behavior."
 
-Resolve one exception. Tick **"always do this"**.
+## 1:30–2:20 · The human gate
 
-> "Here's where most agent demos cheat. I've told it to always do this."
+**On screen:** `/close/exceptions`, already signed in and preflighted with two
+same-kind exceptions for one vendor.
 
-**On screen:** the amber panel appears. **Read it aloud, verbatim:**
+Resolve the first and tick **always do this**. Read the amber response:
 
-> *"Noted — but not yet a rule. One correction is an anecdote. I'll propose a
-> rule the next time a correction agrees with it."*
+> "Noted—but not yet a rule. One correction is an anecdote."
 
-> "It refused. One correction is an anecdote, and a rule that posts real
-> accounting entries needs evidence. That's not a prompt asking nicely — it's a
-> database constraint."
+Resolve the second matching exception and show the proposed rule and replay.
 
-Now resolve a **second** exception for the same vendor, same kind. Tick it again.
+> "Now there are two attributable corrections. The proposal cites them, replays
+> against closed periods, and still cannot activate itself. A controller owns
+> adoption."
 
-**On screen:** the rule proposal, with its backtest.
+If the queue is not in that exact state, show the terminal output from
+`npm run verify:gate`; do not stage or relabel a mechanism result as production
+model behavior.
 
-> "Second correction. Now it proposes the rule — citing both corrections
-> verbatim, already replayed against every closed period. Fired eleven times,
-> a hundred percent precision. I adopt it, and my name goes on it forever."
+## 2:20–2:50 · Controller-ready outputs
 
----
+**On screen:** `/close/reconciliation`, `/close/entries`, then `/close/binder`.
 
-## 1:45–2:10 · It drafts the entries, you approve them
+> "Reconciliation lists every unexplained amount instead of hiding behind a
+> percentage. Accrual entries must balance and require a different approver.
+> The binder exports the tickmarks and their evidence for audit support."
 
-**On screen:** `/close/entries`.
+## 2:50–3:20 · Verification evidence
 
-> "It noticed Datadog billed in three prior months and not this one, and drafted
-> the accrual — twelve six nineteen, debit cloud infrastructure, credit accrued
-> liabilities, balanced. The agent prepared it. It cannot approve it. That's
-> segregation of duties, and it's a database constraint, not a promise."
+**On screen:** terminal output from `npm test`, `npm run selftest`, and
+`npm run verify:all`.
 
-Approve it on camera.
+> "The unit command runs both verification-script tests and provider capability
+> tests. The mechanism selftest passes 16 checks. Full verification passes eight
+> stages, including all four live Supabase suites—none were skipped. These prove
+> controls and wiring, not model quality."
 
----
+## 3:20–3:45 · AO (required — do not cut)
 
-## 2:10–2:30 · Why an accountant would sign it
+**On screen:** the AO window with the session list visible.
 
-**On screen:** terminal. `npm run verify:all`.
+> "AO shows 23 sessions total, including workers, orchestrators, and terminated
+> sessions. Substantive Codex AO sessions covered audit, hardening, deployment,
+> eval, and integration. Isolated worktrees let those efforts stay reviewable
+> while this final session reconciled the release on main."
 
-> "Every guarantee, one command — including the whole loop running on ingested
-> books with no model at all."
+## 3:45–4:00 · Close
 
-**Say the numbers from your own measured run if you have them.**
+> "Tickmark: the close that gets cheaper as reviewed judgment compiles into
+> rules—and that refuses to bluff when an external model is unavailable."
 
-> "Four closes, same model throughout. Auto-clear goes 55 to 79 percent.
-> Exceptions halve. Cost per close falls — not because the model got cheaper,
-> but because every rule it learned executes with zero model calls. Most agents
-> learn by growing a prompt, so every lesson costs more forever. This one
-> compiles the judgment into something free to run."
-
-Point at the precision chart.
-
-> "And this is the line that must not move. Nobody reviews what it cleared
-> unattended — so a system that gets faster by getting sloppier is worse than
-> no system."
-
----
-
-## 2:30–2:50 · AO  *(required — do not cut this)*
-
-**On screen:** the AO window, sessions visible.
-
-> "Built with AO. I registered the repo as a project and ran the build as
-> orchestrated Claude Code sessions in isolated worktrees — [N] of them —
-> covering the schema, the exception queue, and the tracing work."
-
-State the real number. Show the session list.
-
----
-
-## 2:50–3:00 · Close
-
-> "Tickmark. The close that gets cheaper every month, because the judgment only
-> has to be made once."
-
-**On screen:** landing page.
+**On screen:** landing page with the **See the fail-safe report** CTA.
 
 ---
 
 ## Pre-flight
 
-- [ ] `npm run simulate` has run — the dashboard shows **measured** numbers, and the
-      provenance banner is **gone**. Do not record with the mock banner showing.
-- [ ] `npm run publish` — queue is populated
-- [ ] Two open exceptions share a vendor **and** kind (needed for the 0:40 beat).
-      `npm run verify:gate` prints which scope qualifies, then restores the queue.
-- [ ] Signed in **only** for the queue beat — the close room, dashboard and
-      rulebook are public, so nothing else bounces mid-take
-- [ ] Run the close room once before recording so it's warm
-- [ ] AO window open with sessions visible
+- [ ] `npm test` passes five tests.
+- [ ] `npm run selftest` passes 16 mechanism checks.
+- [ ] `npm run verify:all` ends with `everything holds`; database invariants,
+      evidence gate, close loop, and import all show `PASS`, never `SKIP`.
+- [ ] Production smoke test passes `/`, `/close`, `/close/run`,
+      `/close/rulebook`, `/close/entries`, `/close/cash`,
+      `/close/reconciliation`, `/close/binder`, and the binder API.
+- [ ] Signed in only for write demonstrations; Clerk is using development keys.
+- [ ] AO window shows the current total of 23 sessions.
+- [ ] The degraded provenance banner is visible and the talk track names the AI
+      Gateway billing limitation.
 
 ## Do not
 
-- Show the sign-in flow. The organisers said explicitly not to spend time on auth.
-- Read the architecture aloud. Show it working.
-- Leave the mechanism-test banner on screen. Either run a measured pass or say
-  plainly it's a stand-in — never let it read as model performance.
+- Do not call mock or degraded figures model quality.
+- Do not hide, crop, or remove the honest degraded-provenance banner.
+- Do not run `npm run publish` against the current degraded report; the safety
+  gate correctly refuses it.
+- Do not add billing details, change auth accounts, or submit Devpost during the
+  recording workflow.
+- Do not spend demo time on the sign-in flow.

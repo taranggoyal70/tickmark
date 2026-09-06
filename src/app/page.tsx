@@ -32,6 +32,9 @@ export default async function Home() {
   const report = await latestReport();
   const first = report?.periods[0];
   const last = report?.periods[report.periods.length - 1];
+  const degraded = report?.periods.some(
+    (period) => period.stats.modelFailures > 0 || period.gradientSkipped,
+  ) ?? false;
 
   return (
     <div className="flex min-h-full flex-col">
@@ -63,7 +66,7 @@ export default async function Home() {
                 Watch it close the books
               </Link>
               <Link href="/close" className="focus-ring rounded-[var(--radius-md)] border border-hairline bg-surface-1 px-4 py-2.5 text-[14px] font-medium text-ink transition-colors hover:bg-surface-3">
-                See the measured results
+                {degraded ? "See the fail-safe report" : "See the measured results"}
               </Link>
               <Link href="/close/rulebook" className="focus-ring rounded-[var(--radius-md)] border border-hairline bg-surface-1 px-4 py-2.5 text-[14px] font-medium text-ink transition-colors hover:bg-surface-3">
                 Read what it learned
