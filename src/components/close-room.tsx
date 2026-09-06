@@ -55,7 +55,7 @@ function Lane({ period, frames, running, tone }: {
           <span className="nums text-[15px] font-medium text-ink">{period.period}</span>
           <span className={`rounded-[var(--radius-sm)] border px-2 py-0.5 text-[11px] ${
             tone === "trained"
-              ? "border-[#3987e5]/40 bg-[#3987e5]/12 text-[#7fb4f0]"
+              ? "border-[#2a78d6]/30 bg-[#2a78d6]/10 text-[#1c5fae]"
               : "border-hairline bg-surface-3 text-ink-subtle"}`}>
             {period.activeRules === 0 ? "no rules yet" : `${period.activeRules} rules learned`}
           </span>
@@ -75,7 +75,7 @@ function Lane({ period, frames, running, tone }: {
         ].map((s) => (
           <div key={s.l} className="bg-surface-1 px-2 py-2.5 text-center">
             <div className="eyebrow mb-1 text-[10px]">{s.l}</div>
-            <div className={`nums text-[17px] font-semibold leading-none ${s.warn && exceptions ? "text-[#f0916a]" : "text-ink"}`}>{s.v}</div>
+            <div className={`nums text-[17px] font-semibold leading-none ${s.warn && exceptions ? "text-[#b8471a]" : "text-ink"}`}>{s.v}</div>
           </div>
         ))}
       </div>
@@ -83,8 +83,9 @@ function Lane({ period, frames, running, tone }: {
       <div className="flex-1 space-y-1 overflow-hidden p-2">
         {recent.map((f, n) => (
           <div key={`${f.ref}-${i}-${n}`}
-            className="flex items-center gap-2 rounded-[var(--radius-sm)] border border-hairline bg-surface-2 px-2 py-1.5 text-[11px]"
-            style={{ opacity: Math.max(0.25, 1 - n * 0.11) }}>
+            className="flex items-center gap-2 rounded-[var(--radius-sm)] border border-hairline bg-surface-1 px-2 py-1.5 text-[11px]"
+            // a gentler falloff than on a dark ground, where faint text disappears
+            style={{ opacity: Math.max(0.5, 1 - n * 0.075) }}>
             <span className="inline-block h-1.5 w-1.5 shrink-0 rounded-full"
               style={{ background: f.outcome === "exception" ? SERIES.exception.color : f.by === "rule" ? SERIES.rule.color : SERIES.model.color }} />
             <span className="shrink-0 font-mono text-ink-tertiary">{f.by === "rule" ? "rule" : "model"}</span>
@@ -98,7 +99,7 @@ function Lane({ period, frames, running, tone }: {
       {done ? (
         <div className="hairline-t px-4 py-3">
           <p className="text-[13px] text-ink">
-            Closed. <span className="text-[#f0916a]">{exceptions}</span> items need you.
+            Closed. <span className="text-[#b8471a]">{exceptions}</span> items need you.
           </p>
           <p className="mt-0.5 text-[12px] text-ink-tertiary">
             {ruleHits ? `${ruleHits} settled by rules, at no cost.` : "Nothing learned yet — every call was paid for."}

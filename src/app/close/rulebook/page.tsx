@@ -67,7 +67,7 @@ export default async function RulebookPage() {
               </div>
 
               <div className="mb-4 grid gap-3 sm:grid-cols-2">
-                <div className="rounded-[var(--radius-md)] border border-hairline bg-surface-2 p-3">
+                <div className="rounded-[var(--radius-md)] border border-hairline bg-surface-1 p-3">
                   <div className="eyebrow mb-1.5">When</div>
                   <ul className="space-y-1 text-[13px] text-ink-muted">
                     {r.predicate.map((p, i) => (
@@ -77,7 +77,7 @@ export default async function RulebookPage() {
                     ))}
                   </ul>
                 </div>
-                <div className="rounded-[var(--radius-md)] border border-hairline bg-surface-2 p-3">
+                <div className="rounded-[var(--radius-md)] border border-hairline bg-surface-1 p-3">
                   <div className="eyebrow mb-1.5">Then</div>
                   <div className="text-[13px] text-ink-muted"><ActionSummary rule={r} /></div>
                 </div>
@@ -95,8 +95,8 @@ export default async function RulebookPage() {
                     <span className="text-ink-muted">precision <span className="text-ink">{(r.backtest.precision * 100).toFixed(1)}%</span></span>
                   </div>
                   {r.backtest.regressions.length > 0 ? (
-                    <div className="mt-2 rounded-[var(--radius-md)] border border-[var(--danger)]/30 bg-[var(--danger)]/8 p-2.5 text-[12px] text-ink-muted">
-                      <span className="text-[#ef8686]">Would have broken:</span>{" "}
+                    <div className="mt-2 rounded-[var(--radius-md)] border border-[var(--danger)]/25 bg-[var(--danger)]/6 p-2.5 text-[12px] text-ink-muted">
+                      <span className="text-[var(--danger)]">Would have broken:</span>{" "}
                       {r.backtest.regressions.slice(0, 3).map((g) => `${g.subjectRef} (wanted ${g.expected})`).join("; ")}
                     </div>
                   ) : null}
@@ -107,7 +107,7 @@ export default async function RulebookPage() {
                 <div className="eyebrow mb-2">Evidence · {r.evidence.length} corrections</div>
                 <ul className="space-y-1.5">
                   {r.evidence.map((e) => (
-                    <li key={e.correctionId} className="rounded-[var(--radius-sm)] border-l-2 border-[var(--primary)]/50 bg-surface-2 py-1.5 pl-3 pr-2 text-[12px] leading-snug text-ink-muted">
+                    <li key={e.correctionId} className="rounded-[var(--radius-sm)] border-l-2 border-[var(--primary)]/40 bg-surface-1 py-1.5 pl-3 pr-2 text-[12px] leading-snug text-ink-muted">
                       <span className="font-mono text-ink-tertiary">{e.periodCode} · {e.subjectRef}</span>
                       <div className="mt-0.5">{e.quote}</div>
                     </li>

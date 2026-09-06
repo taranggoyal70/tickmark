@@ -1,19 +1,19 @@
 /** Clerk's widgets wear the same tokens as the rest of the product. */
 export const clerkAppearance = {
   variables: {
-    colorPrimary: "#5e6ad2",
-    colorBackground: "#0f1011",
-    colorInputBackground: "#141516",
-    colorText: "#f7f8f8",
-    colorTextSecondary: "#8a8f98",
-    colorInputText: "#f7f8f8",
-    colorNeutral: "#f7f8f8",
+    colorPrimary: "#533afd",
+    colorBackground: "#ffffff",
+    colorInputBackground: "#ffffff",
+    colorText: "#0d253d",
+    colorTextSecondary: "#64748d",
+    colorInputText: "#0d253d",
+    colorNeutral: "#0d253d",
     borderRadius: "8px",
     fontSize: "14px",
   },
   elements: {
-    card: { border: "1px solid #23252a", boxShadow: "none" },
-    headerTitle: { letterSpacing: "-0.02em" },
+    card: { border: "1px solid #e3e8ee", boxShadow: "0 1px 2px rgb(13 37 61 / 0.04)" },
+    headerTitle: { letterSpacing: "-0.012em" },
     footer: { background: "transparent" },
   },
 };

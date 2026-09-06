@@ -206,7 +206,8 @@ ingest bank feed + AP invoices + GL
   land on the filesystem when it is not provisioned
 - **Clerk** for auth
 - Design tokens ported from
-  [awesome-design-md](https://github.com/VoltAgent/awesome-design-md) → `linear.app`
+  [awesome-design-md](https://github.com/VoltAgent/awesome-design-md) → `stripe`:
+  white canvas, near-white cards, deep navy ink, one indigo accent
 - Chart palette validated for colour-vision deficiency with the `dataviz` validator
   (lightness band, chroma floor, adjacent CVD ΔE, contrast)
 

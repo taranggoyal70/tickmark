@@ -4,19 +4,22 @@ import { useId, useState } from "react";
 
 /**
  * Categorical theme, fixed order, never cycled. Validated against the dark
- * chart surface (#0f1011) with scripts/validate_palette.js: lightness band,
- * chroma floor, adjacent CVD separation, normal-vision floor and contrast all
- * pass. Do not reorder or add a fourth hue without re-running the validator.
+ * chart surface (#ffffff) with scripts/validate_palette.js: lightness band,
+ * chroma floor and adjacent CVD separation all pass. The aqua sits just under
+ * 3:1 on white, which the validator flags as needing relief rather than
+ * failing - satisfied here by the always-present legend, direct labels and the
+ * table view on every chart. Do not reorder or add a fourth hue without
+ * re-running the validator.
  */
 export const SERIES = {
-  rule:      { color: "#3987e5", label: "Settled by rule" },
-  model:     { color: "#199e70", label: "Decided by model" },
-  exception: { color: "#d95926", label: "Sent to controller" },
+  rule:      { color: "#2a78d6", label: "Settled by rule" },
+  model:     { color: "#1baf7a", label: "Decided by model" },
+  exception: { color: "#eb6834", label: "Sent to controller" },
 } as const;
 
-const SURFACE = "#0f1011";
-const GRID = "#23252a";
-const INK_SUBTLE = "#8a8f98";
+const SURFACE = "#ffffff";
+const GRID = "#e3e8ee";
+const INK_SUBTLE = "#64748d";
 
 const W = 660, H = 200, PAD_L = 44, PAD_R = 16, PAD_T = 16, PAD_B = 30;
 const PW = W - PAD_L - PAD_R, PH = H - PAD_T - PAD_B;
@@ -108,7 +111,7 @@ export function TrendLine({
                aria-label={`${title}. ${points.map((p) => `${p.label} ${fmt(p.value)}`).join(", ")}.`}>
             <defs>
               <linearGradient id={`g-${id}`} x1="0" y1="0" x2="0" y2="1">
-                <stop offset="0%" stopColor={accent} stopOpacity="0.16" />
+                <stop offset="0%" stopColor={accent} stopOpacity="0.13" />
                 <stop offset="100%" stopColor={accent} stopOpacity="0" />
               </linearGradient>
             </defs>
@@ -144,7 +147,7 @@ export function TrendLine({
             <text
               x={x(points.length - 1)}
               y={y(last) - PAD_T < 20 ? y(last) + 20 : y(last) - 12}
-              textAnchor="end" fontSize="12" fontWeight="600" fill="#f7f8f8" className="nums"
+              textAnchor="end" fontSize="12" fontWeight="600" fill="#0d253d" className="nums"
             >
               {fmt(last)}
             </text>

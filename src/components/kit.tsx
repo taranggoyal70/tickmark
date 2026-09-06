@@ -18,9 +18,9 @@ export function Stat({
   // The number stays in ink. State is carried by a dot plus words in the
   // caption, never by colour alone.
   const dot =
-    tone === "good" ? "bg-[#0ca30c]" :
-    tone === "warn" ? "bg-[#fab219]" :
-    tone === "bad"  ? "bg-[#d03b3b]" : "bg-[var(--ink-tertiary)]";
+    tone === "good" ? "bg-[#0f7a34]" :
+    tone === "warn" ? "bg-[#8a5a00]" :
+    tone === "bad"  ? "bg-[#b3261e]" : "bg-[var(--ink-tertiary)]";
   return (
     <div className="panel p-5">
       <div className="eyebrow mb-2">{label}</div>
@@ -36,13 +36,13 @@ export function Stat({
 }
 
 const BADGE: Record<string, string> = {
-  rule:    "bg-[#3987e5]/12 text-[#7fb4f0] border-[#3987e5]/30",
-  agent:   "bg-[#199e70]/12 text-[#5cc79b] border-[#199e70]/30",
-  human:   "bg-[#d95926]/12 text-[#f0916a] border-[#d95926]/30",
+  rule:    "bg-[#2a78d6]/10 text-[#1c5fae] border-[#2a78d6]/25",
+  agent:   "bg-[#1baf7a]/10 text-[#0f7a55] border-[#1baf7a]/30",
+  human:   "bg-[#eb6834]/10 text-[#b8471a] border-[#eb6834]/30",
   neutral: "bg-surface-3 text-ink-subtle border-hairline",
-  good:    "bg-[#0ca30c]/12 text-[#5fd05f] border-[#0ca30c]/30",
-  warn:    "bg-[#fab219]/12 text-[#f5cc6b] border-[#fab219]/30",
-  bad:     "bg-[#d03b3b]/12 text-[#ef8686] border-[#d03b3b]/30",
+  good:    "bg-[#0ca30c]/10 text-[#0f7a34] border-[#0ca30c]/30",
+  warn:    "bg-[#fab219]/16 text-[#8a5a00] border-[#fab219]/45",
+  bad:     "bg-[#d03b3b]/10 text-[#b3261e] border-[#d03b3b]/30",
 };
 
 export function Badge({ kind = "neutral", children }: { kind?: keyof typeof BADGE | string; children: ReactNode }) {

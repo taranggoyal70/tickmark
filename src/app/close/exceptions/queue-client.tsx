@@ -45,8 +45,8 @@ function Outcome({ outcome, onAdopt, busy }: {
   }
   if (outcome.kind === "intent_recorded") {
     return (
-      <div className="rounded-[var(--radius-md)] border border-[var(--warning)]/35 bg-[var(--warning)]/8 p-3">
-        <p className="text-[13px] text-[#f5cc6b]">Noted — but not yet a rule.</p>
+      <div className="rounded-[var(--radius-md)] border border-[#fab219]/50 bg-[#fab219]/12 p-3">
+        <p className="text-[13px] text-[#8a5a00]">Noted — but not yet a rule.</p>
         <p className="mt-1 text-[12px] leading-snug text-ink-muted">
           One correction is an anecdote. I&rsquo;ve recorded a standing intent for{" "}
           <span className="text-ink">{outcome.scope}</span> and will propose a rule the next time
@@ -57,8 +57,8 @@ function Outcome({ outcome, onAdopt, busy }: {
   }
   const weak = !outcome.adoptable;
   return (
-    <div className={`rounded-[var(--radius-md)] border p-3 ${weak ? "border-[var(--danger)]/35 bg-[var(--danger)]/8" : "border-[var(--primary)]/40 bg-[var(--primary)]/8"}`}>
-      <p className={`text-[13px] ${weak ? "text-[#ef8686]" : "text-[#a8b0f5]"}`}>
+    <div className={`rounded-[var(--radius-md)] border p-3 ${weak ? "border-[var(--danger)]/30 bg-[var(--danger)]/6" : "border-[var(--primary)]/30 bg-[var(--primary)]/6"}`}>
+      <p className={`text-[13px] ${weak ? "text-[var(--danger)]" : "text-[var(--primary-hover)]"}`}>
         {weak ? "Seconded — but the replay says no." : "Seconded — rule proposed."}
       </p>
       <p className="mt-1 nums text-[12px] text-ink-muted">
@@ -129,8 +129,8 @@ export function QueueRow({ item }: { item: QueueItem }) {
                   onClick={() => resolve(o, i === 0 ? "accept" : "amend")}
                   className={`focus-ring rounded-[var(--radius-sm)] border px-2 py-1 text-[12px] transition-colors disabled:opacity-50 ${
                     i === 0
-                      ? "border-[var(--primary)]/40 bg-[var(--primary)]/10 text-[#a8b0f5] hover:bg-[var(--primary)]/20"
-                      : "border-hairline bg-surface-2 text-ink-subtle hover:bg-surface-3"
+                      ? "border-[var(--primary)]/40 bg-[var(--primary)]/10 text-[var(--primary-hover)] hover:bg-[var(--primary)]/20"
+                      : "border-hairline bg-surface-1 text-ink-subtle hover:bg-surface-3"
                   }`}
                 >
                   {o.label}

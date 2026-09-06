@@ -1,35 +1,37 @@
 @import "tailwindcss";
 
 /*
- * Design tokens ported from VoltAgent/awesome-design-md -> design-md/linear.app.
- * Near-black canvas, hairline panels, one chromatic accent used sparingly.
- * A controller lives in this screen for five days a month; it is dense on
- * purpose and commits to a single dark look.
+ * Design tokens ported from VoltAgent/awesome-design-md -> design-md/stripe.
+ * A financial-infrastructure palette: white canvas, near-white card surfaces,
+ * deep navy ink, one electric indigo accent, hairline borders. Light on
+ * purpose - this is a tool a controller opens in daylight next to a
+ * spreadsheet, not a code editor at midnight.
  */
 :root {
-  --canvas:        #010102;
-  --surface-1:     #0f1011;
-  --surface-2:     #141516;
-  --surface-3:     #18191a;
-  --surface-4:     #191a1b;
-  --hairline:      #23252a;
-  --hairline-strong:#34343a;
-  --hairline-3:    #3e3e44;
+  --canvas:         #ffffff;
+  --surface-1:      #f6f9fc;
+  --surface-2:      #ffffff;
+  --surface-3:      #eef3f9;
+  --surface-4:      #e7eef6;
+  --hairline:       #e3e8ee;
+  --hairline-strong:#cfd9e4;
+  --hairline-3:     #b9c6d6;
 
-  --ink:           #f7f8f8;
-  --ink-muted:     #d0d6e0;
-  --ink-subtle:    #8a8f98;
-  --ink-tertiary:  #62666d;
+  --ink:            #0d253d;
+  --ink-muted:      #273951;
+  --ink-subtle:     #64748d;
+  --ink-tertiary:   #8a99ad;
 
-  --primary:       #5e6ad2;
-  --primary-hover: #828fff;
-  --primary-focus: #5e69d1;
-  --on-primary:    #ffffff;
+  --primary:        #533afd;
+  --primary-hover:  #4434d4;
+  --primary-press:  #2e2b8c;
+  --primary-soft:   #665efd;
+  --on-primary:     #ffffff;
 
-  --success:       #27a644;
-  --warning:       #d9a548;
-  --danger:        #e5484d;
-  --brand-secure:  #7a7fad;
+  /* status: darkened for legible text on a white ground */
+  --success:        #0f7a34;
+  --warning:        #8a5a00;
+  --danger:         #b3261e;
 }
 
 @theme inline {
@@ -62,7 +64,7 @@
   --radius-2xl: 24px;
 }
 
-html { color-scheme: dark; }
+html { color-scheme: light; }
 
 body {
   background: var(--canvas);
@@ -71,16 +73,22 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
-/* Display type: 500-700 with measured negative tracking, per the source system. */
-.display-xl { font-size: clamp(40px, 6.2vw, 80px); font-weight: 600; line-height: 1.05; letter-spacing: -0.038em; }
-.display-lg { font-size: clamp(32px, 4.4vw, 56px); font-weight: 600; line-height: 1.10; letter-spacing: -0.032em; }
-.display-md { font-size: clamp(26px, 3vw, 40px);  font-weight: 600; line-height: 1.15; letter-spacing: -0.025em; }
-.headline   { font-size: 28px; font-weight: 600; line-height: 1.20; letter-spacing: -0.021em; }
-.card-title { font-size: 22px; font-weight: 500; line-height: 1.25; letter-spacing: -0.014em; }
-.eyebrow    { font-size: 12px; font-weight: 500; line-height: 1.30; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-subtle); }
+/* Display type: light weights with negative tracking, per the source system. */
+.display-xl { font-size: clamp(38px, 5.6vw, 56px); font-weight: 300; line-height: 1.03; letter-spacing: -0.025em; }
+.display-lg { font-size: clamp(30px, 4vw, 48px);  font-weight: 300; line-height: 1.10; letter-spacing: -0.02em; }
+.display-md { font-size: clamp(24px, 2.8vw, 32px);font-weight: 300; line-height: 1.12; letter-spacing: -0.02em; }
+.headline   { font-size: 26px; font-weight: 400; line-height: 1.15; letter-spacing: -0.012em; }
+.card-title { font-size: 20px; font-weight: 500; line-height: 1.25; letter-spacing: -0.01em; }
+.eyebrow    { font-size: 11px; font-weight: 600; line-height: 1.30; letter-spacing: 0.09em; text-transform: uppercase; color: var(--ink-subtle); }
 
-.panel   { background: var(--surface-1); border: 1px solid var(--hairline); border-radius: var(--radius-lg); }
-.panel-2 { background: var(--surface-2); border: 1px solid var(--hairline); border-radius: var(--radius-lg); }
+/* Cards sit on near-white with a hairline and the faintest lift. */
+.panel {
+  background: var(--surface-2);
+  border: 1px solid var(--hairline);
+  border-radius: var(--radius-lg);
+  box-shadow: 0 1px 2px rgb(13 37 61 / 0.04);
+}
+.panel-2 { background: var(--surface-1); border: 1px solid var(--hairline); border-radius: var(--radius-lg); }
 
 .hairline-t { border-top: 1px solid var(--hairline); }
 .hairline-b { border-bottom: 1px solid var(--hairline); }
@@ -88,12 +96,9 @@ body {
 /* Tabular figures everywhere money or a metric is shown. */
 .nums { font-variant-numeric: tabular-nums; font-feature-settings: "tnum" 1; }
 
-.focus-ring:focus-visible {
-  outline: 2px solid var(--primary);
-  outline-offset: 2px;
-}
+.focus-ring:focus-visible { outline: 2px solid var(--primary); outline-offset: 2px; }
 
-::selection { background: color-mix(in oklab, var(--primary) 40%, transparent); }
+::selection { background: color-mix(in oklab, var(--primary) 22%, transparent); }
 
 ::-webkit-scrollbar { width: 10px; height: 10px; }
 ::-webkit-scrollbar-track { background: transparent; }

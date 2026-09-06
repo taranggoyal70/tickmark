@@ -56,7 +56,7 @@ export default async function ExceptionsPage() {
           <div className="eyebrow mb-2">Standing intents · waiting for a second correction</div>
           <ul className="flex flex-wrap gap-2">
             {openIntents.map((i) => (
-              <li key={i.id} className="rounded-[var(--radius-sm)] border border-[var(--warning)]/30 bg-[var(--warning)]/8 px-2.5 py-1 text-[12px] text-ink-muted">
+              <li key={i.id} className="rounded-[var(--radius-sm)] border border-[#fab219]/45 bg-[#fab219]/12 px-2.5 py-1 text-[12px] text-ink-muted">
                 <span className="text-ink">{Object.values(i.scope).join(" ")}</span>
                 <span className="text-ink-tertiary"> · {i.kind}</span>
               </li>
