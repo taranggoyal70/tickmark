@@ -35,6 +35,9 @@ export default async function Home() {
   const degraded = report?.periods.some(
     (period) => period.stats.modelFailures > 0 || period.gradientSkipped,
   ) ?? false;
+  const unpriced = Boolean(report && report.totals.llmCalls > 0 && report.periods.every(
+    (period) => period.stats.costMicros === 0,
+  ));
 
   return (
     <div className="flex min-h-full flex-col">
@@ -80,7 +83,9 @@ export default async function Home() {
               <div className="grid gap-px overflow-hidden rounded-[var(--radius-xl)] border border-hairline bg-[var(--hairline)] sm:grid-cols-2 lg:grid-cols-4">
                 {[
                   { l: "Auto-cleared", a: pct(first.stats.autoClearRate), b: pct(last.stats.autoClearRate) },
-                  { l: "Cost per close", a: usdFromMicros(first.stats.costMicros), b: usdFromMicros(last.stats.costMicros) },
+                  unpriced
+                    ? { l: "Model calls", a: String(first.stats.llmCalls), b: String(last.stats.llmCalls) }
+                    : { l: "Cost per close", a: usdFromMicros(first.stats.costMicros), b: usdFromMicros(last.stats.costMicros) },
                   { l: "Controller time", a: minutes(first.touchSeconds), b: minutes(last.touchSeconds) },
                   { l: "Precision held", a: pct(first.stats.autoClearPrecision, 1), b: pct(last.stats.autoClearPrecision, 1) },
                 ].map((s) => (

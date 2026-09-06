@@ -22,6 +22,7 @@ export default async function ClosePage() {
   const costDrop = first.stats.costMicros > 0 ? 1 - last.stats.costMicros / first.stats.costMicros : 0;
   const timeDrop = first.touchSeconds > 0 ? 1 - last.touchSeconds / first.touchSeconds : 0;
   const precisionHeld = last.stats.autoClearPrecision >= 0.99;
+  const unpriced = report.totals.llmCalls > 0 && P.every((period) => period.stats.costMicros === 0);
 
   return (
     <Shell active="/close">
@@ -54,12 +55,21 @@ export default async function ClosePage() {
           tone="good"
           sub={<>up from {pct(first.stats.autoClearRate)} in {first.period}</>}
         />
-        <Stat
-          label="Cost per close"
-          value={usdFromMicros(last.stats.costMicros)}
-          tone="good"
-          sub={<>{pct(costDrop)} cheaper than {first.period}, on the same model</>}
-        />
+        {unpriced ? (
+          <Stat
+            label="Model calls per close"
+            value={String(last.stats.llmCalls)}
+            tone="good"
+            sub={<>{first.stats.llmCalls} in {first.period}; local endpoint is unpriced</>}
+          />
+        ) : (
+          <Stat
+            label="Cost per close"
+            value={usdFromMicros(last.stats.costMicros)}
+            tone="good"
+            sub={<>{pct(costDrop)} cheaper than {first.period}, on the same model</>}
+          />
+        )}
         <Stat
           label="Controller time"
           value={minutes(last.touchSeconds)}
@@ -91,13 +101,23 @@ export default async function ClosePage() {
           domainMax={1}
           goodDirection="flat"
         />
-        <TrendLine
-          title="Cost per close"
-          note="Same model throughout. Cost falls because compiled rules retire model calls, not because the model got cheaper."
-          points={P.map((p, i) => ({ label: labels[i], value: p.stats.costMicros / 1e6 }))}
-          format="usd3"
-          goodDirection="down"
-        />
+        {unpriced ? (
+          <TrendLine
+            title="Model calls per close"
+            note="The local endpoint has no configured token price, so calls are the honest resource measure. Rules retire model work."
+            points={P.map((p, i) => ({ label: labels[i], value: p.stats.llmCalls }))}
+            format="count"
+            goodDirection="down"
+          />
+        ) : (
+          <TrendLine
+            title="Cost per close"
+            note="Same model throughout. Cost falls because compiled rules retire model calls, not because the model got cheaper."
+            points={P.map((p, i) => ({ label: labels[i], value: p.stats.costMicros / 1e6 }))}
+            format="usd3"
+            goodDirection="down"
+          />
+        )}
         <TrendLine
           title="Controller time in the queue"
           note="Exceptions × observed median handling time. The line a CFO actually feels."
@@ -131,7 +151,7 @@ export default async function ClosePage() {
                   <th className="pb-2 text-right font-medium">Match</th>
                   <th className="pb-2 text-right font-medium">Exc</th>
                   <th className="pb-2 text-right font-medium">Calls</th>
-                  <th className="pb-2 text-right font-medium">Cost</th>
+                  <th className="pb-2 text-right font-medium">{unpriced ? "Price" : "Cost"}</th>
                   <th className="pb-2 pl-3 text-right font-medium">Rulebook</th>
                 </tr>
               </thead>
@@ -143,7 +163,7 @@ export default async function ClosePage() {
                     <td className="py-2 text-right text-ink">{pct(p.stats.matchAccuracy)}</td>
                     <td className="py-2 text-right text-ink">{p.stats.exceptionsOpened}</td>
                     <td className="py-2 text-right text-ink-muted">{p.stats.llmCalls}</td>
-                    <td className="py-2 text-right text-ink-muted">{usdFromMicros(p.stats.costMicros)}</td>
+                    <td className="py-2 text-right text-ink-muted">{unpriced ? "unpriced" : usdFromMicros(p.stats.costMicros)}</td>
                     <td className="py-2 pl-3 text-right text-ink-tertiary">v{p.rulebookVersionOut}</td>
                   </tr>
                 ))}
