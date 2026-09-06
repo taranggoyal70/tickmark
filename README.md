@@ -143,6 +143,45 @@ Auto-clear precision is the one that must *not* move. Nobody reviews what the ag
 cleared unattended, so a system that gets faster by getting sloppier is worse than no
 system at all.
 
+## Bring your own books
+
+Nothing here is wired to a demo fixture. Point it at a period of your own:
+
+```bash
+npm run ingest -- --entity "Acme, Inc." --period 2026-05 \
+                  --bank bank.csv --ledger gl.csv --invoices ap.csv
+```
+
+The reader is forgiving about headers and money formats — `Posted Date`,
+`posted_date` and `POSTED-DATE` all agree; `$1,234.56`, `(1,234.56)` and
+`-1234.56` all mean the same thing — and strict about what a row *means*. A row
+it cannot read is reported with its table, line number and reason rather than
+dropped, because a missing line is a reconciling difference someone chases for
+an hour.
+
+The bundled sample company is loaded through **exactly this path**, from CSV
+text, and `sample-books/` holds the files it used so the format is documented by
+example:
+
+```bash
+npm run ingest -- --sample --emit sample-books
+```
+
+Nothing downstream is permitted to know whether it got sample data or your
+export.
+
+### It works out how your vendors settle
+
+A matching rule's settlement shape is not declared anywhere. When a correction
+seconds a standing intent, each candidate strategy — by invoice, same-day
+settlement, instalments — is replayed over your real bank lines, and the one
+that actually balances wins. Against the sample books the system works out on
+its own that **Flexport settles in instalments**, firing 6 times at 100%
+precision, with nothing in the code telling it so.
+
+The same applies to coding: a rule's GL account and department split come from
+the vendor's own coded history, not from a lookup table.
+
 ## The human gate, in practice
 
 The part of this a controller actually touches. It is the answer to *"is the
@@ -253,7 +292,8 @@ depth.
 ## Layout
 
 ```
-src/lib/seed/       fixture entity + deterministic period generator (with ground truth)
+src/lib/ingest/     CSV reader + loader - the path every book takes in
+src/lib/seed/       the sample company, generated then ingested like any customer
 src/lib/agent/
   rules.ts          the deterministic Rulebook engine — zero tokens
   llm.ts            the model-backed residue, TOON-encoded
@@ -261,6 +301,7 @@ src/lib/agent/
   gradient.ts       corrections → candidate rules → backtest
   controller.ts     the human gate, simulated from ground truth
   simulate.ts       the multi-period eval harness
+  backtest-db.ts    replays a proposed rule against the entity's own history
 src/lib/store/      Supabase adapter + filesystem fallback behind one interface
 supabase/migrations one SQL file; the invariants live here as triggers
 CONTEXT.md          the domain model — read before naming anything
