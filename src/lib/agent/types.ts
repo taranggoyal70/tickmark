@@ -101,7 +101,9 @@ export interface AccrualProposal {
 
 export type ExceptionCause =
   | "low_confidence" | "over_materiality" | "policy_requires_human"
-  | "no_candidate" | "ambiguous_candidates";
+  | "no_candidate" | "ambiguous_candidates"
+  /** the model could not be reached; the Rulebook still ran */
+  | "model_unavailable";
 
 export interface Exception {
   id: string;
@@ -114,6 +116,31 @@ export interface Exception {
   options: { label: string; value: unknown }[];
 }
 
+/** Ground truth exists only for the sample company; a customer's books have none. */
+export interface GroundTruthData {
+  coding: Record<string, { glCode: string; deptSplit: Record<string, number> }>;
+  matches: { bankExternalIds: string[]; ledgerExternalIds: string[]; cardinality: string; deltaReason: string | null }[];
+  expectedAccruals: { vendorName: string; amountCents: number; glCode: string }[];
+}
+
+/** Everything a close run needs, whether generated or ingested. */
+export interface ClosePeriodData {
+  code: string;
+  bankLines: BankLine[];
+  ledgerEntries: LedgerEntry[];
+  apInvoices: ApInvoice[];
+  truth?: GroundTruthData;
+}
+
+export interface TickmarkRecord {
+  subjectType: "bank_line" | "ap_invoice" | "journal_entry";
+  subjectRef: string;
+  assertedBy: "rule" | "agent";
+  confidence: number;
+  ruleId?: string;
+  evidence: { note: string; refs: string[] }[];
+}
+
 export interface CloseRunResult {
   periodCode: string;
   rulebookVersion: number;
@@ -121,6 +148,8 @@ export interface CloseRunResult {
   matches: MatchDecision[];
   accruals: AccrualProposal[];
   exceptions: Exception[];
+  /** the verifications this run is prepared to stand behind */
+  tickmarks: TickmarkRecord[];
   tickmarked: number;
   stats: RunStats;
 }
@@ -139,6 +168,10 @@ export interface RunStats {
   exceptionsOpened: number;
   /** precision of what the agent cleared without asking. must stay ~1.0 */
   autoClearPrecision: number;
+  /** false when the books carry no answer key, which is the normal case */
+  scored: boolean;
+  /** batches the model could not serve; the Rulebook still ran */
+  modelFailures: number;
 }
 
 export interface Rulebook {

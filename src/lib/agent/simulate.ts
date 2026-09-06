@@ -14,7 +14,7 @@ import { DEFAULT_MODEL, type ModelId } from "./pricing";
 import { effectiveModelId } from "./provider";
 import { emptyRulebook } from "./rules";
 import { splitKey } from "./close";
-import type { Exception, Rule, RunStats } from "./types";
+import type { ClosePeriodData, Exception, Rule, RunStats } from "./types";
 
 export const CHART: ChartContext = {
   accounts: GL_ACCOUNTS.map((a) => ({ code: a.code, name: a.name, type: a.type })),
@@ -99,7 +99,7 @@ export interface SimulationReport {
  * Flatten a run into an ordered list of decisions. Interleaved by amount so a
  * replay looks like a close being worked rather than two sorted blocks.
  */
-function frames(period: GeneratedPeriod, run: Awaited<ReturnType<typeof runClose>>): DecisionFrame[] {
+function frames(period: ClosePeriodData, run: Awaited<ReturnType<typeof runClose>>): DecisionFrame[] {
   const exRefs = new Set(run.exceptions.map((e) => e.subjectRef));
   const out: DecisionFrame[] = [];
 

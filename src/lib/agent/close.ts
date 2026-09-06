@@ -7,17 +7,16 @@
  * shrinks - so the same close costs less each month without the model getting
  * any weaker.
  */
-import type { GeneratedPeriod } from "../seed/generate";
 import { codeInvoices, matchBankLines, zeroUsage, addUsage, type ChartContext, type Usage, type VendorHistoryRow } from "./llm";
 import { DEFAULT_MODEL, type ModelId } from "./pricing";
 import { applyAccrualRules, applyCodingRules, applyMatchingRules, consume, forcesReview, MATCH_WINDOW_DAYS, type MatchWorkspace } from "./rules";
 import type {
-  AccrualProposal, CloseRunResult, CodingDecision, Exception, LedgerEntry,
-  MatchDecision, RunStats, Rulebook,
+  AccrualProposal, ClosePeriodData, CloseRunResult, CodingDecision, Exception, LedgerEntry,
+  MatchDecision, RunStats, Rulebook, TickmarkRecord,
 } from "./types";
 
 export interface CloseInput {
-  period: GeneratedPeriod;
+  period: ClosePeriodData;
   rulebook: Rulebook;
   chart: ChartContext;
   history: VendorHistoryRow[];
@@ -49,6 +48,7 @@ export async function runClose(input: CloseInput): Promise<CloseRunResult> {
 
   let usage: Usage = zeroUsage();
   let ruleHits = 0;
+  let modelFailures = 0;
 
   const codings: CodingDecision[] = [];
   const matches: MatchDecision[] = [];
@@ -66,9 +66,26 @@ export async function runClose(input: CloseInput): Promise<CloseRunResult> {
   }
 
   for (const batch of chunk(residualInvoices, input.codingBatch ?? 20)) {
-    const { decisions, usage: u } = await codeInvoices(batch, chart, input.history, model,
-      { periodCode: period.code, rulebookVersion: rulebook.version });
-    usage = addUsage(usage, u);
+    let decisions: Awaited<ReturnType<typeof codeInvoices>>["decisions"];
+    try {
+      const r = await codeInvoices(batch, chart, input.history, model,
+        { periodCode: period.code, rulebookVersion: rulebook.version });
+      decisions = r.decisions;
+      usage = addUsage(usage, r.usage);
+    } catch (e) {
+      // The close continues. Whatever the Rulebook already knows still holds;
+      // the rest becomes the controller's, labelled for what it is.
+      modelFailures++;
+      for (const inv of batch) {
+        openException({
+          subjectType: "ap_invoice", subjectRef: inv.invoiceNumber, cause: "model_unavailable",
+          amountCents: inv.amountCents, confidence: null,
+          proposal: { vendor: inv.vendorName, why: (e as Error).message.slice(0, 140) },
+          options: [{ label: "Code manually", value: null }],
+        });
+      }
+      continue;
+    }
     const seen = new Set<string>();
     for (const d of decisions) {
       if (seen.has(d.invoiceNumber)) continue;
@@ -118,9 +135,25 @@ export async function runClose(input: CloseInput): Promise<CloseRunResult> {
       continue;
     }
 
-    const { matches: found, unmatchable, usage: u } = await matchBankLines(batch, candidates, model,
-      { periodCode: period.code, rulebookVersion: rulebook.version });
-    usage = addUsage(usage, u);
+    let found: Awaited<ReturnType<typeof matchBankLines>>["matches"];
+    let unmatchable: Awaited<ReturnType<typeof matchBankLines>>["unmatchable"];
+    try {
+      const r = await matchBankLines(batch, candidates, model,
+        { periodCode: period.code, rulebookVersion: rulebook.version });
+      found = r.matches; unmatchable = r.unmatchable;
+      usage = addUsage(usage, r.usage);
+    } catch (e) {
+      modelFailures++;
+      for (const b of batch) {
+        openException({
+          subjectType: "bank_line", subjectRef: b.externalId, cause: "model_unavailable",
+          amountCents: b.amountCents, confidence: null,
+          proposal: { description: b.description, why: (e as Error).message.slice(0, 140) },
+          options: [{ label: "Match manually", value: null }],
+        });
+      }
+      continue;
+    }
 
     for (const m of found) {
       const bankIds = m.bankExternalIds.filter((id) => !ws.consumedBank.has(id));
@@ -204,17 +237,37 @@ export async function runClose(input: CloseInput): Promise<CloseRunResult> {
   };
 
   const autoCleared: { kind: "coding" | "match"; ref: string }[] = [];
+  const tickmarks: TickmarkRecord[] = [];
   for (const c of codings) {
     const inv = period.apInvoices.find((i) => i.invoiceNumber === c.invoiceNumber);
     const ok = gate(c.invoiceNumber, "ap_invoice", c.confidence, inv?.amountCents ?? 0, c.decidedBy, c,
       [{ label: `Accept ${c.glCode}`, value: c }, { label: "Recode", value: null }]);
-    if (ok) autoCleared.push({ kind: "coding", ref: c.invoiceNumber });
+    if (ok) {
+      autoCleared.push({ kind: "coding", ref: c.invoiceNumber });
+      tickmarks.push({
+        subjectType: "ap_invoice", subjectRef: c.invoiceNumber,
+        assertedBy: c.decidedBy === "rule" ? "rule" : "agent",
+        confidence: c.confidence, ruleId: c.ruleId,
+        evidence: [{ note: `coded ${c.glCode}${c.reasoning ? ` — ${c.reasoning}` : ""}`, refs: [c.invoiceNumber] }],
+      });
+    }
   }
   for (const m of matches) {
     const total = m.bankExternalIds.reduce((s, id) => s + (period.bankLines.find((b) => b.externalId === id)?.amountCents ?? 0), 0);
     const ok = gate(m.bankExternalIds.join("+"), "bank_line", m.confidence, total, m.decidedBy, m,
       [{ label: "Accept match", value: m }, { label: "Reject", value: null }]);
-    if (ok) autoCleared.push({ kind: "match", ref: m.bankExternalIds.join("+") });
+    if (ok) {
+      autoCleared.push({ kind: "match", ref: m.bankExternalIds.join("+") });
+      tickmarks.push({
+        subjectType: "bank_line", subjectRef: m.bankExternalIds.join("+"),
+        assertedBy: m.decidedBy === "rule" ? "rule" : "agent",
+        confidence: m.confidence, ruleId: m.ruleId,
+        evidence: [{
+          note: `${m.cardinality} tie-out${m.deltaReason ? `, residual is ${m.deltaReason}` : ", clean"}`,
+          refs: m.ledgerExternalIds,
+        }],
+      });
+    }
   }
 
   const stats = score(period, codings, matches, {
@@ -223,7 +276,11 @@ export async function runClose(input: CloseInput): Promise<CloseRunResult> {
     exceptionsOpened: exceptions.length, tickmarked, autoCleared,
   });
 
-  return { periodCode: period.code, rulebookVersion: rulebook.version, codings, matches, accruals, exceptions, tickmarked, stats };
+  return {
+    periodCode: period.code, rulebookVersion: rulebook.version,
+    codings, matches, accruals, exceptions, tickmarks, tickmarked,
+    stats: { ...stats, modelFailures },
+  };
 }
 
 // ── measurement against ground truth ─────────────────────────────────────────
@@ -239,22 +296,25 @@ const splitMatches = (a: Record<string, number>, b: Record<string, number>) => {
   return true;
 };
 
-export function codingIsCorrect(period: GeneratedPeriod, c: CodingDecision): boolean {
-  const t = period.truth.coding[c.invoiceNumber];
+export function codingIsCorrect(period: ClosePeriodData, c: CodingDecision): boolean {
+  const t = period.truth?.coding[c.invoiceNumber];
   return !!t && t.glCode === c.glCode && splitMatches(t.deptSplit, c.deptSplit);
 }
 
-export function matchIsCorrect(period: GeneratedPeriod, m: MatchDecision): boolean {
+export function matchIsCorrect(period: ClosePeriodData, m: MatchDecision): boolean {
   const key = (b: string[], l: string[]) => `${[...b].sort().join(",")}|${[...l].sort().join(",")}`;
-  const want = new Set(period.truth.matches.map((t) => key(t.bankExternalIds, t.ledgerExternalIds)));
+  const want = new Set((period.truth?.matches ?? []).map((t) => key(t.bankExternalIds, t.ledgerExternalIds)));
   return want.has(key(m.bankExternalIds, m.ledgerExternalIds));
 }
 
 function score(
-  period: GeneratedPeriod, codings: CodingDecision[], matches: MatchDecision[],
-  base: Omit<RunStats, "codingAccuracy" | "matchAccuracy" | "autoClearRate" | "autoClearPrecision"> &
+  period: ClosePeriodData, codings: CodingDecision[], matches: MatchDecision[],
+  base: Omit<RunStats, "codingAccuracy" | "matchAccuracy" | "autoClearRate" | "autoClearPrecision" | "scored" | "modelFailures"> &
         { tickmarked: number; autoCleared: { kind: "coding" | "match"; ref: string }[] },
 ): RunStats {
+  // Without an answer key the accuracy figures are meaningless, and reporting a
+  // confident zero would be worse than reporting nothing.
+  const scored = Boolean(period.truth);
   const codingRight = codings.filter((c) => codingIsCorrect(period, c)).length;
   const matchRight = matches.filter((m) => matchIsCorrect(period, m)).length;
 
@@ -268,10 +328,12 @@ function score(
     llmCalls: base.llmCalls, ruleHits: base.ruleHits,
     tokensIn: base.tokensIn, tokensOut: base.tokensOut,
     costMicros: base.costMicros, durationMs: base.durationMs,
-    codingAccuracy: codings.length ? codingRight / codings.length : 0,
-    matchAccuracy: period.truth.matches.length ? matchRight / period.truth.matches.length : 0,
+    scored,
+    codingAccuracy: scored && codings.length ? codingRight / codings.length : 0,
+    matchAccuracy: scored && period.truth!.matches.length ? matchRight / period.truth!.matches.length : 0,
     autoClearRate: decisions ? base.tickmarked / decisions : 0,
-    autoClearPrecision: clearedRefs.size ? clearedCorrect / clearedRefs.size : 1,
+    autoClearPrecision: scored && clearedRefs.size ? clearedCorrect / clearedRefs.size : 1,
     exceptionsOpened: base.exceptionsOpened,
+    modelFailures: 0,
   };
 }
