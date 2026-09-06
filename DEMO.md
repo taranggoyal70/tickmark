@@ -2,9 +2,10 @@
 
 Syndicate by Maximor · Track 2, Autonomous Office of the CFO.
 
-Three minutes is short. This is cut so the **single strongest moment** — the
-system refusing to learn from one example — lands at 1:10, while attention is
-still high. Everything else supports it.
+Three minutes is short. This is cut to open with the **close room** — the one
+thing that makes the argument visceral rather than intellectual — and to land
+the **refusal to learn from one example** at 1:10, while attention is still
+high. Everything else supports those two beats.
 
 Record at 1440×900. Have `npm run dev`, a signed-in browser, and the AO window
 open **before** you hit record.
@@ -23,18 +24,27 @@ open **before** you hit record.
 
 ---
 
-## 0:20–0:40 · What it does
+## 0:20–0:50 · The hook — run both closes
 
-> "Tickmark runs that close. It codes the AP ledger, reconciles the bank across
-> all four match shapes, and finds the accruals nobody invoiced. What it can't
-> assert, it hands to a controller — and that queue is the product."
+**On screen:** `/close/run`. Press **Run both closes** and stop talking for three
+seconds. Let them watch.
 
-**On screen:** `/close/exceptions`. Scroll once, slowly. Land on an item with a
-visible confidence and a vendor.
+> "Same company, same books, same model. On the left, January — the agent has
+> learned nothing. On the right, April, after three months of a controller
+> correcting it."
+
+Point at the counters as they move.
+
+> "Blue rows are decisions settled by a rule it learned. They cost nothing and
+> take no time. Watch the right-hand queue —"
+
+Let it finish.
+
+> "— it hands back half as many items, for less money, on the same model."
 
 ---
 
-## 0:40–1:25 · The moment — make this beat count
+## 0:50–1:35 · The moment — make this beat count
 
 Resolve one exception. Tick **"always do this"**.
 
@@ -59,9 +69,11 @@ Now resolve a **second** exception for the same vendor, same kind. Tick it again
 
 ---
 
-## 1:25–2:00 · Why it gets cheaper
+## 1:35–2:05 · The measured curve
 
 **On screen:** `/close` dashboard.
+
+**Say the numbers from your own measured run — do not read these.**
 
 > "Four closes, same model throughout. Auto-clear goes 55 to 79 percent.
 > Exceptions halve. Cost per close falls — not because the model got cheaper,
@@ -77,7 +89,7 @@ Point at the precision chart.
 
 ---
 
-## 2:00–2:30 · Why an accountant would sign it
+## 2:05–2:30 · Why an accountant would sign it
 
 **On screen:** terminal. Run `npm run verify:gate` live.
 
@@ -118,7 +130,9 @@ State the real number. Show the session list.
 - [ ] `npm run publish` — queue is populated
 - [ ] Two open exceptions share a vendor **and** kind (needed for the 0:40 beat).
       `npm run verify:gate` prints which scope qualifies, then restores the queue.
-- [ ] Signed in, so `/close` doesn't bounce to sign-in mid-take
+- [ ] Signed in **only** for the queue beat — the close room, dashboard and
+      rulebook are public, so nothing else bounces mid-take
+- [ ] Run the close room once before recording so it's warm
 - [ ] AO window open with sessions visible
 
 ## Do not
