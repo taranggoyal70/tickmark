@@ -180,6 +180,12 @@ async function main() {
   let degradedRefused = false;
   try { assertMeasuredReport(degraded); } catch { degradedRefused = true; }
 
+  const skippedGradient = structuredClone(report);
+  skippedGradient.provenance = "model";
+  skippedGradient.periods[0].gradientSkipped = true;
+  let skippedGradientRefused = false;
+  try { assertMeasuredReport(skippedGradient); } catch { skippedGradientRefused = true; }
+
   const noCalls = structuredClone(report);
   noCalls.provenance = "model";
   noCalls.totals.llmCalls = 0;
@@ -202,6 +208,7 @@ async function main() {
   const checks: [string, boolean, string][] = [
     ["mock report cannot pass measured gate", mockRefused, report.provenance],
     ["degraded run cannot pass measured gate", degradedRefused, `${degraded.periods[0].stats.modelFailures} failed batch`],
+    ["skipped gradient cannot pass gate", skippedGradientRefused, "1 skipped gradient"],
     ["zero-call run cannot pass measured gate", noCallsRefused, `${noCalls.totals.llmCalls} successful calls`],
     ["close run produces decisions", first.stats.llmCalls > 0, `${first.stats.llmCalls} calls in ${first.period}`],
     ["exceptions reach the queue", first.stats.exceptionsOpened > 0, `${first.stats.exceptionsOpened} opened`],

@@ -120,6 +120,11 @@ export function assertMeasuredReport(report: SimulationReport): void {
     throw new Error(`report contains ${failureTotal} failed model batch${failureTotal === 1 ? "" : "es"}`);
   }
 
+  const skippedGradients = report.periods.filter((period) => period.gradientSkipped).length;
+  if (skippedGradients > 0) {
+    throw new Error(`report contains ${skippedGradients} skipped gradient step${skippedGradients === 1 ? "" : "s"}`);
+  }
+
   if (!Number.isInteger(report.totals.llmCalls) || report.totals.llmCalls < 1) {
     throw new Error("report contains no successful model calls");
   }
