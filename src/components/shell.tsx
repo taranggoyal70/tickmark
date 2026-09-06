@@ -7,6 +7,7 @@ const NAV = [
   { href: "/close/run", label: "Close room" },
   { href: "/close/exceptions", label: "Exceptions" },
   { href: "/close/rulebook", label: "Rulebook" },
+  { href: "/setup", label: "Import" },
 ];
 
 export function Mark({ className = "" }: { className?: string }) {
