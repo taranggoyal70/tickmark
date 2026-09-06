@@ -34,6 +34,8 @@ export function resolveModel(id: ModelId): LanguageModel {
       name: "tickmark-endpoint",
       baseURL,
       apiKey: process.env.TICKMARK_API_KEY,
+      supportsStructuredOutputs:
+        process.env.TICKMARK_SUPPORTS_STRUCTURED_OUTPUTS === "1",
     });
     return provider(process.env.TICKMARK_MODEL ?? bare(id));
   }

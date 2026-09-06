@@ -383,11 +383,26 @@ runs against whatever the deployment has:
    OpenAI-compatible endpoint: a sponsor or in-house inference gateway,
    OpenRouter, or a self-hosted model. Set `TICKMARK_PRICE_IN` /
    `TICKMARK_PRICE_OUT` (USD per 1M tokens) so cost is priced honestly instead
-   of reported as `$0.00`.
+   of reported as `$0.00`. Structured outputs remain disabled by default for
+   unknown gateways. If the selected endpoint and model support JSON Schema
+   structured outputs, explicitly opt in with
+   `TICKMARK_SUPPORTS_STRUCTURED_OUTPUTS=1`.
 2. `ANTHROPIC_API_KEY` — the Anthropic API directly.
 3. Nothing set — the plain `provider/model` string routes through the
    [Vercel AI Gateway](https://vercel.com/docs/ai-gateway), authenticated by the
    `VERCEL_OIDC_TOKEN` that `vercel link` writes.
+
+For example, a local Ollama model that supports structured outputs can be
+configured in `.env.local` as follows:
+
+```dotenv
+TICKMARK_BASE_URL=http://localhost:11434/v1
+TICKMARK_API_KEY=ollama
+TICKMARK_MODEL=llama3.2:latest
+TICKMARK_SUPPORTS_STRUCTURED_OUTPUTS=1
+TICKMARK_PRICE_IN=0
+TICKMARK_PRICE_OUT=0
+```
 
 A full four-period run is roughly 75k input / 21k output tokens — about **$0.18
 on Haiku 4.5, $0.90 on Opus 5**. That is the entire demo, not a monthly bill.

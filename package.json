@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "test": "tsx --test scripts/*.test.ts",
+    "test": "tsx --test scripts/*.test.ts src/lib/agent/provider.test.ts",
     "simulate": "tsx --env-file-if-exists=.env.local scripts/simulate.ts",
     "typecheck": "next typegen && tsc --noEmit",
     "selftest": "tsx --env-file-if-exists=.env.local scripts/selftest.ts",
