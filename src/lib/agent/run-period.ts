@@ -224,3 +224,19 @@ export async function closePeriod(entityName: string, code: string, model: Model
   const persisted = await persistRun(entityId, loaded.periodId, result, model);
   return { entityId, result, persisted, rulebookVersion: rulebook.version };
 }
+
+/** Entities with ingested books, and the periods available to close. */
+export async function listEntitiesWithPeriods(): Promise<{ name: string; periods: string[] }[]> {
+  const c = db();
+  const { data: ents } = await c.from("entities").select("id, name").order("name");
+  if (!ents?.length) return [];
+  const { data: pers } = await c.from("periods").select("entity_id, code").order("code");
+  const byEntity = new Map<string, string[]>();
+  for (const p of pers ?? []) {
+    const k = String(p.entity_id);
+    (byEntity.get(k) ?? byEntity.set(k, []).get(k)!).push(String(p.code));
+  }
+  return ents
+    .map((e) => ({ name: String(e.name), periods: byEntity.get(String(e.id)) ?? [] }))
+    .filter((e) => e.periods.length);
+}

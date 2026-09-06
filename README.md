@@ -170,6 +170,33 @@ npm run ingest -- --sample --emit sample-books
 Nothing downstream is permitted to know whether it got sample data or your
 export.
 
+### Closing a period for real
+
+```bash
+npm run close -- --entity "Acme, Inc." --period 2026-05
+```
+
+This is not the eval harness. It loads the entity's ingested books, applies the
+Rulebook that entity has actually earned, and writes back what it decided:
+**tickmarks with their evidence**, matched pairs, the exception queue, and
+accrual entries **drafted for approval rather than posted**. The same close runs
+from the dashboard for anyone signed in — reading is public, writing to a ledger
+is not.
+
+A tickmark is the point of the product, so it is a row, not a counter:
+
+```json
+{ "note": "1:many tie-out, clean",
+  "refs": ["GL-2026-04-0046", "GL-2026-04-0047"],
+  "subjectRef": "BNK-2026-04-0033" }
+```
+
+**The close does not fail when the model is unreachable.** The Rulebook still
+settles everything it has earned and the remainder goes to the controller under
+`model_unavailable` — labelled for what it is rather than disguised as low
+confidence. A close that stops because a dependency is down is worse than one
+that does less.
+
 ### It works out how your vendors settle
 
 A matching rule's settlement shape is not declared anywhere. When a correction
@@ -260,6 +287,7 @@ npm run selftest               # full loop against a stand-in - no credential ne
 npm run simulate               # measured eval across four periods
 npm run verify:db              # prove the invariants against the live database
 npm run verify:gate            # prove the evidence gate, then restore the queue
+npm run verify:loop            # the whole product loop on ingested books
 npm run verify:all             # all of the above, one summary
 npm run dev                    # dashboard on http://localhost:3000
 ```
@@ -302,6 +330,7 @@ src/lib/agent/
   controller.ts     the human gate, simulated from ground truth
   simulate.ts       the multi-period eval harness
   backtest-db.ts    replays a proposed rule against the entity's own history
+  run-period.ts     load ingested books, close them, persist the result
 src/lib/store/      Supabase adapter + filesystem fallback behind one interface
 supabase/migrations one SQL file; the invariants live here as triggers
 CONTEXT.md          the domain model — read before naming anything

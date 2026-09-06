@@ -3,11 +3,16 @@ import { Panel, Stat } from "@/components/kit";
 import { EmptyRun, Shell } from "@/components/shell";
 import { ProvenanceBanner } from "@/components/provenance";
 import { latestReport, minutes, pct, usdFromMicros } from "@/lib/report";
+import { listEntitiesWithPeriods } from "@/lib/agent/run-period";
+import { queueEnabled } from "@/lib/store/queue";
+import { RunClose } from "@/components/run-close";
 
 export const dynamic = "force-dynamic";
 
 export default async function ClosePage() {
   const report = await latestReport();
+  // books that have actually been ingested, which is what a close can run on
+  const entities = queueEnabled() ? await listEntitiesWithPeriods().catch(() => []) : [];
   if (!report) return <Shell active="/close"><EmptyRun /></Shell>;
 
   const P = report.periods;
@@ -21,6 +26,12 @@ export default async function ClosePage() {
   return (
     <Shell active="/close">
       <ProvenanceBanner report={report} />
+
+      {entities.length ? (
+        <div className="mb-6">
+          <RunClose entity={entities[0].name} periods={entities[0].periods} />
+        </div>
+      ) : null}
       <div className="mb-8 flex flex-wrap items-end justify-between gap-4">
         <div>
           <div className="eyebrow mb-2">Close performance · {report.entity}</div>
