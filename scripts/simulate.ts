@@ -7,6 +7,7 @@ import { simulate } from "../src/lib/agent/simulate";
 import { fmtUsd, MODELS, rateFor, type ModelId } from "../src/lib/agent/pricing";
 import { effectiveModelId, providerLabel } from "../src/lib/agent/provider";
 import { getStore } from "../src/lib/store";
+import { flushTracing, tracingLabel } from "../src/lib/agent/tracing";
 
 function parseModel(): ModelId | undefined {
   const i = process.argv.indexOf("--model");
@@ -27,6 +28,7 @@ async function main() {
   const effective = effectiveModelId(model ?? "anthropic/claude-opus-5");
   const rate = rateFor(effective);
   console.log(`provider: ${providerLabel()}`);
+  console.log(`tracing:  ${tracingLabel()}`);
   console.log(`model:    ${effective}  ($${rate.inPerMTok}/$${rate.outPerMTok} per MTok)`);
   if (rate.inPerMTok === 0 && rate.outPerMTok === 0) {
     console.log("          no price configured, so cost reports as $0.00 - set TICKMARK_PRICE_IN/OUT to price it");
@@ -62,6 +64,8 @@ async function main() {
   const store = await getStore();
   await store.saveReport(report);
   console.log(`\nsaved via ${store.kind} store`);
+  // a short CLI run exits before the exporter drains on its own
+  await flushTracing();
 }
 
 main().catch((e) => { console.error("\nrun failed:", e?.message ?? e); process.exit(1); });

@@ -66,7 +66,8 @@ export async function runClose(input: CloseInput): Promise<CloseRunResult> {
   }
 
   for (const batch of chunk(residualInvoices, input.codingBatch ?? 20)) {
-    const { decisions, usage: u } = await codeInvoices(batch, chart, input.history, model);
+    const { decisions, usage: u } = await codeInvoices(batch, chart, input.history, model,
+      { periodCode: period.code, rulebookVersion: rulebook.version });
     usage = addUsage(usage, u);
     const seen = new Set<string>();
     for (const d of decisions) {
@@ -117,7 +118,8 @@ export async function runClose(input: CloseInput): Promise<CloseRunResult> {
       continue;
     }
 
-    const { matches: found, unmatchable, usage: u } = await matchBankLines(batch, candidates, model);
+    const { matches: found, unmatchable, usage: u } = await matchBankLines(batch, candidates, model,
+      { periodCode: period.code, rulebookVersion: rulebook.version });
     usage = addUsage(usage, u);
 
     for (const m of found) {

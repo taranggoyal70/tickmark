@@ -10,6 +10,7 @@ import { generateObject } from "ai";
 import { z } from "zod";
 import { DEFAULT_MODEL, costMicros, type ModelId } from "./pricing";
 import { resolveModel } from "./provider";
+import { telemetryFor, type TraceContext } from "./tracing";
 import { clip, toonTable, usd } from "./toon";
 import type { ApInvoice, BankLine, DeltaReason, LedgerEntry } from "./types";
 
@@ -71,9 +72,11 @@ export interface VendorHistoryRow {
 
 export async function codeInvoices(
   invoices: ApInvoice[], chart: ChartContext, history: VendorHistoryRow[], model: ModelId = DEFAULT_MODEL,
+  trace: Omit<TraceContext, "pass"> = {},
 ) {
   const { object, usage } = await generateObject({
     model: resolveModel(model),
+    experimental_telemetry: await telemetryFor({ ...trace, pass: "coding", batchSize: invoices.length }),
     schema: CodingOut,
     system: `${POLICY}\n\n${chartBlock(chart)}`,
     // AXI 4: the history aggregate is precomputed so the model never has to ask for it
@@ -112,9 +115,11 @@ const MatchOut = z.object({
 
 export async function matchBankLines(
   bank: BankLine[], candidates: LedgerEntry[], model: ModelId = DEFAULT_MODEL,
+  trace: Omit<TraceContext, "pass"> = {},
 ) {
   const { object, usage } = await generateObject({
     model: resolveModel(model),
+    experimental_telemetry: await telemetryFor({ ...trace, pass: "matching", batchSize: bank.length }),
     schema: MatchOut,
     system: `${POLICY}
 
@@ -184,9 +189,13 @@ export interface CorrectionRow {
   agentSaid: string; humanSaid: string; note: string;
 }
 
-export async function distillRules(corrections: CorrectionRow[], chart: ChartContext, model: ModelId = DEFAULT_MODEL) {
+export async function distillRules(
+  corrections: CorrectionRow[], chart: ChartContext, model: ModelId = DEFAULT_MODEL,
+  trace: Omit<TraceContext, "pass"> = {},
+) {
   const { object, usage } = await generateObject({
     model: resolveModel(model),
+    experimental_telemetry: await telemetryFor({ ...trace, pass: "gradient", batchSize: corrections.length }),
     schema: RuleOut,
     system: `${POLICY}
 

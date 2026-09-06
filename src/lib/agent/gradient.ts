@@ -145,7 +145,7 @@ export async function gradientStep(
 
   const { proposals: raw, usage } = await distillRules(
     corrections.map(({ id, period, subject, vendor, agentSaid, humanSaid, note }) => ({ id, period, subject, vendor, agentSaid, humanSaid, note })),
-    chart, model,
+    chart, model, { periodCode: corrections[0]?.period },
   );
 
   const byId = new Map(corrections.map((c) => [c.id, c]));
