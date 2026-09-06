@@ -138,8 +138,8 @@ export function CloseRoom({ periods }: { periods: PeriodReport[] }) {
       </div>
 
       <div className="grid gap-4 lg:grid-cols-2">
-        <Lane key={`a-${runId}`} period={cold} frames={cold.decisions} running={running} tone="cold" />
-        <Lane key={`b-${runId}`} period={trained} frames={trained.decisions} running={running} tone="trained" />
+        <Lane key={`a-${runId}`} period={cold} frames={cold.decisions ?? []} running={running} tone="cold" />
+        <Lane key={`b-${runId}`} period={trained} frames={trained.decisions ?? []} running={running} tone="trained" />
       </div>
 
       <p className="mt-5 text-[13px] leading-relaxed text-ink-subtle">

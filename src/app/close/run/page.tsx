@@ -7,7 +7,9 @@ export const dynamic = "force-dynamic";
 
 export default async function CloseRoomPage() {
   const report = await latestReport();
-  if (!report || report.periods.length < 2) return <Shell active="/close/run"><EmptyRun /></Shell>;
+  // a report written before decision frames existed cannot be replayed
+  const replayable = report && report.periods.length >= 2 && report.periods.every((p) => p.decisions?.length);
+  if (!replayable) return <Shell active="/close/run"><EmptyRun /></Shell>;
 
   const cold = report.periods[0];
   const trained = report.periods[report.periods.length - 1];

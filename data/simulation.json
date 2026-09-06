@@ -1,7 +1,7 @@
 {
   "provenance": "mock",
   "model": "anthropic/claude-opus-5",
-  "generatedAt": "2026-09-05T20:14:45.200Z",
+  "generatedAt": "2026-09-06T17:28:26.305Z",
   "entity": "Northwind Robotics, Inc.",
   "periods": [
     {
@@ -1577,13 +1577,762 @@
           ]
         }
       ],
+      "decisions": [
+        {
+          "ref": "DAT-202601-6298",
+          "kind": "coding",
+          "by": "agent",
+          "outcome": "exception",
+          "amountCents": 1216762,
+          "label": "Datadog → 6820",
+          "confidence": 0.62
+        },
+        {
+          "ref": "DIG-202601-7228",
+          "kind": "coding",
+          "by": "agent",
+          "outcome": "tickmark",
+          "amountCents": 679007,
+          "label": "Digi-Key Electronics → 5010",
+          "confidence": 0.95
+        },
+        {
+          "ref": "COO-202601-8421",
+          "kind": "coding",
+          "by": "agent",
+          "outcome": "exception",
+          "amountCents": 2694383,
+          "label": "Cooley LLP → 6610",
+          "confidence": 0.95
+        },
+        {
+          "ref": "BNK-2026-01-0031",
+          "kind": "matching",
+          "by": "agent",
+          "outcome": "exception",
+          "amountCents": -20797503,
+          "label": "Gusto · 1:many",
+          "confidence": 0.96
+        },
+        {
+          "ref": "BNK-2026-01-0051",
+          "kind": "matching",
+          "by": "agent",
+          "outcome": "tickmark",
+          "amountCents": 227793,
+          "label": "bank line · 1:1",
+          "confidence": 0.96
+        },
+        {
+          "ref": "BNK-2026-01-0008",
+          "kind": "matching",
+          "by": "agent",
+          "outcome": "exception",
+          "amountCents": -3950000,
+          "label": "WeWork · 1:1",
+          "confidence": 0.96
+        },
+        {
+          "ref": "BNK-2026-01-0011",
+          "kind": "matching",
+          "by": "agent",
+          "outcome": "exception",
+          "amountCents": 7432128,
+          "label": "Stripe · 1:many · bank_fee",
+          "confidence": 0.58
+        },
+        {
+          "ref": "BNK-2026-01-0038",
+          "kind": "matching",
+          "by": "agent",
+          "outcome": "tickmark",
+          "amountCents": -4190,
+          "label": "bank line · 1:1",
+          "confidence": 0.96
+        },
+        {
+          "ref": "BNK-2026-01-0041",
+          "kind": "matching",
+          "by": "agent",
+          "outcome": "tickmark",
+          "amountCents": -105326,
+          "label": "bank line · 1:1",
+          "confidence": 0.96
+        },
+        {
+          "ref": "BNK-2026-01-0001",
+          "kind": "matching",
+          "by": "agent",
+          "outcome": "exception",
+          "amountCents": -4870920,
+          "label": "Amazon Web Services · 1:many",
+          "confidence": 0.96
+        },
+        {
+          "ref": "BNK-2026-01-0028",
+          "kind": "matching",
+          "by": "agent",
+          "outcome": "exception",
+          "amountCents": -2690945,
+          "label": "Cooley LLP · 1:1",
+          "confidence": 0.96
+        },
+        {
+          "ref": "BNK-2026-01-0048",
+          "kind": "matching",
+          "by": "agent",
+          "outcome": "tickmark",
+          "amountCents": -3534,
+          "label": "bank line · 1:1",
+          "confidence": 0.96
+        },
+        {
+          "ref": "BNK-2026-01-0018",
+          "kind": "matching",
+          "by": "agent",
+          "outcome": "tickmark",
+          "amountCents": -824529,
+          "label": "Digi-Key Electronics · 1:1",
+          "confidence": 0.96
+        },
+        {
+          "ref": "BNK-2026-01-0021",
+          "kind": "matching",
+          "by": "agent",
+          "outcome": "exception",
+          "amountCents": -3357260,
+          "label": "no candidate",
+          "confidence": 0
+        },
+        {
+          "ref": "LIN-202601-7232",
+          "kind": "coding",
+          "by": "agent",
+          "outcome": "exception",
+          "amountCents": 95178,
+          "label": "Linear → 6830",
+          "confidence": 0.62
+        },
+        {
+          "ref": "DIG-202601-2169",
+          "kind": "coding",
+          "by": "agent",
+          "outcome": "tickmark",
+          "amountCents": 875788,
+          "label": "Digi-Key Electronics → 5010",
+          "confidence": 0.95
+        },
+        {
+          "ref": "DIG-202601-9439",
+          "kind": "coding",
+          "by": "agent",
+          "outcome": "tickmark",
+          "amountCents": 595628,
+          "label": "Digi-Key Electronics → 5010",
+          "confidence": 0.95
+        },
+        {
+          "ref": "COO-202601-9022",
+          "kind": "coding",
+          "by": "agent",
+          "outcome": "exception",
+          "amountCents": 3021517,
+          "label": "Cooley LLP → 6610",
+          "confidence": 0.95
+        },
+        {
+          "ref": "UNI-202601-6249",
+          "kind": "coding",
+          "by": "agent",
+          "outcome": "exception",
+          "amountCents": 157155,
+          "label": "United Airlines → 6910",
+          "confidence": 0.62
+        },
+        {
+          "ref": "UNI-202601-5362",
+          "kind": "coding",
+          "by": "agent",
+          "outcome": "exception",
+          "amountCents": 146878,
+          "label": "United Airlines → 6910",
+          "confidence": 0.62
+        },
+        {
+          "ref": "UNI-202601-7712",
+          "kind": "coding",
+          "by": "agent",
+          "outcome": "exception",
+          "amountCents": 242141,
+          "label": "United Airlines → 6910",
+          "confidence": 0.62
+        },
+        {
+          "ref": "BNK-2026-01-0009",
+          "kind": "matching",
+          "by": "agent",
+          "outcome": "exception",
+          "amountCents": 7599505,
+          "label": "Stripe · 1:many · bank_fee",
+          "confidence": 0.58
+        },
+        {
+          "ref": "BNK-2026-01-0039",
+          "kind": "matching",
+          "by": "agent",
+          "outcome": "tickmark",
+          "amountCents": -14196,
+          "label": "bank line · 1:1",
+          "confidence": 0.96
+        },
+        {
+          "ref": "BNK-2026-01-0052",
+          "kind": "matching",
+          "by": "agent",
+          "outcome": "tickmark",
+          "amountCents": -68338,
+          "label": "bank line · 1:1",
+          "confidence": 0.96
+        },
+        {
+          "ref": "BNK-2026-01-0042",
+          "kind": "matching",
+          "by": "agent",
+          "outcome": "tickmark",
+          "amountCents": -21399,
+          "label": "bank line · 1:1",
+          "confidence": 0.96
+        },
+        {
+          "ref": "BNK-2026-01-0049",
+          "kind": "matching",
+          "by": "agent",
+          "outcome": "tickmark",
+          "amountCents": -3729,
+          "label": "bank line · 1:1",
+          "confidence": 0.96
+        },
+        {
+          "ref": "BNK-2026-01-0002",
+          "kind": "matching",
+          "by": "agent",
+          "outcome": "tickmark",
+          "amountCents": -1216762,
+          "label": "Datadog · 1:many",
+          "confidence": 0.96
+        },
+        {
+          "ref": "BNK-2026-01-0029",
+          "kind": "matching",
+          "by": "agent",
+          "outcome": "exception",
+          "amountCents": -2694383,
+          "label": "Cooley LLP · 1:1",
+          "confidence": 0.96
+        },
+        {
+          "ref": "BNK-2026-01-0012",
+          "kind": "matching",
+          "by": "agent",
+          "outcome": "exception",
+          "amountCents": 9101329,
+          "label": "Stripe · 1:many · bank_fee",
+          "confidence": 0.58
+        },
+        {
+          "ref": "BNK-2026-01-0019",
+          "kind": "matching",
+          "by": "agent",
+          "outcome": "tickmark",
+          "amountCents": -680024,
+          "label": "Digi-Key Electronics · 1:1",
+          "confidence": 0.96
+        },
+        {
+          "ref": "BNK-2026-01-0032",
+          "kind": "matching",
+          "by": "agent",
+          "outcome": "exception",
+          "amountCents": -20140181,
+          "label": "Gusto · 1:many",
+          "confidence": 0.96
+        },
+        {
+          "ref": "BNK-2026-01-0022",
+          "kind": "matching",
+          "by": "agent",
+          "outcome": "exception",
+          "amountCents": -2238174,
+          "label": "no candidate",
+          "confidence": 0
+        },
+        {
+          "ref": "SLA-202601-6983",
+          "kind": "coding",
+          "by": "agent",
+          "outcome": "exception",
+          "amountCents": 204520,
+          "label": "Slack Technologies → 6830",
+          "confidence": 0.62
+        },
+        {
+          "ref": "BNK-2026-01-0033",
+          "kind": "matching",
+          "by": "agent",
+          "outcome": "tickmark",
+          "amountCents": -157155,
+          "label": "United Airlines · 1:many",
+          "confidence": 0.96
+        },
+        {
+          "ref": "BNK-2026-01-0043",
+          "kind": "matching",
+          "by": "agent",
+          "outcome": "tickmark",
+          "amountCents": -3161,
+          "label": "bank line · 1:1",
+          "confidence": 0.96
+        },
+        {
+          "ref": "BNK-2026-01-0003",
+          "kind": "matching",
+          "by": "agent",
+          "outcome": "tickmark",
+          "amountCents": -417027,
+          "label": "Vercel · 1:many",
+          "confidence": 0.96
+        },
+        {
+          "ref": "BNK-2026-01-0013",
+          "kind": "matching",
+          "by": "agent",
+          "outcome": "exception",
+          "amountCents": -2229208,
+          "label": "Deel · 1:many · fx",
+          "confidence": 0.58
+        },
+        {
+          "ref": "BNK-2026-01-0053",
+          "kind": "matching",
+          "by": "agent",
+          "outcome": "exception",
+          "amountCents": 1132635,
+          "label": "no candidate",
+          "confidence": 0
+        },
+        {
+          "ref": "BNK-2026-01-0023",
+          "kind": "matching",
+          "by": "agent",
+          "outcome": "exception",
+          "amountCents": -4244711,
+          "label": "no candidate",
+          "confidence": 0
+        },
+        {
+          "ref": "VER-202601-5484",
+          "kind": "coding",
+          "by": "agent",
+          "outcome": "exception",
+          "amountCents": 417027,
+          "label": "Vercel → 6820",
+          "confidence": 0.62
+        },
+        {
+          "ref": "MOU-202601-7494",
+          "kind": "coding",
+          "by": "agent",
+          "outcome": "tickmark",
+          "amountCents": 2055124,
+          "label": "Mouser Electronics → 5010",
+          "confidence": 0.95
+        },
+        {
+          "ref": "DIG-202601-3144",
+          "kind": "coding",
+          "by": "agent",
+          "outcome": "tickmark",
+          "amountCents": 824529,
+          "label": "Digi-Key Electronics → 5010",
+          "confidence": 0.95
+        },
+        {
+          "ref": "COO-202601-7754",
+          "kind": "coding",
+          "by": "agent",
+          "outcome": "exception",
+          "amountCents": 3463935,
+          "label": "Cooley LLP → 6610",
+          "confidence": 0.95
+        },
+        {
+          "ref": "BNK-2026-01-0034",
+          "kind": "matching",
+          "by": "agent",
+          "outcome": "tickmark",
+          "amountCents": -146878,
+          "label": "United Airlines · 1:many",
+          "confidence": 0.96
+        },
+        {
+          "ref": "BNK-2026-01-0044",
+          "kind": "matching",
+          "by": "agent",
+          "outcome": "tickmark",
+          "amountCents": -4213,
+          "label": "bank line · 1:1",
+          "confidence": 0.96
+        },
+        {
+          "ref": "BNK-2026-01-0004",
+          "kind": "matching",
+          "by": "agent",
+          "outcome": "tickmark",
+          "amountCents": -134165,
+          "label": "Figma · 1:many",
+          "confidence": 0.96
+        },
+        {
+          "ref": "BNK-2026-01-0014",
+          "kind": "matching",
+          "by": "agent",
+          "outcome": "tickmark",
+          "amountCents": -2055124,
+          "label": "Mouser Electronics · 1:1",
+          "confidence": 0.96
+        },
+        {
+          "ref": "BNK-2026-01-0054",
+          "kind": "matching",
+          "by": "agent",
+          "outcome": "exception",
+          "amountCents": -201014,
+          "label": "no candidate",
+          "confidence": 0
+        },
+        {
+          "ref": "BNK-2026-01-0024",
+          "kind": "matching",
+          "by": "agent",
+          "outcome": "exception",
+          "amountCents": -2829807,
+          "label": "no candidate",
+          "confidence": 0
+        },
+        {
+          "ref": "FIG-202601-3285",
+          "kind": "coding",
+          "by": "agent",
+          "outcome": "exception",
+          "amountCents": 134165,
+          "label": "Figma → 6830",
+          "confidence": 0.62
+        },
+        {
+          "ref": "FLE-202601-9265",
+          "kind": "coding",
+          "by": "agent",
+          "outcome": "exception",
+          "amountCents": 7074518,
+          "label": "Flexport → 5020",
+          "confidence": 0.95
+        },
+        {
+          "ref": "FLE-202601-9355",
+          "kind": "coding",
+          "by": "agent",
+          "outcome": "exception",
+          "amountCents": 4714280,
+          "label": "Flexport → 5020",
+          "confidence": 0.95
+        },
+        {
+          "ref": "COO-202601-9475",
+          "kind": "coding",
+          "by": "agent",
+          "outcome": "exception",
+          "amountCents": 2690945,
+          "label": "Cooley LLP → 6610",
+          "confidence": 0.95
+        },
+        {
+          "ref": "BNK-2026-01-0035",
+          "kind": "matching",
+          "by": "agent",
+          "outcome": "tickmark",
+          "amountCents": -242141,
+          "label": "United Airlines · 1:many",
+          "confidence": 0.96
+        },
+        {
+          "ref": "BNK-2026-01-0025",
+          "kind": "matching",
+          "by": "agent",
+          "outcome": "exception",
+          "amountCents": -4714280,
+          "label": "Flexport · 1:1",
+          "confidence": 0.96
+        },
+        {
+          "ref": "BNK-2026-01-0045",
+          "kind": "matching",
+          "by": "agent",
+          "outcome": "tickmark",
+          "amountCents": -14761,
+          "label": "bank line · 1:1",
+          "confidence": 0.96
+        },
+        {
+          "ref": "BNK-2026-01-0005",
+          "kind": "matching",
+          "by": "agent",
+          "outcome": "tickmark",
+          "amountCents": -95178,
+          "label": "Linear · 1:many",
+          "confidence": 0.96
+        },
+        {
+          "ref": "BNK-2026-01-0015",
+          "kind": "matching",
+          "by": "agent",
+          "outcome": "tickmark",
+          "amountCents": -2425592,
+          "label": "Mouser Electronics · 1:1",
+          "confidence": 0.96
+        },
+        {
+          "ref": "MOU-202601-8036",
+          "kind": "coding",
+          "by": "agent",
+          "outcome": "tickmark",
+          "amountCents": 2425592,
+          "label": "Mouser Electronics → 5010",
+          "confidence": 0.95
+        },
+        {
+          "ref": "FLE-202601-4016",
+          "kind": "coding",
+          "by": "agent",
+          "outcome": "exception",
+          "amountCents": 5595434,
+          "label": "Flexport → 5020",
+          "confidence": 0.95
+        },
+        {
+          "ref": "COO-202601-2266",
+          "kind": "coding",
+          "by": "agent",
+          "outcome": "exception",
+          "amountCents": 2532892,
+          "label": "Cooley LLP → 6610",
+          "confidence": 0.95
+        },
+        {
+          "ref": "IRO-202601-8926",
+          "kind": "coding",
+          "by": "agent",
+          "outcome": "tickmark",
+          "amountCents": 48964,
+          "label": "Iron Mountain → 6510",
+          "confidence": 0.95
+        },
+        {
+          "ref": "BNK-2026-01-0046",
+          "kind": "matching",
+          "by": "agent",
+          "outcome": "tickmark",
+          "amountCents": -82507,
+          "label": "bank line · 1:1",
+          "confidence": 0.96
+        },
+        {
+          "ref": "BNK-2026-01-0006",
+          "kind": "matching",
+          "by": "agent",
+          "outcome": "tickmark",
+          "amountCents": -204520,
+          "label": "Slack Technologies · 1:many",
+          "confidence": 0.96
+        },
+        {
+          "ref": "BNK-2026-01-0016",
+          "kind": "matching",
+          "by": "agent",
+          "outcome": "tickmark",
+          "amountCents": -875788,
+          "label": "Digi-Key Electronics · 1:1",
+          "confidence": 0.96
+        },
+        {
+          "ref": "BNK-2026-01-0026",
+          "kind": "matching",
+          "by": "agent",
+          "outcome": "exception",
+          "amountCents": -3463935,
+          "label": "Cooley LLP · 1:1",
+          "confidence": 0.96
+        },
+        {
+          "ref": "BNK-2026-01-0036",
+          "kind": "matching",
+          "by": "agent",
+          "outcome": "tickmark",
+          "amountCents": -1499614,
+          "label": "Google Ads · 1:1",
+          "confidence": 0.96
+        },
+        {
+          "ref": "AMA-202601-5427",
+          "kind": "coding",
+          "by": "agent",
+          "outcome": "exception",
+          "amountCents": 4870920,
+          "label": "Amazon Web Services → 6820",
+          "confidence": 0.62
+        },
+        {
+          "ref": "GIT-202601-8050",
+          "kind": "coding",
+          "by": "agent",
+          "outcome": "exception",
+          "amountCents": 177801,
+          "label": "GitHub → 6830",
+          "confidence": 0.62
+        },
+        {
+          "ref": "WEW-202601-7230",
+          "kind": "coding",
+          "by": "agent",
+          "outcome": "exception",
+          "amountCents": 3950000,
+          "label": "WeWork → 6510",
+          "confidence": 0.95
+        },
+        {
+          "ref": "DEE-202601-4827",
+          "kind": "coding",
+          "by": "agent",
+          "outcome": "exception",
+          "amountCents": 2049316,
+          "label": "Deel → 6010",
+          "confidence": 0.62
+        },
+        {
+          "ref": "DIG-202601-3537",
+          "kind": "coding",
+          "by": "agent",
+          "outcome": "tickmark",
+          "amountCents": 680024,
+          "label": "Digi-Key Electronics → 5010",
+          "confidence": 0.95
+        },
+        {
+          "ref": "GOO-202601-5330",
+          "kind": "coding",
+          "by": "agent",
+          "outcome": "tickmark",
+          "amountCents": 1499614,
+          "label": "Google Ads → 6710",
+          "confidence": 0.95
+        },
+        {
+          "ref": "BNK-2026-01-0010",
+          "kind": "matching",
+          "by": "agent",
+          "outcome": "exception",
+          "amountCents": 11265287,
+          "label": "Stripe · 1:many · bank_fee",
+          "confidence": 0.58
+        },
+        {
+          "ref": "BNK-2026-01-0047",
+          "kind": "matching",
+          "by": "agent",
+          "outcome": "tickmark",
+          "amountCents": -18070,
+          "label": "bank line · 1:1",
+          "confidence": 0.96
+        },
+        {
+          "ref": "BNK-2026-01-0027",
+          "kind": "matching",
+          "by": "agent",
+          "outcome": "exception",
+          "amountCents": -3021517,
+          "label": "Cooley LLP · 1:1",
+          "confidence": 0.96
+        },
+        {
+          "ref": "BNK-2026-01-0040",
+          "kind": "matching",
+          "by": "agent",
+          "outcome": "tickmark",
+          "amountCents": 220758,
+          "label": "bank line · 1:1",
+          "confidence": 0.96
+        },
+        {
+          "ref": "BNK-2026-01-0050",
+          "kind": "matching",
+          "by": "agent",
+          "outcome": "tickmark",
+          "amountCents": -10938,
+          "label": "bank line · 1:1",
+          "confidence": 0.96
+        },
+        {
+          "ref": "BNK-2026-01-0020",
+          "kind": "matching",
+          "by": "agent",
+          "outcome": "tickmark",
+          "amountCents": -679007,
+          "label": "Digi-Key Electronics · 1:1",
+          "confidence": 0.96
+        },
+        {
+          "ref": "BNK-2026-01-0007",
+          "kind": "matching",
+          "by": "agent",
+          "outcome": "tickmark",
+          "amountCents": -177801,
+          "label": "GitHub · 1:many",
+          "confidence": 0.96
+        },
+        {
+          "ref": "BNK-2026-01-0017",
+          "kind": "matching",
+          "by": "agent",
+          "outcome": "tickmark",
+          "amountCents": -595628,
+          "label": "Digi-Key Electronics · 1:1",
+          "confidence": 0.96
+        },
+        {
+          "ref": "BNK-2026-01-0030",
+          "kind": "matching",
+          "by": "agent",
+          "outcome": "exception",
+          "amountCents": -2532892,
+          "label": "Cooley LLP · 1:1",
+          "confidence": 0.96
+        },
+        {
+          "ref": "BNK-2026-01-0037",
+          "kind": "matching",
+          "by": "agent",
+          "outcome": "tickmark",
+          "amountCents": -48964,
+          "label": "Iron Mountain · 1:1",
+          "confidence": 0.96
+        }
+      ],
       "stats": {
         "llmCalls": 7,
         "ruleHits": 0,
         "tokensIn": 6300,
         "tokensOut": 1820,
         "costMicros": 77000,
-        "durationMs": 22,
+        "durationMs": 15,
         "codingAccuracy": 1,
         "matchAccuracy": 0.96,
         "autoClearRate": 0.5454545454545454,
@@ -3096,6 +3845,809 @@
           ]
         }
       ],
+      "decisions": [
+        {
+          "ref": "SLA-202602-8581",
+          "kind": "coding",
+          "by": "agent",
+          "outcome": "exception",
+          "amountCents": 224020,
+          "label": "Slack Technologies → 6830",
+          "confidence": 0.62
+        },
+        {
+          "ref": "MOU-202602-6388",
+          "kind": "coding",
+          "by": "agent",
+          "outcome": "tickmark",
+          "amountCents": 1763615,
+          "label": "Mouser Electronics → 5010",
+          "confidence": 0.95
+        },
+        {
+          "ref": "MOU-202602-2481",
+          "kind": "coding",
+          "by": "agent",
+          "outcome": "tickmark",
+          "amountCents": 1554109,
+          "label": "Mouser Electronics → 5010",
+          "confidence": 0.95
+        },
+        {
+          "ref": "DIG-202602-5121",
+          "kind": "coding",
+          "by": "agent",
+          "outcome": "tickmark",
+          "amountCents": 1041357,
+          "label": "Digi-Key Electronics → 5010",
+          "confidence": 0.95
+        },
+        {
+          "ref": "DIG-202602-2898",
+          "kind": "coding",
+          "by": "agent",
+          "outcome": "tickmark",
+          "amountCents": 641181,
+          "label": "Digi-Key Electronics → 5010",
+          "confidence": 0.95
+        },
+        {
+          "ref": "DIG-202602-2171",
+          "kind": "coding",
+          "by": "agent",
+          "outcome": "tickmark",
+          "amountCents": 1326497,
+          "label": "Digi-Key Electronics → 5010",
+          "confidence": 0.95
+        },
+        {
+          "ref": "FLE-202602-3258",
+          "kind": "coding",
+          "by": "agent",
+          "outcome": "exception",
+          "amountCents": 4653296,
+          "label": "Flexport → 5020",
+          "confidence": 0.95
+        },
+        {
+          "ref": "FLE-202602-5421",
+          "kind": "coding",
+          "by": "agent",
+          "outcome": "exception",
+          "amountCents": 6754159,
+          "label": "Flexport → 5020",
+          "confidence": 0.95
+        },
+        {
+          "ref": "COO-202602-2028",
+          "kind": "coding",
+          "by": "agent",
+          "outcome": "tickmark",
+          "amountCents": 1951489,
+          "label": "Cooley LLP → 6610",
+          "confidence": 0.95
+        },
+        {
+          "ref": "UNI-202602-8251",
+          "kind": "coding",
+          "by": "agent",
+          "outcome": "exception",
+          "amountCents": 233952,
+          "label": "United Airlines → 6910",
+          "confidence": 0.62
+        },
+        {
+          "ref": "BNK-2026-02-0038",
+          "kind": "matching",
+          "by": "agent",
+          "outcome": "tickmark",
+          "amountCents": -228416,
+          "label": "United Airlines · 1:many",
+          "confidence": 0.96
+        },
+        {
+          "ref": "BNK-2026-02-0041",
+          "kind": "matching",
+          "by": "agent",
+          "outcome": "tickmark",
+          "amountCents": -4061,
+          "label": "bank line · 1:1",
+          "confidence": 0.96
+        },
+        {
+          "ref": "BNK-2026-02-0051",
+          "kind": "matching",
+          "by": "agent",
+          "outcome": "tickmark",
+          "amountCents": -3449,
+          "label": "bank line · 1:1",
+          "confidence": 0.96
+        },
+        {
+          "ref": "BNK-2026-02-0008",
+          "kind": "matching",
+          "by": "agent",
+          "outcome": "exception",
+          "amountCents": -3950000,
+          "label": "WeWork · 1:1",
+          "confidence": 0.96
+        },
+        {
+          "ref": "BNK-2026-02-0011",
+          "kind": "matching",
+          "by": "agent",
+          "outcome": "exception",
+          "amountCents": 8726826,
+          "label": "Stripe · 1:many · bank_fee",
+          "confidence": 0.58
+        },
+        {
+          "ref": "BNK-2026-02-0021",
+          "kind": "matching",
+          "by": "agent",
+          "outcome": "tickmark",
+          "amountCents": -833988,
+          "label": "Digi-Key Electronics · 1:1",
+          "confidence": 0.96
+        },
+        {
+          "ref": "BNK-2026-02-0048",
+          "kind": "matching",
+          "by": "agent",
+          "outcome": "tickmark",
+          "amountCents": 180416,
+          "label": "bank line · 1:1",
+          "confidence": 0.96
+        },
+        {
+          "ref": "BNK-2026-02-0001",
+          "kind": "matching",
+          "by": "agent",
+          "outcome": "exception",
+          "amountCents": -4548054,
+          "label": "Amazon Web Services · 1:many",
+          "confidence": 0.96
+        },
+        {
+          "ref": "BNK-2026-02-0031",
+          "kind": "matching",
+          "by": "agent",
+          "outcome": "tickmark",
+          "amountCents": -2093987,
+          "label": "Cooley LLP · 1:1",
+          "confidence": 0.96
+        },
+        {
+          "ref": "BNK-2026-02-0018",
+          "kind": "matching",
+          "by": "agent",
+          "outcome": "tickmark",
+          "amountCents": -1957553,
+          "label": "Mouser Electronics · 1:1",
+          "confidence": 0.96
+        },
+        {
+          "ref": "BNK-2026-02-0028",
+          "kind": "matching",
+          "by": "agent",
+          "outcome": "exception",
+          "amountCents": -2494915,
+          "label": "no candidate",
+          "confidence": 0
+        },
+        {
+          "ref": "AMA-202602-3782",
+          "kind": "coding",
+          "by": "agent",
+          "outcome": "exception",
+          "amountCents": 4548054,
+          "label": "Amazon Web Services → 6820",
+          "confidence": 0.62
+        },
+        {
+          "ref": "MOU-202602-1679",
+          "kind": "coding",
+          "by": "agent",
+          "outcome": "tickmark",
+          "amountCents": 1957553,
+          "label": "Mouser Electronics → 5010",
+          "confidence": 0.95
+        },
+        {
+          "ref": "DIG-202602-4772",
+          "kind": "coding",
+          "by": "agent",
+          "outcome": "tickmark",
+          "amountCents": 865082,
+          "label": "Digi-Key Electronics → 5010",
+          "confidence": 0.95
+        },
+        {
+          "ref": "COO-202602-1282",
+          "kind": "coding",
+          "by": "agent",
+          "outcome": "tickmark",
+          "amountCents": 1792917,
+          "label": "Cooley LLP → 6610",
+          "confidence": 0.95
+        },
+        {
+          "ref": "BNK-2026-02-0009",
+          "kind": "matching",
+          "by": "agent",
+          "outcome": "exception",
+          "amountCents": 9675748,
+          "label": "Stripe · 1:many · bank_fee",
+          "confidence": 0.58
+        },
+        {
+          "ref": "BNK-2026-02-0052",
+          "kind": "matching",
+          "by": "agent",
+          "outcome": "tickmark",
+          "amountCents": -12515,
+          "label": "bank line · 1:1",
+          "confidence": 0.96
+        },
+        {
+          "ref": "BNK-2026-02-0042",
+          "kind": "matching",
+          "by": "agent",
+          "outcome": "tickmark",
+          "amountCents": -11391,
+          "label": "bank line · 1:1",
+          "confidence": 0.96
+        },
+        {
+          "ref": "BNK-2026-02-0049",
+          "kind": "matching",
+          "by": "agent",
+          "outcome": "tickmark",
+          "amountCents": -92996,
+          "label": "bank line · 1:1",
+          "confidence": 0.96
+        },
+        {
+          "ref": "BNK-2026-02-0002",
+          "kind": "matching",
+          "by": "agent",
+          "outcome": "tickmark",
+          "amountCents": -1236205,
+          "label": "Datadog · 1:many",
+          "confidence": 0.96
+        },
+        {
+          "ref": "BNK-2026-02-0012",
+          "kind": "matching",
+          "by": "agent",
+          "outcome": "exception",
+          "amountCents": 7789664,
+          "label": "Stripe · 1:many · bank_fee",
+          "confidence": 0.58
+        },
+        {
+          "ref": "BNK-2026-02-0019",
+          "kind": "matching",
+          "by": "agent",
+          "outcome": "tickmark",
+          "amountCents": -1041357,
+          "label": "Digi-Key Electronics · 1:1",
+          "confidence": 0.96
+        },
+        {
+          "ref": "BNK-2026-02-0022",
+          "kind": "matching",
+          "by": "agent",
+          "outcome": "tickmark",
+          "amountCents": -865082,
+          "label": "Digi-Key Electronics · 1:1",
+          "confidence": 0.96
+        },
+        {
+          "ref": "BNK-2026-02-0029",
+          "kind": "matching",
+          "by": "agent",
+          "outcome": "tickmark",
+          "amountCents": -1792917,
+          "label": "Cooley LLP · 1:1",
+          "confidence": 0.96
+        },
+        {
+          "ref": "BNK-2026-02-0032",
+          "kind": "matching",
+          "by": "agent",
+          "outcome": "tickmark",
+          "amountCents": -2267196,
+          "label": "Cooley LLP · 1:1",
+          "confidence": 0.96
+        },
+        {
+          "ref": "BNK-2026-02-0039",
+          "kind": "matching",
+          "by": "agent",
+          "outcome": "tickmark",
+          "amountCents": -1970857,
+          "label": "Google Ads · 1:1",
+          "confidence": 0.96
+        },
+        {
+          "ref": "BNK-2026-02-0043",
+          "kind": "matching",
+          "by": "agent",
+          "outcome": "tickmark",
+          "amountCents": -86554,
+          "label": "bank line · 1:1",
+          "confidence": 0.96
+        },
+        {
+          "ref": "BNK-2026-02-0013",
+          "kind": "matching",
+          "by": "agent",
+          "outcome": "exception",
+          "amountCents": -2061731,
+          "label": "Deel · 1:many · fx",
+          "confidence": 0.58
+        },
+        {
+          "ref": "BNK-2026-02-0053",
+          "kind": "matching",
+          "by": "agent",
+          "outcome": "tickmark",
+          "amountCents": 168652,
+          "label": "bank line · 1:1",
+          "confidence": 0.96
+        },
+        {
+          "ref": "BNK-2026-02-0003",
+          "kind": "matching",
+          "by": "agent",
+          "outcome": "tickmark",
+          "amountCents": -401587,
+          "label": "Vercel · 1:many",
+          "confidence": 0.96
+        },
+        {
+          "ref": "BNK-2026-02-0023",
+          "kind": "matching",
+          "by": "agent",
+          "outcome": "tickmark",
+          "amountCents": -1326497,
+          "label": "Digi-Key Electronics · 1:1",
+          "confidence": 0.96
+        },
+        {
+          "ref": "BNK-2026-02-0033",
+          "kind": "matching",
+          "by": "agent",
+          "outcome": "exception",
+          "amountCents": -4551358,
+          "label": "Deloitte · 1:1",
+          "confidence": 0.96
+        },
+        {
+          "ref": "FIG-202602-4584",
+          "kind": "coding",
+          "by": "agent",
+          "outcome": "exception",
+          "amountCents": 129921,
+          "label": "Figma → 6830",
+          "confidence": 0.62
+        },
+        {
+          "ref": "LIN-202602-5174",
+          "kind": "coding",
+          "by": "agent",
+          "outcome": "exception",
+          "amountCents": 97928,
+          "label": "Linear → 6830",
+          "confidence": 0.62
+        },
+        {
+          "ref": "GIT-202602-2924",
+          "kind": "coding",
+          "by": "agent",
+          "outcome": "exception",
+          "amountCents": 169492,
+          "label": "GitHub → 6830",
+          "confidence": 0.62
+        },
+        {
+          "ref": "DEE-202602-6664",
+          "kind": "coding",
+          "by": "agent",
+          "outcome": "exception",
+          "amountCents": 1920587,
+          "label": "Deel → 6010",
+          "confidence": 0.62
+        },
+        {
+          "ref": "BNK-2026-02-0044",
+          "kind": "matching",
+          "by": "agent",
+          "outcome": "tickmark",
+          "amountCents": -24912,
+          "label": "bank line · 1:1",
+          "confidence": 0.96
+        },
+        {
+          "ref": "BNK-2026-02-0054",
+          "kind": "matching",
+          "by": "agent",
+          "outcome": "tickmark",
+          "amountCents": -108878,
+          "label": "bank line · 1:1",
+          "confidence": 0.96
+        },
+        {
+          "ref": "BNK-2026-02-0004",
+          "kind": "matching",
+          "by": "agent",
+          "outcome": "tickmark",
+          "amountCents": -129921,
+          "label": "Figma · 1:many",
+          "confidence": 0.96
+        },
+        {
+          "ref": "BNK-2026-02-0014",
+          "kind": "matching",
+          "by": "agent",
+          "outcome": "tickmark",
+          "amountCents": -1763615,
+          "label": "Mouser Electronics · 1:1",
+          "confidence": 0.96
+        },
+        {
+          "ref": "BNK-2026-02-0024",
+          "kind": "matching",
+          "by": "agent",
+          "outcome": "exception",
+          "amountCents": -4653296,
+          "label": "Flexport · 1:1",
+          "confidence": 0.96
+        },
+        {
+          "ref": "BNK-2026-02-0034",
+          "kind": "matching",
+          "by": "agent",
+          "outcome": "exception",
+          "amountCents": -24000000,
+          "label": "Salesforce · 1:1",
+          "confidence": 0.96
+        },
+        {
+          "ref": "DIG-202602-9165",
+          "kind": "coding",
+          "by": "agent",
+          "outcome": "tickmark",
+          "amountCents": 833988,
+          "label": "Digi-Key Electronics → 5010",
+          "confidence": 0.95
+        },
+        {
+          "ref": "FLE-202602-5155",
+          "kind": "coding",
+          "by": "agent",
+          "outcome": "exception",
+          "amountCents": 6237287,
+          "label": "Flexport → 5020",
+          "confidence": 0.95
+        },
+        {
+          "ref": "COO-202602-5895",
+          "kind": "coding",
+          "by": "agent",
+          "outcome": "tickmark",
+          "amountCents": 2093987,
+          "label": "Cooley LLP → 6610",
+          "confidence": 0.95
+        },
+        {
+          "ref": "DEL-202602-5205",
+          "kind": "coding",
+          "by": "agent",
+          "outcome": "exception",
+          "amountCents": 4551358,
+          "label": "Deloitte → 6610",
+          "confidence": 0.95
+        },
+        {
+          "ref": "UNI-202602-4915",
+          "kind": "coding",
+          "by": "agent",
+          "outcome": "exception",
+          "amountCents": 228416,
+          "label": "United Airlines → 6910",
+          "confidence": 0.62
+        },
+        {
+          "ref": "BNK-2026-02-0055",
+          "kind": "matching",
+          "by": "agent",
+          "outcome": "tickmark",
+          "amountCents": -22342,
+          "label": "bank line · 1:1",
+          "confidence": 0.96
+        },
+        {
+          "ref": "BNK-2026-02-0035",
+          "kind": "matching",
+          "by": "agent",
+          "outcome": "exception",
+          "amountCents": -20401212,
+          "label": "Gusto · 1:many",
+          "confidence": 0.96
+        },
+        {
+          "ref": "BNK-2026-02-0045",
+          "kind": "matching",
+          "by": "agent",
+          "outcome": "tickmark",
+          "amountCents": -3373,
+          "label": "bank line · 1:1",
+          "confidence": 0.96
+        },
+        {
+          "ref": "BNK-2026-02-0005",
+          "kind": "matching",
+          "by": "agent",
+          "outcome": "tickmark",
+          "amountCents": -97928,
+          "label": "Linear · 1:many",
+          "confidence": 0.96
+        },
+        {
+          "ref": "BNK-2026-02-0015",
+          "kind": "matching",
+          "by": "agent",
+          "outcome": "tickmark",
+          "amountCents": -1554109,
+          "label": "Mouser Electronics · 1:1",
+          "confidence": 0.96
+        },
+        {
+          "ref": "BNK-2026-02-0025",
+          "kind": "matching",
+          "by": "agent",
+          "outcome": "exception",
+          "amountCents": -4052495,
+          "label": "no candidate",
+          "confidence": 0
+        },
+        {
+          "ref": "DAT-202602-1226",
+          "kind": "coding",
+          "by": "agent",
+          "outcome": "exception",
+          "amountCents": 1236205,
+          "label": "Datadog → 6820",
+          "confidence": 0.62
+        },
+        {
+          "ref": "WEW-202602-5306",
+          "kind": "coding",
+          "by": "agent",
+          "outcome": "exception",
+          "amountCents": 3950000,
+          "label": "WeWork → 6510",
+          "confidence": 0.95
+        },
+        {
+          "ref": "COO-202602-2676",
+          "kind": "coding",
+          "by": "agent",
+          "outcome": "tickmark",
+          "amountCents": 2267196,
+          "label": "Cooley LLP → 6610",
+          "confidence": 0.95
+        },
+        {
+          "ref": "SAL-202602-4136",
+          "kind": "coding",
+          "by": "agent",
+          "outcome": "exception",
+          "amountCents": 24000000,
+          "label": "Salesforce → 1400",
+          "confidence": 0.95
+        },
+        {
+          "ref": "BNK-2026-02-0046",
+          "kind": "matching",
+          "by": "agent",
+          "outcome": "tickmark",
+          "amountCents": -5211,
+          "label": "bank line · 1:1",
+          "confidence": 0.96
+        },
+        {
+          "ref": "BNK-2026-02-0006",
+          "kind": "matching",
+          "by": "agent",
+          "outcome": "tickmark",
+          "amountCents": -224020,
+          "label": "Slack Technologies · 1:many",
+          "confidence": 0.96
+        },
+        {
+          "ref": "BNK-2026-02-0016",
+          "kind": "matching",
+          "by": "agent",
+          "outcome": "exception",
+          "amountCents": -2501738,
+          "label": "Mouser Electronics · 1:1",
+          "confidence": 0.96
+        },
+        {
+          "ref": "BNK-2026-02-0036",
+          "kind": "matching",
+          "by": "agent",
+          "outcome": "exception",
+          "amountCents": -20752346,
+          "label": "Gusto · 1:many",
+          "confidence": 0.96
+        },
+        {
+          "ref": "BNK-2026-02-0056",
+          "kind": "matching",
+          "by": "agent",
+          "outcome": "exception",
+          "amountCents": 1086227,
+          "label": "no candidate",
+          "confidence": 0
+        },
+        {
+          "ref": "BNK-2026-02-0026",
+          "kind": "matching",
+          "by": "agent",
+          "outcome": "exception",
+          "amountCents": -2701664,
+          "label": "no candidate",
+          "confidence": 0
+        },
+        {
+          "ref": "VER-202602-8460",
+          "kind": "coding",
+          "by": "agent",
+          "outcome": "exception",
+          "amountCents": 401587,
+          "label": "Vercel → 6820",
+          "confidence": 0.62
+        },
+        {
+          "ref": "MOU-202602-7557",
+          "kind": "coding",
+          "by": "agent",
+          "outcome": "exception",
+          "amountCents": 2501738,
+          "label": "Mouser Electronics → 5010",
+          "confidence": 0.95
+        },
+        {
+          "ref": "MOU-202602-7907",
+          "kind": "coding",
+          "by": "agent",
+          "outcome": "exception",
+          "amountCents": 2602585,
+          "label": "Mouser Electronics → 5010",
+          "confidence": 0.95
+        },
+        {
+          "ref": "GOO-202602-9817",
+          "kind": "coding",
+          "by": "agent",
+          "outcome": "tickmark",
+          "amountCents": 1970857,
+          "label": "Google Ads → 6710",
+          "confidence": 0.95
+        },
+        {
+          "ref": "IRO-202602-7130",
+          "kind": "coding",
+          "by": "agent",
+          "outcome": "tickmark",
+          "amountCents": 49000,
+          "label": "Iron Mountain → 6510",
+          "confidence": 0.95
+        },
+        {
+          "ref": "BNK-2026-02-0037",
+          "kind": "matching",
+          "by": "agent",
+          "outcome": "tickmark",
+          "amountCents": -233952,
+          "label": "United Airlines · 1:many",
+          "confidence": 0.96
+        },
+        {
+          "ref": "BNK-2026-02-0047",
+          "kind": "matching",
+          "by": "agent",
+          "outcome": "tickmark",
+          "amountCents": -12964,
+          "label": "bank line · 1:1",
+          "confidence": 0.96
+        },
+        {
+          "ref": "BNK-2026-02-0010",
+          "kind": "matching",
+          "by": "agent",
+          "outcome": "exception",
+          "amountCents": 11015675,
+          "label": "Stripe · 1:many · bank_fee",
+          "confidence": 0.58
+        },
+        {
+          "ref": "BNK-2026-02-0050",
+          "kind": "matching",
+          "by": "agent",
+          "outcome": "tickmark",
+          "amountCents": -26537,
+          "label": "bank line · 1:1",
+          "confidence": 0.96
+        },
+        {
+          "ref": "BNK-2026-02-0040",
+          "kind": "matching",
+          "by": "agent",
+          "outcome": "tickmark",
+          "amountCents": -49000,
+          "label": "Iron Mountain · 1:1",
+          "confidence": 0.96
+        },
+        {
+          "ref": "BNK-2026-02-0007",
+          "kind": "matching",
+          "by": "agent",
+          "outcome": "tickmark",
+          "amountCents": -169492,
+          "label": "GitHub · 1:many",
+          "confidence": 0.96
+        },
+        {
+          "ref": "BNK-2026-02-0017",
+          "kind": "matching",
+          "by": "agent",
+          "outcome": "exception",
+          "amountCents": -2602585,
+          "label": "Mouser Electronics · 1:1",
+          "confidence": 0.96
+        },
+        {
+          "ref": "BNK-2026-02-0020",
+          "kind": "matching",
+          "by": "agent",
+          "outcome": "tickmark",
+          "amountCents": -641181,
+          "label": "Digi-Key Electronics · 1:1",
+          "confidence": 0.96
+        },
+        {
+          "ref": "BNK-2026-02-0030",
+          "kind": "matching",
+          "by": "agent",
+          "outcome": "tickmark",
+          "amountCents": -1951489,
+          "label": "Cooley LLP · 1:1",
+          "confidence": 0.96
+        },
+        {
+          "ref": "BNK-2026-02-0027",
+          "kind": "matching",
+          "by": "agent",
+          "outcome": "exception",
+          "amountCents": -3742372,
+          "label": "no candidate",
+          "confidence": 0
+        },
+        {
+          "ref": "BNK-2026-02-0057",
+          "kind": "matching",
+          "by": "agent",
+          "outcome": "exception",
+          "amountCents": -424410,
+          "label": "no candidate",
+          "confidence": 0
+        }
+      ],
       "stats": {
         "llmCalls": 7,
         "ruleHits": 0,
@@ -4279,13 +5831,798 @@
           ]
         }
       ],
+      "decisions": [
+        {
+          "ref": "FLE-202603-1978",
+          "kind": "coding",
+          "by": "rule",
+          "outcome": "tickmark",
+          "amountCents": 8294271,
+          "label": "Flexport → 5020",
+          "confidence": 0.99
+        },
+        {
+          "ref": "UNI-202603-9841",
+          "kind": "coding",
+          "by": "rule",
+          "outcome": "tickmark",
+          "amountCents": 198664,
+          "label": "United Airlines → 6910",
+          "confidence": 0.99
+        },
+        {
+          "ref": "AMA-202603-6378",
+          "kind": "coding",
+          "by": "agent",
+          "outcome": "exception",
+          "amountCents": 5483736,
+          "label": "Amazon Web Services → 6820",
+          "confidence": 0.62
+        },
+        {
+          "ref": "FIG-202603-7018",
+          "kind": "coding",
+          "by": "agent",
+          "outcome": "exception",
+          "amountCents": 134233,
+          "label": "Figma → 6830",
+          "confidence": 0.62
+        },
+        {
+          "ref": "BNK-2026-03-0029+BNK-2026-03-0028",
+          "kind": "matching",
+          "by": "rule",
+          "outcome": "tickmark",
+          "amountCents": -5480283,
+          "label": "Flexport · many:1",
+          "confidence": 0.98
+        },
+        {
+          "ref": "BNK-2026-03-0048",
+          "kind": "matching",
+          "by": "agent",
+          "outcome": "tickmark",
+          "amountCents": -11784,
+          "label": "bank line · 1:1",
+          "confidence": 0.96
+        },
+        {
+          "ref": "BNK-2026-03-0051",
+          "kind": "matching",
+          "by": "agent",
+          "outcome": "tickmark",
+          "amountCents": -22785,
+          "label": "bank line · 1:1",
+          "confidence": 0.96
+        },
+        {
+          "ref": "BNK-2026-03-0008",
+          "kind": "matching",
+          "by": "agent",
+          "outcome": "exception",
+          "amountCents": -3950000,
+          "label": "WeWork · 1:1",
+          "confidence": 0.96
+        },
+        {
+          "ref": "BNK-2026-03-0011",
+          "kind": "matching",
+          "by": "agent",
+          "outcome": "exception",
+          "amountCents": 10266093,
+          "label": "Stripe · 1:many · bank_fee",
+          "confidence": 0.58
+        },
+        {
+          "ref": "BNK-2026-03-0041",
+          "kind": "matching",
+          "by": "agent",
+          "outcome": "tickmark",
+          "amountCents": -4356,
+          "label": "bank line · 1:1",
+          "confidence": 0.96
+        },
+        {
+          "ref": "BNK-2026-03-0001",
+          "kind": "matching",
+          "by": "agent",
+          "outcome": "exception",
+          "amountCents": -5483736,
+          "label": "Amazon Web Services · 1:many",
+          "confidence": 0.96
+        },
+        {
+          "ref": "BNK-2026-03-0038",
+          "kind": "matching",
+          "by": "agent",
+          "outcome": "tickmark",
+          "amountCents": -1570409,
+          "label": "Google Ads · 1:1",
+          "confidence": 0.96
+        },
+        {
+          "ref": "BNK-2026-03-0018",
+          "kind": "matching",
+          "by": "agent",
+          "outcome": "tickmark",
+          "amountCents": -1413233,
+          "label": "Mouser Electronics · 1:1",
+          "confidence": 0.96
+        },
+        {
+          "ref": "BNK-2026-03-0031",
+          "kind": "matching",
+          "by": "agent",
+          "outcome": "exception",
+          "amountCents": -3261857,
+          "label": "Cooley LLP · 1:1",
+          "confidence": 0.96
+        },
+        {
+          "ref": "BNK-2026-03-0058",
+          "kind": "matching",
+          "by": "agent",
+          "outcome": "exception",
+          "amountCents": 977129,
+          "label": "no candidate",
+          "confidence": 0
+        },
+        {
+          "ref": "BNK-2026-03-0021",
+          "kind": "matching",
+          "by": "agent",
+          "outcome": "exception",
+          "amountCents": -3044030,
+          "label": "no candidate",
+          "confidence": 0
+        },
+        {
+          "ref": "MOU-202603-4999",
+          "kind": "coding",
+          "by": "rule",
+          "outcome": "tickmark",
+          "amountCents": 1439514,
+          "label": "Mouser Electronics → 5010",
+          "confidence": 0.99
+        },
+        {
+          "ref": "MOU-202603-1209",
+          "kind": "coding",
+          "by": "rule",
+          "outcome": "tickmark",
+          "amountCents": 1506856,
+          "label": "Mouser Electronics → 5010",
+          "confidence": 0.99
+        },
+        {
+          "ref": "MOU-202603-3612",
+          "kind": "coding",
+          "by": "rule",
+          "outcome": "tickmark",
+          "amountCents": 2561886,
+          "label": "Mouser Electronics → 5010",
+          "confidence": 0.99
+        },
+        {
+          "ref": "UNI-202603-7062",
+          "kind": "coding",
+          "by": "rule",
+          "outcome": "tickmark",
+          "amountCents": 105404,
+          "label": "United Airlines → 6910",
+          "confidence": 0.99
+        },
+        {
+          "ref": "LIN-202603-2269",
+          "kind": "coding",
+          "by": "agent",
+          "outcome": "exception",
+          "amountCents": 93803,
+          "label": "Linear → 6830",
+          "confidence": 0.62
+        },
+        {
+          "ref": "GIT-202603-8799",
+          "kind": "coding",
+          "by": "agent",
+          "outcome": "exception",
+          "amountCents": 174970,
+          "label": "GitHub → 6830",
+          "confidence": 0.62
+        },
+        {
+          "ref": "BNK-2026-03-0009",
+          "kind": "matching",
+          "by": "agent",
+          "outcome": "exception",
+          "amountCents": 9804519,
+          "label": "Stripe · 1:many · bank_fee",
+          "confidence": 0.58
+        },
+        {
+          "ref": "BNK-2026-03-0052",
+          "kind": "matching",
+          "by": "agent",
+          "outcome": "tickmark",
+          "amountCents": -3143,
+          "label": "bank line · 1:1",
+          "confidence": 0.96
+        },
+        {
+          "ref": "BNK-2026-03-0032",
+          "kind": "matching",
+          "by": "agent",
+          "outcome": "exception",
+          "amountCents": -20018111,
+          "label": "Gusto · 1:many",
+          "confidence": 0.96
+        },
+        {
+          "ref": "BNK-2026-03-0002",
+          "kind": "matching",
+          "by": "agent",
+          "outcome": "tickmark",
+          "amountCents": -1332987,
+          "label": "Datadog · 1:many",
+          "confidence": 0.96
+        },
+        {
+          "ref": "BNK-2026-03-0019",
+          "kind": "matching",
+          "by": "agent",
+          "outcome": "tickmark",
+          "amountCents": -543258,
+          "label": "Digi-Key Electronics · 1:1",
+          "confidence": 0.96
+        },
+        {
+          "ref": "BNK-2026-03-0042",
+          "kind": "matching",
+          "by": "agent",
+          "outcome": "tickmark",
+          "amountCents": -11383,
+          "label": "bank line · 1:1",
+          "confidence": 0.96
+        },
+        {
+          "ref": "BNK-2026-03-0049",
+          "kind": "matching",
+          "by": "agent",
+          "outcome": "tickmark",
+          "amountCents": 230744,
+          "label": "bank line · 1:1",
+          "confidence": 0.96
+        },
+        {
+          "ref": "BNK-2026-03-0012",
+          "kind": "matching",
+          "by": "agent",
+          "outcome": "exception",
+          "amountCents": 8753660,
+          "label": "Stripe · 1:many · bank_fee",
+          "confidence": 0.58
+        },
+        {
+          "ref": "BNK-2026-03-0039",
+          "kind": "matching",
+          "by": "agent",
+          "outcome": "tickmark",
+          "amountCents": -49105,
+          "label": "Iron Mountain · 1:1",
+          "confidence": 0.96
+        },
+        {
+          "ref": "BNK-2026-03-0059",
+          "kind": "matching",
+          "by": "agent",
+          "outcome": "exception",
+          "amountCents": -335280,
+          "label": "no candidate",
+          "confidence": 0
+        },
+        {
+          "ref": "BNK-2026-03-0022",
+          "kind": "matching",
+          "by": "agent",
+          "outcome": "exception",
+          "amountCents": -2029354,
+          "label": "no candidate",
+          "confidence": 0
+        },
+        {
+          "ref": "UNI-202603-7943",
+          "kind": "coding",
+          "by": "rule",
+          "outcome": "tickmark",
+          "amountCents": 128524,
+          "label": "United Airlines → 6910",
+          "confidence": 0.99
+        },
+        {
+          "ref": "WEW-202603-2593",
+          "kind": "coding",
+          "by": "agent",
+          "outcome": "exception",
+          "amountCents": 3950000,
+          "label": "WeWork → 6510",
+          "confidence": 0.95
+        },
+        {
+          "ref": "DIG-202603-2543",
+          "kind": "coding",
+          "by": "agent",
+          "outcome": "tickmark",
+          "amountCents": 543258,
+          "label": "Digi-Key Electronics → 5010",
+          "confidence": 0.95
+        },
+        {
+          "ref": "BNK-2026-03-0023",
+          "kind": "matching",
+          "by": "rule",
+          "outcome": "tickmark",
+          "amountCents": -4976563,
+          "label": "Flexport · 1:1 · partial",
+          "confidence": 0.98
+        },
+        {
+          "ref": "BNK-2026-03-0043",
+          "kind": "matching",
+          "by": "agent",
+          "outcome": "tickmark",
+          "amountCents": 167199,
+          "label": "bank line · 1:1",
+          "confidence": 0.96
+        },
+        {
+          "ref": "BNK-2026-03-0053",
+          "kind": "matching",
+          "by": "agent",
+          "outcome": "tickmark",
+          "amountCents": -4204,
+          "label": "bank line · 1:1",
+          "confidence": 0.96
+        },
+        {
+          "ref": "BNK-2026-03-0003",
+          "kind": "matching",
+          "by": "agent",
+          "outcome": "tickmark",
+          "amountCents": -371343,
+          "label": "Vercel · 1:many",
+          "confidence": 0.96
+        },
+        {
+          "ref": "BNK-2026-03-0013",
+          "kind": "matching",
+          "by": "agent",
+          "outcome": "exception",
+          "amountCents": -2607983,
+          "label": "Deel · 1:many · fx",
+          "confidence": 0.58
+        },
+        {
+          "ref": "BNK-2026-03-0033",
+          "kind": "matching",
+          "by": "agent",
+          "outcome": "exception",
+          "amountCents": -21131271,
+          "label": "Gusto · 1:many",
+          "confidence": 0.96
+        },
+        {
+          "ref": "MOU-202603-8024",
+          "kind": "coding",
+          "by": "rule",
+          "outcome": "tickmark",
+          "amountCents": 2405111,
+          "label": "Mouser Electronics → 5010",
+          "confidence": 0.99
+        },
+        {
+          "ref": "FLE-202603-7474",
+          "kind": "coding",
+          "by": "rule",
+          "outcome": "tickmark",
+          "amountCents": 7381157,
+          "label": "Flexport → 5020",
+          "confidence": 0.99
+        },
+        {
+          "ref": "DAT-202603-4324",
+          "kind": "coding",
+          "by": "agent",
+          "outcome": "exception",
+          "amountCents": 1332987,
+          "label": "Datadog → 6820",
+          "confidence": 0.62
+        },
+        {
+          "ref": "DIG-202603-3324",
+          "kind": "coding",
+          "by": "agent",
+          "outcome": "tickmark",
+          "amountCents": 1392650,
+          "label": "Digi-Key Electronics → 5010",
+          "confidence": 0.95
+        },
+        {
+          "ref": "COO-202603-8524",
+          "kind": "coding",
+          "by": "agent",
+          "outcome": "exception",
+          "amountCents": 2547160,
+          "label": "Cooley LLP → 6610",
+          "confidence": 0.95
+        },
+        {
+          "ref": "COO-202603-1084",
+          "kind": "coding",
+          "by": "agent",
+          "outcome": "exception",
+          "amountCents": 3261857,
+          "label": "Cooley LLP → 6610",
+          "confidence": 0.95
+        },
+        {
+          "ref": "GOO-202603-3204",
+          "kind": "coding",
+          "by": "agent",
+          "outcome": "tickmark",
+          "amountCents": 1570409,
+          "label": "Google Ads → 6710",
+          "confidence": 0.95
+        },
+        {
+          "ref": "IRO-202603-1164",
+          "kind": "coding",
+          "by": "agent",
+          "outcome": "tickmark",
+          "amountCents": 49105,
+          "label": "Iron Mountain → 6510",
+          "confidence": 0.95
+        },
+        {
+          "ref": "BNK-2026-03-0044",
+          "kind": "matching",
+          "by": "agent",
+          "outcome": "tickmark",
+          "amountCents": -80582,
+          "label": "bank line · 1:1",
+          "confidence": 0.96
+        },
+        {
+          "ref": "BNK-2026-03-0034",
+          "kind": "matching",
+          "by": "agent",
+          "outcome": "tickmark",
+          "amountCents": -105404,
+          "label": "United Airlines · 1:many",
+          "confidence": 0.96
+        },
+        {
+          "ref": "BNK-2026-03-0054",
+          "kind": "matching",
+          "by": "agent",
+          "outcome": "tickmark",
+          "amountCents": -13233,
+          "label": "bank line · 1:1",
+          "confidence": 0.96
+        },
+        {
+          "ref": "BNK-2026-03-0004",
+          "kind": "matching",
+          "by": "agent",
+          "outcome": "tickmark",
+          "amountCents": -134233,
+          "label": "Figma · 1:many",
+          "confidence": 0.96
+        },
+        {
+          "ref": "BNK-2026-03-0014",
+          "kind": "matching",
+          "by": "agent",
+          "outcome": "tickmark",
+          "amountCents": -1439514,
+          "label": "Mouser Electronics · 1:1",
+          "confidence": 0.96
+        },
+        {
+          "ref": "BNK-2026-03-0024",
+          "kind": "matching",
+          "by": "agent",
+          "outcome": "exception",
+          "amountCents": -3317708,
+          "label": "no candidate",
+          "confidence": 0
+        },
+        {
+          "ref": "MOU-202603-7955",
+          "kind": "coding",
+          "by": "rule",
+          "outcome": "tickmark",
+          "amountCents": 1413233,
+          "label": "Mouser Electronics → 5010",
+          "confidence": 0.99
+        },
+        {
+          "ref": "FLE-202603-4975",
+          "kind": "coding",
+          "by": "rule",
+          "outcome": "tickmark",
+          "amountCents": 4674729,
+          "label": "Flexport → 5020",
+          "confidence": 0.99
+        },
+        {
+          "ref": "BNK-2026-03-0025",
+          "kind": "matching",
+          "by": "rule",
+          "outcome": "tickmark",
+          "amountCents": -4674729,
+          "label": "Flexport · 1:1",
+          "confidence": 0.98
+        },
+        {
+          "ref": "BNK-2026-03-0035",
+          "kind": "matching",
+          "by": "agent",
+          "outcome": "tickmark",
+          "amountCents": -198664,
+          "label": "United Airlines · 1:many",
+          "confidence": 0.96
+        },
+        {
+          "ref": "BNK-2026-03-0045",
+          "kind": "matching",
+          "by": "agent",
+          "outcome": "tickmark",
+          "amountCents": -27019,
+          "label": "bank line · 1:1",
+          "confidence": 0.96
+        },
+        {
+          "ref": "BNK-2026-03-0055",
+          "kind": "matching",
+          "by": "agent",
+          "outcome": "tickmark",
+          "amountCents": 211477,
+          "label": "bank line · 1:1",
+          "confidence": 0.96
+        },
+        {
+          "ref": "BNK-2026-03-0005",
+          "kind": "matching",
+          "by": "agent",
+          "outcome": "tickmark",
+          "amountCents": -93803,
+          "label": "Linear · 1:many",
+          "confidence": 0.96
+        },
+        {
+          "ref": "BNK-2026-03-0015",
+          "kind": "matching",
+          "by": "agent",
+          "outcome": "tickmark",
+          "amountCents": -1506856,
+          "label": "Mouser Electronics · 1:1",
+          "confidence": 0.96
+        },
+        {
+          "ref": "FLE-202603-7766",
+          "kind": "coding",
+          "by": "rule",
+          "outcome": "tickmark",
+          "amountCents": 5480283,
+          "label": "Flexport → 5020",
+          "confidence": 0.99
+        },
+        {
+          "ref": "UNI-202603-3076",
+          "kind": "coding",
+          "by": "rule",
+          "outcome": "tickmark",
+          "amountCents": 306541,
+          "label": "United Airlines → 6910",
+          "confidence": 0.99
+        },
+        {
+          "ref": "BNK-2026-03-0056",
+          "kind": "matching",
+          "by": "agent",
+          "outcome": "tickmark",
+          "amountCents": -95290,
+          "label": "bank line · 1:1",
+          "confidence": 0.96
+        },
+        {
+          "ref": "BNK-2026-03-0036",
+          "kind": "matching",
+          "by": "agent",
+          "outcome": "tickmark",
+          "amountCents": -306541,
+          "label": "United Airlines · 1:many",
+          "confidence": 0.96
+        },
+        {
+          "ref": "BNK-2026-03-0016",
+          "kind": "matching",
+          "by": "agent",
+          "outcome": "exception",
+          "amountCents": -2561886,
+          "label": "Mouser Electronics · 1:1",
+          "confidence": 0.96
+        },
+        {
+          "ref": "BNK-2026-03-0046",
+          "kind": "matching",
+          "by": "agent",
+          "outcome": "tickmark",
+          "amountCents": -4230,
+          "label": "bank line · 1:1",
+          "confidence": 0.96
+        },
+        {
+          "ref": "BNK-2026-03-0006",
+          "kind": "matching",
+          "by": "agent",
+          "outcome": "tickmark",
+          "amountCents": -214194,
+          "label": "Slack Technologies · 1:many",
+          "confidence": 0.96
+        },
+        {
+          "ref": "BNK-2026-03-0026",
+          "kind": "matching",
+          "by": "agent",
+          "outcome": "exception",
+          "amountCents": -4428694,
+          "label": "no candidate",
+          "confidence": 0
+        },
+        {
+          "ref": "FLE-202603-4347",
+          "kind": "coding",
+          "by": "rule",
+          "outcome": "tickmark",
+          "amountCents": 5073384,
+          "label": "Flexport → 5020",
+          "confidence": 0.99
+        },
+        {
+          "ref": "VER-202603-2987",
+          "kind": "coding",
+          "by": "agent",
+          "outcome": "exception",
+          "amountCents": 371343,
+          "label": "Vercel → 6820",
+          "confidence": 0.62
+        },
+        {
+          "ref": "SLA-202603-1677",
+          "kind": "coding",
+          "by": "agent",
+          "outcome": "exception",
+          "amountCents": 214194,
+          "label": "Slack Technologies → 6830",
+          "confidence": 0.62
+        },
+        {
+          "ref": "DEE-202603-3077",
+          "kind": "coding",
+          "by": "agent",
+          "outcome": "exception",
+          "amountCents": 2386212,
+          "label": "Deel → 6010",
+          "confidence": 0.62
+        },
+        {
+          "ref": "BNK-2026-03-0037",
+          "kind": "matching",
+          "by": "agent",
+          "outcome": "tickmark",
+          "amountCents": -128524,
+          "label": "United Airlines · 1:many",
+          "confidence": 0.96
+        },
+        {
+          "ref": "BNK-2026-03-0047",
+          "kind": "matching",
+          "by": "agent",
+          "outcome": "tickmark",
+          "amountCents": -3721,
+          "label": "bank line · 1:1",
+          "confidence": 0.96
+        },
+        {
+          "ref": "BNK-2026-03-0007",
+          "kind": "matching",
+          "by": "agent",
+          "outcome": "tickmark",
+          "amountCents": -174970,
+          "label": "GitHub · 1:many",
+          "confidence": 0.96
+        },
+        {
+          "ref": "BNK-2026-03-0010",
+          "kind": "matching",
+          "by": "agent",
+          "outcome": "exception",
+          "amountCents": 11836472,
+          "label": "Stripe · 1:many · bank_fee",
+          "confidence": 0.58
+        },
+        {
+          "ref": "BNK-2026-03-0040",
+          "kind": "matching",
+          "by": "agent",
+          "outcome": "tickmark",
+          "amountCents": -3096,
+          "label": "bank line · 1:1",
+          "confidence": 0.96
+        },
+        {
+          "ref": "BNK-2026-03-0050",
+          "kind": "matching",
+          "by": "agent",
+          "outcome": "tickmark",
+          "amountCents": -85428,
+          "label": "bank line · 1:1",
+          "confidence": 0.96
+        },
+        {
+          "ref": "BNK-2026-03-0057",
+          "kind": "matching",
+          "by": "agent",
+          "outcome": "tickmark",
+          "amountCents": -21377,
+          "label": "bank line · 1:1",
+          "confidence": 0.96
+        },
+        {
+          "ref": "BNK-2026-03-0017",
+          "kind": "matching",
+          "by": "agent",
+          "outcome": "tickmark",
+          "amountCents": -2405111,
+          "label": "Mouser Electronics · 1:1",
+          "confidence": 0.96
+        },
+        {
+          "ref": "BNK-2026-03-0020",
+          "kind": "matching",
+          "by": "agent",
+          "outcome": "tickmark",
+          "amountCents": -1392650,
+          "label": "Digi-Key Electronics · 1:1",
+          "confidence": 0.96
+        },
+        {
+          "ref": "BNK-2026-03-0030",
+          "kind": "matching",
+          "by": "agent",
+          "outcome": "exception",
+          "amountCents": -2547160,
+          "label": "Cooley LLP · 1:1",
+          "confidence": 0.96
+        },
+        {
+          "ref": "BNK-2026-03-0027",
+          "kind": "matching",
+          "by": "agent",
+          "outcome": "exception",
+          "amountCents": -2952463,
+          "label": "no candidate",
+          "confidence": 0
+        }
+      ],
       "stats": {
         "llmCalls": 6,
         "ruleHits": 17,
         "tokensIn": 5400,
         "tokensOut": 1560,
         "costMicros": 66000,
-        "durationMs": 5,
+        "durationMs": 4,
         "codingAccuracy": 1,
         "matchAccuracy": 0.9433962264150944,
         "autoClearRate": 0.7125,
@@ -5185,13 +7522,816 @@
           ]
         }
       ],
+      "decisions": [
+        {
+          "ref": "MOU-202604-2601",
+          "kind": "coding",
+          "by": "rule",
+          "outcome": "tickmark",
+          "amountCents": 2276454,
+          "label": "Mouser Electronics → 5010",
+          "confidence": 0.99
+        },
+        {
+          "ref": "MOU-202604-3551",
+          "kind": "coding",
+          "by": "rule",
+          "outcome": "tickmark",
+          "amountCents": 1705555,
+          "label": "Mouser Electronics → 5010",
+          "confidence": 0.99
+        },
+        {
+          "ref": "FLE-202604-3281",
+          "kind": "coding",
+          "by": "rule",
+          "outcome": "tickmark",
+          "amountCents": 5710754,
+          "label": "Flexport → 5020",
+          "confidence": 0.99
+        },
+        {
+          "ref": "FIG-202604-9921",
+          "kind": "coding",
+          "by": "agent",
+          "outcome": "exception",
+          "amountCents": 129790,
+          "label": "Figma → 6830",
+          "confidence": 0.62
+        },
+        {
+          "ref": "SLA-202604-9481",
+          "kind": "coding",
+          "by": "agent",
+          "outcome": "exception",
+          "amountCents": 225388,
+          "label": "Slack Technologies → 6830",
+          "confidence": 0.62
+        },
+        {
+          "ref": "BNK-2026-04-0008",
+          "kind": "matching",
+          "by": "agent",
+          "outcome": "exception",
+          "amountCents": 11650496,
+          "label": "Stripe · 1:many · bank_fee",
+          "confidence": 0.58
+        },
+        {
+          "ref": "BNK-2026-04-0038",
+          "kind": "matching",
+          "by": "agent",
+          "outcome": "tickmark",
+          "amountCents": -207436,
+          "label": "United Airlines · 1:many",
+          "confidence": 0.96
+        },
+        {
+          "ref": "BNK-2026-04-0041",
+          "kind": "matching",
+          "by": "agent",
+          "outcome": "tickmark",
+          "amountCents": -2724,
+          "label": "bank line · 1:1",
+          "confidence": 0.96
+        },
+        {
+          "ref": "BNK-2026-04-0051",
+          "kind": "matching",
+          "by": "agent",
+          "outcome": "tickmark",
+          "amountCents": -17703,
+          "label": "bank line · 1:1",
+          "confidence": 0.96
+        },
+        {
+          "ref": "BNK-2026-04-0048",
+          "kind": "matching",
+          "by": "agent",
+          "outcome": "tickmark",
+          "amountCents": -12326,
+          "label": "bank line · 1:1",
+          "confidence": 0.96
+        },
+        {
+          "ref": "BNK-2026-04-0001",
+          "kind": "matching",
+          "by": "agent",
+          "outcome": "exception",
+          "amountCents": -5624858,
+          "label": "Amazon Web Services · 1:many",
+          "confidence": 0.96
+        },
+        {
+          "ref": "BNK-2026-04-0011",
+          "kind": "matching",
+          "by": "agent",
+          "outcome": "exception",
+          "amountCents": 8116216,
+          "label": "Stripe · 1:many · bank_fee",
+          "confidence": 0.58
+        },
+        {
+          "ref": "BNK-2026-04-0018",
+          "kind": "matching",
+          "by": "agent",
+          "outcome": "tickmark",
+          "amountCents": -627995,
+          "label": "Digi-Key Electronics · 1:1",
+          "confidence": 0.96
+        },
+        {
+          "ref": "BNK-2026-04-0021",
+          "kind": "matching",
+          "by": "agent",
+          "outcome": "tickmark",
+          "amountCents": -856540,
+          "label": "Digi-Key Electronics · 1:1",
+          "confidence": 0.96
+        },
+        {
+          "ref": "BNK-2026-04-0028",
+          "kind": "matching",
+          "by": "agent",
+          "outcome": "tickmark",
+          "amountCents": -1403633,
+          "label": "Cooley LLP · 1:1",
+          "confidence": 0.96
+        },
+        {
+          "ref": "BNK-2026-04-0031",
+          "kind": "matching",
+          "by": "agent",
+          "outcome": "exception",
+          "amountCents": -2512508,
+          "label": "Cooley LLP · 1:1",
+          "confidence": 0.96
+        },
+        {
+          "ref": "BNK-2026-04-0058",
+          "kind": "matching",
+          "by": "agent",
+          "outcome": "exception",
+          "amountCents": -307661,
+          "label": "no candidate",
+          "confidence": 0
+        },
+        {
+          "ref": "MOU-202604-4069",
+          "kind": "coding",
+          "by": "rule",
+          "outcome": "tickmark",
+          "amountCents": 1625953,
+          "label": "Mouser Electronics → 5010",
+          "confidence": 0.99
+        },
+        {
+          "ref": "MOU-202604-5572",
+          "kind": "coding",
+          "by": "rule",
+          "outcome": "tickmark",
+          "amountCents": 2365592,
+          "label": "Mouser Electronics → 5010",
+          "confidence": 0.99
+        },
+        {
+          "ref": "MOU-202604-1969",
+          "kind": "coding",
+          "by": "rule",
+          "outcome": "tickmark",
+          "amountCents": 2289659,
+          "label": "Mouser Electronics → 5010",
+          "confidence": 0.99
+        },
+        {
+          "ref": "COO-202604-4569",
+          "kind": "coding",
+          "by": "rule",
+          "outcome": "tickmark",
+          "amountCents": 1403633,
+          "label": "Cooley LLP → 6610",
+          "confidence": 0.99
+        },
+        {
+          "ref": "UNI-202604-3989",
+          "kind": "coding",
+          "by": "rule",
+          "outcome": "tickmark",
+          "amountCents": 154558,
+          "label": "United Airlines → 6910",
+          "confidence": 0.99
+        },
+        {
+          "ref": "UNI-202604-5302",
+          "kind": "coding",
+          "by": "rule",
+          "outcome": "tickmark",
+          "amountCents": 207436,
+          "label": "United Airlines → 6910",
+          "confidence": 0.99
+        },
+        {
+          "ref": "DIG-202604-4479",
+          "kind": "coding",
+          "by": "agent",
+          "outcome": "tickmark",
+          "amountCents": 627995,
+          "label": "Digi-Key Electronics → 5010",
+          "confidence": 0.95
+        },
+        {
+          "ref": "DIG-202604-7909",
+          "kind": "coding",
+          "by": "agent",
+          "outcome": "tickmark",
+          "amountCents": 856540,
+          "label": "Digi-Key Electronics → 5010",
+          "confidence": 0.95
+        },
+        {
+          "ref": "IRO-202604-8532",
+          "kind": "coding",
+          "by": "agent",
+          "outcome": "tickmark",
+          "amountCents": 47723,
+          "label": "Iron Mountain → 6510",
+          "confidence": 0.95
+        },
+        {
+          "ref": "BNK-2026-04-0009",
+          "kind": "matching",
+          "by": "agent",
+          "outcome": "exception",
+          "amountCents": 11007058,
+          "label": "Stripe · 1:many · bank_fee",
+          "confidence": 0.58
+        },
+        {
+          "ref": "BNK-2026-04-0042",
+          "kind": "matching",
+          "by": "agent",
+          "outcome": "tickmark",
+          "amountCents": -4555,
+          "label": "bank line · 1:1",
+          "confidence": 0.96
+        },
+        {
+          "ref": "BNK-2026-04-0052",
+          "kind": "matching",
+          "by": "agent",
+          "outcome": "tickmark",
+          "amountCents": -3497,
+          "label": "bank line · 1:1",
+          "confidence": 0.96
+        },
+        {
+          "ref": "BNK-2026-04-0049",
+          "kind": "matching",
+          "by": "agent",
+          "outcome": "tickmark",
+          "amountCents": 263028,
+          "label": "bank line · 1:1",
+          "confidence": 0.96
+        },
+        {
+          "ref": "BNK-2026-04-0002",
+          "kind": "matching",
+          "by": "agent",
+          "outcome": "tickmark",
+          "amountCents": -409723,
+          "label": "Vercel · 1:many",
+          "confidence": 0.96
+        },
+        {
+          "ref": "BNK-2026-04-0022",
+          "kind": "matching",
+          "by": "agent",
+          "outcome": "tickmark",
+          "amountCents": -603780,
+          "label": "Digi-Key Electronics · 1:1",
+          "confidence": 0.96
+        },
+        {
+          "ref": "BNK-2026-04-0012",
+          "kind": "matching",
+          "by": "agent",
+          "outcome": "exception",
+          "amountCents": -2430053,
+          "label": "Deel · 1:many · fx",
+          "confidence": 0.58
+        },
+        {
+          "ref": "BNK-2026-04-0019",
+          "kind": "matching",
+          "by": "agent",
+          "outcome": "tickmark",
+          "amountCents": -1344445,
+          "label": "Digi-Key Electronics · 1:1",
+          "confidence": 0.96
+        },
+        {
+          "ref": "BNK-2026-04-0029",
+          "kind": "matching",
+          "by": "agent",
+          "outcome": "tickmark",
+          "amountCents": -2170614,
+          "label": "Cooley LLP · 1:1",
+          "confidence": 0.96
+        },
+        {
+          "ref": "BNK-2026-04-0032",
+          "kind": "matching",
+          "by": "agent",
+          "outcome": "tickmark",
+          "amountCents": -1978149,
+          "label": "Cooley LLP · 1:1",
+          "confidence": 0.96
+        },
+        {
+          "ref": "BNK-2026-04-0039",
+          "kind": "matching",
+          "by": "agent",
+          "outcome": "tickmark",
+          "amountCents": -1979681,
+          "label": "Google Ads · 1:1",
+          "confidence": 0.96
+        },
+        {
+          "ref": "COO-202604-3293",
+          "kind": "coding",
+          "by": "rule",
+          "outcome": "tickmark",
+          "amountCents": 2512508,
+          "label": "Cooley LLP → 6610",
+          "confidence": 0.99
+        },
+        {
+          "ref": "AMA-202604-5183",
+          "kind": "coding",
+          "by": "agent",
+          "outcome": "exception",
+          "amountCents": 5624858,
+          "label": "Amazon Web Services → 6820",
+          "confidence": 0.62
+        },
+        {
+          "ref": "BNK-2026-04-0024+BNK-2026-04-0023",
+          "kind": "matching",
+          "by": "rule",
+          "outcome": "tickmark",
+          "amountCents": -5710754,
+          "label": "Flexport · many:1",
+          "confidence": 0.98
+        },
+        {
+          "ref": "BNK-2026-04-0033",
+          "kind": "matching",
+          "by": "agent",
+          "outcome": "exception",
+          "amountCents": -20264129,
+          "label": "Gusto · 1:many",
+          "confidence": 0.96
+        },
+        {
+          "ref": "BNK-2026-04-0043",
+          "kind": "matching",
+          "by": "agent",
+          "outcome": "tickmark",
+          "amountCents": -13595,
+          "label": "bank line · 1:1",
+          "confidence": 0.96
+        },
+        {
+          "ref": "BNK-2026-04-0053",
+          "kind": "matching",
+          "by": "agent",
+          "outcome": "tickmark",
+          "amountCents": -4685,
+          "label": "bank line · 1:1",
+          "confidence": 0.96
+        },
+        {
+          "ref": "BNK-2026-04-0003",
+          "kind": "matching",
+          "by": "agent",
+          "outcome": "tickmark",
+          "amountCents": -129790,
+          "label": "Figma · 1:many",
+          "confidence": 0.96
+        },
+        {
+          "ref": "BNK-2026-04-0013",
+          "kind": "matching",
+          "by": "agent",
+          "outcome": "tickmark",
+          "amountCents": -1625953,
+          "label": "Mouser Electronics · 1:1",
+          "confidence": 0.96
+        },
+        {
+          "ref": "COO-202604-7934",
+          "kind": "coding",
+          "by": "rule",
+          "outcome": "tickmark",
+          "amountCents": 2170614,
+          "label": "Cooley LLP → 6610",
+          "confidence": 0.99
+        },
+        {
+          "ref": "UNI-202604-4614",
+          "kind": "coding",
+          "by": "rule",
+          "outcome": "tickmark",
+          "amountCents": 186624,
+          "label": "United Airlines → 6910",
+          "confidence": 0.99
+        },
+        {
+          "ref": "UNI-202604-7694",
+          "kind": "coding",
+          "by": "rule",
+          "outcome": "tickmark",
+          "amountCents": 246776,
+          "label": "United Airlines → 6910",
+          "confidence": 0.99
+        },
+        {
+          "ref": "DIG-202604-9004",
+          "kind": "coding",
+          "by": "agent",
+          "outcome": "tickmark",
+          "amountCents": 603780,
+          "label": "Digi-Key Electronics → 5010",
+          "confidence": 0.95
+        },
+        {
+          "ref": "BNK-2026-04-0054",
+          "kind": "matching",
+          "by": "agent",
+          "outcome": "tickmark",
+          "amountCents": -14772,
+          "label": "bank line · 1:1",
+          "confidence": 0.96
+        },
+        {
+          "ref": "BNK-2026-04-0044",
+          "kind": "matching",
+          "by": "agent",
+          "outcome": "tickmark",
+          "amountCents": 225692,
+          "label": "bank line · 1:1",
+          "confidence": 0.96
+        },
+        {
+          "ref": "BNK-2026-04-0004",
+          "kind": "matching",
+          "by": "agent",
+          "outcome": "tickmark",
+          "amountCents": -93018,
+          "label": "Linear · 1:many",
+          "confidence": 0.96
+        },
+        {
+          "ref": "BNK-2026-04-0014",
+          "kind": "matching",
+          "by": "agent",
+          "outcome": "tickmark",
+          "amountCents": -2276454,
+          "label": "Mouser Electronics · 1:1",
+          "confidence": 0.96
+        },
+        {
+          "ref": "BNK-2026-04-0034",
+          "kind": "matching",
+          "by": "agent",
+          "outcome": "exception",
+          "amountCents": -20822975,
+          "label": "Gusto · 1:many",
+          "confidence": 0.96
+        },
+        {
+          "ref": "VER-202604-7415",
+          "kind": "coding",
+          "by": "agent",
+          "outcome": "exception",
+          "amountCents": 409723,
+          "label": "Vercel → 6820",
+          "confidence": 0.62
+        },
+        {
+          "ref": "DIG-202604-7475",
+          "kind": "coding",
+          "by": "agent",
+          "outcome": "tickmark",
+          "amountCents": 1344445,
+          "label": "Digi-Key Electronics → 5010",
+          "confidence": 0.95
+        },
+        {
+          "ref": "DIG-202604-1465",
+          "kind": "coding",
+          "by": "agent",
+          "outcome": "tickmark",
+          "amountCents": 649943,
+          "label": "Digi-Key Electronics → 5010",
+          "confidence": 0.95
+        },
+        {
+          "ref": "BNK-2026-04-0026+BNK-2026-04-0025",
+          "kind": "matching",
+          "by": "rule",
+          "outcome": "tickmark",
+          "amountCents": -5199142,
+          "label": "Flexport · many:1",
+          "confidence": 0.98
+        },
+        {
+          "ref": "BNK-2026-04-0045",
+          "kind": "matching",
+          "by": "agent",
+          "outcome": "tickmark",
+          "amountCents": -66215,
+          "label": "bank line · 1:1",
+          "confidence": 0.96
+        },
+        {
+          "ref": "BNK-2026-04-0035",
+          "kind": "matching",
+          "by": "agent",
+          "outcome": "tickmark",
+          "amountCents": -154558,
+          "label": "United Airlines · 1:many",
+          "confidence": 0.96
+        },
+        {
+          "ref": "BNK-2026-04-0055",
+          "kind": "matching",
+          "by": "agent",
+          "outcome": "tickmark",
+          "amountCents": 233394,
+          "label": "bank line · 1:1",
+          "confidence": 0.96
+        },
+        {
+          "ref": "BNK-2026-04-0005",
+          "kind": "matching",
+          "by": "agent",
+          "outcome": "tickmark",
+          "amountCents": -225388,
+          "label": "Slack Technologies · 1:many",
+          "confidence": 0.96
+        },
+        {
+          "ref": "BNK-2026-04-0015",
+          "kind": "matching",
+          "by": "agent",
+          "outcome": "tickmark",
+          "amountCents": -1705555,
+          "label": "Mouser Electronics · 1:1",
+          "confidence": 0.96
+        },
+        {
+          "ref": "LIN-202604-2556",
+          "kind": "coding",
+          "by": "agent",
+          "outcome": "exception",
+          "amountCents": 93018,
+          "label": "Linear → 6830",
+          "confidence": 0.62
+        },
+        {
+          "ref": "GOO-202604-8886",
+          "kind": "coding",
+          "by": "agent",
+          "outcome": "tickmark",
+          "amountCents": 1979681,
+          "label": "Google Ads → 6710",
+          "confidence": 0.95
+        },
+        {
+          "ref": "BNK-2026-04-0036",
+          "kind": "matching",
+          "by": "agent",
+          "outcome": "tickmark",
+          "amountCents": -186624,
+          "label": "United Airlines · 1:many",
+          "confidence": 0.96
+        },
+        {
+          "ref": "BNK-2026-04-0046",
+          "kind": "matching",
+          "by": "agent",
+          "outcome": "tickmark",
+          "amountCents": -17819,
+          "label": "bank line · 1:1",
+          "confidence": 0.96
+        },
+        {
+          "ref": "BNK-2026-04-0056",
+          "kind": "matching",
+          "by": "agent",
+          "outcome": "tickmark",
+          "amountCents": -21605,
+          "label": "bank line · 1:1",
+          "confidence": 0.96
+        },
+        {
+          "ref": "BNK-2026-04-0006",
+          "kind": "matching",
+          "by": "agent",
+          "outcome": "tickmark",
+          "amountCents": -175739,
+          "label": "GitHub · 1:many",
+          "confidence": 0.96
+        },
+        {
+          "ref": "BNK-2026-04-0016",
+          "kind": "matching",
+          "by": "agent",
+          "outcome": "tickmark",
+          "amountCents": -2365592,
+          "label": "Mouser Electronics · 1:1",
+          "confidence": 0.96
+        },
+        {
+          "ref": "Datadog",
+          "kind": "accrual",
+          "by": "agent",
+          "outcome": "exception",
+          "amountCents": 1261985,
+          "label": "policy requires human",
+          "confidence": 0
+        },
+        {
+          "ref": "FLE-202604-2630",
+          "kind": "coding",
+          "by": "rule",
+          "outcome": "tickmark",
+          "amountCents": 5199142,
+          "label": "Flexport → 5020",
+          "confidence": 0.99
+        },
+        {
+          "ref": "FLE-202604-9750",
+          "kind": "coding",
+          "by": "rule",
+          "outcome": "tickmark",
+          "amountCents": 4956937,
+          "label": "Flexport → 5020",
+          "confidence": 0.99
+        },
+        {
+          "ref": "COO-202604-2217",
+          "kind": "coding",
+          "by": "rule",
+          "outcome": "tickmark",
+          "amountCents": 2109585,
+          "label": "Cooley LLP → 6610",
+          "confidence": 0.99
+        },
+        {
+          "ref": "COO-202604-7087",
+          "kind": "coding",
+          "by": "rule",
+          "outcome": "tickmark",
+          "amountCents": 1978149,
+          "label": "Cooley LLP → 6610",
+          "confidence": 0.99
+        },
+        {
+          "ref": "GIT-202604-1450",
+          "kind": "coding",
+          "by": "agent",
+          "outcome": "exception",
+          "amountCents": 175739,
+          "label": "GitHub → 6830",
+          "confidence": 0.62
+        },
+        {
+          "ref": "WEW-202604-4467",
+          "kind": "coding",
+          "by": "agent",
+          "outcome": "exception",
+          "amountCents": 3950000,
+          "label": "WeWork → 6510",
+          "confidence": 0.95
+        },
+        {
+          "ref": "DEE-202604-7347",
+          "kind": "coding",
+          "by": "agent",
+          "outcome": "exception",
+          "amountCents": 2258940,
+          "label": "Deel → 6010",
+          "confidence": 0.62
+        },
+        {
+          "ref": "BNK-2026-04-0027",
+          "kind": "matching",
+          "by": "rule",
+          "outcome": "tickmark",
+          "amountCents": -4956937,
+          "label": "Flexport · 1:1",
+          "confidence": 0.98
+        },
+        {
+          "ref": "BNK-2026-04-0007",
+          "kind": "matching",
+          "by": "agent",
+          "outcome": "exception",
+          "amountCents": -3950000,
+          "label": "WeWork · 1:1",
+          "confidence": 0.96
+        },
+        {
+          "ref": "BNK-2026-04-0010",
+          "kind": "matching",
+          "by": "agent",
+          "outcome": "exception",
+          "amountCents": 10722884,
+          "label": "Stripe · 1:many · bank_fee",
+          "confidence": 0.58
+        },
+        {
+          "ref": "BNK-2026-04-0037",
+          "kind": "matching",
+          "by": "agent",
+          "outcome": "tickmark",
+          "amountCents": -246776,
+          "label": "United Airlines · 1:many",
+          "confidence": 0.96
+        },
+        {
+          "ref": "BNK-2026-04-0047",
+          "kind": "matching",
+          "by": "agent",
+          "outcome": "tickmark",
+          "amountCents": -4363,
+          "label": "bank line · 1:1",
+          "confidence": 0.96
+        },
+        {
+          "ref": "BNK-2026-04-0030",
+          "kind": "matching",
+          "by": "agent",
+          "outcome": "tickmark",
+          "amountCents": -2109585,
+          "label": "Cooley LLP · 1:1",
+          "confidence": 0.96
+        },
+        {
+          "ref": "BNK-2026-04-0050",
+          "kind": "matching",
+          "by": "agent",
+          "outcome": "tickmark",
+          "amountCents": -82503,
+          "label": "bank line · 1:1",
+          "confidence": 0.96
+        },
+        {
+          "ref": "BNK-2026-04-0017",
+          "kind": "matching",
+          "by": "agent",
+          "outcome": "tickmark",
+          "amountCents": -2289659,
+          "label": "Mouser Electronics · 1:1",
+          "confidence": 0.96
+        },
+        {
+          "ref": "BNK-2026-04-0020",
+          "kind": "matching",
+          "by": "agent",
+          "outcome": "tickmark",
+          "amountCents": -649943,
+          "label": "Digi-Key Electronics · 1:1",
+          "confidence": 0.96
+        },
+        {
+          "ref": "BNK-2026-04-0040",
+          "kind": "matching",
+          "by": "agent",
+          "outcome": "tickmark",
+          "amountCents": -47723,
+          "label": "Iron Mountain · 1:1",
+          "confidence": 0.96
+        },
+        {
+          "ref": "BNK-2026-04-0057",
+          "kind": "matching",
+          "by": "agent",
+          "outcome": "exception",
+          "amountCents": 1625290,
+          "label": "no candidate",
+          "confidence": 0
+        }
+      ],
       "stats": {
         "llmCalls": 6,
         "ruleHits": 20,
         "tokensIn": 5400,
         "tokensOut": 1560,
         "costMicros": 66000,
-        "durationMs": 6,
+        "durationMs": 4,
         "codingAccuracy": 1,
         "matchAccuracy": 1,
         "autoClearRate": 0.7906976744186046,
@@ -5266,8 +8406,8 @@
         "precision": 1
       },
       "hitCount": 0,
-      "createdAt": "2026-09-05T20:14:45.180Z",
-      "activatedAt": "2026-09-05T20:14:45.181Z"
+      "createdAt": "2026-09-06T17:28:26.291Z",
+      "activatedAt": "2026-09-06T17:28:26.292Z"
     },
     {
       "id": "RULE-008",
@@ -5319,8 +8459,8 @@
         "precision": 1
       },
       "hitCount": 0,
-      "createdAt": "2026-09-05T20:14:45.180Z",
-      "activatedAt": "2026-09-05T20:14:45.181Z"
+      "createdAt": "2026-09-06T17:28:26.291Z",
+      "activatedAt": "2026-09-06T17:28:26.292Z"
     },
     {
       "id": "RULE-009",
@@ -5378,8 +8518,8 @@
         "precision": 1
       },
       "hitCount": 0,
-      "createdAt": "2026-09-05T20:14:45.180Z",
-      "activatedAt": "2026-09-05T20:14:45.181Z"
+      "createdAt": "2026-09-06T17:28:26.291Z",
+      "activatedAt": "2026-09-06T17:28:26.292Z"
     },
     {
       "id": "RULE-010",
@@ -5426,8 +8566,8 @@
         "precision": 1
       },
       "hitCount": 0,
-      "createdAt": "2026-09-05T20:14:45.181Z",
-      "activatedAt": "2026-09-05T20:14:45.181Z"
+      "createdAt": "2026-09-06T17:28:26.292Z",
+      "activatedAt": "2026-09-06T17:28:26.292Z"
     },
     {
       "id": "RULE-013",
@@ -5474,8 +8614,8 @@
         "precision": 1
       },
       "hitCount": 0,
-      "createdAt": "2026-09-05T20:14:45.189Z",
-      "activatedAt": "2026-09-05T20:14:45.191Z"
+      "createdAt": "2026-09-06T17:28:26.297Z",
+      "activatedAt": "2026-09-06T17:28:26.298Z"
     },
     {
       "id": "RULE-014",
@@ -5534,8 +8674,8 @@
         "precision": 1
       },
       "hitCount": 0,
-      "createdAt": "2026-09-05T20:14:45.189Z",
-      "activatedAt": "2026-09-05T20:14:45.191Z"
+      "createdAt": "2026-09-06T17:28:26.298Z",
+      "activatedAt": "2026-09-06T17:28:26.298Z"
     }
   ],
   "totals": {
