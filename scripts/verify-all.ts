@@ -10,7 +10,7 @@ import { spawn } from "node:child_process";
 type Stage = { name: string; cmd: string; args: string[]; needsDb?: boolean };
 
 const STAGES: Stage[] = [
-  { name: "types",         cmd: "npx", args: ["tsc", "--noEmit"] },
+  { name: "types",         cmd: "npm", args: ["run", "typecheck"] },
   { name: "lint",          cmd: "npm", args: ["run", "lint"] },
   { name: "loop wiring",   cmd: "npm", args: ["run", "selftest"] },
   { name: "db invariants", cmd: "npm", args: ["run", "verify:db"],   needsDb: true },
