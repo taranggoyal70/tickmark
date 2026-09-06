@@ -21,6 +21,7 @@ const STAGES: Stage[] = [
 ];
 
 const hasDb = Boolean(process.env.SUPABASE_URL && process.env.SUPABASE_SERVICE_ROLE_KEY);
+const allowPartialVerify = process.env.ALLOW_PARTIAL_VERIFY === "1";
 
 const run = (s: Stage) =>
   new Promise<{ code: number; tail: string }>((resolve) => {
@@ -54,10 +55,13 @@ async function main() {
     }
   }
 
-  console.log(failed === 0
-    ? `\neverything holds${hasDb ? "" : "  (database suites skipped)"}`
-    : `\n${failed} stage(s) failed`);
-  process.exit(failed === 0 ? 0 : 1);
+  const incomplete = failed === 0 && !hasDb && !allowPartialVerify;
+  console.log(failed > 0
+    ? `\n${failed} stage(s) failed`
+    : incomplete
+      ? "\nverification incomplete  (database suites skipped)"
+      : `\neverything holds${hasDb ? "" : "  (database suites skipped by ALLOW_PARTIAL_VERIFY=1)"}`);
+  process.exit(failed === 0 && !incomplete ? 0 : 1);
 }
 
 main().catch((e) => { console.error("verify-all crashed:", e?.message ?? e); process.exit(1); });

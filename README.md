@@ -372,7 +372,7 @@ npm run simulate               # measured eval across four periods
 npm run verify:db              # prove the invariants against the live database
 npm run verify:gate            # prove the evidence gate, then restore the queue
 npm run verify:loop            # the whole product loop on ingested books
-npm run verify:all             # all of the above, one summary
+npm run verify:all             # full verification; requires Supabase by default
 npm run dev                    # dashboard on http://localhost:3000
 ```
 
@@ -392,8 +392,12 @@ runs against whatever the deployment has:
 A full four-period run is roughly 75k input / 21k output tokens — about **$0.18
 on Haiku 4.5, $0.90 on Opus 5**. That is the entire demo, not a monthly bill.
 
-**Optional** — `SUPABASE_URL` and `SUPABASE_SERVICE_ROLE_KEY`. Without them runs persist
-to `data/`. With them, apply `supabase/migrations/0001_init.sql` first.
+**Required for database-backed workflows and full verification** — `SUPABASE_URL` and
+`SUPABASE_SERVICE_ROLE_KEY`. Apply the migrations in `supabase/migrations/` before
+running the database verification suites. Local runs can still use the filesystem
+fallback in `data/`, but `npm run verify:all` exits nonzero when it has to skip database
+suites. Set `ALLOW_PARTIAL_VERIFY=1` only when you intentionally want that partial run
+to succeed.
 
 Create the Supabase project with the Data API's *"automatically expose new tables"*
 switched **off**. The migration then grants only `service_role` — held server-side by
