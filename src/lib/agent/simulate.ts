@@ -51,6 +51,18 @@ function recurringHistory(closed: GeneratedPeriod[]): Record<string, number[]> {
   return out;
 }
 
+/** One decision, small enough that a whole close fits in the report and can be replayed. */
+export interface DecisionFrame {
+  ref: string;
+  kind: "coding" | "matching" | "accrual";
+  /** who settled it - a compiled rule costs nothing, the model costs tokens */
+  by: "rule" | "agent";
+  outcome: "tickmark" | "exception";
+  amountCents: number;
+  label: string;
+  confidence: number;
+}
+
 export interface PeriodReport {
   period: string;
   rulebookVersionIn: number;
@@ -60,6 +72,8 @@ export interface PeriodReport {
   modelDecisions: number;
   /** the queue a controller actually worked this period */
   exceptions: Exception[];
+  /** every decision, in order, so a close can be replayed rather than described */
+  decisions: DecisionFrame[];
   stats: RunStats;
   corrections: number;
   touchSeconds: number;
@@ -79,6 +93,54 @@ export interface SimulationReport {
   periods: PeriodReport[];
   rulebook: Rule[];
   totals: { costMicros: number; llmCalls: number; ruleHits: number; touchSeconds: number };
+}
+
+/**
+ * Flatten a run into an ordered list of decisions. Interleaved by amount so a
+ * replay looks like a close being worked rather than two sorted blocks.
+ */
+function frames(period: GeneratedPeriod, run: Awaited<ReturnType<typeof runClose>>): DecisionFrame[] {
+  const exRefs = new Set(run.exceptions.map((e) => e.subjectRef));
+  const out: DecisionFrame[] = [];
+
+  for (const c of run.codings) {
+    const inv = period.apInvoices.find((i) => i.invoiceNumber === c.invoiceNumber);
+    out.push({
+      ref: c.invoiceNumber, kind: "coding", by: c.decidedBy === "rule" ? "rule" : "agent",
+      outcome: exRefs.has(c.invoiceNumber) ? "exception" : "tickmark",
+      amountCents: inv?.amountCents ?? 0,
+      label: `${inv?.vendorName ?? "invoice"} → ${c.glCode}`,
+      confidence: c.confidence,
+    });
+  }
+  for (const m of run.matches) {
+    const ref = m.bankExternalIds.join("+");
+    const total = m.bankExternalIds.reduce(
+      (s, id) => s + (period.bankLines.find((b) => b.externalId === id)?.amountCents ?? 0), 0);
+    // name the counterparty: a stream of bare cardinalities reads like noise,
+    // a stream of vendor names reads like a close being worked
+    const who = m.ledgerExternalIds
+      .map((id) => period.ledgerEntries.find((e) => e.externalId === id)?.vendorName)
+      .find(Boolean);
+    out.push({
+      ref, kind: "matching", by: m.decidedBy === "rule" ? "rule" : "agent",
+      outcome: exRefs.has(ref) ? "exception" : "tickmark",
+      amountCents: total,
+      label: `${who ?? "bank line"} · ${m.cardinality}${m.deltaReason ? ` · ${m.deltaReason}` : ""}`,
+      confidence: m.confidence,
+    });
+  }
+  for (const e of run.exceptions) {
+    if (out.some((f) => f.ref === e.subjectRef)) continue;
+    out.push({
+      ref: e.subjectRef, kind: e.subjectType === "accrual" ? "accrual" : "matching",
+      by: "agent", outcome: "exception", amountCents: e.amountCents,
+      label: e.cause.replace(/_/g, " "), confidence: e.confidence ?? 0,
+    });
+  }
+
+  // deterministic shuffle so rule-hits and model calls interleave on screen
+  return out.sort((a, b) => (a.ref.charCodeAt(a.ref.length - 1) % 7) - (b.ref.charCodeAt(b.ref.length - 1) % 7));
 }
 
 export async function simulate(opts: { model?: ModelId; provenance?: "model" | "mock"; onProgress?: (m: string) => void } = {}): Promise<SimulationReport> {
@@ -126,6 +188,7 @@ export async function simulate(opts: { model?: ModelId; provenance?: "model" | "
         run.codings.filter((c) => c.decidedBy === "agent").length +
         run.matches.filter((m) => m.decidedBy === "agent").length,
       exceptions: run.exceptions,
+      decisions: frames(period, run),
       stats: run.stats,
       corrections: corrections.length,
       touchSeconds: touch,
