@@ -185,6 +185,7 @@ export async function simulate(opts: { model?: ModelId; provenance?: "model" | "
 
   let rulebook = emptyRulebook();
   const closed: GeneratedPeriod[] = [];
+  const correctionHistory: CorrectionRecord[] = [];
   const reports: PeriodReport[] = [];
   const totals = { costMicros: 0, llmCalls: 0, ruleHits: 0, touchSeconds: 0 };
 
@@ -201,12 +202,19 @@ export async function simulate(opts: { model?: ModelId; provenance?: "model" | "
     });
 
     const corrections: CorrectionRecord[] = controllerReview(period, run);
+    correctionHistory.push(...corrections);
     log(`  cleared ${(run.stats.autoClearRate * 100).toFixed(0)}% · ${run.exceptions.length} exceptions · ${run.stats.llmCalls} llm calls · $${(run.stats.costMicros / 1e6).toFixed(4)}`);
 
     let gradientSkipped = false;
     let grad;
     try {
-      grad = await gradientStep(corrections, CHART, closed, model);
+      // Corrections are institutional memory, not a monthly scratchpad. A
+      // recurring vendor with one invoice per month earns a rule only after
+      // multiple periods agree, so the gradient sees the full signed history.
+      // The deterministic compiler receives all signed history. The model sees
+      // only this period's residue, keeping its context bounded while still
+      // allowing richer proposals where the structured compiler is silent.
+      grad = await gradientStep(correctionHistory, CHART, closed, model, corrections);
     } catch (e) {
       // A provider outage must not discard the close we just completed. The
       // learning step can wait; persisting the queue cannot.

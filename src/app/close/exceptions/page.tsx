@@ -10,10 +10,12 @@ export const dynamic = "force-dynamic";
 const CAUSE_LABEL: Record<string, string> = {
   over_materiality: "Over materiality", low_confidence: "Low confidence",
   policy_requires_human: "Policy", no_candidate: "No match found",
+  unverified_model_judgment: "Needs human evidence",
   ambiguous_candidates: "Ambiguous",
 };
 const CAUSE_BADGE: Record<string, string> = {
   over_materiality: "warn", low_confidence: "bad", policy_requires_human: "human",
+  unverified_model_judgment: "human",
   no_candidate: "neutral", ambiguous_candidates: "warn",
 };
 

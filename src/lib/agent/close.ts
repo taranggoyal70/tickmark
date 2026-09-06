@@ -227,7 +227,7 @@ export async function runClose(input: CloseInput): Promise<CloseRunResult> {
     }
   }
 
-  // ── 4. the gate: confidence AND materiality, neither overriding the other ──
+  // ── 4. authorization gate: earned rules only, still bounded by materiality ─
   let tickmarked = 0;
   const gate = (
     ref: string, subjectType: Exception["subjectType"], conf: number, amountCents: number,
@@ -239,8 +239,11 @@ export async function runClose(input: CloseInput): Promise<CloseRunResult> {
     };
     const policy = forcesReview(rulebook, { description: ref, amountCents: Math.abs(amountCents) });
     if (policy) return open("policy_requires_human");
-    // A backtested rule carries its own control, so it is allowed further than a
-    // fresh model judgment - but never past the ceiling.
+    // A fresh model suggestion is useful evidence for the controller, but its
+    // self-reported confidence is not authority to touch the books. Only a
+    // human-earned, backtested rule may clear unattended.
+    if (decidedBy === "agent") return open("unverified_model_judgment");
+    // A backtested rule carries its own control, but never past the ceiling.
     const ceiling = decidedBy === "rule" ? chart.ruleCeilingCents : chart.materialityCents;
     if (Math.abs(amountCents) > ceiling) return open("over_materiality");
     if (conf < autoThreshold) return open("low_confidence");

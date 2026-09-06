@@ -7,16 +7,17 @@ and the AO window open before recording.
 
 ## Current release condition
 
-The live report was recorded with `provenance: "model"`, but it is degraded:
-AI Gateway rejected inference because the linked team has no valid billing card.
-Across the four recorded closes, all 28 model batches failed and all four
-gradient steps were skipped. Tickmark failed closed and routed undecided work to
-review. Leave the provenance banner visible and describe this as fail-safe
-behavior, never as model quality.
+The live report is a completed real-model run through local `llama3.2:1b`: 30
+successful calls, zero failed batches, zero skipped gradient steps, and five
+active rules. Auto-clear moves 0% → 39%, controller time 63 → 47 minutes, and
+unattended precision holds at 100%. The local endpoint had no configured token
+price, so `$0.0000` is an honest unpriced result; emphasize the measured call
+reduction from 7 → 6 instead of claiming a dollar saving.
 
-The deterministic `npm run selftest` remains useful proof that the full learning
-loop is wired. Its 55% → 79% auto-clear curve and 41 → 21 exception curve are
-mechanism-test results, not real-model measurements.
+The small model scored poorly at raw matching. That is part of the proof:
+Tickmark never lets fresh model confidence authorize a ledger assertion. Model
+suggestions go to the controller; only rules compiled from reviewed corrections
+and a passing backtest clear work unattended.
 
 ---
 
@@ -29,10 +30,10 @@ mechanism-test results, not real-model measurements.
 > their invoices. Tickmark turns reviewed corrections into deterministic rules,
 > so the judgment is traceable and only has to be made once."
 
-If the amber banner is visible, point to it immediately:
+Point to the measured figures:
 
-> "This report is intentionally labeled. The model provider is unavailable, so
-> these figures show the system failing closed—not model quality."
+> "This is a real local-model run, not the deterministic selftest: 30 successful
+> calls, no failed batches, and 100% precision on unattended work."
 
 ## 0:25–0:55 · It takes exported books
 
@@ -49,15 +50,11 @@ in and the sample files have been preflighted.
 **On screen:** `/close/run`.
 
 > "Every close starts with the Rulebook. Earned rules execute deterministically
-> with zero model calls. Only the residue reaches the model, and confidence plus
-> materiality decide what can clear without a controller."
+> with zero model calls. Only the residue reaches the model, and every fresh
+> model suggestion stays review-only. Confidence never grants its own authority."
 
-With the current billing limitation, a signed-in **Run both closes** action
-should complete in degraded mode instead of pretending to decide:
-
-> "The provider refused inference. Tickmark still records the close, labels the
-> outage, and sends every undecided line to review. That is the safe accounting
-> behavior."
+Show the period table: model calls fall from 7 to 6 and controller time from 63
+to 47 minutes after five backtested rules activate, while precision stays 100%.
 
 ## 1:30–2:20 · The human gate
 
@@ -91,8 +88,8 @@ model behavior.
 **On screen:** terminal output from `npm test`, `npm run selftest`, and
 `npm run verify:all`.
 
-> "The unit command runs both verification-script tests and provider capability
-> tests. The mechanism selftest passes 21 checks. Full verification passes eight
+> "The unit command runs eight compiler, verification, and provider tests. The
+> mechanism selftest passes 21 checks. Full verification passes eight
 > stages, including all four live Supabase suites—none were skipped. These prove
 > controls and wiring, not model quality."
 
@@ -110,13 +107,13 @@ model behavior.
 > "Tickmark: the close that gets cheaper as reviewed judgment compiles into
 > rules—and that refuses to bluff when an external model is unavailable."
 
-**On screen:** landing page with the **See the fail-safe report** CTA.
+**On screen:** landing page with the **See the measured results** CTA.
 
 ---
 
 ## Pre-flight
 
-- [ ] `npm test` passes five tests.
+- [ ] `npm test` passes eight tests.
 - [ ] `npm run selftest` passes 21 mechanism checks.
 - [ ] `npm run verify:all` ends with `everything holds`; database invariants,
       evidence gate, close loop, and import all show `PASS`, never `SKIP`.
@@ -125,15 +122,15 @@ model behavior.
       `/close/reconciliation`, `/close/binder`, and the binder API.
 - [ ] Signed in only for write demonstrations; Clerk is using development keys.
 - [ ] AO window shows the current total of 23 sessions.
-- [ ] The degraded provenance banner is visible and the talk track names the AI
-      Gateway billing limitation.
+- [ ] The live report shows `llama3.2:1b`, five active rules, no model failures,
+      and 100% unattended precision.
 
 ## Do not
 
-- Do not call mock or degraded figures model quality.
-- Do not hide, crop, or remove the honest degraded-provenance banner.
-- Do not run `npm run publish` against the current degraded report; the safety
-  gate correctly refuses it.
+- Do not call the selftest figures real-model quality.
+- Do not claim model matching quality; the measured model scored 0% there.
+- Do not invent a dollar saving for the unpriced local endpoint; show calls and
+  controller minutes instead.
 - Do not add billing details, change auth accounts, or submit Devpost during the
   recording workflow.
 - Do not spend demo time on the sign-in flow.

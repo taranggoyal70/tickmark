@@ -30,8 +30,9 @@ runs three close workflows end to end:
 - accrual completeness with balanced draft journal entries.
 
 The active Rulebook runs first with no model call. A model handles only the
-residue. Confidence and materiality gates decide which items can receive an
-append-only tickmark and which must enter the controller queue. A first
+residue, but a fresh model suggestion always enters the controller queue rather
+than authorizing itself. Only a human-earned, backtested rule can issue an
+append-only tickmark, and materiality still limits that authority. A first
 "always do this" correction records standing intent but cannot create a rule.
 A second compatible correction may produce a proposal, which is backtested
 against closed periods and still requires human adoption.
@@ -63,6 +64,8 @@ CSV rather than leaving support trapped in dashboard counters.
 ## What is technically distinctive
 
 - Learning compiles into deterministic rules that cost zero tokens to execute.
+- Structured corrections compile directly when they agree; policy creation does
+  not depend on a model faithfully reproducing facts already captured by a human.
 - Analysis cannot activate its own proposal; adoption is a separate human act.
 - Rules require at least two same-kind corrections and a passing replay.
 - Tickmarks are append-only and every automated decision has an evidence chain.
@@ -103,30 +106,36 @@ trigger, and index, with zero null signatures and zero active duplicate groups.
 | Command | Verified result |
 |---|---|
 | `npm ci` | Exit 0; 553 packages installed, 554 audited. npm reported 10 moderate and 4 high dependency findings. |
-| `npm test` | Exit 0; 5/5 tests passed: both `scripts/*.test.ts` coverage and the OpenAI-compatible provider capability tests. |
+| `npm test` | Exit 0; 8/8 tests passed, including deterministic correction compilation, conflicting-evidence refusal, verification-script behavior, and provider capability tests. |
 | `npm run typecheck` | Exit 0; Next.js route types generated and TypeScript completed without diagnostics. |
 | `npm run lint` | Exit 0; ESLint completed without findings. |
 | `npm run build` | Exit 0; Next.js 16.3.4 production build compiled all application routes. |
 | `npm run selftest` | Exit 0; 21/21 mechanism checks passed, including fail-closed provider behavior, measured-report gates, and semantic-rule deduplication. |
 | `npm run verify:all` | Exit 0; all 8 stages passed. The four live Supabase stages—database invariants, evidence gate, close loop, and import—ran and passed; none were skipped. |
-| `npm run check` | Exit 1; authentication reached AI Gateway, which refused inference because the linked team has no valid payment card. |
+| `npm run check` | Exit 0 against local `llama3.2:1b`; the OpenAI-compatible endpoint returned `OK`. |
 
 The selftest uses a deterministic stand-in to prove control flow and invariants.
 Its percentages, exception counts, and synthetic costs are not model-quality
 measurements.
 
+## Measured real-model result
+
+The published four-period run used local `llama3.2:1b` through the product's
+OpenAI-compatible endpoint. It completed 30 successful calls with zero failed
+batches and zero skipped gradients. Five rules passed the evidence and replay
+gates. From the first to fourth close, auto-clear moved 0% → 39%, close-model
+calls 7 → 6, controller time 63 → 47 minutes, and unattended precision remained
+100%. The local endpoint had no configured per-token price, so the report shows
+`$0.0000` rather than inventing a cost claim.
+
 ## Honest external limitations
 
-- Vercel AI Gateway currently refuses inference until the linked team has a
-  valid payment card. No billing change was made for this submission.
-- The hosted run was rejected before inference. A local `llama3.2` run first
-  returned schema-invalid output; after structured mode was enabled, a second
-  run timed out after 15 minutes without completing its first period. Neither
-  produced model-quality metrics, and the safety gate published neither as
-  measured evidence.
-- The live database's latest report has model provenance but is degraded: 28
-  failed model batches and four skipped gradient steps across four closes. It
-  demonstrates fail-safe behavior only, not model quality.
+- The small local model scored 0% on raw matching. Fresh model suggestions are
+  review-only, so this did not reduce unattended precision; the measured gain
+  came from controller-earned rules.
+- Vercel AI Gateway still refuses hosted inference until the linked team has a
+  valid payment card. The production report is the completed local-model run
+  persisted in Supabase, not a claim that hosted inference is configured.
 - Clerk is configured with development keys, appropriate for judging but not a
   production customer rollout. No auth-account changes were made.
 - The repository's dependency audit reports 10 moderate and 4 high findings;
@@ -135,25 +144,24 @@ measurements.
 ## 3–5 minute demo beats
 
 1. **0:00–0:25 — Problem and promise.** Open the landing page and name the
-   repetitive close judgments Tickmark targets. Point out the degraded-report
-   banner before discussing any figures.
+   repetitive close judgments Tickmark targets. Identify the real-model report.
 2. **0:25–0:55 — Bring exported books.** Show `/setup` and the strict-but-helpful
    CSV ingestion contract.
 3. **0:55–1:30 — Close architecture.** Show `/close/run`: Rulebook first, model
-   residue second, confidence plus materiality, then fail-closed review when the
-   provider is unavailable.
+   residue second, fresh model suggestions to review, and only replayed rules
+   clearing unattended within materiality.
 4. **1:30–2:20 — Human gate.** In `/close/exceptions`, show first correction →
    standing intent, second compatible correction → backtested proposal, and
    separate controller adoption. Use `npm run verify:gate` output if the live
    queue is not preflighted.
 5. **2:20–2:50 — Finance outputs.** Show reconciliation details, balanced draft
    entries, and the downloadable binder.
-6. **2:50–3:20 — Evidence.** Show five unit tests, 21 selftest checks, and all
+6. **2:50–3:20 — Evidence.** Show eight unit tests, 21 selftest checks, and all
    eight verification stages passing, including four live database stages.
 7. **3:20–3:45 — AO use.** Show the 23-session AO list and briefly describe the
    substantive Codex work on audit, hardening, deployment, eval, and integration.
-8. **3:45–4:00 — Close.** Return to the landing page and the fail-safe-report
-   CTA; end on compiled judgment plus refusal to bluff during outages.
+8. **3:45–4:00 — Close.** Return to the measured results; end on compiled
+   judgment plus refusal to let raw model confidence authorize the books.
 
 ## Suggested closing line
 

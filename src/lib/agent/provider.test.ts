@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
 import { afterEach, describe, test } from "node:test";
 import type { LanguageModel } from "ai";
-import { resolveModel } from "./provider";
+import { effectiveModelId, resolveModel } from "./provider";
 
 const ENV_KEYS = [
   "TICKMARK_API_KEY",
@@ -48,5 +48,14 @@ describe("resolveModel OpenAI-compatible structured outputs", () => {
     process.env.TICKMARK_SUPPORTS_STRUCTURED_OUTPUTS = "true";
 
     assert.equal(structuredOutputsEnabled(resolveModel("test-model")), false);
+  });
+});
+
+describe("custom-endpoint accounting", () => {
+  test("records the model actually served instead of the requested fallback id", () => {
+    process.env.TICKMARK_BASE_URL = "http://localhost:11434/v1";
+    process.env.TICKMARK_MODEL = "llama3.2:1b";
+
+    assert.equal(effectiveModelId("anthropic/claude-opus-5"), "llama3.2:1b");
   });
 });

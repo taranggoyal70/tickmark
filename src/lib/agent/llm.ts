@@ -9,7 +9,7 @@
 import { generateObject } from "ai";
 import { z } from "zod";
 import { DEFAULT_MODEL, costMicros, type ModelId } from "./pricing";
-import { resolveModel } from "./provider";
+import { effectiveModelId, resolveModel } from "./provider";
 import { telemetryFor, type TraceContext } from "./tracing";
 import { clip, toonTable, usd } from "./toon";
 import type { ApInvoice, BankLine, DeltaReason, LedgerEntry } from "./types";
@@ -54,6 +54,14 @@ Non-negotiable:
 - Prefer the pattern the vendor's own history shows over what the account name
   sounds like.`;
 
+const generationBounds = () => ({
+  // A malformed local model must not hold the close indefinitely. Hosted
+  // providers normally finish well inside this ceiling; slower endpoints can
+  // override both values explicitly.
+  maxOutputTokens: Number(process.env.TICKMARK_MAX_OUTPUT_TOKENS ?? 4096),
+  abortSignal: AbortSignal.timeout(Number(process.env.TICKMARK_MODEL_TIMEOUT_MS ?? 300_000)),
+});
+
 // ── invoice coding ───────────────────────────────────────────────────────────
 
 const CodingOut = z.object({
@@ -75,6 +83,7 @@ export async function codeInvoices(
   trace: Omit<TraceContext, "pass"> = {},
 ) {
   const { object, usage } = await generateObject({
+    ...generationBounds(),
     model: resolveModel(model),
     experimental_telemetry: await telemetryFor({ ...trace, pass: "coding", batchSize: invoices.length }),
     schema: CodingOut,
@@ -97,7 +106,7 @@ export async function codeInvoices(
       "Return one decision per invoice.",
     ].join("\n"),
   });
-  return { decisions: object.decisions, usage: account(usage, model) };
+  return { decisions: object.decisions, usage: account(usage, effectiveModelId(model)) };
 }
 
 // ── bank reconciliation ──────────────────────────────────────────────────────
@@ -118,6 +127,7 @@ export async function matchBankLines(
   trace: Omit<TraceContext, "pass"> = {},
 ) {
   const { object, usage } = await generateObject({
+    ...generationBounds(),
     model: resolveModel(model),
     experimental_telemetry: await telemetryFor({ ...trace, pass: "matching", batchSize: bank.length }),
     schema: MatchOut,
@@ -156,7 +166,7 @@ Reconciliation rules:
     ...m,
     deltaReason: (m.deltaReason === "none" ? null : m.deltaReason) as DeltaReason | null,
   }));
-  return { matches, unmatchable: object.unmatchable, usage: account(usage, model) };
+  return { matches, unmatchable: object.unmatchable, usage: account(usage, effectiveModelId(model)) };
 }
 
 // ── the gradient step ────────────────────────────────────────────────────────
@@ -194,6 +204,7 @@ export async function distillRules(
   trace: Omit<TraceContext, "pass"> = {},
 ) {
   const { object, usage } = await generateObject({
+    ...generationBounds(),
     model: resolveModel(model),
     experimental_telemetry: await telemetryFor({ ...trace, pass: "gradient", batchSize: corrections.length }),
     schema: RuleOut,
@@ -220,5 +231,5 @@ ${chartBlock(chart)}`,
       "Propose the rules this evidence actually supports. Proposing none is fine.",
     ].join("\n"),
   });
-  return { proposals: object.rules, usage: account(usage, model) };
+  return { proposals: object.rules, usage: account(usage, effectiveModelId(model)) };
 }

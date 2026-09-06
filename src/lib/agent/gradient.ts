@@ -30,6 +30,48 @@ export interface CorrectionRecord extends CorrectionRow {
 let ruleSeq = 0;
 const nextRuleId = () => `RULE-${String(++ruleSeq).padStart(3, "0")}`;
 
+const evidenceFor = (rows: CorrectionRecord[]): EvidenceItem[] => rows.map((c) => ({
+  correctionId: c.id, periodCode: c.period, subjectRef: c.subject,
+  quote: `agent said "${c.agentSaid}", controller set "${c.humanSaid}"${c.note ? ` - ${c.note}` : ""}`,
+}));
+
+/**
+ * Compile the unambiguous part of the loss signal without asking a model to
+ * reproduce facts the corrections already state structurally. The model may
+ * still propose richer rules, but reliability does not depend on it emitting
+ * policy syntax. Conflicting corrections deliberately compile to nothing.
+ */
+export function compileCorrectionRules(
+  corrections: CorrectionRecord[], closed: GeneratedPeriod[],
+): Rule[] {
+  const byVendor = new Map<string, CorrectionRecord[]>();
+  for (const correction of corrections) {
+    if (correction.kind !== "coding" || !correction.vendor || !correction.glCode || !correction.deptSplit) continue;
+    const key = correction.vendor.trim().toLocaleLowerCase();
+    (byVendor.get(key) ?? byVendor.set(key, []).get(key)!).push(correction);
+  }
+
+  const rules: Rule[] = [];
+  for (const rows of byVendor.values()) {
+    if (rows.length < 2) continue;
+    const outcomes = new Set(rows.map((row) => `${row.glCode}|${splitKey(row.deptSplit ?? {})}`));
+    if (outcomes.size !== 1) continue;
+
+    const first = rows[0];
+    const rule: Rule = {
+      id: nextRuleId(), kind: "coding",
+      name: `${first.vendor} → ${first.glCode} (${splitKey(first.deptSplit ?? {})})`,
+      predicate: [{ op: "vendor_is", value: first.vendor }],
+      action: { type: "code", glCode: first.glCode!, deptSplit: first.deptSplit! },
+      status: "proposed", version: 1, evidence: evidenceFor(rows), backtest: null,
+      hitCount: 0, createdAt: new Date().toISOString(),
+    };
+    rule.backtest = backtest(rule, closed);
+    rules.push(rule);
+  }
+  return rules;
+}
+
 /** Shape a model proposal into a Rule. Returns null if it is internally invalid. */
 function materialize(p: Awaited<ReturnType<typeof distillRules>>["proposals"][number]): Rule | null {
   if (p.predicate.length === 0) return null;
@@ -139,14 +181,15 @@ export interface GradientStepResult {
 
 export async function gradientStep(
   corrections: CorrectionRecord[], chart: ChartContext, closed: GeneratedPeriod[], model: ModelId = DEFAULT_MODEL,
+  modelCorrections: CorrectionRecord[] = corrections,
 ): Promise<GradientStepResult> {
   if (corrections.length === 0) {
     return { proposals: [], usage: { tokensIn: 0, tokensOut: 0, costMicros: 0, calls: 0 }, correctionsConsidered: 0 };
   }
 
   const { proposals: raw, usage } = await distillRules(
-    corrections.map(({ id, period, subject, vendor, agentSaid, humanSaid, note }) => ({ id, period, subject, vendor, agentSaid, humanSaid, note })),
-    chart, model, { periodCode: corrections[0]?.period },
+    modelCorrections.map(({ id, period, subject, vendor, agentSaid, humanSaid, note }) => ({ id, period, subject, vendor, agentSaid, humanSaid, note })),
+    chart, model, { periodCode: modelCorrections[0]?.period },
   );
 
   const byId = new Map(corrections.map((c) => [c.id, c]));
@@ -170,12 +213,17 @@ export async function gradientStep(
       .filter((c): c is CorrectionRecord => !!c && (wantKind === null || c.kind === wantKind));
     if (cited.length < 2) continue;
 
-    rule.evidence = cited.map<EvidenceItem>((c) => ({
-      correctionId: c.id, periodCode: c.period, subjectRef: c.subject,
-      quote: `agent said "${c.agentSaid}", controller set "${c.humanSaid}"${c.note ? ` - ${c.note}` : ""}`,
-    }));
+    rule.evidence = evidenceFor(cited);
     rule.backtest = backtest(rule, closed);
     out.push(rule);
+  }
+
+  const signatures = new Set(out.map(semanticRuleSignature));
+  for (const compiled of compileCorrectionRules(corrections, closed)) {
+    const signature = semanticRuleSignature(compiled);
+    if (signatures.has(signature)) continue;
+    signatures.add(signature);
+    out.push(compiled);
   }
 
   return { proposals: out, usage, correctionsConsidered: corrections.length };

@@ -108,6 +108,8 @@ export interface AccrualProposal {
 export type ExceptionCause =
   | "low_confidence" | "over_materiality" | "policy_requires_human"
   | "no_candidate" | "ambiguous_candidates"
+  /** a fresh model suggestion has not yet earned authority to clear work */
+  | "unverified_model_judgment"
   /** the model could not be reached; the Rulebook still ran */
   | "model_unavailable";
 

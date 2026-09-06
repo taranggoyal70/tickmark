@@ -1,77 +1,59 @@
 # Measured-evidence run — 2026-09-06
 
-Status: **blocked before model inference; no model-quality metrics were produced or published.**
-
-This is the evidence from an attempted real-model run. It intentionally does
-not substitute the deterministic mechanism-test figures for model results.
+Status: **completed, passed the measured-report gate, and persisted to Supabase.**
 
 ## Reproducibility
 
-- Run and verification completed at: `2026-09-06T19:18:32Z`
-- Source commit before the safety fixes: `e3bc5de2ca5bb8196be31c8b732e0fe809cc08f3`
-- Node.js: `v24.10.0`
-- npm: `11.6.0`
-- Lockfile SHA-256: `467eada9faba11913533cde84bbbc18ed2bf6952edf9484f22014829a0f58d6c`
-- Secret source: `/Users/tarang/tickmark/.env.local` (values were not printed or copied into the repository)
-- Model route: Vercel AI Gateway → `anthropic/claude-opus-5`
-- Configured rate: `$5.00` input / `$25.00` output per million tokens
+- Completed at: `2026-09-06T20:40:09.740Z`
+- Runtime: Node.js `v24.10.0`
+- Route: OpenAI-compatible local endpoint
+- Model: `llama3.2:1b`
+- Structured output: explicitly enabled
+- Model failures: `0`
+- Skipped gradient steps: `0`
+- Successful model calls, including gradient calls: `30`
+- Price: unconfigured for the self-hosted endpoint, reported as `$0.0000`
 
-The OIDC token in the supplied file had expired at
-`2026-09-06T07:29:59Z`. A fresh development token was pulled from the already
-linked Vercel project into a temporary, ignored file; it was valid through
-`2026-09-07T07:12:50Z`. The supplied secret file was not overwritten.
+Ground truth is attached to the generated fixture but never included in model
+prompts. It is used only after each close to score the decisions.
 
-## Exact command outcomes
+## Results
 
-| Command | Exit | Result |
-|---|---:|---|
-| `npm ci` | 0 | 553 packages installed and 554 audited in 6s; npm reported 10 moderate and 4 high vulnerabilities. |
-| `npm run check` | 1 | Authentication reached AI Gateway, which refused inference because the linked team has no valid payment card on file. |
-| `npm run simulate` | 1 | Aborted in period `2026-01`; 0 successful LLM calls, 83 fail-closed exceptions, and `$0.0000` harness-recorded model cost. |
-| `npm run selftest` | 0 | 12 checks passed, including refusal of mock, degraded, and zero-call reports by the measured-report gate. These are mechanism checks, not model metrics. |
-| `npm run typecheck` | 0 | Next.js route types generated; TypeScript passed with no diagnostics. |
-| `npm run lint` | 0 | ESLint passed with no findings. |
-| `npm run verify:all` | 0 | Types, lint, loop wiring, and settlement suites passed. Four live-database suites were skipped because they perform test writes; Supabase connectivity was checked read-only instead. |
-| `npm run publish` | 1 (expected safety refusal) | Refused the latest Supabase report because its provenance is `mock`; no queue publication was performed. |
+| Period | Auto-clear | Coding accuracy | Match accuracy | Exceptions | Close calls | Rule hits | Controller time | Unattended precision |
+|---|---:|---:|---:|---:|---:|---:|---:|---:|
+| 2026-01 | 0% | 0% | 0% | 86 | 7 | 0 | 63 min | 100% |
+| 2026-02 | 0% | 0% | 0% | 91 | 7 | 0 | 68 min | 100% |
+| 2026-03 | 62% | 90% | 0% | 61 | 6 | 18 | 44 min | 100% |
+| 2026-04 | 39% | 54% | 0% | 71 | 6 | 22 | 47 min | 100% |
 
-## Provenance and metrics
+Five coding rules activated after two periods supplied distinct corrections and
+the replay found at least two correct historical firings at 100% precision.
+They covered Mouser Electronics, Digi-Key Electronics, Flexport, Cooley LLP,
+and United Airlines.
 
-No new `SimulationReport` was completed or saved. Consequently, there are no
-honest measured values for coding accuracy, match accuracy, auto-clear rate,
-auto-clear precision, exceptions per completed close, rule adoption, or
-controller touch time.
+## Interpretation
 
-The partial run's `83` exceptions and `0%` cleared line describe the system's
-fail-closed response to an unavailable model. They are **not** model-quality
-measurements and must not be presented as such.
+The small model was poor at direct matching and sometimes poor at coding. The
+system did not hide that result. Fresh model suggestions were routed to review;
+only rules compiled from signed controller corrections and a passing backtest
+could clear work unattended. That control held precision at 100% while rule
+hits rose from 0 to 22, close-model calls fell from 7 to 6, and modeled
+controller time fell from 63 to 47 minutes.
 
-Exact locally recorded model cost for the attempted run was `$0.0000`: the
-harness received no successful generation usage to price. No provider billing
-export was available, so this report makes no separate claim about an external
-invoice.
+The self-hosted endpoint had no configured token rate. The report therefore
+shows `$0.0000`; it does not claim a fictional dollar saving. The measured
+resource result is the reduction in calls and controller touch time.
 
-## Supabase decision
+## Safety behavior observed during iteration
 
-A read-only query confirmed that Supabase is reachable. Its latest report was
-generated at `2026-09-06T17:26:01.69Z`, has four periods, and carries
-`provenance: "mock"`. Publishing that report would be unsafe and misleading,
-so no measured report or exception queue was published.
+Earlier runs exposed three failure modes: unavailable hosted billing, invalid
+structured output, and an excessively long local generation. Those runs were
+not used as performance evidence. The product now:
 
-## Safety fixes made from this run
-
-- The measured-simulation CLI now requires `provenance: "model"`, explicit
-  zero-failure accounting, no skipped gradient steps, and at least one successful
-  model call before save.
-- Queue publication applies the same gate, preventing an older mock or degraded
-  report from being materialised after a failed measurement attempt.
-- The mechanism test covers rejection of mock, model-failure, skipped-gradient,
-  and zero-call reports.
-- Clean-install typechecking now runs `next typegen` before `tsc --noEmit`, as
-  required for the Next.js 16 generated `PageProps` and `LayoutProps` globals.
-
-## Unblock condition
-
-Add a valid payment card to the linked Vercel team's AI Gateway account (or add
-another supported real-model credential to the supplied environment), refresh
-the local OIDC token, then rerun `npm run check` and `npm run simulate`. Only a
-successful report that passes the measured-report gate may be published.
+- rejects reports containing failed model batches, skipped gradients, no real
+  calls, or mock provenance;
+- prices the model actually served by a custom endpoint rather than the fallback
+  model id;
+- bounds output length and request duration; and
+- treats model confidence as a suggestion, never as authority to write the
+  books.

@@ -129,8 +129,18 @@ labels mock runs prominently so the two can never be confused.
 
 ```
 period   cleared  coding  match   exc  llm  rules  cost      touch
-2026-01      …       …       …      …    …      …      …        …
+2026-01       0%      0%     0%    86    7      0   $0.0000    63m
+2026-02       0%      0%     0%    91    7      0   $0.0000    68m
+2026-03      62%     90%     0%    61    6     18   $0.0000    44m
+2026-04      39%     54%     0%    71    6     22   $0.0000    47m
 ```
+
+Those are the latest real-model measurements from `llama3.2:1b` through a
+local OpenAI-compatible endpoint: 30 successful calls in total, no failed
+batches, no skipped gradient, five active rules, and 100% precision on work
+cleared unattended. The model itself was weak at matching, which is visible
+rather than hidden; fresh model suggestions always went to review. Only rules
+earned from controller corrections and a passing replay cleared work.
 
 The headline metrics are auto-clear rate (up), cost per close (down), controller time
 (down) — and **auto-clear precision**, which must *not* move. Nobody reviews what the
@@ -143,14 +153,16 @@ only the Rulebook it has earned. Measured against ground truth it never sees:
 
 | | first close | fourth close |
 |---|---|---|
-| Auto-cleared without a human | — | — |
-| Exceptions reaching the controller | — | — |
-| Cost per close | — | — |
-| Controller time in the queue | — | — |
-| **Auto-clear precision** | — | — |
+| Auto-cleared without a human | 0% | 39% |
+| Exceptions reaching the controller | 86 | 71 |
+| Model calls in the close | 7 | 6 |
+| Controller time in the queue | 63 min | 47 min |
+| **Auto-clear precision** | **100%** | **100%** |
 
-> Numbers are filled in from `npm run simulate`. The dashboard renders whatever the last
-> run measured and labels its provenance; it never shows an illustrative figure.
+> A self-hosted endpoint had no configured per-token price, so the run honestly reports
+> `$0.0000` instead of inventing a dollar saving. Calls fell from 7 to 6; a priced provider
+> turns that measured reduction into a dollar curve. The dashboard renders the last run
+> and labels its provenance; it never shows an illustrative figure.
 
 Auto-clear precision is the one that must *not* move. Nobody reviews what the agent
 cleared unattended, so a system that gets faster by getting sloppier is worse than no
@@ -343,8 +355,8 @@ ingest bank feed + AP invoices + GL
   │
   ├─ Model pass         only the residue, batched, TOON-encoded context
   │
-  ├─ The gate           confidence AND materiality; rule-settled work is trusted
-  │                     to a higher ceiling because a backtest is the control
+  ├─ The gate           fresh model suggestions always go to human review;
+  │                     only backtested rules clear, still bounded by materiality
   │
   ├─ Tickmark           verified, append-only, with its evidence chain
   └─ Exception queue    everything needing judgment, with one-click resolutions

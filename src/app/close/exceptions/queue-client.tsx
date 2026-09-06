@@ -8,6 +8,7 @@ import { adoptAction, resolveAction } from "./actions";
 const CAUSE: Record<string, { badge: string; label: string; why: string }> = {
   over_materiality:      { badge: "warn",    label: "Over materiality",  why: "Above the threshold, so a human reviews it however confident the agent is." },
   low_confidence:        { badge: "bad",     label: "Low confidence",    why: "The agent declined to assert this one. That is the system working." },
+  unverified_model_judgment: { badge: "human", label: "Needs human evidence", why: "A fresh model suggestion can help the reviewer, but only a backtested rule may clear work unattended." },
   policy_requires_human: { badge: "human",   label: "Policy",            why: "A standing rule sends this class of item to a person every time." },
   no_candidate:          { badge: "neutral", label: "No match found",    why: "On the bank, nothing in the ledger explains it. Usually a timing difference." },
   ambiguous_candidates:  { badge: "warn",    label: "Ambiguous",         why: "More than one credible answer. Forcing a pick here would be guessing." },
