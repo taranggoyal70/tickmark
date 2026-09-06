@@ -1,0 +1,39 @@
+[span] Tickmark
+[a] Close room
+[a] Exceptions
+[a] Reconciliation
+[a] Rulebook
+[span] Northwind Robotics, Inc.
+[div] The close room
+[h1] Watch the same close, twice.
+[span] Before it learned anything, and after.
+[p] 2026-01
+[p] on the left,
+[p] 2026-04
+[p] on the right — identical books, identical model. Every decision is replayed from a recorded run at the speed it actually costs: a compiled rule is a predicate check, a model call is not. Watch the right-hand queue stay short.
+[span] settled by a rule · free
+[span] asked the model · costs tokens
+[span] sent to the controller
+[button] Run both closes
+[span] 2026-01
+[span] no rules yet
+[div] cleared
+[div] for you
+[div] free
+[div] cost
+[div] $0.000
+[p] Waiting to start.
+[span] 2026-04
+[span] 5 rules learned
+[div] cleared
+[div] for you
+[div] free
+[div] cost
+[div] $0.000
+[p] Waiting to start.
+[p] Same books, same model, same prompts. The only difference is
+[p] rules the agent earned from corrections a controller already made — which is why the right-hand close hands back
+[span] fewer items
+[p] and pays for fewer of its own decisions.
+[span] Tickmark
+[span] Every automated decision traces to a Rule or a Close Run. No orphan decisions.

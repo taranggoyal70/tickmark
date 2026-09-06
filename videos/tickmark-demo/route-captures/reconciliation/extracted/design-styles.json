@@ -1,0 +1,121 @@
+{
+  "typography": [
+    {
+      "role": "display",
+      "fontFamily": "Inter",
+      "fontSize": "26px",
+      "fontWeight": "400",
+      "lineHeight": "29.9px",
+      "letterSpacing": "-0.312px",
+      "color": "#0D253D",
+      "sampleText": "2026-04"
+    },
+    {
+      "role": "link",
+      "fontFamily": "Inter",
+      "fontSize": "16px",
+      "fontWeight": "400",
+      "lineHeight": "24px",
+      "letterSpacing": "normal",
+      "color": "#0D253D",
+      "sampleText": "Tickmark"
+    },
+    {
+      "role": "heading",
+      "fontFamily": "Inter",
+      "fontSize": "15px",
+      "fontWeight": "500",
+      "lineHeight": "22.5px",
+      "letterSpacing": "normal",
+      "color": "#0D253D",
+      "sampleText": "Outstanding on the statement"
+    },
+    {
+      "role": "body",
+      "fontFamily": "Inter",
+      "fontSize": "13px",
+      "fontWeight": "400",
+      "lineHeight": "19.5px",
+      "letterSpacing": "normal",
+      "color": "#273951",
+      "sampleText": "Not yet reconciled — 40 statement lines and 40 ledger entrie"
+    },
+    {
+      "role": "code",
+      "fontFamily": "JetBrains Mono",
+      "fontSize": "11px",
+      "fontWeight": "400",
+      "lineHeight": "16.5px",
+      "letterSpacing": "normal",
+      "color": "#8A99AD",
+      "sampleText": "2026-04-07"
+    }
+  ],
+  "spacing": {
+    "observed": [
+      4,
+      6,
+      8,
+      10,
+      12,
+      16,
+      20,
+      24
+    ],
+    "baseUnit": 4
+  },
+  "radius": [
+    "6px"
+  ],
+  "shadows": [
+    {
+      "value": "rgba(13, 37, 61, 0.04) 0px 1px 2px 0px",
+      "count": 3
+    }
+  ],
+  "buttons": [],
+  "cards": [
+    {
+      "label": "card",
+      "background": "#FFFFFF",
+      "backgroundImage": "",
+      "backdropFilter": "",
+      "color": "#0D253D",
+      "padding": "20px",
+      "borderRadius": "12px",
+      "border": "1px solid rgb(227, 232, 238)",
+      "boxShadow": "rgba(13, 37, 61, 0.04) 0px 1px 2px 0px",
+      "fontSize": "16px",
+      "fontWeight": "400",
+      "height": "127.797px"
+    }
+  ],
+  "nav": {
+    "label": "navigation",
+    "background": "oklab(0.999994 0.0000455678 0.0000200868 / 0.88)",
+    "backgroundImage": "",
+    "backdropFilter": "blur(8px)",
+    "color": "#0D253D",
+    "padding": "0px",
+    "borderRadius": "0px",
+    "border": "",
+    "boxShadow": "none",
+    "fontSize": "16px",
+    "fontWeight": "400",
+    "height": "57px"
+  },
+  "chips": [],
+  "statCells": [],
+  "tabs": [],
+  "backgrounds": [],
+  "glass": [
+    {
+      "backdropFilter": "blur(8px)",
+      "background": "oklab(0.999994 0.0000455678 0.0000200868 / 0.88)",
+      "border": "",
+      "borderRadius": "0px",
+      "boxShadow": "",
+      "area": 109440
+    }
+  ]
+}

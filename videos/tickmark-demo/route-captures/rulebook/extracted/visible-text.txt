@@ -1,0 +1,195 @@
+[span] Tickmark
+[a] Close room
+[a] Exceptions
+[a] Reconciliation
+[a] Rulebook
+[span] Northwind Robotics, Inc.
+[div] Rulebook · the weights
+[h1] active rules, learned from corrections
+[p] Each active rule was distilled from at least two distinct human corrections, replayed against every closed period, and only then activated. Equivalent later proposals stay inactive while keeping their own evidence for the audit trail. Active rules execute with zero model calls - which is why the close gets cheaper as the agent learns more.
+[span] RULE-027
+[h3] Mouser Electronics → 5010 (OPS:100)
+[span] coding
+[span] active
+[div] When
+[li] vendor is
+[span] Mouser Electronics
+[div] Then
+[span] code to
+[span] 5010
+[span] OPS 100%
+[div] Backtest · replayed against
+[div] 2026-01
+[span] fired
+[span] correct
+[span] wrong
+[span] precision
+[span] 100.0
+[div] Evidence ·
+[div] corrections
+[span] 2026-02
+[span] MOU-202602-6388
+[div] agent said "(no proposal)", controller set "5010|OPS:100" - recoded
+[span] 2026-02
+[span] MOU-202602-2481
+[div] agent said "(no proposal)", controller set "5010|OPS:100" - recoded
+[span] 2026-02
+[span] MOU-202602-7557
+[div] agent said "(no proposal)", controller set "5010|OPS:100" - recoded
+[span] 2026-02
+[span] MOU-202602-7907
+[div] agent said "(no proposal)", controller set "5010|OPS:100" - recoded
+[span] 2026-02
+[span] MOU-202602-1679
+[div] agent said "(no proposal)", controller set "5010|OPS:100" - recoded
+[span] RULE-028
+[h3] Digi-Key Electronics → 5010 (OPS:100)
+[span] coding
+[span] active
+[div] When
+[li] vendor is
+[span] Digi-Key Electronics
+[div] Then
+[span] code to
+[span] 5010
+[span] OPS 100%
+[div] Backtest · replayed against
+[div] 2026-01
+[span] fired
+[span] correct
+[span] wrong
+[span] precision
+[span] 100.0
+[div] Evidence ·
+[div] corrections
+[span] 2026-02
+[span] DIG-202602-5121
+[div] agent said "(no proposal)", controller set "5010|OPS:100" - recoded
+[span] 2026-02
+[span] DIG-202602-2898
+[div] agent said "(no proposal)", controller set "5010|OPS:100" - recoded
+[span] 2026-02
+[span] DIG-202602-9165
+[div] agent said "(no proposal)", controller set "5010|OPS:100" - recoded
+[span] 2026-02
+[span] DIG-202602-4772
+[div] agent said "(no proposal)", controller set "5010|OPS:100" - recoded
+[span] 2026-02
+[span] DIG-202602-2171
+[div] agent said "(no proposal)", controller set "5010|OPS:100" - recoded
+[span] RULE-029
+[h3] Flexport → 5020 (OPS:100)
+[span] coding
+[span] active
+[div] When
+[li] vendor is
+[span] Flexport
+[div] Then
+[span] code to
+[span] 5020
+[span] OPS 100%
+[div] Backtest · replayed against
+[div] 2026-01
+[span] fired
+[span] correct
+[span] wrong
+[span] precision
+[span] 100.0
+[div] Evidence ·
+[div] corrections
+[span] 2026-02
+[span] FLE-202602-3258
+[div] agent said "(no proposal)", controller set "5020|OPS:100" - recoded
+[span] 2026-02
+[span] FLE-202602-5421
+[div] agent said "5010|", controller set "5020|OPS:100" - recoded
+[span] 2026-02
+[span] FLE-202602-5155
+[div] agent said "5010|", controller set "5020|OPS:100" - recoded
+[span] RULE-030
+[h3] Cooley LLP → 6610 (GA:100)
+[span] coding
+[span] active
+[div] When
+[li] vendor is
+[span] Cooley LLP
+[div] Then
+[span] code to
+[span] 6610
+[span] GA 100%
+[div] Backtest · replayed against
+[div] 2026-01
+[span] fired
+[span] correct
+[span] wrong
+[span] precision
+[span] 100.0
+[div] Evidence ·
+[div] corrections
+[span] 2026-02
+[span] COO-202602-1282
+[div] agent said "5010|", controller set "6610|GA:100" - recoded
+[span] 2026-02
+[span] COO-202602-2028
+[div] agent said "5010|", controller set "6610|GA:100" - recoded
+[span] 2026-02
+[span] COO-202602-5895
+[div] agent said "5010|", controller set "6610|GA:100" - recoded
+[span] 2026-02
+[span] COO-202602-2676
+[div] agent said "5010|", controller set "6610|GA:100" - recoded
+[span] RULE-031
+[h3] United Airlines → 6910 (GTM:60/OPS:40)
+[span] coding
+[span] active
+[div] When
+[li] vendor is
+[span] United Airlines
+[div] Then
+[span] code to
+[span] 6910
+[span] GTM 60% / OPS 40%
+[div] Backtest · replayed against
+[div] 2026-01
+[span] fired
+[span] correct
+[span] wrong
+[span] precision
+[span] 100.0
+[div] Evidence ·
+[div] corrections
+[span] 2026-02
+[span] UNI-202602-8251
+[div] agent said "5010|", controller set "6910|GTM:60/OPS:40" - recoded
+[span] 2026-02
+[span] UNI-202602-4915
+[div] agent said "5010|", controller set "6910|GTM:60/OPS:40" - recoded
+[h2] proposals the gate rejected
+[p] Proposing a rule is not adopting one. These failed the backtest or the evidence bar and never reached the books.
+[span] Cooley LLP → 6610 (GA:100)
+[span] coding
+[span] fired
+[span] precision
+[span] evidence
+[span] United Airlines → 6910 (GTM:60/OPS:40)
+[span] coding
+[span] fired
+[span] precision
+[span] evidence
+[span] Mouser Electronics → 5010 (OPS:100)
+[span] coding
+[span] fired
+[span] precision
+[span] evidence
+[span] Digi-Key Electronics → 5010 (OPS:100)
+[span] coding
+[span] fired
+[span] precision
+[span] evidence
+[span] Flexport → 5020 (OPS:100)
+[span] coding
+[span] fired
+[span] precision
+[span] evidence
+[span] Tickmark
+[span] Every automated decision traces to a Rule or a Close Run. No orphan decisions.

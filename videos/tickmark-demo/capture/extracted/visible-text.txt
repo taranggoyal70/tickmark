@@ -1,0 +1,73 @@
+[span] Tickmark
+[a] Open the close
+[div] Office of the CFO · month-end close
+[h1] The close that
+[h1] gets cheaper every month.
+[p] Tickmark codes the AP ledger and reconciles the bank, hands the controller only what genuinely needs judgment, and compiles every correction they make into a deterministic rule. The judgment gets made once. After that it runs for free.
+[a] Watch it close the books
+[a] See the measured results
+[a] Read what it learned
+[div] Auto-cleared
+[span] 39%
+[div] 2026-01
+[div] 2026-04
+[div] Model calls
+[div] 2026-01
+[div] 2026-04
+[div] Controller time
+[span] 63m
+[span] 47m
+[div] 2026-01
+[div] 2026-04
+[div] Precision held
+[span] 100.0%
+[span] 100.0%
+[div] 2026-01
+[div] 2026-04
+[div] Why it gets cheaper
+[h2] Learning that compiles, not learning that accumulates.
+[p] Most agents “learn” by growing a prompt. Every lesson makes the next call longer, slower and more expensive, and none of it can be audited.
+[p] Tickmark turns a correction into a
+[span] rule
+[p] : a predicate and an action, versioned, readable, and executable with no model call at all. The month the agent learns that AWS codes to 6820 split 60/25/15, that invoice stops costing anything to decide - forever.
+[p] So the cost curve bends the right way. More learning means fewer calls, not bigger ones. And a controller can read the rule, disable it, or ask which corrections taught it - which is the difference between automation an auditor signs off and automation they refuse.
+[div] The loop
+[h2] Five steps, and a human owns one of them.
+[div] Rulebook
+[p] the weights - deterministic rules the agent has already earned
+[div] Close run
+[p] the forward pass - rules first, model only on the residue
+[div] Corrections
+[p] the loss signal - what the controller changed, captured structurally
+[div] Gradient step
+[p] distil corrections into candidate rules, backtested against every closed period
+[div] The human gate
+[p] a controller accepts or rejects. Analysis never writes.
+[p] Two constraints are borrowed, with credit, from
+[a] backpass
+[p] : a rule needs evidence from at least two distinct corrections, and analysis never writes. In accounting those are not niceties - they are traceability and segregation of duties.
+[div] What it actually does
+[h2] Three steps of the close, end to end.
+[h3] Bank reconciliation
+[p] Ties the statement to the ledger across all four cardinalities - one payment, an ACH batch against six invoices, an invoice settled in two tranches, a lockbox deposit. Names every residual as fx, fee, partial or timing, or refuses the match.
+[h3] AP invoice coding
+[p] GL account, department, and class per invoice - including the split allocations that are pure tribal knowledge, like cloud spend carved 60/25/15 across Engineering, Data and Product.
+[h3] Accrual completeness
+[p] Finds the recurring cost that was incurred but never invoiced before cut-off, sizes it off trailing actuals, and books it as a balanced entry with a preparer and an approver who are not the same person.
+[div] Guardrails
+[h2] The parts that make it usable on real books.
+[h3] Materiality is a hard gate
+[p] Nothing above the threshold auto-posts, whatever the confidence. A $12 bank fee and a $2.4M wire do not get the same scrutiny.
+[h3] Debits equal credits
+[p] Checked arithmetically in the database, never taken from model output.
+[h3] Preparer ≠ approver
+[p] Enforced by a constraint, not a convention.
+[h3] Tickmarks are append-only
+[p] You supersede one with a new tickmark. You never edit or delete the record of a verification.
+[h3] No rule without a backtest
+[p] A proposed rule is replayed against every closed period, and the controller sees what it would have broken before adopting it.
+[h3] Every decision traces
+[p] To a rule and its corrections, or to a close run and its evidence chain. No orphan decisions.
+[span] Tickmark
+[span] Synthetic fixture entity. No real financial data.
+[a] Open the close →

@@ -1,0 +1,291 @@
+[span] Tickmark
+[a] Close room
+[a] Exceptions
+[a] Reconciliation
+[a] Rulebook
+[span] Northwind Robotics, Inc.
+[div] Journal entries
+[h1] 14 entries waiting for approval
+[p] The agent drafts entries; it never posts them. Debits must equal credits — checked arithmetically by the database, not taken from the model — and the approver has to be someone other than the preparer.
+[span] Accrue Datadog — billed in 3 prior period(s) but not this one; trailing average of the last 3
+[span] 2026-04
+[span] accrual
+[span] prepared by
+[span] agent:anthropic/claude-opus-5
+[th] Account
+[th] Debit
+[th] Credit
+[span] 6820
+[td] Cloud Infrastructure
+[span] 12,619.85
+[span] 2100
+[td] Accrued Liabilities
+[span] 12,619.85
+[td] Balanced
+[span] 12,619.85
+[span] 12,619.85
+[button] Approve and post
+[button] Reject
+[span] Your name is recorded as approver. The agent prepared it and cannot approve its own entry.
+[span] Accrue Datadog — billed in 3 prior period(s) but not this one; trailing average of the last 3
+[span] 2026-04
+[span] accrual
+[span] prepared by
+[span] agent:anthropic/claude-opus-5
+[th] Account
+[th] Debit
+[th] Credit
+[span] 6820
+[td] Cloud Infrastructure
+[span] 12,619.85
+[span] 2100
+[td] Accrued Liabilities
+[span] 12,619.85
+[td] Balanced
+[span] 12,619.85
+[span] 12,619.85
+[button] Approve and post
+[button] Reject
+[span] Your name is recorded as approver. The agent prepared it and cannot approve its own entry.
+[span] Accrue Datadog — billed in 3 prior period(s) but not this one; trailing average of the last 3
+[span] 2026-04
+[span] accrual
+[span] prepared by
+[span] agent:anthropic/claude-opus-5
+[th] Account
+[th] Debit
+[th] Credit
+[span] 6820
+[td] Cloud Infrastructure
+[span] 12,619.85
+[span] 2100
+[td] Accrued Liabilities
+[span] 12,619.85
+[td] Balanced
+[span] 12,619.85
+[span] 12,619.85
+[button] Approve and post
+[button] Reject
+[span] Your name is recorded as approver. The agent prepared it and cannot approve its own entry.
+[span] Accrue Datadog — billed in 3 prior period(s) but not this one; trailing average of the last 3
+[span] 2026-04
+[span] accrual
+[span] prepared by
+[span] agent:anthropic/claude-opus-5
+[th] Account
+[th] Debit
+[th] Credit
+[span] 6820
+[td] Cloud Infrastructure
+[span] 12,619.85
+[span] 2100
+[td] Accrued Liabilities
+[span] 12,619.85
+[td] Balanced
+[span] 12,619.85
+[span] 12,619.85
+[button] Approve and post
+[button] Reject
+[span] Your name is recorded as approver. The agent prepared it and cannot approve its own entry.
+[span] Accrue Datadog — billed in 3 prior period(s) but not this one; trailing average of the last 3
+[span] 2026-04
+[span] accrual
+[span] prepared by
+[span] agent:anthropic/claude-opus-5
+[th] Account
+[th] Debit
+[th] Credit
+[span] 6820
+[td] Cloud Infrastructure
+[span] 12,619.85
+[span] 2100
+[td] Accrued Liabilities
+[span] 12,619.85
+[td] Balanced
+[span] 12,619.85
+[span] 12,619.85
+[button] Approve and post
+[button] Reject
+[span] Your name is recorded as approver. The agent prepared it and cannot approve its own entry.
+[span] Accrue Datadog — billed in 3 prior period(s) but not this one; trailing average of the last 3
+[span] 2026-04
+[span] accrual
+[span] prepared by
+[span] agent:anthropic/claude-opus-5
+[th] Account
+[th] Debit
+[th] Credit
+[span] 6820
+[td] Cloud Infrastructure
+[span] 12,619.85
+[span] 2100
+[td] Accrued Liabilities
+[span] 12,619.85
+[td] Balanced
+[span] 12,619.85
+[span] 12,619.85
+[button] Approve and post
+[button] Reject
+[span] Your name is recorded as approver. The agent prepared it and cannot approve its own entry.
+[span] Accrue Datadog — billed in 3 prior period(s) but not this one; trailing average of the last 3
+[span] 2026-04
+[span] accrual
+[span] prepared by
+[span] agent:anthropic/claude-opus-5
+[th] Account
+[th] Debit
+[th] Credit
+[span] 6820
+[td] Cloud Infrastructure
+[span] 12,619.85
+[span] 2100
+[td] Accrued Liabilities
+[span] 12,619.85
+[td] Balanced
+[span] 12,619.85
+[span] 12,619.85
+[button] Approve and post
+[button] Reject
+[span] Your name is recorded as approver. The agent prepared it and cannot approve its own entry.
+[span] Accrue Datadog — billed in 3 prior period(s) but not this one; trailing average of the last 3
+[span] 2026-04
+[span] accrual
+[span] prepared by
+[span] agent:anthropic/claude-opus-5
+[th] Account
+[th] Debit
+[th] Credit
+[span] 6820
+[td] Cloud Infrastructure
+[span] 12,619.85
+[span] 2100
+[td] Accrued Liabilities
+[span] 12,619.85
+[td] Balanced
+[span] 12,619.85
+[span] 12,619.85
+[button] Approve and post
+[button] Reject
+[span] Your name is recorded as approver. The agent prepared it and cannot approve its own entry.
+[span] Accrue Datadog — billed in 3 prior period(s) but not this one; trailing average of the last 3
+[span] 2026-04
+[span] accrual
+[span] prepared by
+[span] agent:anthropic/claude-opus-5
+[th] Account
+[th] Debit
+[th] Credit
+[span] 6820
+[td] Cloud Infrastructure
+[span] 12,619.85
+[span] 2100
+[td] Accrued Liabilities
+[span] 12,619.85
+[td] Balanced
+[span] 12,619.85
+[span] 12,619.85
+[button] Approve and post
+[button] Reject
+[span] Your name is recorded as approver. The agent prepared it and cannot approve its own entry.
+[span] Accrue Datadog — billed in 3 prior period(s) but not this one; trailing average of the last 3
+[span] 2026-04
+[span] accrual
+[span] prepared by
+[span] agent:anthropic/claude-opus-5
+[th] Account
+[th] Debit
+[th] Credit
+[span] 6820
+[td] Cloud Infrastructure
+[span] 12,619.85
+[span] 2100
+[td] Accrued Liabilities
+[span] 12,619.85
+[td] Balanced
+[span] 12,619.85
+[span] 12,619.85
+[button] Approve and post
+[button] Reject
+[span] Your name is recorded as approver. The agent prepared it and cannot approve its own entry.
+[span] Accrue Datadog — billed in 3 prior period(s) but not this one; trailing average of the last 3
+[span] 2026-04
+[span] accrual
+[span] prepared by
+[span] agent:anthropic/claude-opus-5
+[th] Account
+[th] Debit
+[th] Credit
+[span] 6820
+[td] Cloud Infrastructure
+[span] 12,619.85
+[span] 2100
+[td] Accrued Liabilities
+[span] 12,619.85
+[td] Balanced
+[span] 12,619.85
+[span] 12,619.85
+[button] Approve and post
+[button] Reject
+[span] Your name is recorded as approver. The agent prepared it and cannot approve its own entry.
+[span] Accrue Datadog — billed in 3 prior period(s) but not this one; trailing average of the last 3
+[span] 2026-04
+[span] accrual
+[span] prepared by
+[span] agent:anthropic/claude-opus-5
+[th] Account
+[th] Debit
+[th] Credit
+[span] 6820
+[td] Cloud Infrastructure
+[span] 12,619.85
+[span] 2100
+[td] Accrued Liabilities
+[span] 12,619.85
+[td] Balanced
+[span] 12,619.85
+[span] 12,619.85
+[button] Approve and post
+[button] Reject
+[span] Your name is recorded as approver. The agent prepared it and cannot approve its own entry.
+[span] Accrue Datadog — billed in 3 prior period(s) but not this one; trailing average of the last 3
+[span] 2026-04
+[span] accrual
+[span] prepared by
+[span] agent:anthropic/claude-opus-5
+[th] Account
+[th] Debit
+[th] Credit
+[span] 6820
+[td] Cloud Infrastructure
+[span] 12,619.85
+[span] 2100
+[td] Accrued Liabilities
+[span] 12,619.85
+[td] Balanced
+[span] 12,619.85
+[span] 12,619.85
+[button] Approve and post
+[button] Reject
+[span] Your name is recorded as approver. The agent prepared it and cannot approve its own entry.
+[span] Accrue Datadog — billed in 3 prior period(s) but not this one; trailing average of the last 3
+[span] 2026-04
+[span] accrual
+[span] prepared by
+[span] agent:anthropic/claude-opus-5
+[th] Account
+[th] Debit
+[th] Credit
+[span] 6820
+[td] Cloud Infrastructure
+[span] 12,619.85
+[span] 2100
+[td] Accrued Liabilities
+[span] 12,619.85
+[td] Balanced
+[span] 12,619.85
+[span] 12,619.85
+[button] Approve and post
+[button] Reject
+[span] Your name is recorded as approver. The agent prepared it and cannot approve its own entry.
+[span] Tickmark
+[span] Every automated decision traces to a Rule or a Close Run. No orphan decisions.

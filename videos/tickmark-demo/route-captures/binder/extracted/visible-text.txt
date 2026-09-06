@@ -1,0 +1,149 @@
+[span] Tickmark
+[a] Close room
+[a] Exceptions
+[a] Reconciliation
+[a] Rulebook
+[span] Northwind Robotics, Inc.
+[div] Close binder ·
+[div] Northwind Robotics, Inc.
+[h1] Audit support for
+[h1] 2026-04
+[p] When an auditor asks who checked something, when, and on what basis, the answer should be a file — not a week of reconstructing it. Everything here is read back from the ledger; nothing is recomputed for the report.
+[div] Tickmarks standing
+[div] Exceptions
+[div] Still open
+[div] Journal entries
+[div] Rules in force
+[a] Download the binder (JSON)
+[a] Tickmarks (CSV)
+[span] rulebook v
+[span] settled by rule ·
+[span] model calls
+[h3] Tickmarks
+[p] Each names who asserted it and what it rests on.
+[p] 71 earlier verifications were superseded by these, not deleted.
+[span] BNK-2026-04-0033
+[span] rule
+[p] 1:many tie-out, clean
+[p] supported by
+[p] GL-2026-04-0046, GL-2026-04-0047
+[span] BNK-2026-04-0034
+[span] rule
+[p] 1:many tie-out, clean
+[p] supported by
+[p] GL-2026-04-0048, GL-2026-04-0049
+[span] BNK-2026-04-0001
+[span] rule
+[p] 1:many tie-out, clean
+[p] supported by
+[p] GL-2026-04-0001, GL-2026-04-0002, GL-2026-04-0003
+[span] BNK-2026-04-0027
+[span] rule
+[p] 1:1 tie-out, clean
+[p] supported by
+[p] GL-2026-04-0040
+[h3] Entries and who approved them
+[p] Preparer and approver are recorded on every one.
+[div] Accrue Datadog — billed in 3 prior period(s) but not this one; trailing average of the last 3
+[span] pending_approval
+[span] prepared
+[span] agent:anthropic/claude-opus-5
+[span] approved
+[span] 12,619.85
+[div] Accrue Datadog — billed in 3 prior period(s) but not this one; trailing average of the last 3
+[span] pending_approval
+[span] prepared
+[span] agent:anthropic/claude-opus-5
+[span] approved
+[span] 12,619.85
+[div] Accrue Datadog — billed in 3 prior period(s) but not this one; trailing average of the last 3
+[span] pending_approval
+[span] prepared
+[span] agent:anthropic/claude-opus-5
+[span] approved
+[span] 12,619.85
+[div] Accrue Datadog — billed in 3 prior period(s) but not this one; trailing average of the last 3
+[span] pending_approval
+[span] prepared
+[span] agent:anthropic/claude-opus-5
+[span] approved
+[span] 12,619.85
+[div] Accrue Datadog — billed in 3 prior period(s) but not this one; trailing average of the last 3
+[span] pending_approval
+[span] prepared
+[span] agent:anthropic/claude-opus-5
+[span] approved
+[span] 12,619.85
+[div] Accrue Datadog — billed in 3 prior period(s) but not this one; trailing average of the last 3
+[span] pending_approval
+[span] prepared
+[span] agent:anthropic/claude-opus-5
+[span] approved
+[span] 12,619.85
+[div] Accrue Datadog — billed in 3 prior period(s) but not this one; trailing average of the last 3
+[span] pending_approval
+[span] prepared
+[span] agent:anthropic/claude-opus-5
+[span] approved
+[span] 12,619.85
+[div] Accrue Datadog — billed in 3 prior period(s) but not this one; trailing average of the last 3
+[span] pending_approval
+[span] prepared
+[span] agent:anthropic/claude-opus-5
+[span] approved
+[span] 12,619.85
+[div] Accrue Datadog — billed in 3 prior period(s) but not this one; trailing average of the last 3
+[span] pending_approval
+[span] prepared
+[span] agent:anthropic/claude-opus-5
+[span] approved
+[span] 12,619.85
+[div] Accrue Datadog — billed in 3 prior period(s) but not this one; trailing average of the last 3
+[span] pending_approval
+[span] prepared
+[span] agent:anthropic/claude-opus-5
+[span] approved
+[span] 12,619.85
+[div] Accrue Datadog — billed in 3 prior period(s) but not this one; trailing average of the last 3
+[span] pending_approval
+[span] prepared
+[span] agent:anthropic/claude-opus-5
+[span] approved
+[span] 12,619.85
+[div] Accrue Datadog — billed in 3 prior period(s) but not this one; trailing average of the last 3
+[span] pending_approval
+[span] prepared
+[span] agent:anthropic/claude-opus-5
+[span] approved
+[span] 12,619.85
+[div] Accrue Datadog — billed in 3 prior period(s) but not this one; trailing average of the last 3
+[span] pending_approval
+[span] prepared
+[span] agent:anthropic/claude-opus-5
+[span] approved
+[span] 12,619.85
+[div] Accrue Datadog — billed in 3 prior period(s) but not this one; trailing average of the last 3
+[span] pending_approval
+[span] prepared
+[span] agent:anthropic/claude-opus-5
+[span] approved
+[span] 12,619.85
+[h3] Rules that decided anything
+[p] Each with the corrections that authorised it and its replay.
+[span] Gusto settles same day settlement
+[div] adopted by
+[div] Controller B
+[div] corrections
+[div] · replay 3/3 at 100%
+[span] Amazon Web Services settles by invoice
+[div] adopted by
+[div] Controller B
+[div] corrections
+[div] · replay 2/2 at 100%
+[span] Flexport settles by invoice
+[div] adopted by
+[div] Controller B
+[div] corrections
+[div] · replay 4/4 at 100%
+[span] Tickmark
+[span] Every automated decision traces to a Rule or a Close Run. No orphan decisions.

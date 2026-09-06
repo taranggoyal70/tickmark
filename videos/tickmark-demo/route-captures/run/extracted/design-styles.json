@@ -1,0 +1,116 @@
+{
+  "typography": [
+    {
+      "role": "display",
+      "fontFamily": "Inter",
+      "fontSize": "32px",
+      "fontWeight": "300",
+      "lineHeight": "35.84px",
+      "letterSpacing": "-0.64px",
+      "color": "#0D253D",
+      "sampleText": "Watch the same close, twice.Before it learned anything, and "
+    },
+    {
+      "role": "link",
+      "fontFamily": "Inter",
+      "fontSize": "16px",
+      "fontWeight": "400",
+      "lineHeight": "24px",
+      "letterSpacing": "normal",
+      "color": "#0D253D",
+      "sampleText": "Tickmark"
+    },
+    {
+      "role": "body",
+      "fontFamily": "Inter",
+      "fontSize": "14px",
+      "fontWeight": "400",
+      "lineHeight": "22.75px",
+      "letterSpacing": "normal",
+      "color": "#64748D",
+      "sampleText": "2026-01 on the left, 2026-04 on the right — identical books,"
+    }
+  ],
+  "spacing": {
+    "observed": [
+      1,
+      4,
+      6,
+      8,
+      10,
+      12,
+      16,
+      24
+    ],
+    "baseUnit": 4
+  },
+  "radius": [
+    "6px"
+  ],
+  "shadows": [
+    {
+      "value": "rgba(13, 37, 61, 0.04) 0px 1px 2px 0px",
+      "count": 2
+    }
+  ],
+  "buttons": [
+    {
+      "label": "Run both closes",
+      "background": "#533AFD",
+      "backgroundImage": "",
+      "backdropFilter": "",
+      "color": "#FFFFFF",
+      "padding": "8px 16px",
+      "borderRadius": "8px",
+      "border": "0px solid rgb(255, 255, 255)",
+      "boxShadow": "none",
+      "fontSize": "13px",
+      "fontWeight": "500",
+      "height": "35.5px"
+    }
+  ],
+  "cards": [
+    {
+      "label": "card",
+      "background": "#FFFFFF",
+      "backgroundImage": "",
+      "backdropFilter": "",
+      "color": "#0D253D",
+      "padding": "0px",
+      "borderRadius": "12px",
+      "border": "1px solid rgb(227, 232, 238)",
+      "boxShadow": "rgba(13, 37, 61, 0.04) 0px 1px 2px 0px",
+      "fontSize": "16px",
+      "fontWeight": "400",
+      "height": "560px"
+    }
+  ],
+  "nav": {
+    "label": "navigation",
+    "background": "oklab(0.999994 0.0000455678 0.0000200868 / 0.88)",
+    "backgroundImage": "",
+    "backdropFilter": "blur(8px)",
+    "color": "#0D253D",
+    "padding": "0px",
+    "borderRadius": "0px",
+    "border": "",
+    "boxShadow": "none",
+    "fontSize": "16px",
+    "fontWeight": "400",
+    "height": "57px"
+  },
+  "chips": [],
+  "statCells": [],
+  "tabs": [],
+  "backgrounds": [],
+  "glass": [
+    {
+      "backdropFilter": "blur(8px)",
+      "background": "oklab(0.999994 0.0000455678 0.0000200868 / 0.88)",
+      "border": "",
+      "borderRadius": "0px",
+      "boxShadow": "",
+      "area": 109440
+    }
+  ]
+}

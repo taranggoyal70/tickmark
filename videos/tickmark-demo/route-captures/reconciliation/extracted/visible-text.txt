@@ -1,0 +1,265 @@
+[span] Tickmark
+[a] Close room
+[a] Exceptions
+[a] Reconciliation
+[a] Rulebook
+[span] Northwind Robotics, Inc.
+[div] Bank reconciliation ·
+[div] Northwind Robotics, Inc.
+[h1] 2026-04
+[div] Statement lines
+[div] Explained
+[div] 4 of 58
+[div] Movement on statement
+[span] 540,656.74
+[div] Unexplained difference
+[span] 0.18
+[p] Not yet reconciled — 40 statement lines and 40 ledger entries are still unexplained. They are listed below rather than summarised away.
+[h3] Outstanding on the statement
+[span] 20,826.90
+[p] On the bank, nothing in the ledger explains it yet. Usually a timing difference.
+[td] 2026-04-07
+[td] STRIPE PAYOUT88368363
+[span] 116,504.96
+[td] 2026-04-14
+[td] STRIPE TRANSFER ST-37513628
+[span] 110,070.58
+[td] 2026-04-21
+[td] STRIPE PAYOUT78114392
+[span] 107,228.84
+[td] 2026-04-28
+[td] STRIPE PAYOUT19577138
+[span] 81,162.16
+[td] 2026-04-17
+[td] WEWORK COMPANIES LLC
+[span] 39,500.00
+[td] 2026-04-28
+[td] FLEXPORT INC SAN FRANCIS TRANCHE 1/2
+[span] 34,264.52
+[td] 2026-04-28
+[td] FLEXPORT INC SAN FRANCIS TRANCHE 1/2
+[span] 31,194.85
+[td] 2026-04-28
+[td] COOLEY LLP OPERATING
+[span] 25,125.08
+[td] 2026-04-28
+[td] DEEL INC EUR CONTRACTOR EUR22589.40
+[span] 24,300.53
+[td] 2026-04-28
+[td] MOUSER ELECTRONI
+[span] 23,655.92
+[td] 2026-04-28
+[td] MOUSER ELECTRONICS 800-346
+[span] 22,896.59
+[td] 2026-05-04
+[td] FLEXPORT INC SAN FRANCIS TRANCHE 2/2
+[span] 22,843.02
+[td] 2026-04-24
+[td] MOUSER ELECTRONI
+[span] 22,764.54
+[td] 2026-04-28
+[td] COOLEY LLP
+[span] 21,706.14
+[td] 2026-04-25
+[td] COOLEY LLP OPERATING
+[span] 21,095.85
+[td] 2026-05-04
+[td] FLEXPORT INC SAN FRANCIS TRANCHE 2/2
+[span] 20,796.57
+[td] 2026-04-28
+[td] GOOGLE ADS4829174 CC@GOOGL
+[span] 19,796.81
+[td] 2026-04-28
+[td] COOLEY LLP OPERATING
+[span] 19,781.49
+[td] 2026-04-28
+[td] MOUSER ELECTRONICS 800-346
+[span] 17,055.55
+[td] 2026-04-26
+[td] MOUSER ELECTRONI
+[span] 16,259.53
+[td] 2026-04-27
+[td] DEPOSIT IN TRANSIT - LOCKBOX
+[span] 16,252.90
+[td] 2026-04-28
+[td] COOLEY LLP
+[span] 14,036.33
+[td] 2026-04-28
+[td] DIGI-KEY CORP THIEF RIVER
+[span] 13,444.45
+[td] 2026-04-28
+[td] DIGI-KEY CORP THIEF RIVER
+[span] 8,565.40
+[td] 2026-04-28
+[td] DIGIKEY ELECTRONICS
+[span] 6,499.43
+[td] 2026-04-28
+[td] DIGI-KEY CORP THIEF RIVER
+[span] 6,279.95
+[td] 2026-04-24
+[td] DIGI-KEY CORP THIEF RIVER
+[span] 6,037.80
+[td] 2026-04-28
+[td] VERCEL INC
+[span] 4,097.23
+[td] 2026-04-28
+[td] ACH DEBIT PENDING VENDOR REF 88213
+[span] 3,076.61
+[td] 2026-04-19
+[td] INTEREST EARNED - SWEEP
+[span] 2,630.28
+[td] 2026-04-19
+[td] UNITED AIRLINES
+[span] 2,467.76
+[td] 2026-04-17
+[td] INTEREST EARNED - SWEEP
+[span] 2,333.94
+[td] 2026-04-16
+[td] INTEREST EARNED - SWEEP
+[span] 2,256.92
+[td] 2026-04-28
+[td] SLACK T SALESFORCE
+[span] 2,253.88
+[td] 2026-04-08
+[td] UNITED AIRLINES
+[span] 2,074.36
+[td] 2026-04-15
+[td] UNITED AIRLINES
+[span] 1,866.24
+[td] 2026-04-27
+[td] MSFT * GITHUB
+[span] 1,757.39
+[td] 2026-04-16
+[td] UNITED 016 CHICAGO IL
+[span] 1,545.58
+[td] 2026-04-28
+[td] FIGMA, INC.
+[span] 1,297.90
+[td] 2026-04-28
+[td] LINEAR.APP
+[span] 930.18
+[h3] In the ledger, not on the statement
+[span] 27,621.17
+[p] Posted to the books but not yet cleared the bank.
+[td] 2026-04-07
+[td] Product revenue - card settlements
+[span] 119,984.82
+[td] 2026-04-14
+[td] Product revenue - card settlements
+[span] 113,358.27
+[td] 2026-04-21
+[td] Product revenue - card settlements
+[span] 110,431.66
+[td] 2026-04-28
+[td] Product revenue - card settlements
+[span] 83,586.47
+[td] 2026-04-15
+[td] Flexport FLE-202604-3281
+[span] 57,107.54
+[td] 2026-04-22
+[td] Flexport FLE-202604-2630
+[span] 51,991.42
+[td] 2026-04-16
+[td] WeWork WEW-202604-4467
+[span] 39,500.00
+[td] 2026-04-21
+[td] Cooley LLP COO-202604-3293
+[span] 25,125.08
+[td] 2026-04-09
+[td] Mouser Electronics MOU-202604-5572
+[span] 23,655.92
+[td] 2026-04-11
+[td] Mouser Electronics MOU-202604-1969
+[span] 22,896.59
+[td] 2026-04-04
+[td] Mouser Electronics MOU-202604-2601
+[span] 22,764.54
+[td] 2026-04-12
+[td] Cooley LLP COO-202604-7934
+[span] 21,706.14
+[td] 2026-04-05
+[td] Cooley LLP COO-202604-2217
+[span] 21,095.85
+[td] 2026-04-14
+[td] Google Ads GOO-202604-8886
+[span] 19,796.81
+[td] 2026-04-12
+[td] Cooley LLP COO-202604-7087
+[span] 19,781.49
+[td] 2026-04-22
+[td] Mouser Electronics MOU-202604-3551
+[span] 17,055.55
+[td] 2026-04-06
+[td] Mouser Electronics MOU-202604-4069
+[span] 16,259.53
+[td] 2026-04-14
+[td] Deel DEE-202604-7347
+[span] 15,916.49
+[td] 2026-04-18
+[td] Cooley LLP COO-202604-4569
+[span] 14,036.33
+[td] 2026-04-11
+[td] Digi-Key Electronics DIG-202604-7475
+[span] 13,444.45
+[td] 2026-04-14
+[td] Deel DEE-202604-7347
+[span] 8,570.42
+[td] 2026-04-12
+[td] Digi-Key Electronics DIG-202604-7909
+[span] 8,565.40
+[td] 2026-04-14
+[td] Digi-Key Electronics DIG-202604-1465
+[span] 6,499.43
+[td] 2026-04-20
+[td] Digi-Key Electronics DIG-202604-4479
+[span] 6,279.95
+[td] 2026-04-04
+[td] Digi-Key Electronics DIG-202604-9004
+[span] 6,037.80
+[td] 2026-04-07
+[td] Stripe processing fees
+[span] 3,479.86
+[td] 2026-04-14
+[td] Stripe processing fees
+[span] 3,287.69
+[td] 2026-04-19
+[td] Vercel VER-202604-7415
+[span] 3,277.78
+[td] 2026-04-21
+[td] Stripe processing fees
+[span] 3,202.82
+[td] 2026-04-19
+[td] INTEREST EARNED - SWEEP
+[span] 2,630.28
+[td] 2026-04-28
+[td] Stripe processing fees
+[span] 2,424.31
+[td] 2026-04-17
+[td] INTEREST EARNED - SWEEP
+[span] 2,333.94
+[td] 2026-04-16
+[td] INTEREST EARNED - SWEEP
+[span] 2,256.92
+[td] 2026-04-07
+[td] GitHub GIT-202604-1450
+[span] 1,581.65
+[td] 2026-04-19
+[td] United Airlines UNI-202604-7694
+[span] 1,480.66
+[td] 2026-04-08
+[td] United Airlines UNI-202604-5302
+[span] 1,244.62
+[td] 2026-04-15
+[td] United Airlines UNI-202604-4614
+[span] 1,119.74
+[td] 2026-04-17
+[td] Figma FIG-202604-9921
+[span] 1,103.22
+[td] 2026-04-19
+[td] United Airlines UNI-202604-7694
+[span] 987.10
+[td] 2026-04-16
+[td] United Airlines UNI-202604-3989
+[span] 927.35
+[span] Tickmark
+[span] Every automated decision traces to a Rule or a Close Run. No orphan decisions.

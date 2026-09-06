@@ -1,0 +1,103 @@
+[span] Tickmark
+[a] Close room
+[a] Exceptions
+[a] Reconciliation
+[a] Rulebook
+[span] Northwind Robotics, Inc.
+[div] Run a close
+[p] Against this entity’s ingested books, using the rulebook it has earned.
+[option] 2026-01
+[option] 2026-02
+[option] 2026-03
+[option] 2026-04
+[button] Close the books
+[div] Close performance ·
+[div] Northwind Robotics, Inc.
+[h1] Four closes. Same agent.
+[span] It learned the difference.
+[div] llama3.2:1b
+[div] 9/6/2026, 8:40:09 PM
+[div] rulebook v
+[div] active rules
+[div] Auto-cleared without a human
+[div] 39%
+[span] up from
+[span] 2026-01
+[div] Model calls per close
+[span] 2026-01
+[span] ; local endpoint is unpriced
+[div] Controller time
+[div] 47m
+[span] 26%
+[span] less queue work than
+[span] 2026-01
+[span] 63m
+[div] Auto-clear precision
+[div] 100.0%
+[span] of what it cleared unattended was right
+[h3] Auto-clear rate
+[button] table
+[p] Share of decisions the agent finished on its own. The rest went to the exception queue.
+[text] 100%
+[text] 75%
+[text] 50%
+[text] 25%
+[text] 39%
+[p] Improving
+[p] 39%
+[h3] Auto-clear precision
+[button] table
+[p] Of the lines it cleared unattended, the share that was actually right. Nobody reviews these, so this is the number that must not fall.
+[text] 100.0%
+[text] 75.0%
+[text] 50.0%
+[text] 25.0%
+[text] 0.0%
+[text] 100.0%
+[p] Held flat
+[p] across all
+[p] periods. This one is supposed to stay put.
+[h3] Model calls per close
+[button] table
+[p] The local endpoint has no configured token price, so calls are the honest resource measure. Rules retire model work.
+[p] Improving
+[h3] Controller time in the queue
+[button] table
+[p] Exceptions × observed median handling time. The line a CFO actually feels.
+[text] 100m
+[text] 75m
+[text] 50m
+[text] 25m
+[text] 47m
+[p] Improving
+[p] 63m
+[p] 47m
+[h3] Where each decision came from
+[p] Blue is free. Every line the Rulebook settles costs zero tokens and never reaches a person.
+[span] Settled by rule
+[span] Decided by model
+[span] Sent to controller
+[text] 109
+[text] 106
+[text] 128
+[h3] Per-period detail
+[p] Every figure measured against ground truth the agent never sees.
+[th] Period
+[th] Coding
+[th] Match
+[th] Exc
+[th] Calls
+[th] Price
+[th] Rulebook
+[td] 2026-01
+[td] unpriced
+[td] 2026-02
+[td] unpriced
+[td] 2026-03
+[td] 90%
+[td] unpriced
+[td] 2026-04
+[td] 54%
+[td] unpriced
+[span] Tickmark
+[span] Every automated decision traces to a Rule or a Close Run. No orphan decisions.

@@ -1,0 +1,186 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1920, height=1080" />
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+    <style>
+      * { margin:0; padding:0; box-sizing:border-box; }
+      html, body { width:1920px; height:1080px; overflow:hidden; background:#0d253d; }
+      body { font-family: ui-sans-serif, system-ui, -apple-system, "Helvetica Neue", sans-serif; }
+      .mono { font-family: ui-monospace, "SF Mono", Menlo, monospace; }
+
+      .scene { position:absolute; inset:0; overflow:hidden; background:#fff; }
+      .scene img { position:absolute; top:0; left:0; width:1920px; display:block; transform-origin:50% 12%; }
+      .vignette { position:absolute; inset:0; background:
+        linear-gradient(to bottom, rgba(13,37,61,0) 52%, rgba(13,37,61,.55) 76%, rgba(13,37,61,.94) 100%); }
+
+      .sub { position:absolute; left:150px; right:150px; bottom:88px; text-align:center; }
+      .sub p { display:inline-block; max-width:1560px; padding:20px 34px; border-radius:12px;
+        background:rgba(13,37,61,.88); color:#fff; font-size:40px; line-height:1.34; letter-spacing:-.011em; }
+      .sub b { color:#a8b0f5; font-weight:600; }
+
+      .chip { position:absolute; left:150px; top:80px; display:inline-flex; align-items:center; gap:14px;
+        padding:12px 22px; border-radius:999px; background:rgba(13,37,61,.9); color:#fff; font-size:26px; letter-spacing:.02em; }
+      .chip i { width:12px; height:12px; border-radius:50%; background:#533afd; font-style:normal; }
+
+      /* Typographic beats on the navy ground, for the parts of the story that
+         are an argument rather than a screen. */
+      .card { position:absolute; inset:0; display:flex; flex-direction:column; align-items:center;
+        justify-content:center; gap:26px; background:#0d253d; color:#fff; text-align:center; padding:0 180px; }
+      .card.left { align-items:flex-start; text-align:left; padding:0 190px; }
+      .card h1 { font-size:104px; font-weight:300; letter-spacing:-.035em; }
+      .card h2 { font-size:66px; font-weight:300; letter-spacing:-.028em; line-height:1.14; }
+      .card h3 { font-size:44px; font-weight:300; color:#b8c6d8; letter-spacing:-.015em; line-height:1.3; }
+      .card .kick { font-size:26px; letter-spacing:.14em; text-transform:uppercase; color:#7f93ab; }
+      .rule { width:132px; height:3px; background:#533afd; border-radius:2px; }
+      .quote { font-size:52px; font-weight:300; line-height:1.3; letter-spacing:-.02em; color:#fff; max-width:1400px; }
+      .quote em { color:#a8b0f5; font-style:normal; }
+      .foot { position:absolute; bottom:88px; font-size:30px; color:#8fa3ba; }
+      .tick { width:92px; height:92px; }
+
+      .stats { display:flex; gap:110px; margin-top:14px; }
+      .stat { text-align:left; }
+      .stat .l { font-size:24px; letter-spacing:.1em; text-transform:uppercase; color:#7f93ab; margin-bottom:12px; }
+      .stat .v { font-size:74px; font-weight:300; letter-spacing:-.03em; }
+      .stat .v s { color:#61748c; }
+      .stat .was { color:#61748c; text-decoration:line-through; font-size:44px; margin-right:14px; }
+      .stat .now { color:#fff; }
+
+      .code { font-size:34px; line-height:1.6; color:#cfe0f0; background:rgba(255,255,255,.05);
+        border:1px solid rgba(255,255,255,.12); border-radius:14px; padding:26px 32px; text-align:left; }
+      .code .bad { color:#ff9d8a; }
+      .code .ok { color:#8ee0b4; }
+    </style>
+  </head>
+  <body>
+    <div id="root" data-composition-id="main" data-start="0" data-duration="180"
+         data-width="1920" data-height="1080">
+
+      <div id="c0" class="clip card" data-start="0" data-duration="8" data-track-index="1">
+        <svg class="tick" viewBox="0 0 20 20" fill="none"><path d="M3 10.5 L7.5 15.5 L17 4.5"
+          stroke="#533afd" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <h1>Tickmark</h1><div class="rule"></div>
+        <h3>The month-end close that gets cheaper every month</h3>
+        <div class="foot mono">Track 2 · Autonomous Office of the CFO</div>
+      </div>
+
+      <div id="c1" class="clip card left" data-start="8" data-duration="16" data-track-index="1">
+        <div class="kick">Day three of the close</div>
+        <h2>A controller is tying 400 bank lines<br/>to a ledger, by hand. Again.</h2>
+        <h3>The same vendors. The same splits. The same odd settlements.<br/>
+            The judgment is real — and it is identical every month.</h3>
+      </div>
+
+      <div id="c2" class="clip scene" data-start="24" data-duration="14" data-track-index="1">
+        <img src="capture/product/landing.png" alt=""/><div class="vignette"></div>
+        <div class="chip"><i></i>What it is</div>
+        <div class="sub"><p>Tickmark runs that close — and compiles every correction
+          a controller makes into a rule that then runs for <b>zero model calls</b>.</p></div>
+      </div>
+
+      <div id="c3" class="clip card left" data-start="38" data-duration="16" data-track-index="1">
+        <div class="kick">Step one · bring your own books</div>
+        <h2>Your bank export. Your invoices.<br/>Your processor payouts.</h2>
+        <div class="code mono">$1,240.00 &nbsp;<span class="bad">unquoted comma → refused</span><br/>
+          <span class="ok">reading $1,240 as $1 is an accounting error,<br/>not a parsing inconvenience</span></div>
+      </div>
+
+      <div id="c4" class="clip scene" data-start="54" data-duration="15" data-track-index="1">
+        <img src="capture/product/dashboard.png" alt=""/><div class="vignette"></div>
+        <div class="chip"><i></i>The close runs</div>
+        <div class="sub"><p>It codes the invoices and reconciles the statement across all four
+          match shapes — one payment, a batch, instalments, a lockbox.</p></div>
+      </div>
+
+      <div id="c5" class="clip scene" data-start="69" data-duration="15" data-track-index="1">
+        <img src="capture/product/reconciliation.png" alt=""/><div class="vignette"></div>
+        <div class="chip"><i></i>Reconciling accounts</div>
+        <div class="sub"><p>Every unreconciled line listed <b>at its amount</b>, both directions —
+          because “97% reconciled” is not something anyone can sign.</p></div>
+      </div>
+
+      <div id="c6" class="clip card" data-start="84" data-duration="20" data-track-index="1">
+        <div class="kick">The moment that matters</div>
+        <div class="quote">A controller fixes one exception and says<br/>
+          <em>“always do this.”</em> Tickmark answers:</div>
+        <div class="code mono" style="font-size:38px">Noted — but not yet a rule.<br/>
+          <span class="ok">One correction is an anecdote.</span><br/>
+          I&rsquo;ll propose a rule the next time a correction agrees.</div>
+      </div>
+
+      <div id="c7" class="clip scene" data-start="104" data-duration="16" data-track-index="1">
+        <img src="capture/product/rulebook.png" alt=""/><div class="vignette"></div>
+        <div class="chip"><i></i>What it learned</div>
+        <div class="sub"><p>The second correction proposes the rule — citing both, and
+          <b>replayed against every closed period</b> before anyone may adopt it.</p></div>
+      </div>
+
+      <div id="c8" class="clip scene" data-start="120" data-duration="16" data-track-index="1">
+        <img src="capture/product/entries.png" alt=""/><div class="vignette"></div>
+        <div class="chip"><i></i>Human review</div>
+        <div class="sub"><p>It found the vendor that went quiet and drafted the accrual, balanced.
+          The agent prepares — <b>it cannot approve its own entry</b>.</p></div>
+      </div>
+
+      <div id="c9" class="clip scene" data-start="136" data-duration="15" data-track-index="1">
+        <img src="capture/product/cash.png" alt=""/><div class="vignette"></div>
+        <div class="chip"><i></i>Cash and the month ahead</div>
+        <div class="sub"><p>Committed is separated from estimated, and a vendor seen once is
+          labelled <b>thin evidence</b> — not averaged quietly into the total.</p></div>
+      </div>
+
+      <div id="c10" class="clip card" data-start="151" data-duration="18" data-track-index="1">
+        <div class="kick">Four closes · same model · same books</div>
+        <h2 style="font-size:58px">Learning that compiles,<br/>not learning that accumulates.</h2>
+        <div class="stats">
+          <div class="stat"><div class="l">Auto-cleared</div>
+            <div class="v"><span class="was">55%</span><span class="now">79%</span></div></div>
+          <div class="stat"><div class="l">Exceptions</div>
+            <div class="v"><span class="was">41</span><span class="now">21</span></div></div>
+          <div class="stat"><div class="l">Precision</div>
+            <div class="v"><span class="now">100%</span></div></div>
+        </div>
+        <h3 style="font-size:36px; margin-top:10px">Nobody reviews what it cleared unattended —<br/>
+          so that last number is the one that must not move.</h3>
+      </div>
+
+      <div id="c11" class="clip card" data-start="169" data-duration="11" data-track-index="1">
+        <svg class="tick" viewBox="0 0 20 20" fill="none"><path d="M3 10.5 L7.5 15.5 L17 4.5"
+          stroke="#533afd" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <h1 style="font-size:88px">Import. Close. Sign.</h1><div class="rule"></div>
+        <h3 class="mono" style="font-size:38px">tickmark-kappa.vercel.app</h3>
+        <div class="foot">Every automated decision traces to a rule, or to a close run. No orphan decisions.</div>
+      </div>
+    </div>
+
+    <script>
+      window.__timelines = window.__timelines || {};
+      const tl = gsap.timeline({ paused: true });
+
+      const cardIn = (sel, at) => {
+        tl.fromTo(`${sel} .kick`,  { opacity:0, y:14 }, { opacity:1, y:0, duration:.7, ease:"power3.out" }, at+.15);
+        tl.fromTo(`${sel} h1`,     { opacity:0, y:26 }, { opacity:1, y:0, duration:.9, ease:"power3.out" }, at+.3);
+        tl.fromTo(`${sel} h2`,     { opacity:0, y:24 }, { opacity:1, y:0, duration:.9, ease:"power3.out" }, at+.35);
+        tl.fromTo(`${sel} .quote`, { opacity:0, y:24 }, { opacity:1, y:0, duration:.9, ease:"power3.out" }, at+.35);
+        tl.fromTo(`${sel} .rule`,  { scaleX:0 },        { scaleX:1, duration:.7, ease:"power3.out" }, at+.7);
+        tl.fromTo(`${sel} h3`,     { opacity:0, y:18 }, { opacity:1, y:0, duration:.8, ease:"power3.out" }, at+.85);
+        tl.fromTo(`${sel} .code`,  { opacity:0, y:22 }, { opacity:1, y:0, duration:.8, ease:"power3.out" }, at+1.15);
+        tl.fromTo(`${sel} .stat`,  { opacity:0, y:20 }, { opacity:1, y:0, duration:.7, stagger:.18, ease:"power3.out" }, at+1.1);
+        tl.fromTo(`${sel} .tick`,  { opacity:0, scale:.82 }, { opacity:1, scale:1, duration:.9, ease:"power3.out" }, at+.15);
+        tl.fromTo(`${sel} .foot`,  { opacity:0 }, { opacity:1, duration:.8 }, at+1.5);
+      };
+      [["#c0",0],["#c1",8],["#c3",38],["#c6",84],["#c10",151],["#c11",169]].forEach(([s,a]) => cardIn(s,a));
+
+      // Capture scenes: one slow push, caption settling under it.
+      [["#c2",24,14],["#c4",54,15],["#c5",69,15],["#c7",104,16],["#c8",120,16],["#c9",136,15]]
+        .forEach(([id, at, dur]) => {
+          tl.fromTo(`${id} img`,   { scale:1, y:0 }, { scale:1.07, y:-30, duration:dur, ease:"none" }, at);
+          tl.fromTo(`${id} .chip`, { opacity:0, x:-18 }, { opacity:1, x:0, duration:.6, ease:"power3.out" }, at+.15);
+          tl.fromTo(`${id} .sub p`,{ opacity:0, y:20 },  { opacity:1, y:0, duration:.6, ease:"power3.out" }, at+.3);
+        });
+
+      window.__timelines["main"] = tl;
+    </script>
+  </body>
+</html>

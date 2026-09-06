@@ -1,0 +1,135 @@
+{
+  "typography": [
+    {
+      "role": "display",
+      "fontFamily": "Inter",
+      "fontSize": "56px",
+      "fontWeight": "300",
+      "lineHeight": "57.68px",
+      "letterSpacing": "-1.4px",
+      "color": "#0D253D",
+      "sampleText": "The close thatgets cheaper every month."
+    },
+    {
+      "role": "heading",
+      "fontFamily": "Inter",
+      "fontSize": "32px",
+      "fontWeight": "300",
+      "lineHeight": "35.84px",
+      "letterSpacing": "-0.64px",
+      "color": "#0D253D",
+      "sampleText": "Learning that compiles, not learning that accumulates."
+    },
+    {
+      "role": "heading-3",
+      "fontFamily": "Inter",
+      "fontSize": "20px",
+      "fontWeight": "500",
+      "lineHeight": "25px",
+      "letterSpacing": "-0.2px",
+      "color": "#0D253D",
+      "sampleText": "Bank reconciliation"
+    },
+    {
+      "role": "body",
+      "fontFamily": "Inter",
+      "fontSize": "17px",
+      "fontWeight": "400",
+      "lineHeight": "27.625px",
+      "letterSpacing": "normal",
+      "color": "#273951",
+      "sampleText": "Tickmark codes the AP ledger and reconciles the bank, hands "
+    },
+    {
+      "role": "code",
+      "fontFamily": "Inter",
+      "fontSize": "16px",
+      "fontWeight": "400",
+      "lineHeight": "24px",
+      "letterSpacing": "normal",
+      "color": "#000000",
+      "sampleText": "Tickmark - the month-end close that learnsTickmarkOpen the c"
+    },
+    {
+      "role": "heading-3",
+      "fontFamily": "Inter",
+      "fontSize": "14px",
+      "fontWeight": "500",
+      "lineHeight": "21px",
+      "letterSpacing": "normal",
+      "color": "#0D253D",
+      "sampleText": "Materiality is a hard gate"
+    },
+    {
+      "role": "link",
+      "fontFamily": "Inter",
+      "fontSize": "13px",
+      "fontWeight": "500",
+      "lineHeight": "19.5px",
+      "letterSpacing": "normal",
+      "color": "#FFFFFF",
+      "sampleText": "Open the close"
+    }
+  ],
+  "spacing": {
+    "observed": [
+      1,
+      8,
+      10,
+      12,
+      16,
+      20,
+      24,
+      32,
+      40,
+      48,
+      80
+    ],
+    "baseUnit": 8
+  },
+  "radius": [
+    "8px"
+  ],
+  "shadows": [
+    {
+      "value": "rgba(13, 37, 61, 0.04) 0px 1px 2px 0px",
+      "count": 3
+    }
+  ],
+  "buttons": [],
+  "cards": [
+    {
+      "label": "card",
+      "background": "#FFFFFF",
+      "backgroundImage": "",
+      "backdropFilter": "",
+      "color": "#0D253D",
+      "padding": "24px",
+      "borderRadius": "12px",
+      "border": "1px solid rgb(227, 232, 238)",
+      "boxShadow": "rgba(13, 37, 61, 0.04) 0px 1px 2px 0px",
+      "fontSize": "16px",
+      "fontWeight": "400",
+      "height": "200.75px"
+    }
+  ],
+  "nav": {
+    "label": "navigation",
+    "background": "transparent",
+    "backgroundImage": "",
+    "backdropFilter": "",
+    "color": "#0D253D",
+    "padding": "0px",
+    "borderRadius": "0px",
+    "border": "",
+    "boxShadow": "none",
+    "fontSize": "16px",
+    "fontWeight": "400",
+    "height": "57px"
+  },
+  "chips": [],
+  "statCells": [],
+  "tabs": [],
+  "backgrounds": [],
+  "glass": []
+}

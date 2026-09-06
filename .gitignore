@@ -43,3 +43,8 @@ next-env.d.ts
 
 # local run artifacts
 /data/run-*.json
+
+# rendered video output
+videos/*/renders/
+videos/*/.media/
+videos/*/node_modules/
