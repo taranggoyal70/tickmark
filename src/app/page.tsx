@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { ProvenanceBanner } from "@/components/provenance";
 import { Mark } from "@/components/shell";
 import { latestReport, minutes, pct, usdFromMicros } from "@/lib/report";
 
@@ -71,23 +72,26 @@ export default async function Home() {
           </div>
 
           {report && first && last ? (
-            <div className="mt-16 grid gap-px overflow-hidden rounded-[var(--radius-xl)] border border-hairline bg-[var(--hairline)] sm:grid-cols-2 lg:grid-cols-4">
-              {[
-                { l: "Auto-cleared", a: pct(first.stats.autoClearRate), b: pct(last.stats.autoClearRate) },
-                { l: "Cost per close", a: usdFromMicros(first.stats.costMicros), b: usdFromMicros(last.stats.costMicros) },
-                { l: "Controller time", a: minutes(first.touchSeconds), b: minutes(last.touchSeconds) },
-                { l: "Precision held", a: pct(first.stats.autoClearPrecision, 1), b: pct(last.stats.autoClearPrecision, 1) },
-              ].map((s) => (
-                <div key={s.l} className="bg-surface-1 p-6">
-                  <div className="eyebrow mb-3">{s.l}</div>
-                  <div className="nums flex items-baseline gap-2">
-                    <span className="text-[15px] text-ink-tertiary line-through decoration-1">{s.a}</span>
-                    <span className="text-ink-tertiary">→</span>
-                    <span className="text-[28px] font-semibold leading-none tracking-[-0.02em] text-ink">{s.b}</span>
+            <div className="mt-16">
+              <ProvenanceBanner report={report} />
+              <div className="grid gap-px overflow-hidden rounded-[var(--radius-xl)] border border-hairline bg-[var(--hairline)] sm:grid-cols-2 lg:grid-cols-4">
+                {[
+                  { l: "Auto-cleared", a: pct(first.stats.autoClearRate), b: pct(last.stats.autoClearRate) },
+                  { l: "Cost per close", a: usdFromMicros(first.stats.costMicros), b: usdFromMicros(last.stats.costMicros) },
+                  { l: "Controller time", a: minutes(first.touchSeconds), b: minutes(last.touchSeconds) },
+                  { l: "Precision held", a: pct(first.stats.autoClearPrecision, 1), b: pct(last.stats.autoClearPrecision, 1) },
+                ].map((s) => (
+                  <div key={s.l} className="bg-surface-1 p-6">
+                    <div className="eyebrow mb-3">{s.l}</div>
+                    <div className="nums flex items-baseline gap-2">
+                      <span className="text-[15px] text-ink-tertiary line-through decoration-1">{s.a}</span>
+                      <span className="text-ink-tertiary">→</span>
+                      <span className="text-[28px] font-semibold leading-none tracking-[-0.02em] text-ink">{s.b}</span>
+                    </div>
+                    <div className="mt-2 text-[12px] text-ink-tertiary">{first.period} → {last.period}</div>
                   </div>
-                  <div className="mt-2 text-[12px] text-ink-tertiary">{first.period} → {last.period}</div>
-                </div>
-              ))}
+                ))}
+              </div>
             </div>
           ) : (
             <div className="mt-16 rounded-[var(--radius-xl)] border border-hairline bg-surface-1 p-8">
