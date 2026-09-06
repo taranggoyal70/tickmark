@@ -77,7 +77,7 @@ export interface PeriodReport {
   stats: RunStats;
   corrections: number;
   touchSeconds: number;
-  proposals: { name: string; kind: string; adopted: boolean; precision: number; fired: number; evidence: number }[];
+  proposals: { name: string; kind: string; adopted: boolean; duplicate?: boolean; precision: number; fired: number; evidence: number }[];
   gradientCostMicros: number;
   /** The close completed, but no new rules were distilled because the model was unavailable. */
   gradientSkipped?: boolean;
@@ -216,7 +216,13 @@ export async function simulate(opts: { model?: ModelId; provenance?: "model" | "
     }
     const accepted = grad.proposals.filter(wouldAdopt);
     rulebook = applyToRulebook(rulebook, accepted);
-    if (grad.proposals.length) log(`  gradient: ${grad.proposals.length} proposed, ${accepted.length} adopted → rulebook v${rulebook.version}`);
+    const activated = new Set(
+      rulebook.rules.filter((r) => r.status === "active" && accepted.some((a) => a.id === r.id)).map((r) => r.id),
+    );
+    const duplicates = new Set(
+      rulebook.rules.filter((r) => r.duplicateOf && accepted.some((a) => a.id === r.id)).map((r) => r.id),
+    );
+    if (grad.proposals.length) log(`  gradient: ${grad.proposals.length} proposed, ${activated.size} adopted → rulebook v${rulebook.version}`);
 
     const touch = touchSeconds(corrections.length);
     totals.costMicros += run.stats.costMicros + grad.usage.costMicros;
@@ -240,7 +246,7 @@ export async function simulate(opts: { model?: ModelId; provenance?: "model" | "
       gradientCostMicros: grad.usage.costMicros,
       gradientSkipped,
       proposals: grad.proposals.map((p) => ({
-        name: p.name, kind: p.kind, adopted: accepted.includes(p),
+        name: p.name, kind: p.kind, adopted: activated.has(p.id), duplicate: duplicates.has(p.id),
         precision: p.backtest?.precision ?? 0, fired: p.backtest?.wouldHaveFired ?? 0,
         evidence: p.evidence.length,
       })),

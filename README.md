@@ -316,6 +316,10 @@ cheat.
 6. **A proposal that failed the replay cannot be adopted at all.** The queue says
    so instead of offering the button, and keeps the instruction for a later
    period.
+7. **Equivalent later proposals remain audit evidence, not extra behavior.** A
+   canonical signature over kind, predicate, and action permits only one active
+   Rule per entity. The controller's later adoption is retained and linked to
+   the already-active Rule.
 
 `npm run verify:gate` runs that entire sequence against the live database and
 restores the queue afterwards:

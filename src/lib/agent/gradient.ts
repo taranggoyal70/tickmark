@@ -15,6 +15,7 @@ import type { GeneratedPeriod } from "../seed/generate";
 import { distillRules, type ChartContext, type CorrectionRow, type Usage } from "./llm";
 import { DEFAULT_MODEL, type ModelId } from "./pricing";
 import { applyMatchingRule, describeAction, evaluate, type MatchWorkspace } from "./rules";
+import { semanticRuleSignature } from "./rule-signature";
 import { splitKey } from "./close";
 import type { BacktestResult, DeltaReason, EvidenceItem, Rule, Rulebook } from "./types";
 
@@ -197,11 +198,29 @@ export function wouldAdopt(rule: Rule): boolean {
 export function applyToRulebook(rb: Rulebook, accepted: Rule[]): Rulebook {
   if (accepted.length === 0) return rb;
   const now = new Date().toISOString();
+  const activeBySignature = new Map(
+    rb.rules
+      .filter((rule) => rule.status === "active")
+      .map((rule) => [semanticRuleSignature(rule), rule.id]),
+  );
+  let activated = 0;
+  const decisions = accepted.map((rule): Rule => {
+    const semanticSignature = semanticRuleSignature(rule);
+    const duplicateOf = activeBySignature.get(semanticSignature);
+    if (duplicateOf) {
+      return {
+        ...rule, status: "disabled", semanticSignature, duplicateOf,
+        deduplicatedAt: now,
+      };
+    }
+    activated++;
+    activeBySignature.set(semanticSignature, rule.id);
+    return { ...rule, status: "active", semanticSignature, activatedAt: now };
+  });
   return {
-    version: rb.version + 1,
-    rules: [
-      ...rb.rules,
-      ...accepted.map((r) => ({ ...r, status: "active" as const, activatedAt: now })),
-    ],
+    // A Rulebook version describes executable behavior. Retaining a duplicate
+    // evidence trail without activating it does not produce a new version.
+    version: rb.version + (activated > 0 ? 1 : 0),
+    rules: [...rb.rules, ...decisions],
   };
 }

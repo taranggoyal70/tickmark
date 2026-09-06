@@ -6,6 +6,7 @@
  */
 import { createClient } from "@supabase/supabase-js";
 import { getStore } from "../src/lib/store";
+import { adoptRule } from "../src/lib/store/queue";
 
 const db = createClient(process.env.SUPABASE_URL!, process.env.SUPABASE_SERVICE_ROLE_KEY!, {
   auth: { persistSession: false },
@@ -88,6 +89,52 @@ async function main() {
         predicate: [{ op: "vendor_is", value: "X" }], action: { type: "code", glCode: "6820", deptSplit: {} },
         backtest: { precision: 1 }, evidence: [{ correctionId: "c1" }],
       }) as never);
+
+    // One semantic rule may have many proposals/evidence trails, but only one
+    // active executor. Deduplication happens at human adoption, not analysis.
+    const semantics = {
+      kind: "matching",
+      predicate: [{ op: "desc_contains", value: "FLEXPORT" }, { op: "amount_lte", value: 5_000_000 }],
+      action: { type: "match", vendorName: "Flexport", strategy: "installments", deltaReason: "partial", tolerancePct: 0.03 },
+      backtest: { periodsReplayed: ["9999-01"], wouldHaveFired: 2, wouldHaveBeenCorrect: 2, wouldHaveBeenWrong: 0, regressions: [], precision: 1 },
+      evidence: [{ correctionId: "dedupe-1" }, { correctionId: "dedupe-2" }],
+    };
+    const { data: proposals, error: proposalErr } = await db.from("rules").insert([
+      { entity_id: entityId, name: "Flexport installments A", status: "proposed", ...semantics },
+      {
+        entity_id: entityId, name: "Flexport installments B", status: "proposed", ...semantics,
+        predicate: [...semantics.predicate].reverse(),
+        action: { tolerancePct: 0.03, deltaReason: "partial", strategy: "installments", vendorName: "flexport", type: "match" },
+        evidence: [{ correctionId: "dedupe-3" }, { correctionId: "dedupe-4" }],
+      },
+    ]).select("id, status, evidence, semantic_signature");
+    check("duplicate analysis retains both proposals", proposalErr === null && proposals?.length === 2 && proposals.every((r) => r.status === "proposed"),
+      proposalErr?.message ?? `${proposals?.length ?? 0} proposed`);
+    check("database assigns one canonical signature", proposals?.length === 2 && JSON.stringify(proposals[0].semantic_signature) === JSON.stringify(proposals[1].semantic_signature),
+      proposals?.length === 2 ? "signatures match" : "proposals missing");
+
+    if (proposals?.length === 2) {
+      const firstRuleId = String(proposals[0].id);
+      const duplicateRuleId = String(proposals[1].id);
+      await adoptRule(firstRuleId, "Controller A", true);
+      const outcome = await adoptRule(duplicateRuleId, "Controller B", true);
+      const { data: adopted } = await db.from("rules")
+        .select("id, status, evidence, duplicate_of, adopted_by")
+        .in("id", [firstRuleId, duplicateRuleId]);
+      const active = adopted?.filter((r) => r.status === "active") ?? [];
+      const duplicate = adopted?.find((r) => r.id === duplicateRuleId);
+      check("duplicate adoption leaves one active rule", active.length === 1, `${active.length} active`);
+      check("duplicate adoption reports existing rule", outcome.status === "duplicate" && outcome.duplicateOf === firstRuleId,
+        outcome.status === "duplicate" ? String(outcome.duplicateOf) : outcome.status);
+      check("duplicate row keeps evidence and adopter", duplicate?.status === "disabled" && (duplicate.evidence as unknown[])?.length === 2 && duplicate.adopted_by === "Controller B",
+        `${duplicate?.status ?? "missing"}, ${(duplicate?.evidence as unknown[])?.length ?? 0} citations`);
+      check("duplicate row links to active rule", duplicate?.duplicate_of === firstRuleId, String(duplicate?.duplicate_of ?? "missing"));
+
+      await mustReject("database refuses a second active semantic rule", () =>
+        db.from("rules").insert({
+          entity_id: entityId, name: "Flexport installments C", status: "active", adopted_by: "Controller C", ...semantics,
+        }) as never);
+    }
 
     // report round-trip
     const existing = await store.loadLatest();

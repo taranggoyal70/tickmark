@@ -2,8 +2,7 @@
 
 import { useState, useTransition } from "react";
 import { Badge, Money } from "@/components/kit";
-import type { QueueItem } from "@/lib/store/queue";
-import type { ResolveOutcome } from "@/lib/store/queue";
+import type { AdoptionOutcome, QueueItem, ResolveOutcome } from "@/lib/store/queue";
 import { adoptAction, resolveAction } from "./actions";
 
 const CAUSE: Record<string, { badge: string; label: string; why: string }> = {
@@ -90,7 +89,7 @@ function Outcome({ outcome, onAdopt, busy }: {
 export function QueueRow({ item }: { item: QueueItem }) {
   const [always, setAlways] = useState(false);
   const [outcome, setOutcome] = useState<ResolveOutcome | null>(null);
-  const [adopted, setAdopted] = useState<null | boolean>(null);
+  const [adoption, setAdoption] = useState<AdoptionOutcome | null>(null);
   const [pending, start] = useTransition();
   const c = CAUSE[item.cause] ?? CAUSE.no_candidate;
 
@@ -100,7 +99,7 @@ export function QueueRow({ item }: { item: QueueItem }) {
     });
 
   const adopt = (ruleId: string, accept: boolean) =>
-    start(async () => { await adoptAction(ruleId, accept); setAdopted(accept); });
+    start(async () => { setAdoption(await adoptAction(ruleId, accept)); });
 
   return (
     <div className={`panel p-4 transition-opacity ${outcome ? "opacity-95" : ""}`}>
@@ -151,10 +150,14 @@ export function QueueRow({ item }: { item: QueueItem }) {
 
       {outcome ? (
         <div className="mt-3">
-          {adopted === null
+          {adoption === null
             ? <Outcome outcome={outcome} busy={pending} onAdopt={adopt} />
-            : <p className={`text-[12px] ${adopted ? "text-[var(--success)]" : "text-ink-subtle"}`}>
-                {adopted ? "Rule adopted. It runs for free from the next close." : "Proposal rejected. Nothing changed."}
+            : <p className={`text-[12px] ${adoption.status === "rejected" ? "text-ink-subtle" : "text-[var(--success)]"}`}>
+                {adoption.status === "active"
+                  ? "Rule adopted. It runs for free from the next close."
+                  : adoption.status === "duplicate"
+                    ? "Equivalent rule is already active. This proposal and its evidence were retained without adding a second rule."
+                    : "Proposal rejected. Nothing changed."}
               </p>}
         </div>
       ) : null}

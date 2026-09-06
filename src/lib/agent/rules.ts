@@ -10,8 +10,7 @@ import type {
   AccrualProposal, ApInvoice, BankLine, BacktestResult, CodingDecision, DeltaReason,
   LedgerEntry, MatchDecision, Predicate, Rule, Rulebook,
 } from "./types";
-
-const norm = (s: string) => s.toUpperCase().replace(/[^A-Z0-9 ]/g, " ").replace(/\s+/g, " ").trim();
+import { normalizeRuleText as norm } from "./rule-signature";
 
 export interface PredicateContext {
   vendorName?: string | null;

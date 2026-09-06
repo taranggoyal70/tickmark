@@ -33,21 +33,30 @@ export default async function RulebookPage() {
   if (!report) return <Shell active="/close/rulebook"><EmptyRun /></Shell>;
 
   const rules = report.rulebook;
+  const activeRules = rules.filter((rule) => rule.status === "active");
+  const duplicates = rules.filter((rule) => rule.duplicateOf);
   const proposed = report.periods.flatMap((p) => p.proposals);
-  const rejected = proposed.filter((p) => !p.adopted);
+  const rejected = proposed.filter((p) => !p.adopted && !p.duplicate);
 
   return (
     <Shell active="/close/rulebook">
       <ProvenanceBanner report={report} />
       <div className="mb-6">
         <div className="eyebrow mb-2">Rulebook · the weights</div>
-        <h1 className="headline text-ink">{rules.length} rules, learned from corrections</h1>
+        <h1 className="headline text-ink">
+          {activeRules.length} active rules, learned from corrections
+        </h1>
         <p className="mt-2 max-w-2xl text-[14px] leading-relaxed text-ink-subtle">
-          Each of these was distilled from at least two distinct human corrections, replayed
-          against every closed period, and only then activated. They execute with zero model
-          calls - which is why the close gets cheaper rather than more expensive as the agent
-          learns more.
+          Each active rule was distilled from at least two distinct human corrections, replayed
+          against every closed period, and only then activated. Equivalent later proposals stay
+          inactive while keeping their own evidence for the audit trail. Active rules execute with
+          zero model calls - which is why the close gets cheaper as the agent learns more.
         </p>
+        {duplicates.length > 0 ? (
+          <p className="mt-2 text-[12px] text-ink-tertiary">
+            {duplicates.length} duplicate {duplicates.length === 1 ? "proposal" : "proposals"} retained, not active.
+          </p>
+        ) : null}
       </div>
 
       {rules.length === 0 ? (

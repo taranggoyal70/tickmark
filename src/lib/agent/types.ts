@@ -50,6 +50,12 @@ export interface Rule {
   backtest: BacktestResult | null;
   hitCount: number;
   createdAt: string;
+  /** Derived only from kind + predicate + action. */
+  semanticSignature?: string;
+  /** An inactive, retained proposal that is equivalent to this active rule. */
+  duplicateOf?: string;
+  activatedAt?: string;
+  deduplicatedAt?: string;
 }
 
 // ── the things being closed ──────────────────────────────────────────────────

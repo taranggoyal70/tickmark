@@ -12,8 +12,11 @@ import { generateAll } from "../src/lib/seed/generate";
 import { VENDORS } from "../src/lib/seed/fixture";
 import { setModelOverride } from "../src/lib/agent/provider";
 import { assertMeasuredReport, simulate } from "../src/lib/agent/simulate";
+import { applyToRulebook } from "../src/lib/agent/gradient";
+import { semanticRuleSignature } from "../src/lib/agent/rule-signature";
 import { splitKey } from "../src/lib/agent/close";
 import { fmtUsd } from "../src/lib/agent/pricing";
+import type { Rule } from "../src/lib/agent/types";
 
 const periods = generateAll();
 
@@ -205,6 +208,26 @@ async function main() {
   }
 
   const first = report.periods[0], last = report.periods[report.periods.length - 1];
+
+  const candidate = (id: string, periodCode: string, reversed = false): Rule => ({
+    id, kind: "matching", name: `${id} Flexport installments`, status: "proposed", version: 1,
+    predicate: reversed
+      ? [{ op: "amount_lte", value: 5_000_000 }, { op: "desc_contains", value: "flexport" }]
+      : [{ op: "desc_contains", value: "FLEXPORT" }, { op: "amount_lte", value: 5_000_000 }],
+    action: { type: "match", vendorName: reversed ? "flexport" : "Flexport", strategy: "installments", deltaReason: "partial", tolerancePct: 0.03 },
+    evidence: [
+      { correctionId: `${id}-1`, periodCode, subjectRef: "Flexport", quote: `${id} first correction` },
+      { correctionId: `${id}-2`, periodCode, subjectRef: "Flexport", quote: `${id} second correction` },
+    ],
+    backtest: { periodsReplayed: [periodCode], wouldHaveFired: 2, wouldHaveBeenCorrect: 2, wouldHaveBeenWrong: 0, regressions: [], precision: 1 },
+    hitCount: 0, createdAt: `${periodCode}-28T00:00:00.000Z`,
+  });
+  const firstLearned = candidate("RULE-DEDUPE-1", "2026-01");
+  const laterDuplicate = candidate("RULE-DEDUPE-2", "2026-02", true);
+  const afterFirst = applyToRulebook({ version: 0, rules: [] }, [firstLearned]);
+  const afterDuplicate = applyToRulebook(afterFirst, [laterDuplicate]);
+  const retainedDuplicate = afterDuplicate.rules.find((r) => r.id === laterDuplicate.id);
+
   const checks: [string, boolean, string][] = [
     ["mock report cannot pass measured gate", mockRefused, report.provenance],
     ["degraded run cannot pass measured gate", degradedRefused, `${degraded.periods[0].stats.modelFailures} failed batch`],
@@ -222,6 +245,11 @@ async function main() {
     ["provider outage still records 4 closes", degraded.periods.length === periods.length, `${degraded.periods.length} periods`],
     ["provider outage labels every close", degraded.periods.every((p) => p.stats.modelFailures > 0), `${degraded.periods.reduce((n, p) => n + p.stats.modelFailures, 0)} failed batches`],
     ["provider outage skips every gradient", degraded.periods.every((p) => p.gradientSkipped), `${degraded.periods.filter((p) => p.gradientSkipped).length} skipped`],
+    ["semantic signature ignores predicate/key order", semanticRuleSignature(firstLearned) === semanticRuleSignature(laterDuplicate), semanticRuleSignature(firstLearned)],
+    ["duplicate rule never becomes second active rule", afterDuplicate.rules.filter((r) => r.status === "active").length === 1, `${afterDuplicate.rules.filter((r) => r.status === "active").length} active`],
+    ["duplicate adoption does not bump rulebook version", afterDuplicate.version === afterFirst.version, `v${afterFirst.version} → v${afterDuplicate.version}`],
+    ["duplicate proposal retains its own evidence", retainedDuplicate?.evidence[0]?.correctionId === "RULE-DEDUPE-2-1", retainedDuplicate?.evidence[0]?.correctionId ?? "missing"],
+    ["duplicate proposal links to the active rule", retainedDuplicate?.duplicateOf === firstLearned.id, retainedDuplicate?.duplicateOf ?? "missing"],
   ];
 
   console.log("");

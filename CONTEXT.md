@@ -188,3 +188,6 @@ would have broken. No rule is adopted on a promise.
 7. A Rule's evidence is the same kind as the Rule. Coding evidences coding.
 8. A Standing Intent never decides anything. Only an active Rule does.
 9. Adoption is attributable. Every active Rule names who adopted it and when.
+10. One semantic decision has at most one active Rule per entity. Later
+    proposals keep their evidence and adoption decision, linked to the active
+    Rule, but never execute a second time.

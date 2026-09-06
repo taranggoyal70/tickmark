@@ -3,6 +3,7 @@ import { ADOPTION } from "../agent/gradient";
 import { backtestAgainstHistory, codingPrecedent } from "../agent/backtest-db";
 import { splitKey } from "../agent/close";
 import { assertMeasuredReport, type SimulationReport } from "../agent/simulate";
+import { semanticRuleSignature } from "../agent/rule-signature";
 import type { Rule, RuleKind } from "../agent/types";
 
 /**
@@ -186,6 +187,9 @@ export const listRules = async (): Promise<(Rule & { adoptedBy?: string; selfEvi
     status: r.status as Rule["status"], version: r.version as number,
     evidence: (r.evidence ?? []) as Rule["evidence"], backtest: (r.backtest ?? null) as Rule["backtest"],
     hitCount: (r.hit_count ?? 0) as number, createdAt: r.created_at as string,
+    duplicateOf: (r.duplicate_of ?? undefined) as string | undefined,
+    deduplicatedAt: (r.deduplicated_at ?? undefined) as string | undefined,
+    activatedAt: (r.activated_at ?? undefined) as string | undefined,
     adoptedBy: (r.adopted_by ?? undefined) as string | undefined,
     selfEvidenced: Boolean(r.self_evidenced),
   }));
@@ -356,19 +360,59 @@ async function proposeRuleFor(
 export const meetsAdoptionBar = (b: Rule["backtest"]) =>
   !!b && b.wouldHaveFired >= ADOPTION.minFired && b.precision >= ADOPTION.minPrecision;
 
+export type AdoptionOutcome =
+  | { status: "active" }
+  | { status: "rejected" }
+  | { status: "duplicate"; duplicateOf: string };
+
+type StoredRuleSemantics = Pick<Rule, "id" | "kind" | "predicate" | "action"> & { entityId: string };
+
+async function findActiveDuplicate(
+  c: ReturnType<typeof db>, candidate: StoredRuleSemantics,
+): Promise<string | null> {
+  const { data, error } = await c.from("rules")
+    .select("id, kind, predicate, action")
+    .eq("entity_id", candidate.entityId)
+    .eq("kind", candidate.kind)
+    .eq("status", "active")
+    .neq("id", candidate.id);
+  if (error) throw new Error(`duplicate check failed: ${error.message}`);
+  const signature = semanticRuleSignature(candidate);
+  const duplicate = (data ?? []).find((row) => semanticRuleSignature({
+    kind: row.kind as Rule["kind"],
+    predicate: row.predicate as Rule["predicate"],
+    action: row.action as Rule["action"],
+  }) === signature);
+  return duplicate ? String(duplicate.id) : null;
+}
+
+async function retainDuplicate(
+  c: ReturnType<typeof db>, ruleId: string, duplicateOf: string, actor: string,
+): Promise<AdoptionOutcome> {
+  const { error } = await c.from("rules").update({
+    status: "disabled", adopted_by: actor, duplicate_of: duplicateOf,
+    deduplicated_at: new Date().toISOString(),
+  }).eq("id", ruleId);
+  if (error) throw new Error(`duplicate retention failed: ${error.message}`);
+  return { status: "duplicate", duplicateOf };
+}
+
 /**
  * The human gate. Adoption names its approver - the trigger enforces that - and
  * a rule that did not survive the replay cannot be adopted at all. Having *a*
  * backtest is not the bar; passing it is.
  */
-export async function adoptRule(ruleId: string, actor: string, accept: boolean) {
+export async function adoptRule(ruleId: string, actor: string, accept: boolean): Promise<AdoptionOutcome> {
   const c = db();
   if (!accept) {
     await c.from("rules").update({ status: "rejected" }).eq("id", ruleId);
-    return;
+    return { status: "rejected" };
   }
 
-  const { data: rule } = await c.from("rules").select("name, backtest").eq("id", ruleId).single();
+  const { data: rule, error: ruleError } = await c.from("rules")
+    .select("id, entity_id, name, kind, predicate, action, backtest")
+    .eq("id", ruleId).single();
+  if (ruleError || !rule) throw new Error(`rule lookup failed: ${ruleError?.message ?? "not found"}`);
   const b = (rule?.backtest ?? null) as Rule["backtest"];
   if (!meetsAdoptionBar(b)) {
     throw new Error(
@@ -378,8 +422,23 @@ export async function adoptRule(ruleId: string, actor: string, accept: boolean) 
     );
   }
 
+  const candidate: StoredRuleSemantics = {
+    id: String(rule.id), entityId: String(rule.entity_id), kind: rule.kind as Rule["kind"],
+    predicate: rule.predicate as Rule["predicate"], action: rule.action as Rule["action"],
+  };
+  const duplicateOf = await findActiveDuplicate(c, candidate);
+  if (duplicateOf) return retainDuplicate(c, ruleId, duplicateOf, actor);
+
   const { error } = await c.from("rules")
     .update({ status: "active", adopted_by: actor, activated_at: new Date().toISOString() })
     .eq("id", ruleId);
-  if (error) throw new Error(`adoption refused: ${error.message}`);
+  if (error) {
+    // The partial unique index closes the race between the read above and this
+    // write. If another controller activated the same semantics first, retain
+    // this proposal as their duplicate instead of discarding its evidence.
+    const racedDuplicate = await findActiveDuplicate(c, candidate);
+    if (racedDuplicate) return retainDuplicate(c, ruleId, racedDuplicate, actor);
+    throw new Error(`adoption refused: ${error.message}`);
+  }
+  return { status: "active" };
 }

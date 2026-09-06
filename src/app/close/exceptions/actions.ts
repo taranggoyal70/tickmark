@@ -24,7 +24,8 @@ export async function resolveAction(
 
 export async function adoptAction(ruleId: string, accept: boolean) {
   const actor = await actorName();
-  await adoptRule(ruleId, actor, accept);
+  const outcome = await adoptRule(ruleId, actor, accept);
   revalidatePath("/close/exceptions");
   revalidatePath("/close/rulebook");
+  return outcome;
 }
