@@ -2,8 +2,8 @@ import { createClient } from "@supabase/supabase-js";
 import { ADOPTION } from "../agent/gradient";
 import { backtestAgainstHistory, codingPrecedent } from "../agent/backtest-db";
 import { splitKey } from "../agent/close";
+import { assertMeasuredReport, type SimulationReport } from "../agent/simulate";
 import type { Rule, RuleKind } from "../agent/types";
-import type { SimulationReport } from "../agent/simulate";
 
 /**
  * The exception queue, as rows rather than as a slide.
@@ -91,6 +91,7 @@ async function vendorResolver(entityId: string) {
 export async function publishRun(
   report: SimulationReport, opts: { lastN?: number } = {},
 ): Promise<{ entityId: string; opened: number }> {
+  assertMeasuredReport(report);
   const c = db();
   const wanted = report.periods.slice(-Math.max(1, opts.lastN ?? 1));
   let openedTotal = 0;

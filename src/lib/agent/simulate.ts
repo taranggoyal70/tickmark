@@ -96,6 +96,34 @@ export interface SimulationReport {
 }
 
 /**
+ * Refuse to treat a mechanism test or a degraded close as measured evidence.
+ * This gate belongs next to the report type so the measured CLI and queue
+ * publisher use the same definition of "measured".
+ */
+export function assertMeasuredReport(report: SimulationReport): void {
+  if (report.provenance !== "model") {
+    throw new Error(`report provenance is ${report.provenance}, not model`);
+  }
+
+  if (report.periods.length === 0) {
+    throw new Error("report contains no periods");
+  }
+
+  const failures = report.periods.map((period) => period.stats.modelFailures);
+  if (failures.some((count) => !Number.isInteger(count) || count < 0)) {
+    throw new Error("report has invalid model-failure accounting");
+  }
+  const failureTotal = failures.reduce((total, count) => total + count, 0);
+  if (failureTotal > 0) {
+    throw new Error(`report contains ${failureTotal} failed model batch${failureTotal === 1 ? "" : "es"}`);
+  }
+
+  if (!Number.isInteger(report.totals.llmCalls) || report.totals.llmCalls < 1) {
+    throw new Error("report contains no successful model calls");
+  }
+}
+
+/**
  * Flatten a run into an ordered list of decisions. Interleaved by amount so a
  * replay looks like a close being worked rather than two sorted blocks.
  */

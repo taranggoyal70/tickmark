@@ -9,7 +9,7 @@
     "lint": "eslint",
     "test": "tsx --test scripts/*.test.ts",
     "simulate": "tsx --env-file-if-exists=.env.local scripts/simulate.ts",
-    "typecheck": "tsc --noEmit",
+    "typecheck": "next typegen && tsc --noEmit",
     "selftest": "tsx --env-file-if-exists=.env.local scripts/selftest.ts",
     "check": "tsx --env-file-if-exists=.env.local scripts/probe.ts",
     "verify:db": "tsx --env-file-if-exists=.env.local scripts/verify-db.ts",

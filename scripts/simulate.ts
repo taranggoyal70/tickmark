@@ -3,7 +3,7 @@
  *
  *   npx tsx --env-file=.env.local scripts/simulate.ts [--model anthropic/claude-sonnet-5]
  */
-import { simulate } from "../src/lib/agent/simulate";
+import { assertMeasuredReport, simulate } from "../src/lib/agent/simulate";
 import { fmtUsd, MODELS, rateFor, type ModelId } from "../src/lib/agent/pricing";
 import { effectiveModelId, providerLabel } from "../src/lib/agent/provider";
 import { getStore } from "../src/lib/store";
@@ -34,6 +34,7 @@ async function main() {
     console.log("          no price configured, so cost reports as $0.00 - set TICKMARK_PRICE_IN/OUT to price it");
   }
   const report = await simulate({ model, onProgress: (m) => console.log(m) });
+  assertMeasuredReport(report);
 
   console.log("\n─────────────────────────────────────────────────────────────────────");
   console.log("period   cleared  coding  match   exc  llm  rules  cost      touch");

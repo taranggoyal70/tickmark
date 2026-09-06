@@ -11,7 +11,7 @@ import { MockLanguageModelV4 } from "ai/test";
 import { generateAll } from "../src/lib/seed/generate";
 import { VENDORS } from "../src/lib/seed/fixture";
 import { setModelOverride } from "../src/lib/agent/provider";
-import { simulate } from "../src/lib/agent/simulate";
+import { assertMeasuredReport, simulate } from "../src/lib/agent/simulate";
 import { splitKey } from "../src/lib/agent/close";
 import { fmtUsd } from "../src/lib/agent/pricing";
 
@@ -160,6 +160,21 @@ async function main() {
 
   const report = await simulate({ provenance: "mock", onProgress: (m) => console.log(m) });
 
+  let mockRefused = false;
+  try { assertMeasuredReport(report); } catch { mockRefused = true; }
+
+  const degraded = structuredClone(report);
+  degraded.provenance = "model";
+  degraded.periods[0].stats.modelFailures = 1;
+  let degradedRefused = false;
+  try { assertMeasuredReport(degraded); } catch { degradedRefused = true; }
+
+  const noCalls = structuredClone(report);
+  noCalls.provenance = "model";
+  noCalls.totals.llmCalls = 0;
+  let noCallsRefused = false;
+  try { assertMeasuredReport(noCalls); } catch { noCallsRefused = true; }
+
   console.log("\nperiod   cleared  exc  rules  llm  cost");
   for (const p of report.periods) {
     console.log([
@@ -174,6 +189,9 @@ async function main() {
 
   const first = report.periods[0], last = report.periods[report.periods.length - 1];
   const checks: [string, boolean, string][] = [
+    ["mock report cannot pass measured gate", mockRefused, report.provenance],
+    ["degraded run cannot pass measured gate", degradedRefused, `${degraded.periods[0].stats.modelFailures} failed batch`],
+    ["zero-call run cannot pass measured gate", noCallsRefused, `${noCalls.totals.llmCalls} successful calls`],
     ["close run produces decisions", first.stats.llmCalls > 0, `${first.stats.llmCalls} calls in ${first.period}`],
     ["exceptions reach the queue", first.stats.exceptionsOpened > 0, `${first.stats.exceptionsOpened} opened`],
     ["gradient step proposes rules", report.periods.some((p) => p.proposals.length > 0), `${report.periods.reduce((n, p) => n + p.proposals.length, 0)} proposals`],
