@@ -219,6 +219,8 @@ npm run check                  # does a model credential resolve?
 npm run selftest               # full loop against a stand-in - no credential needed
 npm run simulate               # measured eval across four periods
 npm run verify:db              # prove the invariants against the live database
+npm run verify:gate            # prove the evidence gate, then restore the queue
+npm run verify:all             # all of the above, one summary
 npm run dev                    # dashboard on http://localhost:3000
 ```
 
