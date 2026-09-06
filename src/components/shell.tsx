@@ -9,6 +9,7 @@ const NAV = [
   { href: "/close/reconciliation", label: "Reconciliation" },
   { href: "/close/entries", label: "Entries" },
   { href: "/close/rulebook", label: "Rulebook" },
+  { href: "/close/binder", label: "Binder" },
   { href: "/setup", label: "Import" },
 ];
 

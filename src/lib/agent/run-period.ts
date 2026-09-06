@@ -167,13 +167,24 @@ export async function persistRun(
     if (error) throw new Error(`matches: ${error.message}`);
   }
 
-  // the point of the product: a verification that outlives the run
+  // The point of the product: a verification that outlives the run. Re-closing a
+  // period does not erase the earlier check - invariant 2 forbids that - so the
+  // new tickmark supersedes it and the chain stays readable.
   if (result.tickmarks.length) {
+    const { data: prior } = await c.from("tickmarks")
+      .select("id, evidence, created_at").eq("period_id", periodId).order("created_at");
+    const latestFor = new Map<string, string>();
+    for (const t of (prior ?? []) as unknown as Record<string, unknown>[]) {
+      const ref = String(((t.evidence ?? []) as Record<string, unknown>[])[0]?.subjectRef ?? "");
+      if (ref) latestFor.set(ref, String(t.id));
+    }
+
     const { error } = await c.from("tickmarks").insert(result.tickmarks.map((t) => ({
       entity_id: entityId, period_id: periodId, close_run_id: closeRunId,
       subject_type: t.subjectType, subject_id: entityId,
       asserted_by: t.assertedBy, actor: t.assertedBy === "rule" ? "rulebook" : String(model),
       confidence: t.confidence,
+      supersedes: latestFor.get(t.subjectRef) ?? null,
       evidence: [{ subjectRef: t.subjectRef, ...(t.evidence[0] ?? {}) }],
     })));
     if (error) throw new Error(`tickmarks: ${error.message}`);
