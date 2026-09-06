@@ -7,6 +7,7 @@
  */
 import { createClient } from "@supabase/supabase-js";
 import { adoptRule, listQueue, resolveException } from "../src/lib/store/queue";
+import { closePeriod } from "../src/lib/agent/run-period";
 
 const db = createClient(process.env.SUPABASE_URL!, process.env.SUPABASE_SERVICE_ROLE_KEY!, {
   auth: { persistSession: false },
@@ -18,7 +19,17 @@ const check = (name: string, ok: boolean, detail = "") => {
   console.log(`  ${ok ? "PASS" : "FAIL"}  ${name.padEnd(52)} ${detail}`);
 };
 
+const ENTITY = "Northwind Robotics, Inc.";
+const SEED_PERIOD = "2026-03";
+
 async function main() {
+  /*
+   * Seed our own queue rather than inherit one. These suites share a database,
+   * and a test that only passes when it runs first is not a test.
+   */
+  await closePeriod(ENTITY, SEED_PERIOD).catch(() => undefined);
+  await db.from("standing_intents").delete().neq("id", "00000000-0000-0000-0000-000000000000");
+
   const queue = await listQueue(200);
   if (!queue) { console.error("no open queue — run `npm run publish` first."); process.exit(1); }
 

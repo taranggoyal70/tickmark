@@ -24,7 +24,19 @@ open **before** you hit record.
 
 ---
 
-## 0:20–0:50 · The hook — run both closes
+## 0:15–0:35 · It takes your books, not a fixture
+
+**On screen:** `/setup`. Drop a bank CSV and an invoice CSV, pick a period, hit import.
+
+> "This is a month exported from a bank and a bookkeeping system. Headers don't
+> have to match, dollar signs and parenthesised negatives are fine — and a row it
+> can't read is reported with its line number, not dropped. If it can't read an
+> amount it refuses the row, because reading twelve hundred as twelve is an
+> accounting error, not a parsing inconvenience."
+
+---
+
+## 0:35–1:05 · The hook — run both closes
 
 **On screen:** `/close/run`. Press **Run both closes** and stop talking for three
 seconds. Let them watch.
@@ -44,7 +56,7 @@ Let it finish.
 
 ---
 
-## 0:50–1:35 · The moment — make this beat count
+## 1:05–1:45 · The moment — make this beat count
 
 Resolve one exception. Tick **"always do this"**.
 
@@ -69,11 +81,27 @@ Now resolve a **second** exception for the same vendor, same kind. Tick it again
 
 ---
 
-## 1:35–2:05 · The measured curve
+## 1:45–2:10 · It drafts the entries, you approve them
 
-**On screen:** `/close` dashboard.
+**On screen:** `/close/entries`.
 
-**Say the numbers from your own measured run — do not read these.**
+> "It noticed Datadog billed in three prior months and not this one, and drafted
+> the accrual — twelve six nineteen, debit cloud infrastructure, credit accrued
+> liabilities, balanced. The agent prepared it. It cannot approve it. That's
+> segregation of duties, and it's a database constraint, not a promise."
+
+Approve it on camera.
+
+---
+
+## 2:10–2:30 · Why an accountant would sign it
+
+**On screen:** terminal. `npm run verify:all`.
+
+> "Every guarantee, one command — including the whole loop running on ingested
+> books with no model at all."
+
+**Say the numbers from your own measured run if you have them.**
 
 > "Four closes, same model throughout. Auto-clear goes 55 to 79 percent.
 > Exceptions halve. Cost per close falls — not because the model got cheaper,
@@ -86,19 +114,6 @@ Point at the precision chart.
 > "And this is the line that must not move. Nobody reviews what it cleared
 > unattended — so a system that gets faster by getting sloppier is worse than
 > no system."
-
----
-
-## 2:05–2:30 · Why an accountant would sign it
-
-**On screen:** terminal. Run `npm run verify:gate` live.
-
-> "These aren't claims in a README. Debits must equal credits, tickmarks are
-> append-only, preparer can't equal approver, no rule activates without an
-> approver's name, and a rule that failed its replay can't be adopted at all —
-> every one enforced in the database and tested against the live instance."
-
-Let the PASS lines scroll. Don't narrate them.
 
 ---
 
