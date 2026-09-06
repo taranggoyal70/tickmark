@@ -17,6 +17,19 @@ Live: <a href="https://tickmark-kappa.vercel.app">tickmark-kappa.vercel.app</a>
 > *"I checked this, and here is how."* Auditors have used them for a century. This
 > product issues tickmarks — and earns the right to issue them without asking.
 
+## What it takes over
+
+The track lists six workflows. This does all six, on ingested books:
+
+| Workflow | Where |
+|---|---|
+| Closing the books | `npm run close` · the dashboard's **Close the books** |
+| Reconciling accounts | `/close/reconciliation` |
+| Processing invoices | AP coding in the close, exceptions in `/close/exceptions` |
+| Gathering audit support | `/close/binder` + JSON / CSV download |
+| Preparing cash reports | `/close/cash` |
+| Updating forecasts | `/close/cash` — next period, every line with its basis |
+
 ## The problem
 
 Month-end close is 5–10 days of a controller doing the same three things they did last
@@ -214,6 +227,26 @@ Outstanding on the statement          In the ledger, not on the statement
 Residuals inside a match are reported separately and **named** — `fx`,
 `bank_fee`, `partial` — because a difference that has been explained is not the
 same as one that has not.
+
+### Cash reporting and the month ahead
+
+`/close/cash` reads actuals from the **statement**, not the ledger, because the
+bank is the source of truth for cash. The forward view is only useful if you can
+see where each number came from, so every projected line carries its basis and
+the number of periods behind it:
+
+```
+Expected in 2026-05                                   net  −$143,490.08
+  Receipts                                                  $415,781.86
+    average of the last 3 periods
+  122 invoices already received, unpaid                   −$2,602,364.16
+    invoiced and outstanding — a commitment, not a projection
+  Salesforce                                                −$240,000.00
+    a single invoice — not yet a pattern · thin evidence
+```
+
+A vendor seen once is reported as an anecdote rather than averaged quietly into
+the total.
 
 ### It works out how your vendors settle
 

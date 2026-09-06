@@ -40,12 +40,13 @@ interface Point { label: string; value: number }
  * a closure across the boundary, so the chart owns the formatter and the page
  * names which one it wants.
  */
-export type FormatKind = "pct" | "pct1" | "usd3" | "minutes" | "count";
+export type FormatKind = "pct" | "pct1" | "usd3" | "usd0" | "minutes" | "count";
 
 const FORMATTERS: Record<FormatKind, (v: number) => string> = {
   pct: (v) => `${(v * 100).toFixed(0)}%`,
   pct1: (v) => `${(v * 100).toFixed(1)}%`,
   usd3: (v) => `$${v.toFixed(3)}`,
+  usd0: (v) => (v < 0 ? `-$${Math.abs(v).toLocaleString("en-US", { maximumFractionDigits: 0 })}` : `$${v.toLocaleString("en-US", { maximumFractionDigits: 0 })}`),
   minutes: (v) => `${Math.round(v)}m`,
   count: (v) => String(Math.round(v)),
 };

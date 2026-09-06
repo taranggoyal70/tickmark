@@ -7,6 +7,7 @@ const NAV = [
   { href: "/close/run", label: "Close room" },
   { href: "/close/exceptions", label: "Exceptions" },
   { href: "/close/reconciliation", label: "Reconciliation" },
+  { href: "/close/cash", label: "Cash" },
   { href: "/close/entries", label: "Entries" },
   { href: "/close/rulebook", label: "Rulebook" },
   { href: "/close/binder", label: "Binder" },
