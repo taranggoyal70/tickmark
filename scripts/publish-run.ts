@@ -15,9 +15,10 @@ async function main() {
   const report = await (await getStore()).loadLatest();
   if (!report) { console.error("no run on record — run `npm run simulate` first."); process.exit(1); }
 
-  const { opened } = await publishRun(report);
-  const last = report.periods[report.periods.length - 1];
-  console.log(`published ${last.period} (provenance: ${report.provenance})`);
+  const lastN = Number(process.argv[process.argv.indexOf("--periods") + 1]) || 1;
+  const { opened } = await publishRun(report, { lastN });
+  const opened_periods = report.periods.slice(-lastN).map((p) => p.period).join(", ");
+  console.log(`published ${opened_periods} (provenance: ${report.provenance})`);
   console.log(`  ${opened} exceptions opened for review`);
 }
 
