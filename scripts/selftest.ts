@@ -154,11 +154,21 @@ const model = new MockLanguageModelV4({
   },
 });
 
+const unavailableModel = new MockLanguageModelV4({
+  doGenerate: async () => { throw new Error("test model unavailable"); },
+});
+
 async function main() {
   setModelOverride(() => model);
   console.log("MECHANISM TEST — deterministic stand-in, not a real model.\n");
 
   const report = await simulate({ provenance: "mock", onProgress: (m) => console.log(m) });
+
+  // Resilience is part of the product contract: a provider outage must leave
+  // reviewable work in the queue, not abort the recorded close or its report.
+  setModelOverride(() => unavailableModel);
+  const degraded = await simulate({ onProgress: () => {} });
+  setModelOverride(() => model);
 
   console.log("\nperiod   cleared  exc  rules  llm  cost");
   for (const p of report.periods) {
@@ -183,6 +193,9 @@ async function main() {
     ["rules take over work", last.stats.ruleHits > first.stats.ruleHits, `${first.stats.ruleHits} → ${last.stats.ruleHits} rule hits`],
     ["exceptions fall", last.stats.exceptionsOpened < first.stats.exceptionsOpened, `${first.stats.exceptionsOpened} → ${last.stats.exceptionsOpened}`],
     ["auto-clear precision holds", last.stats.autoClearPrecision >= 0.99, `${(last.stats.autoClearPrecision * 100).toFixed(1)}%`],
+    ["provider outage still records 4 closes", degraded.periods.length === periods.length, `${degraded.periods.length} periods`],
+    ["provider outage labels every close", degraded.periods.every((p) => p.stats.modelFailures > 0), `${degraded.periods.reduce((n, p) => n + p.stats.modelFailures, 0)} failed batches`],
+    ["provider outage skips every gradient", degraded.periods.every((p) => p.gradientSkipped), `${degraded.periods.filter((p) => p.gradientSkipped).length} skipped`],
   ];
 
   console.log("");

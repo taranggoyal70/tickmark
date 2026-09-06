@@ -9,7 +9,7 @@ import { DEPARTMENTS, ENTITY, GL_ACCOUNTS, VENDORS } from "../seed/fixture";
 import { runClose } from "./close";
 import { controllerReview, touchSeconds } from "./controller";
 import { applyToRulebook, gradientStep, wouldAdopt, type CorrectionRecord } from "./gradient";
-import type { ChartContext, VendorHistoryRow } from "./llm";
+import { zeroUsage, type ChartContext, type VendorHistoryRow } from "./llm";
 import { DEFAULT_MODEL, type ModelId } from "./pricing";
 import { effectiveModelId } from "./provider";
 import { emptyRulebook } from "./rules";
@@ -79,6 +79,8 @@ export interface PeriodReport {
   touchSeconds: number;
   proposals: { name: string; kind: string; adopted: boolean; precision: number; fired: number; evidence: number }[];
   gradientCostMicros: number;
+  /** The close completed, but no new rules were distilled because the model was unavailable. */
+  gradientSkipped?: boolean;
 }
 
 export interface SimulationReport {
@@ -168,7 +170,17 @@ export async function simulate(opts: { model?: ModelId; provenance?: "model" | "
     const corrections: CorrectionRecord[] = controllerReview(period, run);
     log(`  cleared ${(run.stats.autoClearRate * 100).toFixed(0)}% · ${run.exceptions.length} exceptions · ${run.stats.llmCalls} llm calls · $${(run.stats.costMicros / 1e6).toFixed(4)}`);
 
-    const grad = await gradientStep(corrections, CHART, closed, model);
+    let gradientSkipped = false;
+    let grad;
+    try {
+      grad = await gradientStep(corrections, CHART, closed, model);
+    } catch (e) {
+      // A provider outage must not discard the close we just completed. The
+      // learning step can wait; persisting the queue cannot.
+      gradientSkipped = true;
+      grad = { proposals: [], usage: zeroUsage(), correctionsConsidered: corrections.length };
+      log(`  gradient skipped · model unavailable (${String((e as Error).message).slice(0, 100)})`);
+    }
     const accepted = grad.proposals.filter(wouldAdopt);
     rulebook = applyToRulebook(rulebook, accepted);
     if (grad.proposals.length) log(`  gradient: ${grad.proposals.length} proposed, ${accepted.length} adopted → rulebook v${rulebook.version}`);
@@ -193,6 +205,7 @@ export async function simulate(opts: { model?: ModelId; provenance?: "model" | "
       corrections: corrections.length,
       touchSeconds: touch,
       gradientCostMicros: grad.usage.costMicros,
+      gradientSkipped,
       proposals: grad.proposals.map((p) => ({
         name: p.name, kind: p.kind, adopted: accepted.includes(p),
         precision: p.backtest?.precision ?? 0, fired: p.backtest?.wouldHaveFired ?? 0,
