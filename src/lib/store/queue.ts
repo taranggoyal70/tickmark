@@ -316,7 +316,20 @@ async function proposeRuleFor(
   }
 
   const { data: v } = await db().from("vendors").select("bank_aliases").eq("entity_id", entityId).eq("name", vendor).maybeSingle();
-  const alias = ((v?.bank_aliases as string[] | null) ?? [])[0]?.slice(0, 12) ?? vendor;
+  const aliases = ((v?.bank_aliases as string[] | null) ?? []).filter(Boolean);
+
+  /**
+   * A vendor does not appear on a statement under one wording. Gusto is
+   * "GUSTO PAYROLL 8AM-5PM" one month and "GUSTO TAX COLLECTION" the next, so a
+   * predicate cut from a single month's phrasing learns nothing that survives
+   * to the following one. Key on every alias the vendor is known by, plus the
+   * name itself, and let the backtest decide whether that was enough.
+   */
+  const escape = (x: string) => x.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+  const alternates = [...new Set([...aliases.map((a) => a.slice(0, 16)), vendor])]
+    .filter((a) => a.length >= 4)
+    .map(escape);
+  const pattern = alternates.length ? alternates.join("|") : escape(vendor);
 
   let best: Rule | null = null;
   for (const strategy of ["by_invoice", "same_day_settlement", "installments"] as const) {
@@ -324,7 +337,7 @@ async function proposeRuleFor(
       const candidate: Rule = {
         ...base, id: crypto.randomUUID(), kind,
         name: `${vendor} settles ${strategy.replace(/_/g, " ")}${deltaReason ? ` · ${deltaReason}` : ""}`,
-        predicate: [{ op: "desc_contains", value: alias }],
+        predicate: [{ op: "desc_matches", value: pattern }],
         action: { type: "match", vendorName: vendor, strategy, deltaReason, tolerancePct: 0.03 },
       };
       candidate.backtest = await backtestAgainstHistory(candidate, entityId, beforeCode);
