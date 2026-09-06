@@ -68,6 +68,8 @@ CSV rather than leaving support trapped in dashboard counters.
 - Tickmarks are append-only and every automated decision has an evidence chain.
 - Provider outages fail closed: undecided work is labeled and routed to review
   while the close remains inspectable.
+- Semantically identical learned rules cannot become a second active rule;
+  duplicate proposals retain their evidence and link to the canonical rule.
 - OpenAI-compatible structured output is an explicit capability flag, avoiding
   false assumptions about self-hosted or third-party gateways.
 
@@ -90,10 +92,11 @@ cannot bypass materiality. A controller request does not become policy after one
 example. Reports from a deterministic stand-in or an unavailable provider are
 labeled and blocked from the measured-results publication path.
 
-The final integration also withheld a semantic-rule-deduplication change. That
-code requires migration `0005`, but the available production credentials could
-not safely apply and verify DDL, and the production schema did not contain the
-new columns. Shipping the code anyway would have broken production reads.
+Migration `0005` was applied through the Supabase web SQL editor. It backfilled
+canonical semantic signatures, retained nine historical duplicate proposals,
+and enforced a partial unique index so each entity can have only one active
+rule for the same behavior. A post-migration query verified the columns,
+trigger, and index, with zero null signatures and zero active duplicate groups.
 
 ## Verification performed for this release
 
@@ -104,7 +107,7 @@ new columns. Shipping the code anyway would have broken production reads.
 | `npm run typecheck` | Exit 0; Next.js route types generated and TypeScript completed without diagnostics. |
 | `npm run lint` | Exit 0; ESLint completed without findings. |
 | `npm run build` | Exit 0; Next.js 16.3.4 production build compiled all application routes. |
-| `npm run selftest` | Exit 0; 16/16 mechanism checks passed, including fail-closed provider behavior and measured-report gates. |
+| `npm run selftest` | Exit 0; 21/21 mechanism checks passed, including fail-closed provider behavior, measured-report gates, and semantic-rule deduplication. |
 | `npm run verify:all` | Exit 0; all 8 stages passed. The four live Supabase stages—database invariants, evidence gate, close loop, and import—ran and passed; none were skipped. |
 | `npm run check` | Exit 1; authentication reached AI Gateway, which refused inference because the linked team has no valid payment card. |
 
@@ -145,7 +148,7 @@ measurements.
    queue is not preflighted.
 5. **2:20–2:50 — Finance outputs.** Show reconciliation details, balanced draft
    entries, and the downloadable binder.
-6. **2:50–3:20 — Evidence.** Show five unit tests, 16 selftest checks, and all
+6. **2:50–3:20 — Evidence.** Show five unit tests, 21 selftest checks, and all
    eight verification stages passing, including four live database stages.
 7. **3:20–3:45 — AO use.** Show the 23-session AO list and briefly describe the
    substantive Codex work on audit, hardening, deployment, eval, and integration.

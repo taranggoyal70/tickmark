@@ -92,7 +92,7 @@ model behavior.
 `npm run verify:all`.
 
 > "The unit command runs both verification-script tests and provider capability
-> tests. The mechanism selftest passes 16 checks. Full verification passes eight
+> tests. The mechanism selftest passes 21 checks. Full verification passes eight
 > stages, including all four live Supabase suites—none were skipped. These prove
 > controls and wiring, not model quality."
 
@@ -117,7 +117,7 @@ model behavior.
 ## Pre-flight
 
 - [ ] `npm test` passes five tests.
-- [ ] `npm run selftest` passes 16 mechanism checks.
+- [ ] `npm run selftest` passes 21 mechanism checks.
 - [ ] `npm run verify:all` ends with `everything holds`; database invariants,
       evidence gate, close loop, and import all show `PASS`, never `SKIP`.
 - [ ] Production smoke test passes `/`, `/close`, `/close/run`,
