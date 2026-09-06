@@ -82,24 +82,27 @@ export async function loadPeriod(entityId: string, code: string): Promise<Loaded
   // what a human already accepted in earlier periods, which is the only
   // precedent the agent is entitled to lean on
   const { data: priorInv } = await c
-    .from("ap_invoices").select("invoice_number, vendor_id, gl_account_id, period_id, periods(code)")
-    .eq("entity_id", entityId).not("gl_account_id", "is", null);
+    .from("ap_invoices").select("invoice_number, vendor_id, gl_account_id, amount_cents, period_id, periods(code)")
+    .eq("entity_id", entityId);
   const agg = new Map<string, VendorHistoryRow>();
   const recurringHistory: Record<string, number[]> = {};
   for (const r of (priorInv ?? []) as unknown as Record<string, unknown>[]) {
     const pc = (r.periods as { code?: string } | null)?.code ?? "";
-    if (!pc || pc >= code) continue;
+    if (!pc || pc >= code) continue;   // only what is already closed behind us
     const vendor = vendById.get(String(r.vendor_id)) ?? "";
+    if (!vendor) continue;
+
+    // What this vendor has historically billed. Built from PRIOR periods only -
+    // taking it from the current one would mean every vendor in it had already
+    // invoiced, and nothing could ever be found missing.
+    (recurringHistory[vendor] ??= []).push(Number(r.amount_cents));
+
     const glCode = acctById.get(String(r.gl_account_id)) ?? "";
-    if (!vendor || !glCode) continue;
+    if (!glCode) continue;
     const k = `${vendor}|${glCode}`;
     const row = agg.get(k);
     if (row) { row.timesSeen++; row.lastPeriod = pc; }
     else agg.set(k, { vendor, glCode, deptSplit: "", timesSeen: 1, lastPeriod: pc });
-  }
-  for (const inv of invoices) {
-    const v = vendById.get(String(inv.vendor_id));
-    if (v) (recurringHistory[v] ??= []).push(Number(inv.amount_cents));
   }
 
   return {
@@ -215,10 +218,14 @@ export async function closePeriod(entityName: string, code: string, model: Model
   const loaded = await loadPeriod(entityId, code);
   const rulebook = await loadRulebook(entityId).catch(() => emptyRulebook());
 
+  // a vendor can only be accrued to an account it has actually been coded to
+  const accountByVendor = new Map(loaded.history.map((h) => [h.vendor, h.glCode]));
+
   const result = await runClose({
     period: loaded.period, rulebook, chart: loaded.chart,
     history: loaded.history, recurringHistory: loaded.recurringHistory,
     autoThreshold: Number(ent.auto_tickmark_threshold ?? 0.9), model,
+    accrualAccountFor: (v) => accountByVendor.get(v) ?? null,
   });
 
   const persisted = await persistRun(entityId, loaded.periodId, result, model);

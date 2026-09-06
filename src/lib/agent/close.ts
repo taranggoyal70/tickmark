@@ -24,6 +24,8 @@ export interface CloseInput {
   recurringHistory: Record<string, number[]>;
   autoThreshold: number;
   model?: ModelId;
+  /** Which account this vendor has historically been coded to, if any. */
+  accrualAccountFor?: (vendor: string) => string | null;
   /** Batch sizes. Bigger batches cost fewer calls but blunt attention. */
   codingBatch?: number;
   matchBatch?: number;
@@ -203,16 +205,25 @@ export async function runClose(input: CloseInput): Promise<CloseRunResult> {
     const a = applyAccrualRules(rulebook, vendor, hist, billed.has(vendor));
     if (a) { accruals.push(a); ruleHits++; }
     else if (!billed.has(vendor) && hist.length >= 2) {
+      // The reviewable artefact for an accrual is the entry itself. Drafting it
+      // and asking someone to approve is how a close actually works; a queue
+      // item that says "consider accruing something" is not a proposal.
       const avg = Math.round(hist.slice(-3).reduce((x, y) => x + y, 0) / Math.min(3, hist.length));
-      openException({
-        subjectType: "accrual", subjectRef: vendor, cause: "policy_requires_human",
-        amountCents: avg, confidence: null,
-        proposal: { vendorName: vendor, suggestedCents: avg, basis: "trailing_avg_3" },
-        options: [
-          { label: `Accrue ${(avg / 100).toFixed(2)}`, value: { accrue: avg } },
-          { label: "No accrual - service stopped", value: { accrue: 0 } },
-        ],
-      });
+      const glCode = input.accrualAccountFor?.(vendor) ?? null;
+      if (glCode) {
+        accruals.push({
+          vendorName: vendor, glCode, amountCents: avg,
+          confidence: 0.7, decidedBy: "agent",
+          reasoning: `billed in ${hist.length} prior period(s) but not this one; trailing average of the last ${Math.min(3, hist.length)}`,
+        });
+      } else {
+        openException({
+          subjectType: "accrual", subjectRef: vendor, cause: "no_candidate",
+          amountCents: avg, confidence: null,
+          proposal: { vendorName: vendor, suggestedCents: avg, why: "no prior account to accrue this vendor to" },
+          options: [{ label: "Code it once, then it can be accrued", value: null }],
+        });
+      }
     }
   }
 

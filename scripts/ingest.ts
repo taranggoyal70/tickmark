@@ -51,7 +51,12 @@ async function sample() {
   })));
   console.log(`entity ${ENTITY.name}\n  chart ${GL_ACCOUNTS.length} accounts · ${DEPARTMENTS.length} departments · ${VENDORS.length} vendors\n`);
 
-  for (const p of generateAll()) {
+  const periods = generateAll();
+  for (const [idx, p] of periods.entries()) {
+    // A real company's earlier months are closed and coded; only the open one is
+    // uncoded. Emitting every period uncoded would leave the agent with no
+    // precedent to learn from, which is not what anyone's books look like.
+    const closed = idx < periods.length - 1;
     const bank = p.bankLines.map((b) => ({
       external_id: b.externalId, posted_date: b.postedDate, description: b.description,
       amount: money(b.amountCents), currency: b.currency,
@@ -61,10 +66,17 @@ async function sample() {
       dept_code: e.deptCode ?? "", vendor: e.vendorName ?? "", amount: money(e.amountCents),
       memo: e.memo, source: e.source,
     }));
-    const invoices = p.apInvoices.map((i) => ({
-      vendor: i.vendorName, invoice_number: i.invoiceNumber, invoice_date: i.invoiceDate,
-      due_date: i.dueDate, amount: money(i.amountCents), currency: i.currency, description: i.description,
-    }));
+    const invoices = p.apInvoices.map((i) => {
+      const truth = closed ? p.truth.coding[i.invoiceNumber] : undefined;
+      const dominant = truth
+        ? Object.entries(truth.deptSplit).sort((a, b) => b[1] - a[1])[0]?.[0] ?? ""
+        : "";
+      return {
+        vendor: i.vendorName, invoice_number: i.invoiceNumber, invoice_date: i.invoiceDate,
+        due_date: i.dueDate, amount: money(i.amountCents), currency: i.currency, description: i.description,
+        gl_code: truth?.glCode ?? "", dept_code: dominant,
+      };
+    });
 
     if (emitDir) {
       const dir = path.join(process.cwd(), emitDir, p.code);
