@@ -1,0 +1,33 @@
+vendor,invoice_number,invoice_date,due_date,amount,currency,description
+Amazon Web Services,AMA-202604-5183,2026-04-04,2026-05-04,56248.58,USD,AWS monthly usage
+Vercel,VER-202604-7415,2026-04-19,2026-05-19,4097.23,USD,Vercel Enterprise - hosting
+Figma,FIG-202604-9921,2026-04-17,2026-05-17,1297.90,USD,Figma Organization - 88 seats
+Linear,LIN-202604-2556,2026-04-16,2026-05-16,930.18,USD,Linear Business - 120 seats
+Slack Technologies,SLA-202604-9481,2026-04-18,2026-05-18,2253.88,USD,Slack Business+ - company wide
+GitHub,GIT-202604-1450,2026-04-07,2026-05-07,1757.39,USD,GitHub Enterprise Cloud
+WeWork,WEW-202604-4467,2026-04-16,2026-04-17,39500.00,USD,"Office license fee - 555 Market St, 4th floor"
+Deel,DEE-202604-7347,2026-04-14,2026-04-29,22589.40,EUR,EOR contractors - EMEA engineering pod
+Mouser Electronics,MOU-202604-4069,2026-04-06,2026-05-21,16259.53,USD,Sensor modules - EVT build
+Mouser Electronics,MOU-202604-2601,2026-04-04,2026-05-19,22764.54,USD,Connectors and passives - build lot
+Mouser Electronics,MOU-202604-3551,2026-04-22,2026-06-06,17055.55,USD,Sensor modules - EVT build
+Mouser Electronics,MOU-202604-5572,2026-04-09,2026-05-24,23655.92,USD,Connectors and passives - build lot
+Mouser Electronics,MOU-202604-1969,2026-04-11,2026-05-26,22896.59,USD,Sensor modules - EVT build
+Digi-Key Electronics,DIG-202604-4479,2026-04-20,2026-06-04,6279.95,USD,Cable assemblies
+Digi-Key Electronics,DIG-202604-7475,2026-04-11,2026-05-26,13444.45,USD,Cable assemblies
+Digi-Key Electronics,DIG-202604-1465,2026-04-14,2026-05-29,6499.43,USD,Cable assemblies
+Digi-Key Electronics,DIG-202604-7909,2026-04-12,2026-05-27,8565.40,USD,Cable assemblies
+Digi-Key Electronics,DIG-202604-9004,2026-04-04,2026-05-19,6037.80,USD,Cable assemblies
+Flexport,FLE-202604-3281,2026-04-15,2026-05-15,57107.54,USD,Ocean freight SHA-OAK + customs
+Flexport,FLE-202604-2630,2026-04-22,2026-05-22,51991.42,USD,Ocean freight SHA-OAK + customs
+Flexport,FLE-202604-9750,2026-04-02,2026-05-02,49569.37,USD,Ocean freight SHA-OAK + customs
+Cooley LLP,COO-202604-4569,2026-04-18,2026-05-18,14036.33,USD,IP prosecution - utility filings
+Cooley LLP,COO-202604-7934,2026-04-12,2026-05-12,21706.14,USD,Corporate matters - Series B follow-on
+Cooley LLP,COO-202604-2217,2026-04-05,2026-05-05,21095.85,USD,IP prosecution - utility filings
+Cooley LLP,COO-202604-3293,2026-04-21,2026-05-21,25125.08,USD,IP prosecution - utility filings
+Cooley LLP,COO-202604-7087,2026-04-12,2026-05-12,19781.49,USD,IP prosecution - utility filings
+United Airlines,UNI-202604-3989,2026-04-16,2026-04-16,1545.58,USD,Customer visit - Austin
+United Airlines,UNI-202604-4614,2026-04-15,2026-04-15,1866.24,USD,Customer visit - Austin
+United Airlines,UNI-202604-7694,2026-04-19,2026-04-19,2467.76,USD,Supplier audit travel - Shenzhen
+United Airlines,UNI-202604-5302,2026-04-08,2026-04-08,2074.36,USD,Customer visit - Austin
+Google Ads,GOO-202604-8886,2026-04-14,2026-05-14,19796.81,USD,Search + demand gen spend
+Iron Mountain,IRO-202604-8532,2026-04-12,2026-05-12,477.23,USD,Records storage and shredding

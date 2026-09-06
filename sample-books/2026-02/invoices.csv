@@ -1,0 +1,33 @@
+vendor,invoice_number,invoice_date,due_date,amount,currency,description
+Amazon Web Services,AMA-202602-3782,2026-02-21,2026-03-23,45480.54,USD,AWS usage - consolidated billing
+Datadog,DAT-202602-1226,2026-02-11,2026-03-13,12362.05,USD,Datadog Pro - infrastructure monitoring
+Vercel,VER-202602-8460,2026-02-19,2026-03-21,4015.87,USD,Vercel Enterprise - hosting
+Figma,FIG-202602-4584,2026-02-04,2026-03-06,1299.21,USD,Figma Organization - 88 seats
+Linear,LIN-202602-5174,2026-02-11,2026-03-13,979.28,USD,Linear Business - 120 seats
+Slack Technologies,SLA-202602-8581,2026-02-12,2026-03-14,2240.20,USD,Slack Business+ - company wide
+GitHub,GIT-202602-2924,2026-02-16,2026-03-18,1694.92,USD,GitHub Enterprise Cloud
+WeWork,WEW-202602-5306,2026-02-21,2026-02-22,39500.00,USD,"Office license fee - 555 Market St, 4th floor"
+Deel,DEE-202602-6664,2026-02-02,2026-02-17,19205.87,EUR,EOR contractors - EMEA engineering pod
+Mouser Electronics,MOU-202602-6388,2026-02-07,2026-03-24,17636.15,USD,Connectors and passives - build lot
+Mouser Electronics,MOU-202602-2481,2026-02-11,2026-03-28,15541.09,USD,Connectors and passives - build lot
+Mouser Electronics,MOU-202602-7557,2026-02-23,2026-04-09,25017.38,USD,Connectors and passives - build lot
+Mouser Electronics,MOU-202602-7907,2026-02-16,2026-04-02,26025.85,USD,Connectors and passives - build lot
+Mouser Electronics,MOU-202602-1679,2026-02-23,2026-04-09,19575.53,USD,Sensor modules - EVT build
+Digi-Key Electronics,DIG-202602-5121,2026-02-08,2026-03-25,10413.57,USD,Cable assemblies
+Digi-Key Electronics,DIG-202602-2898,2026-02-10,2026-03-27,6411.81,USD,Cable assemblies
+Digi-Key Electronics,DIG-202602-9165,2026-02-02,2026-03-19,8339.88,USD,Board components - DVT run
+Digi-Key Electronics,DIG-202602-4772,2026-02-10,2026-03-27,8650.82,USD,Board components - DVT run
+Digi-Key Electronics,DIG-202602-2171,2026-02-09,2026-03-26,13264.97,USD,Cable assemblies
+Flexport,FLE-202602-3258,2026-02-11,2026-03-13,46532.96,USD,Airfreight expedite - EVT units
+Flexport,FLE-202602-5421,2026-02-04,2026-03-06,67541.59,USD,Airfreight expedite - EVT units
+Flexport,FLE-202602-5155,2026-02-07,2026-03-09,62372.87,USD,Ocean freight SHA-OAK + customs
+Cooley LLP,COO-202602-1282,2026-02-17,2026-03-19,17929.17,USD,Corporate matters - Series B follow-on
+Cooley LLP,COO-202602-2028,2026-02-10,2026-03-12,19514.89,USD,IP prosecution - utility filings
+Cooley LLP,COO-202602-5895,2026-02-05,2026-03-07,20939.87,USD,IP prosecution - utility filings
+Cooley LLP,COO-202602-2676,2026-02-09,2026-03-11,22671.96,USD,IP prosecution - utility filings
+Deloitte,DEL-202602-5205,2026-02-14,2026-03-31,45513.58,USD,Quarterly review procedures
+Salesforce,SAL-202602-4136,2026-02-18,2026-03-20,240000.00,USD,"Sales Cloud + Service Cloud - annual, Feb-Jan"
+United Airlines,UNI-202602-8251,2026-02-13,2026-02-13,2339.52,USD,Customer visit - Austin
+United Airlines,UNI-202602-4915,2026-02-04,2026-02-04,2284.16,USD,Supplier audit travel - Shenzhen
+Google Ads,GOO-202602-9817,2026-02-09,2026-03-11,19708.57,USD,Search + demand gen spend
+Iron Mountain,IRO-202602-7130,2026-02-05,2026-03-07,490.00,USD,Records storage and shredding

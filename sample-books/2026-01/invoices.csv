@@ -1,0 +1,30 @@
+vendor,invoice_number,invoice_date,due_date,amount,currency,description
+Amazon Web Services,AMA-202601-5427,2026-01-13,2026-02-12,48709.20,USD,AWS usage - consolidated billing
+Datadog,DAT-202601-6298,2026-01-23,2026-02-22,12167.62,USD,Datadog Pro - infrastructure monitoring
+Vercel,VER-202601-5484,2026-01-12,2026-02-11,4170.27,USD,Vercel Enterprise - hosting
+Figma,FIG-202601-3285,2026-01-08,2026-02-07,1341.65,USD,Figma Organization - 88 seats
+Linear,LIN-202601-7232,2026-01-09,2026-02-08,951.78,USD,Linear Business - 120 seats
+Slack Technologies,SLA-202601-6983,2026-01-13,2026-02-12,2045.20,USD,Slack Business+ - company wide
+GitHub,GIT-202601-8050,2026-01-08,2026-02-07,1778.01,USD,GitHub Enterprise Cloud
+WeWork,WEW-202601-7230,2026-01-18,2026-01-19,39500.00,USD,"Office license fee - 555 Market St, 4th floor"
+Deel,DEE-202601-4827,2026-01-19,2026-02-03,20493.16,EUR,EOR contractors - EMEA engineering pod
+Mouser Electronics,MOU-202601-7494,2026-01-18,2026-03-04,20551.24,USD,Sensor modules - EVT build
+Mouser Electronics,MOU-202601-8036,2026-01-06,2026-02-20,24255.92,USD,Sensor modules - EVT build
+Digi-Key Electronics,DIG-202601-2169,2026-01-18,2026-03-04,8757.88,USD,Cable assemblies
+Digi-Key Electronics,DIG-202601-9439,2026-01-20,2026-03-06,5956.28,USD,Board components - DVT run
+Digi-Key Electronics,DIG-202601-3144,2026-01-15,2026-03-01,8245.29,USD,Cable assemblies
+Digi-Key Electronics,DIG-202601-3537,2026-01-12,2026-02-26,6800.24,USD,Board components - DVT run
+Digi-Key Electronics,DIG-202601-7228,2026-01-07,2026-02-21,6790.07,USD,Cable assemblies
+Flexport,FLE-202601-4016,2026-01-20,2026-02-19,55954.34,USD,Ocean freight SHA-OAK + customs
+Flexport,FLE-202601-9265,2026-01-22,2026-02-21,70745.18,USD,Ocean freight SHA-OAK + customs
+Flexport,FLE-202601-9355,2026-01-02,2026-02-01,47142.80,USD,Ocean freight SHA-OAK + customs
+Cooley LLP,COO-202601-7754,2026-01-09,2026-02-08,34639.35,USD,IP prosecution - utility filings
+Cooley LLP,COO-202601-9022,2026-01-05,2026-02-04,30215.17,USD,IP prosecution - utility filings
+Cooley LLP,COO-202601-9475,2026-01-07,2026-02-06,26909.45,USD,IP prosecution - utility filings
+Cooley LLP,COO-202601-8421,2026-01-07,2026-02-06,26943.83,USD,Corporate matters - Series B follow-on
+Cooley LLP,COO-202601-2266,2026-01-21,2026-02-20,25328.92,USD,Corporate matters - Series B follow-on
+United Airlines,UNI-202601-6249,2026-01-14,2026-01-14,1571.55,USD,Customer visit - Austin
+United Airlines,UNI-202601-5362,2026-01-08,2026-01-08,1468.78,USD,Supplier audit travel - Shenzhen
+United Airlines,UNI-202601-7712,2026-01-08,2026-01-08,2421.41,USD,Supplier audit travel - Shenzhen
+Google Ads,GOO-202601-5330,2026-01-17,2026-02-16,14996.14,USD,Search + demand gen spend
+Iron Mountain,IRO-202601-8926,2026-01-14,2026-02-13,489.64,USD,Records storage and shredding
