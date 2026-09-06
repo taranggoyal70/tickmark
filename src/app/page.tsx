@@ -58,7 +58,10 @@ export default async function Home() {
               deterministic rule. The judgment gets made once. After that it runs for free.
             </p>
             <div className="mt-8 flex flex-wrap items-center gap-3">
-              <Link href="/close" className="focus-ring rounded-[var(--radius-md)] bg-[var(--primary)] px-4 py-2.5 text-[14px] font-medium text-[var(--on-primary)] transition-colors hover:bg-[var(--primary-hover)]">
+              <Link href="/close/run" className="focus-ring rounded-[var(--radius-md)] bg-[var(--primary)] px-4 py-2.5 text-[14px] font-medium text-[var(--on-primary)] transition-colors hover:bg-[var(--primary-hover)]">
+                Watch it close the books
+              </Link>
+              <Link href="/close" className="focus-ring rounded-[var(--radius-md)] border border-hairline bg-surface-1 px-4 py-2.5 text-[14px] font-medium text-ink transition-colors hover:bg-surface-3">
                 See the measured results
               </Link>
               <Link href="/close/rulebook" className="focus-ring rounded-[var(--radius-md)] border border-hairline bg-surface-1 px-4 py-2.5 text-[14px] font-medium text-ink transition-colors hover:bg-surface-3">
