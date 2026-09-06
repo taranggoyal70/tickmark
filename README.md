@@ -228,6 +228,39 @@ Residuals inside a match are reported separately and **named** — `fx`,
 `bank_fee`, `partial` — because a difference that has been explained is not the
 same as one that has not.
 
+### Payment processor settlements
+
+A processor pays out **net of its fees**, so the deposit on the bank never
+equals the revenue behind it. Reconciling that by hand is one of the most
+repetitive jobs in a close. Hand it the payout breakup export and each
+settlement becomes the three rows that actually explain the deposit:
+
+```
+npm run ingest -- --entity "Acme, Inc." --period 2026-05 \
+                  --settlements payouts.csv --processor Dodo
+```
+
+```
+bank    DODO PAYOUT txn_8891        4,074.00   ← what landed
+ledger  4010 Revenue               −4,200.00   ← gross
+ledger  6410 Processing fees          126.00   ← the fee
+                                    ────────
+                                        0.00
+```
+
+Column names are matched by alias, because no two processors agree on them, and
+**a settlement whose arithmetic does not hold is refused** rather than posted:
+
+```
+gross 900.00 less fee 27.00 is 873.00, but net is 880.00 — row refused
+```
+
+**[Dodo Payments](https://dodopayments.com)** exposes exactly this file at
+`GET /payouts/{id}/breakup/csv` (base `https://live.dodopayments.com`,
+`Authorization: Bearer <key>`). Download it and pass it to `--settlements`, or
+drop it into the import page. Stripe and other processors export the same
+gross/fee/net shape and work unchanged.
+
 ### Cash reporting and the month ahead
 
 `/close/cash` reads actuals from the **statement**, not the ledger, because the

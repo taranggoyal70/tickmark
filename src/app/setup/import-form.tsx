@@ -10,6 +10,7 @@ const FILES = [
   { name: "ledger", label: "General ledger", hint: "external_id, entry_date, gl_code, amount, memo", required: false },
   { name: "chart", label: "Chart of accounts", hint: "code, name, type — a standard one is used if omitted", required: false },
   { name: "vendors", label: "Vendor list", hint: "name, bank_aliases separated by |", required: false },
+  { name: "settlements", label: "Processor payouts", hint: "Dodo / Stripe breakup: gross, fee, net — expanded automatically", required: false },
 ];
 
 export function ImportForm() {

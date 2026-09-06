@@ -14,6 +14,7 @@ import path from "node:path";
 import { DEPARTMENTS, ENTITY, GL_ACCOUNTS, VENDORS } from "../src/lib/seed/fixture";
 import { generateAll } from "../src/lib/seed/generate";
 import { ensureChart, ensureEntity, ensureVendors, ingestPeriod, type IngestReport } from "../src/lib/ingest/ingest";
+import { readSettlements } from "../src/lib/ingest/settlements";
 
 const arg = (name: string) => {
   const i = process.argv.indexOf(`--${name}`);
@@ -99,15 +100,32 @@ async function sample() {
 async function customer() {
   const name = arg("entity"), period = arg("period");
   if (!name || !period) {
-    console.error("need --entity <name> --period <YYYY-MM>, plus at least one of --bank/--ledger/--invoices");
+    console.error("need --entity <name> --period <YYYY-MM>, plus at least one of --bank/--ledger/--invoices/--settlements");
     process.exit(2);
   }
   const entityId = await ensureEntity(name);
   const read = async (f?: string) => (f ? readFile(path.resolve(f), "utf8") : undefined);
-  const [bank, ledger, invoices] = await Promise.all([read(arg("bank")), read(arg("ledger")), read(arg("invoices"))]);
+  const [bank, ledger, invoices, settlements] = await Promise.all([
+    read(arg("bank")), read(arg("ledger")), read(arg("invoices")), read(arg("settlements")),
+  ]);
 
   console.log(`entity ${name}`);
-  const r = await ingestPeriod(entityId, period, { bank, ledger, invoices });
+
+  // A processor payout is one deposit standing for gross revenue less a fee.
+  // Expanding it here means the reconciler sees the three rows that actually
+  // explain the deposit rather than a single unexplained credit.
+  let bankCsv = bank, ledgerCsv = ledger;
+  if (settlements) {
+    const processor = arg("processor") ?? "Dodo";
+    const s = readSettlements(settlements, { processor });
+    console.log(`  ${processor}: ${s.bank.length} settlements → ${s.ledger.length} ledger entries`);
+    console.log(`  columns read as: ${Object.entries(s.mapping).map(([k, v]) => `${k}=${v}`).join(", ") || "none matched"}`);
+    for (const x of s.rejected.slice(0, 6)) console.log(`      rejected settlement row ${x.row}: ${x.reason}`);
+    bankCsv = [bankCsv, csv(s.bank)].filter(Boolean).join("\n");
+    ledgerCsv = [ledgerCsv, csv(s.ledger)].filter(Boolean).join("\n");
+  }
+
+  const r = await ingestPeriod(entityId, period, { bank: bankCsv, ledger: ledgerCsv, invoices });
   report(r);
   if (r.rejected.length) process.exit(1);
 }

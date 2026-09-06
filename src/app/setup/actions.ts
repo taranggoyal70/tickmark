@@ -4,6 +4,7 @@ import { auth } from "@clerk/nextjs/server";
 import { revalidatePath } from "next/cache";
 import { ensureChart, ensureEntity, ensureVendors, ingestPeriod } from "@/lib/ingest/ingest";
 import { parseCsv } from "@/lib/ingest/schema";
+import { readSettlements } from "@/lib/ingest/settlements";
 import { ACCRUED_LIABILITIES, STARTER_CHART, STARTER_DEPARTMENTS } from "@/lib/ingest/starter-chart";
 
 export interface ImportOutcome {
@@ -93,10 +94,34 @@ export async function importPeriodAction(form: FormData): Promise<ImportOutcome>
       warnings.push("Vendors were created from your invoices. Upload a vendor list with bank aliases to match statement wording better.");
     }
 
+    // ── processor settlements ───────────────────────────────────────────────
+    // A payout is one deposit standing for gross revenue less a fee. Expanding
+    // it means the reconciler sees what explains the deposit instead of an
+    // unexplained credit for someone to chase.
+    let bankCsv = await text(form.get("bank"));
+    let ledgerCsv = await text(form.get("ledger"));
+    const settlementsCsv = await text(form.get("settlements"));
+    if (settlementsCsv) {
+      const processor = String(form.get("processor") ?? "").trim() || "Dodo";
+      const st = readSettlements(settlementsCsv, { processor });
+      const toCsv = (rows: Record<string, string>[]) => {
+        if (!rows.length) return "";
+        const head = Object.keys(rows[0]);
+        const cell = (v: string) => (/[",\n]/.test(v) ? `"${v.replace(/"/g, '""')}"` : v);
+        return [head.join(","), ...rows.map((r) => head.map((h) => cell(r[h] ?? "")).join(","))].join("\n");
+      };
+      bankCsv = [bankCsv, toCsv(st.bank)].filter(Boolean).join("\n");
+      ledgerCsv = [ledgerCsv, toCsv(st.ledger)].filter(Boolean).join("\n");
+      warnings.push(
+        `${processor}: ${st.bank.length} settlements expanded into deposits, revenue and fees` +
+        (st.rejected.length ? `; ${st.rejected.length} refused (${st.rejected[0].reason})` : ""),
+      );
+    }
+
     // ── the books ───────────────────────────────────────────────────────────
     const report = await ingestPeriod(entityId, period, {
-      bank: await text(form.get("bank")),
-      ledger: await text(form.get("ledger")),
+      bank: bankCsv,
+      ledger: ledgerCsv,
       invoices: invoicesCsv,
     });
 
