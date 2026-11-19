@@ -37,8 +37,10 @@ for (const [month, commits] of months) {
   const grouped = new Map<string, string[]>();
   for (const c of commits) {
     const section = SECTIONS.find(([re]) => re.test(c.subject))?.[1] ?? "Changed";
-    const text = c.subject.replace(/^\w+(\(.+\))?!?:\s*/, "");
-    (grouped.get(section) ?? grouped.set(section, []).get(section)!).push(`- ${text[0].toUpperCase()}${text.slice(1)} (${c.hash})`);
+    const scope = /^\w+\(([^)]+)\)!?:/.exec(c.subject)?.[1];
+    const text = c.subject.replace(/^\w+(\([^)]+\))?!?:\s*/, "");
+    const entry = `${text[0].toUpperCase()}${text.slice(1)}`;
+    (grouped.get(section) ?? grouped.set(section, []).get(section)!).push(`- ${scope ? `**${scope}:** ` : ""}${entry} (${c.hash})`);
   }
   for (const section of ["Added", "Fixed", "Changed", "Maintenance"]) {
     const items = grouped.get(section);
