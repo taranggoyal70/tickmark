@@ -19,8 +19,18 @@ import type { Company } from "../src/lib/agent/simulate";
 /** Six month-end closes, January through June. */
 export const EVAL_PERIODS = ["2026-01", "2026-02", "2026-03", "2026-04", "2026-05", "2026-06"] as const;
 
-/** Fixed before the first run. Changing these is changing the test set. */
-export const HELD_OUT_SEEDS = [101, 202, 303] as const;
+/**
+ * Fixed before the first run. Changing these is changing the test set.
+ *
+ * Round 1 (101, 202, 303) was run once, in commit 49b0322, and exposed a
+ * defect: the same-day settlement strategy swept unrelated same-day fees into
+ * a payroll match. That fix was made after seeing those results, so round 1
+ * is no longer clean evidence for it. Round 2 (404, 505, 606) was chosen after
+ * the fix and before anything was run on it, and is the headline.
+ */
+export const HELD_OUT_ROUND_1 = [101, 202, 303] as const;
+export const HELD_OUT_ROUND_2 = [404, 505, 606] as const;
+export const HELD_OUT_SEEDS = [...HELD_OUT_ROUND_1, ...HELD_OUT_ROUND_2] as const;
 
 function rng(seed: number) {
   let a = seed >>> 0;
@@ -80,6 +90,8 @@ export function redrawPolicies(seed: number): VendorSpec[] {
 export interface EvalCompany extends Company {
   id: string;
   split: "dev" | "held-out";
+  /** which held-out round; see HELD_OUT_SEEDS */
+  round?: 1 | 2;
   seed: number;
   /** what changes mid-run, if anything */
   drift?: GenerateOptions["drift"];
@@ -96,6 +108,7 @@ export function heldOutCompany(seed: number): EvalCompany {
   const vendors = redrawPolicies(seed);
   return {
     id: `heldout-${seed}`, split: "held-out", seed, name: `Held-out company, seed ${seed}`,
+    round: (HELD_OUT_ROUND_1 as readonly number[]).includes(seed) ? 1 : 2,
     vendors, periods: generateAll({ seed, vendors, periods: EVAL_PERIODS }),
   };
 }
@@ -117,7 +130,7 @@ export function driftCompany(): EvalCompany {
   const { seed, ...drift } = DRIFT;
   const vendors = redrawPolicies(seed);
   return {
-    id: `drift-${seed}`, split: "held-out", seed, name: `Held-out company ${seed}, policy change in April`,
+    id: `drift-${seed}`, split: "held-out", round: 1, seed, name: `Held-out company ${seed}, policy change in April`,
     vendors, drift: { ...drift, deptSplit: { ...drift.deptSplit } },
     periods: generateAll({ seed, vendors, periods: EVAL_PERIODS, drift: { ...drift, deptSplit: { ...drift.deptSplit } } }),
   };

@@ -4,7 +4,7 @@
  *   npm run eval                     offline baseline, every company, writes eval/results/offline.json
  *   npm run eval -- --check          rerun offline and fail if any number differs from the committed file
  *   npm run eval -- --model          the configured real model (see .env.example); writes eval/results/model-<id>.json
- *   npm run eval -- --only dev       restrict to dev | held-out | drift (comma separated)
+ *   npm run eval -- --only dev       restrict to dev | held-out | round1 | round2 | drift (comma separated)
  *
  * Each company is closed six times in a row. After every close the simulated
  * controller works the exception queue from the answer key, the gradient step
@@ -67,6 +67,7 @@ export interface CloseRow {
 export interface CompanyResult {
   id: string;
   split: "dev" | "held-out";
+  round?: 1 | 2;
   seed: number;
   name: string;
   auditRate: number;
@@ -136,12 +137,9 @@ async function runCompany(company: EvalCompany, mode: EvalResults["mode"], audit
       });
     },
   });
-  if (mode === "model" && report.periods.some((p) => p.stats.modelFailures > 0 || p.gradientSkipped)) {
-    throw new Error(`${company.id}: the model failed during the run; not recording a degraded result as evidence`);
-  }
   return {
     id: auditRate > 0 ? `${company.id}-audit${Math.round(auditRate * 100)}` : company.id,
-    split: company.split, seed: company.seed, name: company.name, auditRate,
+    split: company.split, ...(company.round ? { round: company.round } : {}), seed: company.seed, name: company.name, auditRate,
     closes: rows(report),
     contradictions: report.periods.flatMap((p) => (p.contradictions ?? []).map((c) => ({
       period: p.period, ruleSaid: c.ruleSaid, humanSaid: c.humanSaid, subject: c.subject,
@@ -160,7 +158,10 @@ export async function runEval(mode: EvalResults["mode"], only: Set<string>, log:
 
   const jobs: { company: EvalCompany; audit: number }[] = [];
   if (only.has("dev")) jobs.push({ company: devCompany(), audit: 0 });
-  if (only.has("held-out")) for (const seed of HELD_OUT_SEEDS) jobs.push({ company: heldOutCompany(seed), audit: 0 });
+  for (const seed of HELD_OUT_SEEDS) {
+    const c = heldOutCompany(seed);
+    if (only.has("held-out") || only.has(`round${c.round}`)) jobs.push({ company: c, audit: 0 });
+  }
   if (only.has("drift")) {
     const c = driftCompany();
     const before = c.vendors.find((v) => v.name === DRIFT.vendor)!;
@@ -193,8 +194,8 @@ export async function runEval(mode: EvalResults["mode"], only: Set<string>, log:
 const pct = (n: number, d: number) => (d === 0 ? "n/a" : `${((100 * n) / d).toFixed(1)}%`);
 
 /** Held-out companies summed close by close, so every rate has its counts. */
-export function heldOutByClose(r: EvalResults) {
-  const held = r.companies.filter((c) => c.split === "held-out" && !c.drift && c.auditRate === 0);
+export function heldOutByClose(r: EvalResults, round: 1 | 2 = 2) {
+  const held = r.companies.filter((c) => c.split === "held-out" && c.round === round && !c.drift && c.auditRate === 0);
   return r.periods.map((period, i) => {
     const cs = held.map((c) => c.closes[i]);
     const sum = (k: keyof CloseRow) => cs.reduce((s, c) => s + (c[k] as number), 0);

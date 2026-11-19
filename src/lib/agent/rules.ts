@@ -136,8 +136,15 @@ export function applyMatchingRule(rule: Rule, bank: BankLine, ws: MatchWorkspace
   };
 
   if (strategy === "same_day_settlement") {
-    const sameDay = avail.filter((e) => e.entryDate === bank.postedDate && (e.source === "ar" || e.source === "bank_fee" || e.source === "payroll"));
-    return decide([bank.externalId], sameDay, bank.amountCents);
+    // Only this vendor's lines that day, plus vendorless revenue (the gross
+    // side of a processor payout). Sweeping in every same-day fee would let an
+    // unrelated $55 wire charge hide inside a $200k payroll's tolerance.
+    const sameDay = avail.filter((e) => e.entryDate === bank.postedDate);
+    const vendorOnly = sameDay.filter((e) => e.vendorName && norm(e.vendorName) === norm(vendorName));
+    const withRevenue = [...vendorOnly, ...sameDay.filter((e) => !e.vendorName && e.source === "ar")];
+    const fits = [decide([bank.externalId], vendorOnly, bank.amountCents)];
+    if (withRevenue.length > vendorOnly.length) fits.push(decide([bank.externalId], withRevenue, bank.amountCents));
+    return pickUnambiguous(fits.filter((d): d is MatchDecision => d !== null && d.ledgerExternalIds.length > 0));
   }
 
   const mine = avail.filter((e) => e.vendorName && norm(e.vendorName) === norm(vendorName));
