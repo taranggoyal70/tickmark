@@ -15,6 +15,7 @@ import { DEPARTMENTS, ENTITY, GL_ACCOUNTS, VENDORS } from "../src/lib/seed/fixtu
 import { generateAll } from "../src/lib/seed/generate";
 import { ensureChart, ensureEntity, ensureVendors, ingestPeriod, type IngestReport } from "../src/lib/ingest/ingest";
 import { readSettlements } from "../src/lib/ingest/settlements";
+import { parseCsv } from "../src/lib/ingest/schema";
 
 const arg = (name: string) => {
   const i = process.argv.indexOf(`--${name}`);
@@ -114,18 +115,21 @@ async function customer() {
   // A processor payout is one deposit standing for gross revenue less a fee.
   // Expanding it here means the reconciler sees the three rows that actually
   // explain the deposit rather than a single unexplained credit.
-  let bankCsv = bank, ledgerCsv = ledger;
+  // Merge parsed rows, never CSV text: a statement and a settlement export
+  // have different headers, so concatenated text would misread one of them.
+  const bankRows: Record<string, string>[] = bank ? parseCsv(bank) : [];
+  const ledgerRows: Record<string, string>[] = ledger ? parseCsv(ledger) : [];
   if (settlements) {
     const processor = arg("processor") ?? "Dodo";
     const s = readSettlements(settlements, { processor });
     console.log(`  ${processor}: ${s.bank.length} settlements → ${s.ledger.length} ledger entries`);
     console.log(`  columns read as: ${Object.entries(s.mapping).map(([k, v]) => `${k}=${v}`).join(", ") || "none matched"}`);
     for (const x of s.rejected.slice(0, 6)) console.log(`      rejected settlement row ${x.row}: ${x.reason}`);
-    bankCsv = [bankCsv, csv(s.bank)].filter(Boolean).join("\n");
-    ledgerCsv = [ledgerCsv, csv(s.ledger)].filter(Boolean).join("\n");
+    bankRows.push(...s.bank);
+    ledgerRows.push(...s.ledger);
   }
 
-  const r = await ingestPeriod(entityId, period, { bank: bankCsv, ledger: ledgerCsv, invoices });
+  const r = await ingestPeriod(entityId, period, { bank: { rows: bankRows }, ledger: { rows: ledgerRows }, invoices });
   report(r);
   if (r.rejected.length) process.exit(1);
 }

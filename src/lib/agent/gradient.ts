@@ -15,7 +15,7 @@ import type { GeneratedPeriod } from "../seed/generate";
 import { distillRules, type ChartContext, type CorrectionRow, type Usage } from "./llm";
 import { DEFAULT_MODEL, type ModelId } from "./pricing";
 import { applyMatchingRule, describeAction, evaluate, type MatchWorkspace } from "./rules";
-import { semanticRuleSignature } from "./rule-signature";
+import { normalizeRuleText, semanticRuleSignature } from "./rule-signature";
 import { splitKey } from "./close";
 import type { BacktestResult, DeltaReason, EvidenceItem, Rule, Rulebook } from "./types";
 
@@ -25,6 +25,10 @@ export interface CorrectionRecord extends CorrectionRow {
   glCode?: string;
   deptSplit?: Record<string, number>;
   amountCents: number;
+  /** what the corrected line said: an invoice description or a bank narrative */
+  subjectText?: string;
+  /** for a matching correction, the shape the controller confirmed */
+  shape?: { cardinality: string; deltaReason: string | null };
 }
 
 let ruleSeq = 0;
@@ -34,6 +38,25 @@ const evidenceFor = (rows: CorrectionRecord[]): EvidenceItem[] => rows.map((c) =
   correctionId: c.id, periodCode: c.period, subjectRef: c.subject,
   quote: `agent said "${c.agentSaid}", controller set "${c.humanSaid}"${c.note ? ` - ${c.note}` : ""}`,
 }));
+
+/**
+ * The newest run of agreeing corrections. A policy that changed is not a
+ * conflict: once two corrections in a row agree on the new treatment, the older
+ * ones are superseded evidence. Corrections that disagree with each other at
+ * the head of the history still compile to nothing.
+ */
+function latestAgreeingRun<T>(rows: T[], outcome: (row: T) => string): { run: T[]; superseded: boolean } {
+  if (rows.length === 0) return { run: [], superseded: false };
+  const head = outcome(rows[rows.length - 1]);
+  let start = rows.length - 1;
+  while (start > 0 && outcome(rows[start - 1]) === head) start--;
+  return { run: rows.slice(start), superseded: start > 0 };
+}
+
+const byPeriod = <T extends { period: string }>(rows: T[]) =>
+  rows.map((row, i) => ({ row, i }))
+    .sort((a, b) => a.row.period.localeCompare(b.row.period) || a.i - b.i)
+    .map(({ row }) => row);
 
 /**
  * Compile the unambiguous part of the loss signal without asking a model to
@@ -52,10 +75,11 @@ export function compileCorrectionRules(
   }
 
   const rules: Rule[] = [];
-  for (const rows of byVendor.values()) {
+  for (const all of byVendor.values()) {
+    const { run: rows, superseded } = latestAgreeingRun(
+      byPeriod(all), (row) => `${row.glCode}|${splitKey(row.deptSplit ?? {})}`,
+    );
     if (rows.length < 2) continue;
-    const outcomes = new Set(rows.map((row) => `${row.glCode}|${splitKey(row.deptSplit ?? {})}`));
-    if (outcomes.size !== 1) continue;
 
     const first = rows[0];
     const rule: Rule = {
@@ -65,11 +89,114 @@ export function compileCorrectionRules(
       action: { type: "code", glCode: first.glCode!, deptSplit: first.deptSplit! },
       status: "proposed", version: 1, evidence: evidenceFor(rows), backtest: null,
       hitCount: 0, createdAt: new Date().toISOString(),
+      ...(superseded ? { effectiveFrom: first.period } : {}),
     };
-    rule.backtest = backtest(rule, closed);
+    // A rule replacing a superseded policy is replayed from the change on;
+    // replaying it against the old policy would only measure the old policy.
+    rule.backtest = backtest(rule, superseded ? closed.filter((p) => p.code >= first.period) : closed);
     rules.push(rule);
   }
   return rules;
+}
+
+const STRATEGIES = ["by_invoice", "same_day_settlement", "installments"] as const;
+
+/**
+ * The words two bank narratives share at the start, minus anything carrying a
+ * digit (references, amounts, phone numbers change every month).
+ */
+export function commonNarrative(texts: string[]): string {
+  const words = texts.map((t) => normalizeRuleText(t).split(" ").filter((w) => w && !/\d/.test(w)));
+  const out: string[] = [];
+  for (let i = 0; words.every((w) => i < w.length && w[i] === words[0][i]); i++) out.push(words[0][i]);
+  return out.join(" ");
+}
+
+/**
+ * Compile matching corrections the same way coding corrections are compiled:
+ * structurally, with no model. Corrections are grouped by vendor and by the
+ * narrative the bank prints, and each candidate settlement strategy is
+ * replayed against closed periods. Only the strategy the replay supports is
+ * proposed, so the shape is learned from the books rather than declared.
+ */
+export function compileMatchingRules(
+  corrections: CorrectionRecord[], closed: GeneratedPeriod[],
+): Rule[] {
+  const groups = new Map<string, CorrectionRecord[]>();
+  for (const c of corrections) {
+    if (c.kind !== "matching" || !c.vendor || !c.subjectText || !c.shape) continue;
+    const lead = normalizeRuleText(c.subjectText).split(" ")[0] ?? "";
+    if (!lead) continue;
+    const key = `${normalizeRuleText(c.vendor)}|${lead}`;
+    (groups.get(key) ?? groups.set(key, []).get(key)!).push(c);
+  }
+
+  const rules: Rule[] = [];
+  for (const rows of groups.values()) {
+    if (new Set(rows.map((r) => r.id)).size < 2) continue;
+    const narrative = commonNarrative(rows.map((r) => r.subjectText!));
+    if (narrative.length < 3) continue;
+    const reasons = rows.map((r) => r.shape!.deltaReason).filter((x): x is string => !!x);
+    const deltaReason = (reasons.sort((a, b) =>
+      reasons.filter((x) => x === b).length - reasons.filter((x) => x === a).length)[0] ?? null) as DeltaReason | null;
+
+    let best: Rule | null = null;
+    for (const strategy of STRATEGIES) {
+      const candidate: Rule = {
+        id: "candidate", kind: "matching",
+        name: `${rows[0].vendor} settles ${strategy.replace(/_/g, " ")}`,
+        predicate: [{ op: "desc_contains", value: narrative }],
+        action: { type: "match", vendorName: rows[0].vendor, strategy, deltaReason, tolerancePct: 0.02 },
+        status: "proposed", version: 1, evidence: evidenceFor(rows), backtest: null,
+        hitCount: 0, createdAt: new Date().toISOString(),
+      };
+      candidate.backtest = backtest(candidate, closed);
+      const b = candidate.backtest, a = best?.backtest;
+      if (!a || b.precision > a.precision || (b.precision === a.precision && b.wouldHaveBeenCorrect > a.wouldHaveBeenCorrect)) best = candidate;
+    }
+    if (best && best.backtest && best.backtest.wouldHaveFired > 0) rules.push({ ...best, id: nextRuleId() });
+  }
+  return rules;
+}
+
+/** A correction that a currently active rule would have decided differently. */
+export interface Contradiction { ruleId: string; correctionId: string; ruleSaid: string; humanSaid: string; subject: string }
+
+/**
+ * Find active coding rules that a later human correction contradicts. A rule
+ * is a compiled judgment; when the person whose judgment it compiled says
+ * otherwise, the rule is wrong from here on, however good its replay was.
+ */
+export function findContradictions(rb: Rulebook, corrections: CorrectionRecord[]): Contradiction[] {
+  const out: Contradiction[] = [];
+  for (const rule of rb.rules) {
+    if (rule.status !== "active" || rule.kind !== "coding" || rule.action.type !== "code") continue;
+    const ruleSaid = describeAction(rule);
+    for (const c of corrections) {
+      if (c.kind !== "coding" || !c.glCode || !c.deptSplit) continue;
+      const covered = evaluate(rule.predicate, {
+        vendorName: c.vendor, description: `${c.vendor} ${c.subjectText ?? ""}`, amountCents: c.amountCents,
+      });
+      if (!covered) continue;
+      const humanSaid = `${c.glCode}|${splitKey(c.deptSplit)}`;
+      if (humanSaid !== ruleSaid) out.push({ ruleId: rule.id, correctionId: c.id, ruleSaid, humanSaid, subject: c.subject });
+    }
+  }
+  return out;
+}
+
+/** Disable every rule a correction contradicted. The rule stays on file. */
+export function suspendContradicted(rb: Rulebook, contradictions: Contradiction[]): Rulebook {
+  if (contradictions.length === 0) return rb;
+  const by = new Map<string, string>();
+  for (const c of contradictions) if (!by.has(c.ruleId)) by.set(c.ruleId, c.correctionId);
+  const now = new Date().toISOString();
+  return {
+    version: rb.version + 1,
+    rules: rb.rules.map((r) => (by.has(r.id) && r.status === "active"
+      ? { ...r, status: "disabled", suspendedBy: by.get(r.id), suspendedAt: now }
+      : r)),
+  };
 }
 
 /** Shape a model proposal into a Rule. Returns null if it is internally invalid. */
@@ -219,7 +346,7 @@ export async function gradientStep(
   }
 
   const signatures = new Set(out.map(semanticRuleSignature));
-  for (const compiled of compileCorrectionRules(corrections, closed)) {
+  for (const compiled of [...compileCorrectionRules(corrections, closed), ...compileMatchingRules(corrections, closed)]) {
     const signature = semanticRuleSignature(compiled);
     if (signatures.has(signature)) continue;
     signatures.add(signature);

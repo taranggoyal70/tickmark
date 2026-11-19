@@ -12,6 +12,7 @@ import { DEFAULT_MODEL, costMicros, type ModelId } from "./pricing";
 import { effectiveModelId, resolveModel } from "./provider";
 import { telemetryFor, type TraceContext } from "./tracing";
 import { clip, toonTable, usd } from "./toon";
+import { envNumber } from "../env";
 import type { ApInvoice, BankLine, DeltaReason, LedgerEntry } from "./types";
 
 export interface Usage { tokensIn: number; tokensOut: number; costMicros: number; calls: number }
@@ -58,8 +59,8 @@ const generationBounds = () => ({
   // A malformed local model must not hold the close indefinitely. Hosted
   // providers normally finish well inside this ceiling; slower endpoints can
   // override both values explicitly.
-  maxOutputTokens: Number(process.env.TICKMARK_MAX_OUTPUT_TOKENS ?? 4096),
-  abortSignal: AbortSignal.timeout(Number(process.env.TICKMARK_MODEL_TIMEOUT_MS ?? 300_000)),
+  maxOutputTokens: envNumber("TICKMARK_MAX_OUTPUT_TOKENS", 4096, { min: 1, integer: true }),
+  abortSignal: AbortSignal.timeout(envNumber("TICKMARK_MODEL_TIMEOUT_MS", 300_000, { min: 1, integer: true })),
 });
 
 // ── invoice coding ───────────────────────────────────────────────────────────

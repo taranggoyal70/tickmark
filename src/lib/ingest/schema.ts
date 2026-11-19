@@ -9,27 +9,65 @@ import { z } from "zod";
  * parsing inconvenience.
  */
 
-/** "1,234.56", "(1,234.56)", "-1234.56", "$1,234.56" -> integer cents. */
+/**
+ * "1,234.56", "(1,234.56)", "-1234.56", "$1,234.56" -> integer cents.
+ *
+ * Parsed from the digits, never through a float: `Number("1234.57") * 100` is
+ * 123456.99999999999, and money must not depend on how that rounds. An amount
+ * with a non-zero third decimal place is refused rather than rounded, because a
+ * fraction of a cent on a bank line means the column is not what we think it
+ * is. Blank means zero; a lone symbol does not.
+ */
 export function parseMoneyCents(raw: string): number {
   const s = String(raw).trim();
   if (!s) return 0;
-  const negative = /^\(.*\)$/.test(s) || s.startsWith("-");
-  const digits = s.replace(/[()$,\s]/g, "").replace(/^-/, "");
-  if (!/^\d*(\.\d+)?$/.test(digits)) throw new Error(`not an amount: "${raw}"`);
-  const cents = Math.round(Number(digits || "0") * 100);
-  return negative ? -cents : cents;
+  const parenthesised = /^\(.*\)$/.test(s);
+  let body = (parenthesised ? s.slice(1, -1) : s).replace(/[\s$,]/g, "");
+  let negative = parenthesised;
+  if (body.startsWith("-")) {
+    if (parenthesised) throw new Error(`not an amount: "${raw}"`);
+    negative = true;
+    body = body.slice(1);
+  } else if (body.startsWith("+")) {
+    body = body.slice(1);
+  }
+  const m = /^(\d*)(?:\.(\d*))?$/.exec(body);
+  if (!m || (m[1] === "" && !m[2])) throw new Error(`not an amount: "${raw}"`);
+  // "12.3400" is an export padding to four places, not a fraction of a cent
+  const fraction = (m[2] ?? "").replace(/^(\d{2})0+$/, "$1");
+  if (fraction.length > 2) throw new Error(`more than two decimal places: "${raw}"`);
+  const whole = m[1] === "" ? 0 : Number(m[1]);
+  const cents = whole * 100 + Number(fraction.padEnd(2, "0") || "0");
+  if (!Number.isSafeInteger(cents)) throw new Error(`amount out of range: "${raw}"`);
+  return negative && cents !== 0 ? -cents : cents;
 }
 
-/** Accepts ISO, US and dotted forms; always yields ISO. */
+const isoOf = (y: number, m: number, d: number): string | null => {
+  const t = new Date(Date.UTC(y, m - 1, d));
+  if (t.getUTCFullYear() !== y || t.getUTCMonth() !== m - 1 || t.getUTCDate() !== d) return null;
+  return t.toISOString().slice(0, 10);
+};
+
+/**
+ * Accepts ISO (2026-04-30), US (4/30/2026, 04.30.2026) and spelled-out
+ * (30 Apr 2026, Apr 30, 2026) forms; always yields ISO. An impossible calendar
+ * date such as 2026-02-31 is refused instead of rolling into March, and nothing
+ * is read through the host's time zone.
+ */
 export function parseDate(raw: string): string {
   const s = String(raw).trim();
-  const iso = /^(\d{4})-(\d{2})-(\d{2})$/.exec(s);
-  if (iso) return s;
+  const fail = () => new Error(`not a date: "${raw}"`);
+  const iso = /^(\d{4})-(\d{2})-(\d{2})(?:[T ][\d:.]+(?:Z|[+-]\d{2}:?\d{2})?)?$/.exec(s);
+  if (iso) return isoOf(+iso[1], +iso[2], +iso[3]) ?? (() => { throw fail(); })();
   const us = /^(\d{1,2})[/.](\d{1,2})[/.](\d{4})$/.exec(s);
-  if (us) return `${us[3]}-${us[1].padStart(2, "0")}-${us[2].padStart(2, "0")}`;
-  const d = new Date(s);
-  if (Number.isNaN(d.getTime())) throw new Error(`not a date: "${raw}"`);
-  return d.toISOString().slice(0, 10);
+  if (us) return isoOf(+us[3], +us[1], +us[2]) ?? (() => { throw fail(); })();
+  const MONTHS = ["jan", "feb", "mar", "apr", "may", "jun", "jul", "aug", "sep", "oct", "nov", "dec"];
+  const month = (w: string) => MONTHS.indexOf(w.slice(0, 3).toLowerCase()) + 1;
+  const dmy = /^(\d{1,2})[\s-]([A-Za-z]{3,9})\.?[\s-],?\s*(\d{4})$/.exec(s);
+  if (dmy && month(dmy[2])) return isoOf(+dmy[3], month(dmy[2]), +dmy[1]) ?? (() => { throw fail(); })();
+  const mdy = /^([A-Za-z]{3,9})\.?\s+(\d{1,2}),?\s+(\d{4})$/.exec(s);
+  if (mdy && month(mdy[1])) return isoOf(+mdy[3], month(mdy[1]), +mdy[2]) ?? (() => { throw fail(); })();
+  throw fail();
 }
 
 const money = z.string().transform((v, ctx) => {

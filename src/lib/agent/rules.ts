@@ -142,29 +142,39 @@ export function applyMatchingRule(rule: Rule, bank: BankLine, ws: MatchWorkspace
 
   const mine = avail.filter((e) => e.vendorName && norm(e.vendorName) === norm(vendorName));
 
+  // Every way this line could be explained, not the first one that fits. Two
+  // invoices from one vendor are often within tolerance of each other, and
+  // taking whichever comes first would tickmark the wrong one unattended.
+  const fits: MatchDecision[] = [];
+  const consider = (d: MatchDecision | null) => { if (d) fits.push(d); };
+
   if (strategy === "installments") {
-    const sibling = ws.bankLines.find(
+    const siblings = ws.bankLines.filter(
       (b) => b.externalId !== bank.externalId && !ws.consumedBank.has(b.externalId) &&
              evaluate(rule.predicate, { description: b.description, amountCents: b.amountCents }) &&
              daysBetween(b.postedDate, bank.postedDate) <= 12,
     );
     for (const group of groupByMemo(mine)) {
-      if (sibling) {
-        const d = decide([bank.externalId, sibling.externalId], group, bank.amountCents + sibling.amountCents);
-        if (d) return d;
+      for (const sibling of siblings) {
+        consider(decide([bank.externalId, sibling.externalId], group, bank.amountCents + sibling.amountCents));
       }
-      const single = decide([bank.externalId], group, bank.amountCents);
-      if (single) return single;
+      consider(decide([bank.externalId], group, bank.amountCents));
     }
-    return null;
+  } else {
+    // by_invoice
+    for (const group of groupByMemo(mine)) consider(decide([bank.externalId], group, bank.amountCents));
   }
+  return pickUnambiguous(fits);
+}
 
-  // by_invoice
-  for (const group of groupByMemo(mine)) {
-    const d = decide([bank.externalId], group, bank.amountCents);
-    if (d) return d;
-  }
-  return null;
+/**
+ * One candidate: take it. Several: take the single exact tie-out if there is
+ * exactly one. Otherwise the rule cannot tell them apart, and a person must.
+ */
+export function pickUnambiguous(fits: MatchDecision[]): MatchDecision | null {
+  if (fits.length === 1) return fits[0];
+  const exact = fits.filter((f) => f.amountDeltaCents === 0);
+  return exact.length === 1 ? exact[0] : null;
 }
 
 export function applyMatchingRules(rb: Rulebook, bank: BankLine, ws: MatchWorkspace): MatchDecision | null {

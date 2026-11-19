@@ -12,11 +12,13 @@ const CAUSE_LABEL: Record<string, string> = {
   policy_requires_human: "Policy", no_candidate: "No match found",
   unverified_model_judgment: "Needs human evidence",
   ambiguous_candidates: "Ambiguous",
+  model_unavailable: "Model unavailable", audit_sample: "Audit sample",
 };
 const CAUSE_BADGE: Record<string, string> = {
   over_materiality: "warn", low_confidence: "bad", policy_requires_human: "human",
   unverified_model_judgment: "human",
   no_candidate: "neutral", ambiguous_candidates: "warn",
+  model_unavailable: "warn", audit_sample: "human",
 };
 
 export default async function ExceptionsPage() {

@@ -33,10 +33,13 @@ export function controllerReview(period: GeneratedPeriod, run: CloseRunResult): 
         vendor: inv?.vendorName ?? "", agentSaid, humanSaid,
         note: agentSaid === humanSaid ? "confirmed" : "recoded",
         glCode: t.glCode, deptSplit: t.deptSplit, amountCents: inv?.amountCents ?? 0,
+        subjectText: inv?.description,
       });
     } else if (ex.subjectType === "bank_line") {
-      const truth = period.truth.matches.find((m) => m.bankExternalIds.includes(ex.subjectRef));
-      const bank = period.bankLines.find((b) => b.externalId === ex.subjectRef);
+      // a match spanning several statement lines is referred to as "A+B"
+      const lead = ex.subjectRef.split("+")[0];
+      const truth = period.truth.matches.find((m) => m.bankExternalIds.includes(lead));
+      const bank = period.bankLines.find((b) => b.externalId === lead);
       if (!truth) {
         // a genuine timing difference: the controller carries it forward, and
         // that is the correct answer, not a miss
@@ -44,6 +47,7 @@ export function controllerReview(period: GeneratedPeriod, run: CloseRunResult): 
           id: id(), kind: "matching", period: period.code, subject: ex.subjectRef,
           vendor: "", agentSaid: "unmatched", humanSaid: "timing difference - carry forward",
           note: "on the bank, not yet in the ledger", amountCents: bank?.amountCents ?? 0,
+          subjectText: bank?.description,
         });
         continue;
       }
@@ -58,6 +62,8 @@ export function controllerReview(period: GeneratedPeriod, run: CloseRunResult): 
         humanSaid: `${truth.cardinality} against ${truth.ledgerExternalIds.length} ledger line(s)${truth.deltaReason ? `, residual is ${truth.deltaReason}` : ""}`,
         note: truth.deltaReason ? `difference is ${truth.deltaReason}, not an error` : "clean tie-out",
         amountCents: bank?.amountCents ?? 0,
+        subjectText: bank?.description,
+        shape: { cardinality: truth.cardinality, deltaReason: truth.deltaReason },
       });
     } else if (ex.subjectType === "accrual") {
       const t = period.truth.expectedAccruals.find((a) => a.vendorName === ex.subjectRef);

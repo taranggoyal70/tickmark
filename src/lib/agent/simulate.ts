@@ -5,16 +5,19 @@
  * see.
  */
 import { generateAll, type GeneratedPeriod } from "../seed/generate";
-import { DEPARTMENTS, ENTITY, GL_ACCOUNTS, VENDORS } from "../seed/fixture";
-import { runClose } from "./close";
+import { DEPARTMENTS, ENTITY, GL_ACCOUNTS, VENDORS, type VendorSpec } from "../seed/fixture";
+import { codingIsCorrect, matchIsCorrect, runClose } from "./close";
 import { controllerReview, touchSeconds } from "./controller";
-import { applyToRulebook, gradientStep, wouldAdopt, type CorrectionRecord } from "./gradient";
+import {
+  applyToRulebook, findContradictions, gradientStep, suspendContradicted, wouldAdopt,
+  type Contradiction, type CorrectionRecord,
+} from "./gradient";
 import { zeroUsage, type ChartContext, type VendorHistoryRow } from "./llm";
 import { DEFAULT_MODEL, type ModelId } from "./pricing";
 import { effectiveModelId } from "./provider";
 import { emptyRulebook } from "./rules";
 import { splitKey } from "./close";
-import type { ClosePeriodData, Exception, Rule, RunStats } from "./types";
+import type { ClosePeriodData, Exception, Rule, Rulebook, RunStats } from "./types";
 
 export const CHART: ChartContext = {
   accounts: GL_ACCOUNTS.map((a) => ({ code: a.code, name: a.name, type: a.type })),
@@ -39,9 +42,9 @@ function vendorHistory(closed: GeneratedPeriod[]): VendorHistoryRow[] {
   return [...agg.values()].sort((a, b) => b.timesSeen - a.timesSeen);
 }
 
-function recurringHistory(closed: GeneratedPeriod[]): Record<string, number[]> {
+function recurringHistory(closed: GeneratedPeriod[], vendors: VendorSpec[]): Record<string, number[]> {
   const out: Record<string, number[]> = {};
-  const recurring = new Set(VENDORS.filter((v) => v.recurring && v.cadence === "monthly" && !v.quirk).map((v) => v.name));
+  const recurring = new Set(vendors.filter((v) => v.recurring && v.cadence === "monthly" && !v.quirk).map((v) => v.name));
   for (const p of closed) {
     for (const inv of p.apInvoices) {
       if (!recurring.has(inv.vendorName)) continue;
@@ -79,8 +82,37 @@ export interface PeriodReport {
   touchSeconds: number;
   proposals: { name: string; kind: string; adopted: boolean; duplicate?: boolean; precision: number; fired: number; evidence: number }[];
   gradientCostMicros: number;
+  /** model calls and tokens spent by the gradient step, separate from the close */
+  gradientCalls?: number;
+  gradientTokensIn?: number;
+  gradientTokensOut?: number;
   /** The close completed, but no new rules were distilled because the model was unavailable. */
   gradientSkipped?: boolean;
+  /** exact counts against the answer key; absent when the books carry none */
+  measure?: PeriodMeasure;
+  /** corrections this period that an active rule would have decided differently */
+  contradictions?: Contradiction[];
+  /** rules disabled because a correction contradicted them */
+  suspended?: string[];
+}
+
+/** Counts, not ratios, so any rate in a report can be recomputed from them. */
+export interface PeriodMeasure {
+  invoices: number;
+  codingCorrect: number;
+  codingByRule: number;
+  codingByRuleCorrect: number;
+  truthMatches: number;
+  matchCorrect: number;
+  matchByRule: number;
+  matchByRuleCorrect: number;
+  bankLines: number;
+  /** codings and matches proposed, by rule or by model */
+  decisions: number;
+  /** lines tickmarked with nobody looking */
+  cleared: number;
+  /** of those, how many were wrong against the answer key */
+  clearedWrong: number;
 }
 
 export interface SimulationReport {
@@ -178,10 +210,62 @@ function frames(period: ClosePeriodData, run: Awaited<ReturnType<typeof runClose
   return out.sort((a, b) => (a.ref.charCodeAt(a.ref.length - 1) % 7) - (b.ref.charCodeAt(b.ref.length - 1) % 7));
 }
 
-export async function simulate(opts: { model?: ModelId; provenance?: "model" | "mock"; onProgress?: (m: string) => void } = {}): Promise<SimulationReport> {
+/** A company to close, month after month. Defaults to the bundled one. */
+export interface Company {
+  name: string;
+  periods: GeneratedPeriod[];
+  vendors: VendorSpec[];
+}
+
+export interface SimulateOptions {
+  model?: ModelId;
+  provenance?: "model" | "mock";
+  onProgress?: (m: string) => void;
+  company?: Company;
+  /** share of rule decisions sent for a spot-check; see CloseInput.auditRate */
+  auditRate?: number;
+  /** disable a rule as soon as a correction contradicts it (default true) */
+  suspendOnContradiction?: boolean;
+  /** called after each close, before learning from it; for measurement only */
+  onClose?: (period: GeneratedPeriod, run: Awaited<ReturnType<typeof runClose>>, rulebook: Rulebook) => void;
+}
+
+function measureRun(period: GeneratedPeriod, run: Awaited<ReturnType<typeof runClose>>): PeriodMeasure {
+  const clearedRefs = new Set(run.tickmarks.map((t) => `${t.subjectType}:${t.subjectRef}`));
+  let cleared = 0, clearedWrong = 0;
+  for (const c of run.codings) {
+    if (!clearedRefs.has(`ap_invoice:${c.invoiceNumber}`)) continue;
+    cleared++;
+    if (!codingIsCorrect(period, c)) clearedWrong++;
+  }
+  for (const m of run.matches) {
+    if (!clearedRefs.has(`bank_line:${m.bankExternalIds.join("+")}`)) continue;
+    cleared++;
+    if (!matchIsCorrect(period, m)) clearedWrong++;
+  }
+  const byRuleC = run.codings.filter((c) => c.decidedBy === "rule");
+  const byRuleM = run.matches.filter((m) => m.decidedBy === "rule");
+  return {
+    invoices: period.apInvoices.length,
+    codingCorrect: run.codings.filter((c) => codingIsCorrect(period, c)).length,
+    codingByRule: byRuleC.length,
+    codingByRuleCorrect: byRuleC.filter((c) => codingIsCorrect(period, c)).length,
+    truthMatches: period.truth.matches.length,
+    matchCorrect: run.matches.filter((m) => matchIsCorrect(period, m)).length,
+    matchByRule: byRuleM.length,
+    matchByRuleCorrect: byRuleM.filter((m) => matchIsCorrect(period, m)).length,
+    bankLines: period.bankLines.length,
+    decisions: run.codings.length + run.matches.length,
+    cleared, clearedWrong,
+  };
+}
+
+export async function simulate(opts: SimulateOptions = {}): Promise<SimulationReport> {
   const model = opts.model ?? DEFAULT_MODEL;
   const log = opts.onProgress ?? (() => {});
-  const all = generateAll();
+  const company = opts.company ?? { name: ENTITY.name, periods: generateAll(), vendors: VENDORS };
+  const all = company.periods;
+  const suspend = opts.suspendOnContradiction ?? true;
 
   let rulebook = emptyRulebook();
   const closed: GeneratedPeriod[] = [];
@@ -196,13 +280,24 @@ export async function simulate(opts: { model?: ModelId; provenance?: "model" | "
     const run = await runClose({
       period, rulebook, chart: CHART,
       history: vendorHistory(closed),
-      recurringHistory: recurringHistory(closed),
+      recurringHistory: recurringHistory(closed, company.vendors),
       autoThreshold: ENTITY.autoTickmarkThreshold,
       model,
+      auditRate: opts.auditRate,
     });
 
+    opts.onClose?.(period, run, rulebook);
     const corrections: CorrectionRecord[] = controllerReview(period, run);
     correctionHistory.push(...corrections);
+
+    // A correction that overrules an active rule disables it before anything
+    // is learned from this period: the rule must not decide the next close.
+    const contradictions = findContradictions(rulebook, corrections);
+    const suspendedIds = suspend ? [...new Set(contradictions.map((c) => c.ruleId))] : [];
+    if (suspend && contradictions.length) {
+      rulebook = suspendContradicted(rulebook, contradictions);
+      log(`  ${suspendedIds.length} rule(s) suspended: a correction contradicted them`);
+    }
     log(`  cleared ${(run.stats.autoClearRate * 100).toFixed(0)}% · ${run.exceptions.length} exceptions · ${run.stats.llmCalls} llm calls · $${(run.stats.costMicros / 1e6).toFixed(4)}`);
 
     let gradientSkipped = false;
@@ -252,7 +347,13 @@ export async function simulate(opts: { model?: ModelId; provenance?: "model" | "
       corrections: corrections.length,
       touchSeconds: touch,
       gradientCostMicros: grad.usage.costMicros,
+      gradientCalls: grad.usage.calls,
+      gradientTokensIn: grad.usage.tokensIn,
+      gradientTokensOut: grad.usage.tokensOut,
       gradientSkipped,
+      measure: measureRun(period, run),
+      contradictions,
+      suspended: suspendedIds,
       proposals: grad.proposals.map((p) => ({
         name: p.name, kind: p.kind, adopted: activated.has(p.id), duplicate: duplicates.has(p.id),
         precision: p.backtest?.precision ?? 0, fired: p.backtest?.wouldHaveFired ?? 0,
@@ -265,7 +366,7 @@ export async function simulate(opts: { model?: ModelId; provenance?: "model" | "
 
   return {
     provenance: opts.provenance ?? "model",
-    model: opts.provenance === "mock" ? model : effectiveModelId(model), generatedAt: new Date().toISOString(), entity: ENTITY.name,
+    model: opts.provenance === "mock" ? model : effectiveModelId(model), generatedAt: new Date().toISOString(), entity: company.name,
     periods: reports, rulebook: rulebook.rules, totals,
   };
 }

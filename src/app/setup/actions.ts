@@ -3,7 +3,7 @@
 import { auth } from "@clerk/nextjs/server";
 import { revalidatePath } from "next/cache";
 import { ensureChart, ensureEntity, ensureVendors, ingestPeriod } from "@/lib/ingest/ingest";
-import { parseCsv } from "@/lib/ingest/schema";
+import { parseCsv, parseMoneyCents } from "@/lib/ingest/schema";
 import { readSettlements } from "@/lib/ingest/settlements";
 import { ACCRUED_LIABILITIES, STARTER_CHART, STARTER_DEPARTMENTS } from "@/lib/ingest/starter-chart";
 
@@ -37,13 +37,21 @@ export async function importPeriodAction(form: FormData): Promise<ImportOutcome>
   const entityName = String(form.get("entity") ?? "").trim();
   const period = String(form.get("period") ?? "").trim();
   if (!entityName) return { ok: false, message: "Give the entity a name." };
-  if (!/^\d{4}-\d{2}$/.test(period)) return { ok: false, message: "Period must look like 2026-05." };
+  if (entityName.length > 120) return { ok: false, message: "Keep the entity name under 120 characters." };
+  if (!/^\d{4}-(0[1-9]|1[0-2])$/.test(period)) return { ok: false, message: "Period must look like 2026-05." };
 
-  const materiality = Math.round(Number(form.get("materiality") ?? 25000) * 100);
+  // Read as money, not as a float: a materiality threshold is a control.
+  let materiality: number;
+  try {
+    materiality = parseMoneyCents(String(form.get("materiality") ?? "").trim() || "25000");
+  } catch {
+    return { ok: false, message: "Materiality must be a dollar amount, like 25000." };
+  }
+  if (materiality <= 0) return { ok: false, message: "Materiality must be greater than zero." };
   const warnings: string[] = [];
 
   try {
-    const entityId = await ensureEntity(entityName, { materialityCents: materiality || 2_500_000 });
+    const entityId = await ensureEntity(entityName, { materialityCents: materiality });
 
     // ── chart of accounts ────────────────────────────────────────────────────
     const chartCsv = await text(form.get("chart"));
@@ -98,20 +106,18 @@ export async function importPeriodAction(form: FormData): Promise<ImportOutcome>
     // A payout is one deposit standing for gross revenue less a fee. Expanding
     // it means the reconciler sees what explains the deposit instead of an
     // unexplained credit for someone to chase.
-    let bankCsv = await text(form.get("bank"));
-    let ledgerCsv = await text(form.get("ledger"));
+    const bankCsv = await text(form.get("bank"));
+    const ledgerCsv = await text(form.get("ledger"));
+    const bankRows: Record<string, string>[] = bankCsv ? parseCsv(bankCsv) : [];
+    const ledgerRows: Record<string, string>[] = ledgerCsv ? parseCsv(ledgerCsv) : [];
     const settlementsCsv = await text(form.get("settlements"));
     if (settlementsCsv) {
-      const processor = String(form.get("processor") ?? "").trim() || "Dodo";
+      const processor = String(form.get("processor") ?? "").trim().slice(0, 40) || "Dodo";
       const st = readSettlements(settlementsCsv, { processor });
-      const toCsv = (rows: Record<string, string>[]) => {
-        if (!rows.length) return "";
-        const head = Object.keys(rows[0]);
-        const cell = (v: string) => (/[",\n]/.test(v) ? `"${v.replace(/"/g, '""')}"` : v);
-        return [head.join(","), ...rows.map((r) => head.map((h) => cell(r[h] ?? "")).join(","))].join("\n");
-      };
-      bankCsv = [bankCsv, toCsv(st.bank)].filter(Boolean).join("\n");
-      ledgerCsv = [ledgerCsv, toCsv(st.ledger)].filter(Boolean).join("\n");
+      // Merge parsed rows, never CSV text: the user's statement and the
+      // settlement export have different headers and column orders.
+      bankRows.push(...st.bank);
+      ledgerRows.push(...st.ledger);
       warnings.push(
         `${processor}: ${st.bank.length} settlements expanded into deposits, revenue and fees` +
         (st.rejected.length ? `; ${st.rejected.length} refused (${st.rejected[0].reason})` : ""),
@@ -120,8 +126,8 @@ export async function importPeriodAction(form: FormData): Promise<ImportOutcome>
 
     // ── the books ───────────────────────────────────────────────────────────
     const report = await ingestPeriod(entityId, period, {
-      bank: bankCsv,
-      ledger: ledgerCsv,
+      bank: { rows: bankRows },
+      ledger: { rows: ledgerRows },
       invoices: invoicesCsv,
     });
 

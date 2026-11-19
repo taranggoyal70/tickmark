@@ -12,6 +12,8 @@ const CAUSE: Record<string, { badge: string; label: string; why: string }> = {
   policy_requires_human: { badge: "human",   label: "Policy",            why: "A standing rule sends this class of item to a person every time." },
   no_candidate:          { badge: "neutral", label: "No match found",    why: "On the bank, nothing in the ledger explains it. Usually a timing difference." },
   ambiguous_candidates:  { badge: "warn",    label: "Ambiguous",         why: "More than one credible answer. Forcing a pick here would be guessing." },
+  model_unavailable:     { badge: "warn",    label: "Model unavailable", why: "The model could not be reached. The Rulebook still ran; this one needs a person." },
+  audit_sample:          { badge: "human",   label: "Audit sample",      why: "A rule decided this. A sample of rule decisions is checked so a rule that went stale gets caught." },
 };
 
 function ProposalLine({ item }: { item: QueueItem }) {
