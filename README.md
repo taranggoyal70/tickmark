@@ -161,26 +161,25 @@ Earlier real-model evidence, from a four-period run on `llama3.2:1b`, is in
 
 ```mermaid
 flowchart TB
-  subgraph In["Ingest"]
+  subgraph In["1 · Ingest"]
     direction LR
     CSV["Bank, GL, AP and<br>settlement CSVs"] --> Parse["Strict parser<br>integer cents, real dates"]
   end
-  subgraph Close["Close run"]
+  subgraph Close["2 · Close run"]
     direction LR
-    Rules["Rulebook pass<br>zero model calls"] --> Model["Model pass<br>residue only, TOON-encoded"]
-    Model --> Gate{"The gate"}
+    Rules["Rulebook pass<br>zero model calls"] --> Model["Model pass<br>residue only"] --> Gate["The gate<br>who may clear what"]
   end
-  subgraph Learn["Learning loop"]
+  subgraph Out["3 · Outcome"]
     direction LR
-    Queue["Exception queue"] --> Corr["Corrections"]
-    Corr --> Grad["Gradient step<br>propose and backtest"]
-    Grad --> Human["Controller adopts<br>or rejects"]
+    Tick["Tickmark<br>rule decision under the ceiling"]
+    Queue["Exception queue<br>model suggestions, materiality,<br>audit samples, ambiguity"]
   end
-  In --> Close
-  Gate -- "rule, under the ceiling" --> Tick["Tickmark<br>append-only, with evidence"]
-  Gate -- "model suggestion, over materiality,<br>audit sample, ambiguity" --> Queue
-  Human --> Rulebook[("Rulebook<br>versioned")]
-  Rulebook --> Rules
+  subgraph Learn["4 · Learning loop"]
+    direction LR
+    Corr["Corrections"] --> Grad["Gradient step<br>propose and backtest"] --> Human["Controller<br>adopts or rejects"] --> Book[("Rulebook<br>versioned")]
+  end
+  In --> Close --> Out --> Learn
+  Learn -. "the next close starts here" .-> Close
 ```
 
 1. **Ingest.** Every book, including the bundled sample, enters through the same CSV path. Headers
