@@ -39,7 +39,7 @@
     "date-fns": "^4.4.0",
     "lucide-react": "^1.41.0",
     "neatlogs": "^1.1.19",
-    "next": "16.3.4",
+    "next": "16.4.6",
     "react": "19.2.8",
     "react-dom": "19.2.8",
     "tailwind-merge": "^3.6.0",
@@ -51,7 +51,7 @@
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "eslint": "^9",
-    "eslint-config-next": "16.3.4",
+    "eslint-config-next": "16.4.6",
     "tailwindcss": "^4",
     "tsx": "^4.23.13",
     "typescript": "^5"
