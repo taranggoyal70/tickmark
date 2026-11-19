@@ -191,7 +191,8 @@ export async function runEval(mode: EvalResults["mode"], only: Set<string>, log:
 
 // ── summaries ────────────────────────────────────────────────────────────────
 
-const pct = (n: number, d: number) => (d === 0 ? "n/a" : `${((100 * n) / d).toFixed(1)}%`);
+/** One decimal, truncated: a reported share is never rounded up. */
+const pct = (n: number, d: number) => (d === 0 ? "n/a" : `${(Math.floor((1000 * n) / d) / 10).toFixed(1)}%`);
 
 /** Held-out companies summed close by close, so every rate has its counts. */
 export function heldOutByClose(r: EvalResults, round: 1 | 2 = 2) {
