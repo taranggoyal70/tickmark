@@ -1,0 +1,56 @@
+{
+  "source": "eval/results/offline.json via heldOutByClose(results, 2)",
+  "mode": "offline-baseline",
+  "tokenCounts": "estimated (characters / 4)",
+  "companies": 3,
+  "closes": [
+    {
+      "period": "2026-01",
+      "modelCalls": 24,
+      "settledByRule": 0,
+      "decisionsToMake": 234,
+      "cleared": 0,
+      "clearedWrong": 0
+    },
+    {
+      "period": "2026-02",
+      "modelCalls": 24,
+      "settledByRule": 0,
+      "decisionsToMake": 244,
+      "cleared": 0,
+      "clearedWrong": 0
+    },
+    {
+      "period": "2026-03",
+      "modelCalls": 15,
+      "settledByRule": 123,
+      "decisionsToMake": 240,
+      "cleared": 123,
+      "clearedWrong": 0
+    },
+    {
+      "period": "2026-04",
+      "modelCalls": 9,
+      "settledByRule": 185,
+      "decisionsToMake": 234,
+      "cleared": 185,
+      "clearedWrong": 0
+    },
+    {
+      "period": "2026-05",
+      "modelCalls": 12,
+      "settledByRule": 187,
+      "decisionsToMake": 248,
+      "cleared": 187,
+      "clearedWrong": 0
+    },
+    {
+      "period": "2026-06",
+      "modelCalls": 9,
+      "settledByRule": 182,
+      "decisionsToMake": 236,
+      "cleared": 182,
+      "clearedWrong": 0
+    }
+  ]
+}

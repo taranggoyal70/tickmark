@@ -12,6 +12,7 @@
     "eval": "tsx eval/run.ts",
     "eval:model": "tsx --env-file-if-exists=.env.local eval/run.ts --model",
     "readme:assets": "tsx scripts/readme-assets.ts",
+    "changelog": "tsx scripts/changelog.ts",
     "typecheck": "next typegen && tsc --noEmit",
     "selftest": "tsx --env-file-if-exists=.env.local scripts/selftest.ts",
     "check": "tsx --env-file-if-exists=.env.local scripts/probe.ts",
