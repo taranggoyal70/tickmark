@@ -16,6 +16,7 @@ Tickmark has no tagged releases yet; changes are grouped by month, newest first.
 
 ### Fixed
 
+- **auth:** Theme Clerk widgets light and dark (2793881)
 - **model:** Route api.openai.com through OpenAI's own provider (e75470c)
 - **eval:** Truncate reported shares instead of rounding them (dd5d7c4)
 - **deps:** Pin neatlogs to 1.1.19 (f84a1cf)
@@ -25,6 +26,7 @@ Tickmark has no tagged releases yet; changes are grouped by month, newest first.
 
 ### Maintenance
 
+- Regenerate CHANGELOG.md (8718202)
 - **readme:** Retheme graphics and add app screenshots (7a8f328)
 - **eval:** Move result types into eval/summary.ts (557e51a)
 - Regenerate CHANGELOG.md (c67c4d8)
