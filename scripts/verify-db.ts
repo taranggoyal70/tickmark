@@ -116,8 +116,8 @@ async function main() {
     if (proposals?.length === 2) {
       const firstRuleId = String(proposals[0].id);
       const duplicateRuleId = String(proposals[1].id);
-      await adoptRule(firstRuleId, "Controller A", true);
-      const outcome = await adoptRule(duplicateRuleId, "Controller B", true);
+      await adoptRule(firstRuleId, "Controller A", true, [entityId]);
+      const outcome = await adoptRule(duplicateRuleId, "Controller B", true, [entityId]);
       const { data: adopted } = await db.from("rules")
         .select("id, status, evidence, duplicate_of, adopted_by")
         .in("id", [firstRuleId, duplicateRuleId]);

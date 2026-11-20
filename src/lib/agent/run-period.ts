@@ -213,7 +213,7 @@ export async function persistRun(
       if (!expense || !accrued) return [];
       return [{
         entity_id: entityId, period_id: periodId, close_run_id: closeRunId,
-        kind: "accrual", memo: `Accrue ${a.vendorName} — ${a.reasoning ?? "recurring cost not yet invoiced"}`,
+        kind: "accrual", memo: `Accrue ${a.vendorName}: ${a.reasoning ?? "recurring cost not yet invoiced"}`,
         lines: [
           { gl_account_id: expense, debit_cents: a.amountCents, credit_cents: 0 },
           { gl_account_id: accrued, debit_cents: 0, credit_cents: a.amountCents },
@@ -231,12 +231,16 @@ export async function persistRun(
   return { closeRunId, tickmarks: result.tickmarks.length, exceptions: result.exceptions.length, journalEntries };
 }
 
-/** Load, run, persist. The whole close, on real books. */
-export async function closePeriod(entityName: string, code: string, model: ModelId = DEFAULT_MODEL) {
+/**
+ * Load, run, persist. The whole close, on real books.
+ *
+ * Takes an entity id, never a name: names are not unique across customers.
+ * The caller decides who may close what (src/lib/access.ts).
+ */
+export async function closePeriod(entityId: string, code: string, model: ModelId = DEFAULT_MODEL) {
   const c = db();
-  const { data: ent } = await c.from("entities").select("id, auto_tickmark_threshold").eq("name", entityName).maybeSingle();
-  if (!ent) throw new Error(`no entity named "${entityName}" — ingest its books first`);
-  const entityId = ent.id as string;
+  const { data: ent } = await c.from("entities").select("id, auto_tickmark_threshold").eq("id", entityId).maybeSingle();
+  if (!ent) throw new Error("no such entity: ingest its books first");
 
   const loaded = await loadPeriod(entityId, code);
   const rulebook = await loadRulebook(entityId).catch(() => emptyRulebook());
@@ -253,39 +257,4 @@ export async function closePeriod(entityName: string, code: string, model: Model
 
   const persisted = await persistRun(entityId, loaded.periodId, result, model);
   return { entityId, result, persisted, rulebookVersion: rulebook.version };
-}
-
-/**
- * Entities with books someone could actually close.
- *
- * A period on its own is not books - a verification suite leaves entities
- * behind precisely because tickmarks refuse deletion, and those must never
- * surface as something to reconcile. An entity counts only once transactions
- * have been ingested against it.
- */
-export async function listEntitiesWithPeriods(): Promise<{ name: string; periods: string[] }[]> {
-  const c = db();
-  const [{ data: ents }, { data: pers }, { data: bank }, { data: inv }] = await Promise.all([
-    c.from("entities").select("id, name").order("name"),
-    c.from("periods").select("entity_id, code").order("code"),
-    c.from("bank_lines").select("entity_id"),
-    c.from("ap_invoices").select("entity_id"),
-  ]);
-  if (!ents?.length) return [];
-
-  const withBooks = new Set<string>([
-    ...(bank ?? []).map((r) => String(r.entity_id)),
-    ...(inv ?? []).map((r) => String(r.entity_id)),
-  ]);
-
-  const byEntity = new Map<string, string[]>();
-  for (const p of pers ?? []) {
-    const k = String(p.entity_id);
-    (byEntity.get(k) ?? byEntity.set(k, []).get(k)!).push(String(p.code));
-  }
-
-  return ents
-    .filter((e) => withBooks.has(String(e.id)))
-    .map((e) => ({ name: String(e.name), periods: byEntity.get(String(e.id)) ?? [] }))
-    .filter((e) => e.periods.length);
 }

@@ -1,8 +1,9 @@
 "use server";
 
 import { currentUser } from "@clerk/nextjs/server";
-import { signedInUserId } from "@/lib/auth";
 import { revalidatePath } from "next/cache";
+import { memberEntityIds } from "@/lib/access";
+import { signedInUserId } from "@/lib/auth";
 import { decideEntry } from "@/lib/store/entries";
 
 export async function decideEntryAction(id: string, approve: boolean): Promise<{ ok: boolean; message: string }> {
@@ -11,7 +12,7 @@ export async function decideEntryAction(id: string, approve: boolean): Promise<{
   const u = await currentUser();
   const approver = u?.fullName ?? u?.primaryEmailAddress?.emailAddress ?? userId;
   try {
-    await decideEntry(id, approver, approve);
+    await decideEntry(id, approver, approve, await memberEntityIds(userId));
     revalidatePath("/close/entries");
     return { ok: true, message: approve ? `Posted, approved by ${approver}.` : "Rejected. Nothing was posted." };
   } catch (e) {

@@ -39,9 +39,10 @@ export interface Binder {
   counts: { tickmarks: number; superseded: number; exceptions: number; unresolved: number; entries: number; rules: number };
 }
 
-export async function buildBinder(entityName: string, periodCode: string): Promise<Binder | null> {
+/** The caller has already decided the viewer may read this entity (src/lib/access.ts). */
+export async function buildBinder(entityId: string, periodCode: string): Promise<Binder | null> {
   const c = db();
-  const { data: ent } = await c.from("entities").select("id, name").eq("name", entityName).maybeSingle();
+  const { data: ent } = await c.from("entities").select("id, name").eq("id", entityId).maybeSingle();
   if (!ent) return null;
   const { data: per } = await c.from("periods").select("id").eq("entity_id", ent.id).eq("code", periodCode).maybeSingle();
   if (!per) return null;
@@ -67,7 +68,7 @@ export async function buildBinder(entityName: string, periodCode: string): Promi
     entriesQuery,
     c.from("rules").select("*").eq("entity_id", ent.id).eq("status", "active"),
     c.from("gl_accounts").select("id, code").eq("entity_id", ent.id),
-    reconcile(entityName, periodCode),
+    reconcile(entityId, periodCode),
   ]);
 
   const acct = new Map((accounts.data ?? []).map((a) => [String(a.id), String(a.code)]));
@@ -122,7 +123,7 @@ export async function buildBinder(entityName: string, periodCode: string): Promi
     memo: String(j.memo), kind: String(j.kind), status: String(j.status),
     preparer: String(j.preparer), approver: j.approver ? String(j.approver) : null,
     lines: ((j.lines ?? []) as Record<string, unknown>[]).map((l) => ({
-      glCode: acct.get(String(l.gl_account_id)) ?? "—",
+      glCode: acct.get(String(l.gl_account_id)) ?? "-",
       debitCents: Number(l.debit_cents ?? 0), creditCents: Number(l.credit_cents ?? 0),
     })),
   }));

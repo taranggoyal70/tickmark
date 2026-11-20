@@ -287,7 +287,7 @@ export async function runClose(input: CloseInput): Promise<CloseRunResult> {
         subjectType: "ap_invoice", subjectRef: c.invoiceNumber,
         assertedBy: c.decidedBy === "rule" ? "rule" : "agent",
         confidence: c.confidence, ruleId: c.ruleId,
-        evidence: [{ note: `coded ${c.glCode}${c.reasoning ? ` — ${c.reasoning}` : ""}`, refs: [c.invoiceNumber] }],
+        evidence: [{ note: `coded ${c.glCode}${c.reasoning ? `: ${c.reasoning}` : ""}`, refs: [c.invoiceNumber] }],
       });
     }
   }

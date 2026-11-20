@@ -1,5 +1,6 @@
 import { createClient } from "@supabase/supabase-js";
 import { ADOPTION } from "../agent/gradient";
+import { findOperatorEntity } from "../ingest/ingest";
 import { backtestAgainstHistory, codingPrecedent } from "../agent/backtest-db";
 import { splitKey } from "../agent/close";
 import { assertMeasuredReport, type SimulationReport } from "../agent/simulate";
@@ -17,7 +18,15 @@ import type { Rule, RuleKind } from "../agent/types";
  * be replayable by an auditor. That means real writes - which is also the only
  * way the Standing Intent -> second correction -> proposed Rule sequence can be
  * demonstrated honestly rather than staged.
+ *
+ * Every read and write takes a scope: the entity ids the caller may act on.
+ * The app builds it from the signed-in user's memberships (src/lib/access.ts);
+ * an operator script passes the entity it is working on. A row outside the
+ * scope is not found, so an id from someone else's books does nothing.
  */
+
+/** Entity ids a caller may act on. */
+export type EntityScope = readonly string[];
 
 const db = () =>
   createClient(process.env.SUPABASE_URL!, process.env.SUPABASE_SERVICE_ROLE_KEY!, {
@@ -29,6 +38,8 @@ export const queueEnabled = () =>
 
 export interface QueueItem {
   id: string;
+  entityId: string;
+  entity: string;
   subjectType: string;
   subjectRef: string;
   cause: string;
@@ -99,8 +110,9 @@ export async function publishRun(
   let entityIdOut = "";
   for (const last of wanted) {
 
-  const { data: ent } = await c.from("entities").select("id").eq("name", report.entity).maybeSingle();
-  const entityId = ent?.id ?? (await c.from("entities").insert({ name: report.entity }).select("id").single()).data!.id;
+  // an operator entity, never a customer's company that happens to share the name
+  const entityId = (await findOperatorEntity(report.entity))
+    ?? (await c.from("entities").insert({ name: report.entity }).select("id").single()).data!.id;
 
   const { data: per } = await c.from("periods").select("id").eq("entity_id", entityId).eq("code", last.period).maybeSingle();
   const periodId = per?.id ?? (await c.from("periods").insert({
@@ -136,24 +148,31 @@ export async function publishRun(
   return { entityId: entityIdOut, opened: openedTotal };
 }
 
-export async function listQueue(limit = 40): Promise<{ items: QueueItem[]; periodCode: string } | null> {
-  if (!queueEnabled()) return null;
+export async function listQueue(scope: EntityScope, limit = 40): Promise<{ items: QueueItem[]; periodCode: string } | null> {
+  if (!queueEnabled() || !scope.length) return null;
   const c = db();
-  const { data } = await c
+  const { data, error } = await c
     .from("exceptions")
-    .select("id, entity_id, subject_type, cause, amount_cents, confidence, agent_proposal, options, period_id, periods(code)")
+    .select("id, entity_id, subject_type, cause, amount_cents, confidence, agent_proposal, options, period_id, periods(code), entities(name)")
     .eq("status", "open")
+    .in("entity_id", [...scope])
     .order("amount_cents", { ascending: true })
     .limit(limit);
+  if (error) throw new Error(`queue: ${error.message}`);
   if (!data?.length) return null;
 
-  const resolveVendor = await vendorResolver(String(data[0].entity_id));
+  // each entity names its own vendors
+  const resolvers = new Map<string, Awaited<ReturnType<typeof vendorResolver>>>();
+  for (const id of new Set(data.map((r) => String(r.entity_id)))) resolvers.set(id, await vendorResolver(id));
 
   const items: QueueItem[] = data.map((r) => {
     const p = (r.agent_proposal ?? {}) as Record<string, unknown>;
     const ref = String(p.subjectRef ?? "");
+    const resolveVendor = resolvers.get(String(r.entity_id))!;
     return {
       id: r.id as string,
+      entityId: String(r.entity_id),
+      entity: (r.entities as unknown as { name?: string } | null)?.name ?? "",
       subjectType: String(p.subjectType ?? r.subject_type),
       subjectRef: ref,
       cause: r.cause as string,
@@ -168,19 +187,23 @@ export async function listQueue(limit = 40): Promise<{ items: QueueItem[]; perio
   return { items, periodCode: items[0]?.periodCode ?? "" };
 }
 
-export const listIntents = async (): Promise<StandingIntentRow[]> => {
-  if (!queueEnabled()) return [];
-  const { data } = await db().from("standing_intents")
-    .select("id, kind, scope, status, actor, created_at").order("created_at", { ascending: false }).limit(20);
+export const listIntents = async (scope: EntityScope): Promise<StandingIntentRow[]> => {
+  if (!queueEnabled() || !scope.length) return [];
+  const { data, error } = await db().from("standing_intents")
+    .select("id, kind, scope, status, actor, created_at").in("entity_id", [...scope])
+    .order("created_at", { ascending: false }).limit(20);
+  if (error) throw new Error(`intents: ${error.message}`);
   return (data ?? []).map((r) => ({
     id: r.id as string, kind: r.kind as RuleKind, scope: r.scope as Record<string, string>,
     status: r.status as string, actor: r.actor as string, createdAt: r.created_at as string,
   }));
 };
 
-export const listRules = async (): Promise<(Rule & { adoptedBy?: string; selfEvidenced?: boolean })[]> => {
-  if (!queueEnabled()) return [];
-  const { data } = await db().from("rules").select("*").order("created_at", { ascending: false }).limit(30);
+export const listRules = async (scope: EntityScope): Promise<(Rule & { adoptedBy?: string; selfEvidenced?: boolean })[]> => {
+  if (!queueEnabled() || !scope.length) return [];
+  const { data, error } = await db().from("rules").select("*").in("entity_id", [...scope])
+    .order("created_at", { ascending: false }).limit(30);
+  if (error) throw new Error(`rules: ${error.message}`);
   return (data ?? []).map((r) => ({
     id: r.id as string, kind: r.kind as RuleKind, name: r.name as string,
     predicate: r.predicate as Rule["predicate"], action: r.action as Rule["action"],
@@ -210,10 +233,13 @@ export type ResolveOutcome =
  */
 export async function resolveException(
   exceptionId: string, decision: Record<string, unknown>, actor: string, alwaysDoThis: boolean,
+  scope: EntityScope,
 ): Promise<ResolveOutcome> {
   const c = db();
+  if (!scope.length) throw new Error("exception not found");
   const { data: ex } = await c.from("exceptions")
-    .select("id, entity_id, period_id, cause, amount_cents, agent_proposal").eq("id", exceptionId).single();
+    .select("id, entity_id, period_id, cause, amount_cents, agent_proposal")
+    .eq("id", exceptionId).in("entity_id", [...scope]).maybeSingle();
   if (!ex) throw new Error("exception not found");
 
   const proposal = (ex.agent_proposal ?? {}) as Record<string, unknown>;
@@ -233,16 +259,16 @@ export async function resolveException(
 
   if (!alwaysDoThis || !vendor) return { kind: "resolved" };
 
-  const scope = { vendor };
+  const intentScope = { vendor };
   const { data: open } = await c.from("standing_intents")
     .select("id, correction_id, actor").eq("entity_id", ex.entity_id)
-    .eq("kind", kind).eq("status", "open").contains("scope", scope).maybeSingle();
+    .eq("kind", kind).eq("status", "open").contains("scope", intentScope).maybeSingle();
 
   // first ask: record the instruction, do not act on it
   if (!open) {
     await c.from("standing_intents").insert({
       entity_id: ex.entity_id, period_id: ex.period_id, correction_id: corr!.id,
-      kind, scope, actor, status: "open",
+      kind, scope: intentScope, actor, status: "open",
     });
     return { kind: "intent_recorded", scope: vendor };
   }
@@ -303,7 +329,7 @@ async function proposeRuleFor(
     const precedent = await codingPrecedent(entityId, vendor, beforeCode);
     if (!precedent) {
       const rule: Rule = {
-        ...base, kind, name: `${vendor} — no coding precedent`,
+        ...base, kind, name: `${vendor}: no coding precedent`,
         predicate: [{ op: "vendor_is", value: vendor }],
         action: { type: "always_review", reason: "no coded history for this vendor yet" },
       };
@@ -402,16 +428,22 @@ async function retainDuplicate(
  * a rule that did not survive the replay cannot be adopted at all. Having *a*
  * backtest is not the bar; passing it is.
  */
-export async function adoptRule(ruleId: string, actor: string, accept: boolean): Promise<AdoptionOutcome> {
+export async function adoptRule(
+  ruleId: string, actor: string, accept: boolean, scope: EntityScope,
+): Promise<AdoptionOutcome> {
   const c = db();
+  if (!scope.length) throw new Error("rule lookup failed: not found");
   if (!accept) {
-    await c.from("rules").update({ status: "rejected" }).eq("id", ruleId);
+    const { data: rejected, error } = await c.from("rules").update({ status: "rejected" })
+      .eq("id", ruleId).in("entity_id", [...scope]).select("id");
+    if (error) throw new Error(`rejection refused: ${error.message}`);
+    if (!rejected?.length) throw new Error("rule lookup failed: not found");
     return { status: "rejected" };
   }
 
   const { data: rule, error: ruleError } = await c.from("rules")
     .select("id, entity_id, name, kind, predicate, action, backtest")
-    .eq("id", ruleId).single();
+    .eq("id", ruleId).in("entity_id", [...scope]).maybeSingle();
   if (ruleError || !rule) throw new Error(`rule lookup failed: ${ruleError?.message ?? "not found"}`);
   const b = (rule?.backtest ?? null) as Rule["backtest"];
   if (!meetsAdoptionBar(b)) {

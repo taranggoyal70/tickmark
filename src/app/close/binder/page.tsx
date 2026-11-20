@@ -1,32 +1,36 @@
+import { EntityPicker, PeriodPicker } from "@/components/entity-picker";
 import { Badge, Money, Panel } from "@/components/kit";
 import { Shell } from "@/components/shell";
 import { NoBooks } from "@/components/no-books";
-import { listEntitiesWithPeriods } from "@/lib/agent/run-period";
+import { booksFor, pickBooks } from "@/lib/access";
+import { signedInUserId } from "@/lib/auth";
 import { buildBinder } from "@/lib/close/binder";
 import { queueEnabled } from "@/lib/store/queue";
 
 export const dynamic = "force-dynamic";
 
 export default async function BinderPage(props: PageProps<"/close/binder">) {
-  const entities = queueEnabled() ? await listEntitiesWithPeriods().catch(() => []) : [];
-  if (!entities.length) {
+  const userId = await signedInUserId();
+  const books = queueEnabled() ? await booksFor(userId) : [];
+  if (!books.length) {
     return (
       <Shell active="/close/binder">
-        <NoBooks view="The audit binder" />
+        <NoBooks view="The audit binder" signedIn={Boolean(userId)} />
       </Shell>
     );
   }
 
   const sp = await props.searchParams;
-  const entity = entities[0];
+  const entity = pickBooks(books, sp?.entity)!;
   const period = typeof sp?.period === "string" && entity.periods.includes(sp.period)
     ? sp.period : entity.periods[entity.periods.length - 1];
-  const b = await buildBinder(entity.name, period);
+  const b = await buildBinder(entity.id, period);
 
-  const q = `entity=${encodeURIComponent(entity.name)}&period=${period}`;
+  const q = `entity=${entity.id}&period=${period}`;
 
   return (
     <Shell active="/close/binder">
+      <EntityPicker books={books} current={entity} href={(x) => `/close/binder?entity=${x.id}`} />
       <div className="mb-6 flex flex-wrap items-end justify-between gap-3">
         <div className="max-w-2xl">
           <div className="eyebrow mb-4">Close binder · {entity.name}</div>
@@ -40,14 +44,8 @@ export default async function BinderPage(props: PageProps<"/close/binder">) {
             Snapshot scope: the latest successful persisted close run for this period.
           </p>
         </div>
-        <nav className="flex flex-wrap gap-1.5">
-          {entity.periods.map((p) => (
-            <a key={p} href={`/close/binder?period=${p}`}
-              className={`focus-ring nums rounded-[var(--radius-sm)] border px-2.5 py-1 text-[12px] ${
-                p === period ? "border-[var(--ink)] bg-[var(--ink)] text-[var(--on-ink)]"
-                             : "border-hairline bg-surface-1 text-ink-subtle hover:bg-surface-3"}`}>{p}</a>
-          ))}
-        </nav>
+        <PeriodPicker periods={entity.periods} current={period}
+          href={(p) => `/close/binder?entity=${entity.id}&period=${p}`} />
       </div>
 
       {!b ? (
@@ -70,12 +68,10 @@ export default async function BinderPage(props: PageProps<"/close/binder">) {
               ))}
             </div>
             <div className="mt-4 flex flex-wrap items-center gap-2">
-              <a href={`/api/binder?${q}&format=json`}
-                className="focus-ring rounded-[var(--radius-md)] bg-[var(--primary)] px-3.5 py-2 text-[13px] font-medium text-[var(--on-primary)] hover:bg-[var(--primary-hover)]">
+              <a href={`/api/binder?${q}&format=json`} className="btn btn-sm btn-primary">
                 Download the binder (JSON)
               </a>
-              <a href={`/api/binder?${q}&format=csv`}
-                className="focus-ring rounded-[var(--radius-md)] border border-hairline bg-surface-1 px-3.5 py-2 text-[13px] text-ink hover:bg-surface-3">
+              <a href={`/api/binder?${q}&format=csv`} className="btn btn-sm">
                 Tickmarks (CSV)
               </a>
               {b.run ? (

@@ -8,6 +8,7 @@
  * a queue, and accrual entries drafted for approval.
  */
 import { closePeriod } from "../src/lib/agent/run-period";
+import { findOperatorEntity } from "../src/lib/ingest/ingest";
 import { fmtUsd, MODELS, type ModelId } from "../src/lib/agent/pricing";
 import { effectiveModelId, providerLabel } from "../src/lib/agent/provider";
 import { flushTracing } from "../src/lib/agent/tracing";
@@ -35,7 +36,10 @@ async function main() {
   console.log(`period   ${period}`);
   console.log(`provider ${providerLabel()} · ${effectiveModelId(requested ?? "anthropic/claude-opus-5")}\n`);
 
-  const { result, persisted, rulebookVersion } = await closePeriod(entity, period, requested);
+  // an operator entity by name; a customer's books are closed from the browser
+  const entityId = await findOperatorEntity(entity);
+  if (!entityId) { console.error(`no entity named "${entity}": ingest its books first`); process.exit(2); }
+  const { result, persisted, rulebookVersion } = await closePeriod(entityId, period, requested);
   const s = result.stats;
 
   console.log(`rulebook v${rulebookVersion} · ${s.ruleHits} decisions settled by rule at no cost`);
