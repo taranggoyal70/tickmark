@@ -21,6 +21,9 @@ Tickmark has no tagged releases yet; changes are grouped by month, newest first.
 
 ### Maintenance
 
+- **eval:** Record the llama3.2 3B run over held-out round 2 (73a385f)
+- **readme:** Keep the architecture diagram's stages left to right (3c39e92)
+- Generate CHANGELOG.md from git history (c101d3c)
 - **changelog:** Show the conventional-commit scope on each entry (d628bc5)
 - Flagship README with held-out results and methodology (86c3d19)
 - CI, license, contributor docs and generated README graphics (2b6cabc)
