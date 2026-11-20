@@ -150,9 +150,26 @@ across six closes, 177 lines cleared unattended with sampling against 226 withou
 ### With a real model
 
 `npm run eval:model` runs the same companies through whatever model `.env.local` configures and
-writes `eval/results/model-<id>.json` with real token counts. A run on a local `llama3.2:latest`
-(3B, Ollama) over the dev company and held-out round 2 is in progress; its results will be added
-here as they are recorded, not estimated.
+writes `eval/results/model-<id>.json` with the provider's own token counts. The committed run uses
+a small local model, `llama3.2:latest` (3B, Q4, through Ollama), over held-out round 2:
+
+| Close | Model calls | Tokens in / out | Invoices coded right | Bank matches right | Settled by a rule | Cleared unattended (wrong) | Failed batches |
+|---|---:|---:|---:|---:|---:|---:|---:|
+| 1 · Jan | 23 | 46,838 / 32,205 | 0 / 86 | 0 / 148 | 0 / 234 | 0 (0) | 1 |
+| 2 · Feb | 18 | 43,712 / 20,377 | 12 / 92 | 0 / 152 | 0 / 244 | 0 (0) | 4 |
+| 3 · Mar | 12 | 24,313 / 8,917 | 53 / 86 | 68 / 154 | 121 / 240 | 121 (0) | 1 |
+| 4 · Apr | 9 | 12,060 / 6,298 | 88 / 88 | 105 / 146 | 184 / 234 | 184 (0) | 0 |
+| 5 · May | 11 | 14,899 / 4,310 | 87 / 90 | 98 / 158 | 185 / 248 | 185 (0) | 1 |
+| 6 · Jun | 9 | 13,443 / 2,214 | 86 / 86 | 95 / 150 | 181 / 236 | 181 (0) | 0 |
+
+This model is poor at the work: in the first two closes it coded 12 of 178 invoices correctly and
+matched no bank lines, and 7 of its batches failed and went to the queue as `model_unavailable`.
+It made no difference to what cleared unattended, because a model suggestion never clears: **0 of
+671 unattended clears were wrong**, every one of them settled by a rule compiled from corrections.
+Model calls fell from 23 to 9 and tokens per close from 79,043 to 15,657. The bundled dev company
+shows the same shape (calls 8, 4, 5, 2, 3, 3; 0 wrong). Matches after close 3 are almost all rule
+matches, so a stronger model would mainly shorten the queue in the first closes. The run is local,
+so no dollar cost is reported for it.
 
 Earlier real-model evidence, from a four-period run on `llama3.2:1b`, is in
 [docs/MEASURED-EVIDENCE-2026-09-06.md](docs/MEASURED-EVIDENCE-2026-09-06.md).
