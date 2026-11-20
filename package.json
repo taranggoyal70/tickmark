@@ -25,6 +25,7 @@
     "verify:loop": "tsx --env-file-if-exists=.env.local scripts/verify-loop.ts",
     "verify:import": "tsx --env-file-if-exists=.env.local scripts/verify-import.ts",
     "verify:settlements": "tsx scripts/verify-settlements.ts",
+    "verify:tenancy": "tsx --env-file-if-exists=.env.local scripts/verify-tenancy.ts",
     "verify": "npm run lint && npm run typecheck && npm test && npm run eval -- --check && npm run readme:assets -- --check"
   },
   "dependencies": {

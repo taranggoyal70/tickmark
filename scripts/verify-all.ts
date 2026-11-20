@@ -17,6 +17,7 @@ const STAGES: Stage[] = [
   { name: "evidence gate", cmd: "npm", args: ["run", "verify:gate"], needsDb: true },
   { name: "close loop",    cmd: "npm", args: ["run", "verify:loop"], needsDb: true },
   { name: "import",        cmd: "npm", args: ["run", "verify:import"], needsDb: true },
+  { name: "tenancy",       cmd: "npm", args: ["run", "verify:tenancy"], needsDb: true },
   { name: "settlements",   cmd: "npm", args: ["run", "verify:settlements"] },
 ];
 

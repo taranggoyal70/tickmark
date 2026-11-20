@@ -1,9 +1,10 @@
 import { ClerkProvider } from "@clerk/nextjs";
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { clerkAppearance } from "@/lib/clerk-appearance";
 import { authConfigured } from "@/lib/auth";
+import { SITE, siteUrl } from "@/lib/site";
 
 const geist = Geist({ variable: "--font-geist", subsets: ["latin"], display: "swap" });
 const mono = Geist_Mono({ variable: "--font-geist-mono", subsets: ["latin"], display: "swap" });
@@ -13,9 +14,33 @@ const mono = Geist_Mono({ variable: "--font-geist-mono", subsets: ["latin"], dis
 const THEME_INIT = `try{var t=localStorage.getItem("theme");if(t==="dark"||t==="light")document.documentElement.dataset.theme=t}catch(e){}`;
 
 export const metadata: Metadata = {
-  title: "Tickmark - the month-end close that learns",
-  description:
-    "An agent that codes AP invoices and reconciles the bank, hands a controller only what needs judgment, and compiles every correction into a deterministic rule so next month costs less.",
+  metadataBase: siteUrl(),
+  title: { default: `${SITE.name}: ${SITE.tagline.toLowerCase()}`, template: `%s · ${SITE.name}` },
+  description: SITE.description,
+  applicationName: SITE.name,
+  alternates: { canonical: "/" },
+  openGraph: {
+    type: "website",
+    siteName: SITE.name,
+    title: `${SITE.name}: models guess, rules don't`,
+    description: SITE.description,
+    url: "/",
+    locale: "en_US",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: `${SITE.name}: models guess, rules don't`,
+    description: SITE.description,
+  },
+};
+
+// The browser chrome follows the page: paper in light, near-black in dark.
+export const viewport: Viewport = {
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#f3f2ee" },
+    { media: "(prefers-color-scheme: dark)", color: "#0f0f0e" },
+  ],
+  colorScheme: "light dark",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {

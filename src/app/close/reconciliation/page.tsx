@@ -1,7 +1,9 @@
+import { EntityPicker, PeriodPicker } from "@/components/entity-picker";
 import { Money, Panel } from "@/components/kit";
 import { Shell } from "@/components/shell";
 import { NoBooks } from "@/components/no-books";
-import { listEntitiesWithPeriods } from "@/lib/agent/run-period";
+import { booksFor, pickBooks } from "@/lib/access";
+import { signedInUserId } from "@/lib/auth";
 import { reconcile, type ReconcilingItem } from "@/lib/close/reconciliation";
 import { queueEnabled } from "@/lib/store/queue";
 
@@ -38,39 +40,33 @@ function ItemTable({ title, note, items }: { title: string; note: string; items:
 }
 
 export default async function ReconciliationPage(props: PageProps<"/close/reconciliation">) {
-  const entities = queueEnabled() ? await listEntitiesWithPeriods().catch(() => []) : [];
-  if (!entities.length) {
+  const userId = await signedInUserId();
+  const books = queueEnabled() ? await booksFor(userId) : [];
+  if (!books.length) {
     return (
       <Shell active="/close/reconciliation">
-        <NoBooks view="The bank reconciliation" />
+        <NoBooks view="The bank reconciliation" signedIn={Boolean(userId)} />
       </Shell>
     );
   }
 
   const sp = await props.searchParams;
-  const entity = entities[0];
+  const entity = pickBooks(books, sp?.entity)!;
   const period = typeof sp?.period === "string" && entity.periods.includes(sp.period)
     ? sp.period
     : entity.periods[entity.periods.length - 1];
-  const rec = await reconcile(entity.name, period);
+  const rec = await reconcile(entity.id, period);
 
   return (
     <Shell active="/close/reconciliation">
+      <EntityPicker books={books} current={entity} href={(b) => `/close/reconciliation?entity=${b.id}`} />
       <div className="mb-6 flex flex-wrap items-end justify-between gap-3">
         <div>
           <div className="eyebrow mb-4">Bank reconciliation · {entity.name}</div>
           <h1 className="display-md m-0 text-ink">{period}</h1>
         </div>
-        <nav className="flex flex-wrap gap-1.5">
-          {entity.periods.map((p) => (
-            <a key={p} href={`/close/reconciliation?period=${p}`}
-              className={`focus-ring nums rounded-[var(--radius-sm)] border px-2.5 py-1 text-[12px] ${
-                p === period ? "border-[var(--ink)] bg-[var(--ink)] text-[var(--on-ink)]"
-                             : "border-hairline bg-surface-1 text-ink-subtle hover:bg-surface-3"}`}>
-              {p}
-            </a>
-          ))}
-        </nav>
+        <PeriodPicker periods={entity.periods} current={period}
+          href={(p) => `/close/reconciliation?entity=${entity.id}&period=${p}`} />
       </div>
 
       {!rec ? (

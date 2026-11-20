@@ -23,13 +23,38 @@ export interface IngestReport {
   rejected: Rejection[];
 }
 
-export async function ensureEntity(name: string, opts: { materialityCents?: number; ruleCeilingCents?: number } = {}) {
+/**
+ * The entity an operator script means by a name: the oldest one nobody has
+ * imported as their own. A customer's books are owned through entity_members
+ * and are never found by name, so a script cannot write into them because
+ * someone chose the same company name. The browser import goes through
+ * ensureOwnedEntity in src/lib/access.ts instead.
+ */
+export async function findOperatorEntity(name: string): Promise<string | null> {
+  const { data, error } = await db().from("entities")
+    .select("id, created_at, entity_members(clerk_user_id)")
+    .eq("name", name)
+    .order("created_at");
+  if (error) throw new Error(`entity lookup: ${error.message}`);
+  const unowned = (data ?? []).find((e) => !((e.entity_members as unknown[] | null) ?? []).length);
+  return unowned ? String(unowned.id) : null;
+}
+
+/** Find or create an operator entity. `publicDemo` makes it readable by anyone: synthetic books only. */
+export async function ensureEntity(name: string, opts: { materialityCents?: number; publicDemo?: boolean } = {}) {
   const c = db();
-  const { data } = await c.from("entities").select("id").eq("name", name).maybeSingle();
-  if (data) return data.id as string;
+  const found = await findOperatorEntity(name);
+  if (found) {
+    if (opts.publicDemo) {
+      const { error } = await c.from("entities").update({ public_demo: true }).eq("id", found);
+      if (error) throw new Error(`entity: ${error.message}`);
+    }
+    return found;
+  }
   const { data: made, error } = await c.from("entities").insert({
     name,
     materiality_cents: opts.materialityCents ?? 2_500_000,
+    public_demo: opts.publicDemo ?? false,
   }).select("id").single();
   if (error) throw new Error(`entity: ${error.message}`);
   return made!.id as string;

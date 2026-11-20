@@ -1,8 +1,9 @@
 "use server";
 
-import { signedInUserId } from "@/lib/auth";
 import { revalidatePath } from "next/cache";
-import { ensureChart, ensureEntity, ensureVendors, ingestPeriod } from "@/lib/ingest/ingest";
+import { ensureOwnedEntity } from "@/lib/access";
+import { signedInUserId } from "@/lib/auth";
+import { ensureChart, ensureVendors, ingestPeriod } from "@/lib/ingest/ingest";
 import { parseCsv, parseMoneyCents } from "@/lib/ingest/schema";
 import { readSettlements } from "@/lib/ingest/settlements";
 import { ACCRUED_LIABILITIES, STARTER_CHART, STARTER_DEPARTMENTS } from "@/lib/ingest/starter-chart";
@@ -29,6 +30,10 @@ const text = async (f: FormDataEntryValue | null) =>
  * accounts is used if supplied and a conventional one assumed if not, and
  * vendors are created from the invoices themselves rather than demanded up
  * front. What it will not do is guess at an amount or a date it cannot read.
+ *
+ * The books land in the importer's own entity of that name, created with them
+ * as its controller if it does not exist yet, so a name that matches someone
+ * else's company, or the public demo, never writes into their books.
  */
 export async function importPeriodAction(form: FormData): Promise<ImportOutcome> {
   const userId = await signedInUserId();
@@ -51,7 +56,7 @@ export async function importPeriodAction(form: FormData): Promise<ImportOutcome>
   const warnings: string[] = [];
 
   try {
-    const entityId = await ensureEntity(entityName, { materialityCents: materiality });
+    const entityId = await ensureOwnedEntity(userId, entityName, materiality);
 
     // ── chart of accounts ────────────────────────────────────────────────────
     const chartCsv = await text(form.get("chart"));
@@ -75,7 +80,7 @@ export async function importPeriodAction(form: FormData): Promise<ImportOutcome>
     }
     if (!accounts.some((a) => a.code === ACCRUED_LIABILITIES)) {
       accounts.push({ code: ACCRUED_LIABILITIES, name: "Accrued Liabilities", type: "liability", normal: "credit" });
-      warnings.push(`Added account ${ACCRUED_LIABILITIES} (Accrued Liabilities) — an accrual cannot balance without it.`);
+      warnings.push(`Added account ${ACCRUED_LIABILITIES} (Accrued Liabilities): an accrual cannot balance without it.`);
     }
     await ensureChart(entityId, accounts, STARTER_DEPARTMENTS.map((d) => ({ ...d })));
 
@@ -138,7 +143,7 @@ export async function importPeriodAction(form: FormData): Promise<ImportOutcome>
     return {
       ok: !nothing,
       message: nothing
-        ? "Nothing was imported — check the files have headers and at least one row."
+        ? "Nothing was imported. Check the files have headers and at least one row."
         : `Imported ${period} for ${entityName}.`,
       entity: entityName,
       period,

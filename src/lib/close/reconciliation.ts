@@ -28,11 +28,10 @@ export interface Reconciliation {
   tiesOut: boolean;
 }
 
-export async function reconcile(entityName: string, periodCode: string): Promise<Reconciliation | null> {
+/** The caller has already decided the viewer may read this entity (src/lib/access.ts). */
+export async function reconcile(entityId: string, periodCode: string): Promise<Reconciliation | null> {
   const c = db();
-  const { data: ent } = await c.from("entities").select("id").eq("name", entityName).maybeSingle();
-  if (!ent) return null;
-  const { data: per } = await c.from("periods").select("id").eq("entity_id", ent.id).eq("code", periodCode).maybeSingle();
+  const { data: per } = await c.from("periods").select("id").eq("entity_id", entityId).eq("code", periodCode).maybeSingle();
   if (!per) return null;
 
   const { data: latestRun } = await c

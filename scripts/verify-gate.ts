@@ -8,6 +8,7 @@
 import { createClient } from "@supabase/supabase-js";
 import { adoptRule, listQueue, resolveException } from "../src/lib/store/queue";
 import { closePeriod } from "../src/lib/agent/run-period";
+import { findOperatorEntity } from "../src/lib/ingest/ingest";
 
 const db = createClient(process.env.SUPABASE_URL!, process.env.SUPABASE_SERVICE_ROLE_KEY!, {
   auth: { persistSession: false },
@@ -27,10 +28,15 @@ async function main() {
    * Seed our own queue rather than inherit one. These suites share a database,
    * and a test that only passes when it runs first is not a test.
    */
-  await closePeriod(ENTITY, SEED_PERIOD).catch(() => undefined);
-  await db.from("standing_intents").delete().neq("id", "00000000-0000-0000-0000-000000000000");
+  const entityId = await findOperatorEntity(ENTITY);
+  if (!entityId) { console.error(`no "${ENTITY}" to test on: run \`npm run ingest -- --sample\` first.`); process.exit(1); }
+  // the scope the app would build for a member of these books
+  const scope = [entityId];
+  await closePeriod(entityId, SEED_PERIOD).catch(() => undefined);
+  // only this entity's intents: other companies on the same database are not ours to reset
+  await db.from("standing_intents").delete().eq("entity_id", entityId);
 
-  const queue = await listQueue(200);
+  const queue = await listQueue(scope, 200);
   if (!queue) { console.error("no open queue — run `npm run publish` first."); process.exit(1); }
 
   // Two open exceptions sharing a vendor AND a decision kind. A standing intent
@@ -51,13 +57,13 @@ async function main() {
 
   const before = await db.from("rules").select("id", { count: "exact", head: true });
 
-  const one = await resolveException(first.id, { action: "accept" }, "Controller A", true);
+  const one = await resolveException(first.id, { action: "accept" }, "Controller A", true, scope);
   check("first 'always do this' does NOT create a rule", one.kind === "intent_recorded", `outcome: ${one.kind}`);
 
   const mid = await db.from("rules").select("id", { count: "exact", head: true });
   check("rule count unchanged after one correction", mid.count === before.count, `${before.count} → ${mid.count}`);
 
-  const two = await resolveException(second.id, { action: "accept" }, "Controller B", true);
+  const two = await resolveException(second.id, { action: "accept" }, "Controller B", true, scope);
   check("second correction proposes a rule", two.kind === "rule_proposed",
     two.kind === "rule_proposed" ? `${two.ruleName} · fired ${two.fired}× @ ${(two.precision * 100).toFixed(0)}%` : two.kind);
 
@@ -78,7 +84,7 @@ async function main() {
     // the path the UI actually calls, not a raw write around it
     let refused: string | null = null;
     try {
-      await adoptRule(two.ruleId, "Controller B", true);
+      await adoptRule(two.ruleId, "Controller B", true, scope);
     } catch (e) { refused = (e as Error).message; }
 
     if (two.adoptable) {

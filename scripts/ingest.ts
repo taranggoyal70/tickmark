@@ -4,7 +4,12 @@
  *   npm run ingest -- --sample                       load the bundled sample company
  *   npm run ingest -- --sample --emit sample-books   also write the CSVs it used
  *   npm run ingest -- --entity "Acme, Inc." --period 2026-05 \
- *                     --bank bank.csv --ledger gl.csv --invoices ap.csv
+ *                     --bank bank.csv --ledger gl.csv --invoices ap.csv \
+ *                     [--owner user_2abc...]
+ *
+ * --owner loads the books into that Clerk user's own company, as if they had
+ * imported them in the browser, so they see it when they sign in. Without it
+ * the books go to an operator entity that no signed-in user can see.
  *
  * The sample company is loaded through exactly the same path as a customer's
  * export. Nothing downstream is permitted to know which it got.
@@ -14,6 +19,7 @@ import path from "node:path";
 import { DEPARTMENTS, ENTITY, GL_ACCOUNTS, VENDORS } from "../src/lib/seed/fixture";
 import { generateAll } from "../src/lib/seed/generate";
 import { ensureChart, ensureEntity, ensureVendors, ingestPeriod, type IngestReport } from "../src/lib/ingest/ingest";
+import { ensureOwnedEntity } from "../src/lib/access";
 import { readSettlements } from "../src/lib/ingest/settlements";
 import { parseCsv } from "../src/lib/ingest/schema";
 
@@ -42,7 +48,9 @@ function report(r: IngestReport) {
 
 async function sample() {
   const emitDir = arg("emit");
-  const entityId = await ensureEntity(ENTITY.name, { materialityCents: ENTITY.materialityCents });
+  // The sample company is synthetic, so it is the deployment's public demo:
+  // readable by signed-out visitors, writable only by its members.
+  const entityId = await ensureEntity(ENTITY.name, { materialityCents: ENTITY.materialityCents, publicDemo: true });
   await ensureChart(
     entityId,
     GL_ACCOUNTS.map((a) => ({ code: a.code, name: a.name, type: a.type, normal: a.normal })),
@@ -104,13 +112,16 @@ async function customer() {
     console.error("need --entity <name> --period <YYYY-MM>, plus at least one of --bank/--ledger/--invoices/--settlements");
     process.exit(2);
   }
-  const entityId = await ensureEntity(name);
+  const owner = arg("owner");
+  const entityId = owner
+    ? await ensureOwnedEntity(owner, name, 2_500_000)
+    : await ensureEntity(name);
   const read = async (f?: string) => (f ? readFile(path.resolve(f), "utf8") : undefined);
   const [bank, ledger, invoices, settlements] = await Promise.all([
     read(arg("bank")), read(arg("ledger")), read(arg("invoices")), read(arg("settlements")),
   ]);
 
-  console.log(`entity ${name}`);
+  console.log(`entity ${name}${owner ? ` · owned by ${owner}` : ""}`);
 
   // A processor payout is one deposit standing for gross revenue less a fee.
   // Expanding it here means the reconciler sees the three rows that actually
