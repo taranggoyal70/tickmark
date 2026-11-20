@@ -150,8 +150,31 @@ across six closes, 177 lines cleared unattended with sampling against 226 withou
 ### With a real model
 
 `npm run eval:model` runs the same companies through whatever model `.env.local` configures and
-writes `eval/results/model-<id>.json` with the provider's own token counts. The committed run uses
-a small local model, `llama3.2:latest` (3B, Q4, through Ollama), over held-out round 2:
+writes `eval/results/model-<id>.json` with the provider's own token counts. Two runs are committed,
+both over held-out round 2: a frontier model through a paid API, and a 3B model on a laptop.
+
+**`gpt-6.2-sol`, through the OpenAI API.** Cost is the provider's token counts priced at $2 per
+million input and $10 per million output tokens, for the three companies together:
+
+| Close | Model calls | Tokens in / out | Cost | Invoices coded right | Bank matches right | Settled by a rule | Cleared unattended (wrong) | Failed batches |
+|---|---:|---:|---:|---:|---:|---:|---:|---:|
+| 1 · Jan | 24 | 61,891 / 30,783 | $0.432 | 2 / 86 | 140 / 148 | 0 / 234 | 0 (0) | 0 |
+| 2 · Feb | 24 | 66,224 / 31,473 | $0.447 | 89 / 92 | 146 / 152 | 0 / 244 | 0 (0) | 0 |
+| 3 · Mar | 15 | 29,376 / 12,009 | $0.179 | 86 / 86 | 154 / 154 | 123 / 240 | 123 (0) | 0 |
+| 4 · Apr | 9 | 13,651 / 4,768 | $0.075 | 88 / 88 | 146 / 146 | 185 / 234 | 185 (0) | 0 |
+| 5 · May | 12 | 18,119 / 5,959 | $0.096 | 90 / 90 | 158 / 158 | 187 / 248 | 187 (0) | 0 |
+| 6 · Jun | 9 | 14,304 / 5,120 | $0.080 | 86 / 86 | 150 / 150 | 182 / 236 | 182 (0) | 0 |
+
+**0 of 677 unattended clears were wrong.** Model calls fell from 24 to 9, tokens per close from
+92,674 to 19,424 and cost per close from $0.432 to $0.080. The first close has no vendor history to
+go on, so even this model coded 2 of 86 invoices to the company's own accounts; with one close of
+history it coded 89 of 92, and every invoice after that. It cleared exactly as many lines as the
+offline stand-in, because only a rule clears unattended and both runs compiled the same rules from
+the same corrections. What the stronger model changes is the queue: the controller confirms right
+suggestions instead of fixing wrong ones, and no batch failed. The bundled dev company shows the
+same shape (calls 8, 8, 5, 3, 4, 3; 0 wrong), and the whole run, dev company included, cost $1.72.
+
+**`llama3.2:latest` (3B, Q4, through Ollama), on a laptop:**
 
 | Close | Model calls | Tokens in / out | Invoices coded right | Bank matches right | Settled by a rule | Cleared unattended (wrong) | Failed batches |
 |---|---:|---:|---:|---:|---:|---:|---:|
@@ -167,9 +190,8 @@ matched no bank lines, and 7 of its batches failed and went to the queue as `mod
 It made no difference to what cleared unattended, because a model suggestion never clears: **0 of
 671 unattended clears were wrong**, every one of them settled by a rule compiled from corrections.
 Model calls fell from 23 to 9 and tokens per close from 79,043 to 15,657. The bundled dev company
-shows the same shape (calls 8, 4, 5, 2, 3, 3; 0 wrong). Matches after close 3 are almost all rule
-matches, so a stronger model would mainly shorten the queue in the first closes. The run is local,
-so no dollar cost is reported for it.
+shows the same shape (calls 8, 4, 5, 2, 3, 3; 0 wrong). The run is local, so no dollar cost is
+reported for it.
 
 Earlier real-model evidence, from a four-period run on `llama3.2:1b`, is in
 [docs/MEASURED-EVIDENCE-2026-09-06.md](docs/MEASURED-EVIDENCE-2026-09-06.md).
