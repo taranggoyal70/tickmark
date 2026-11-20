@@ -8,6 +8,9 @@ Tickmark has no tagged releases yet; changes are grouped by month, newest first.
 
 ### Added
 
+- **ui:** Paper and ink redesign (b41dcd5)
+- **auth:** Run read-only without Clerk keys (4d3b611)
+- AO page, security headers and honest unpriced wording (b391811)
 - **db:** Allow audit_sample in the exception queue (64dc364)
 - **eval:** Reproducible six-close eval with held-out companies (49b0322)
 
@@ -22,6 +25,9 @@ Tickmark has no tagged releases yet; changes are grouped by month, newest first.
 
 ### Maintenance
 
+- **readme:** Retheme graphics and add app screenshots (7a8f328)
+- **eval:** Move result types into eval/summary.ts (557e51a)
+- Regenerate CHANGELOG.md (c67c4d8)
 - **eval:** Record gpt-6.2-sol over held-out round 2 (8a5c426)
 - Regenerate CHANGELOG.md (ad975a0)
 - **eval:** Record the llama3.2 3B run over held-out round 2 (73a385f)
