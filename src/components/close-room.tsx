@@ -9,8 +9,8 @@ import { SERIES } from "./charts";
  *
  * Two periods run the same books side by side: one before the agent had learned
  * anything, one after. The timing is not decorative - a decision settled by a
- * compiled Rule really is instant and free, and a model call really does cost
- * time and tokens, so the trained lane finishes quieter and cheaper for the
+ * compiled Rule really is instant and free, while model-decided items represent
+ * remaining agent work, so the trained lane finishes quieter for the
  * reason the product claims.
  */
 
@@ -34,17 +34,18 @@ function useReplay(frames: DecisionFrame[], running: boolean) {
 
 const usd = (c: number) => `$${Math.abs(c / 100).toLocaleString("en-US", { maximumFractionDigits: 0 })}`;
 
-function Lane({ period, frames, running, tone }: {
+function Lane({ period, frames, running, tone, unpriced }: {
   period: PeriodReport; frames: DecisionFrame[]; running: boolean; tone: "cold" | "trained";
+  unpriced: boolean;
 }) {
   const { i, done } = useReplay(frames, running);
   const seen = frames.slice(0, i);
   const cleared = seen.filter((f) => f.outcome === "tickmark").length;
   const exceptions = seen.filter((f) => f.outcome === "exception").length;
   const ruleHits = seen.filter((f) => f.by === "rule").length;
-  const agentCalls = seen.filter((f) => f.by === "agent").length;
+  const agentDecisions = seen.filter((f) => f.by === "agent").length;
   // cost accrues only where a model was actually asked
-  const cost = (agentCalls / Math.max(1, frames.filter((f) => f.by === "agent").length)) * period.stats.costMicros;
+  const cost = (agentDecisions / Math.max(1, frames.filter((f) => f.by === "agent").length)) * period.stats.costMicros;
   const pct = frames.length ? Math.round((i / frames.length) * 100) : 0;
   const recent = seen.slice(-9).reverse();
 
@@ -71,7 +72,7 @@ function Lane({ period, frames, running, tone }: {
           { l: "cleared", v: String(cleared) },
           { l: "for you", v: String(exceptions), warn: true },
           { l: "free", v: String(ruleHits) },
-          { l: "cost", v: `$${(cost / 1e6).toFixed(3)}` },
+          { l: unpriced ? "model" : "cost", v: unpriced ? String(agentDecisions) : `$${(cost / 1e6).toFixed(3)}` },
         ].map((s) => (
           <div key={s.l} className="bg-surface-1 px-2 py-2.5 text-center">
             <div className="eyebrow mb-1 text-[10px]">{s.l}</div>
@@ -102,7 +103,11 @@ function Lane({ period, frames, running, tone }: {
             Closed. <span className="text-[#b8471a]">{exceptions}</span> items need you.
           </p>
           <p className="mt-0.5 text-[12px] text-ink-tertiary">
-            {ruleHits ? `${ruleHits} settled by rules, at no cost.` : "Nothing learned yet — every call was paid for."}
+            {ruleHits
+              ? `${ruleHits} settled by rules, without model judgment.`
+              : unpriced
+                ? "Nothing learned yet — every decision went to the model."
+                : "Nothing learned yet — every call was paid for."}
           </p>
         </div>
       ) : null}
@@ -120,12 +125,14 @@ export function CloseRoom({ periods }: { periods: PeriodReport[] }) {
   const start = () => setRunId((n) => n + 1);
 
   const saved = cold.exceptions.length - trained.exceptions.length;
+  const unpriced = periods.some((period) => period.stats.llmCalls > 0)
+    && periods.every((period) => period.stats.costMicros === 0);
 
   return (
     <div>
       <div className="mb-5 flex flex-wrap items-center justify-between gap-3">
         <div className="flex flex-wrap items-center gap-x-4 gap-y-1 text-[12px]">
-          {[["rule", "settled by a rule · free"], ["model", "asked the model · costs tokens"], ["exception", "sent to the controller"]].map(([k, label]) => (
+          {[["rule", "settled by a rule · free"], ["model", "decided by the model"], ["exception", "sent to the controller"]].map(([k, label]) => (
             <span key={k} className="inline-flex items-center gap-1.5 text-ink-muted">
               <span className="inline-block h-2 w-2 rounded-full" style={{ background: SERIES[k as keyof typeof SERIES].color }} />
               {label}
@@ -139,14 +146,14 @@ export function CloseRoom({ periods }: { periods: PeriodReport[] }) {
       </div>
 
       <div className="grid gap-4 lg:grid-cols-2">
-        <Lane key={`a-${runId}`} period={cold} frames={cold.decisions ?? []} running={running} tone="cold" />
-        <Lane key={`b-${runId}`} period={trained} frames={trained.decisions ?? []} running={running} tone="trained" />
+        <Lane key={`a-${runId}`} period={cold} frames={cold.decisions ?? []} running={running} tone="cold" unpriced={unpriced} />
+        <Lane key={`b-${runId}`} period={trained} frames={trained.decisions ?? []} running={running} tone="trained" unpriced={unpriced} />
       </div>
 
       <p className="mt-5 text-[13px] leading-relaxed text-ink-subtle">
         Same books, same model, same prompts. The only difference is {trained.activeRules} rules the agent
         earned from corrections a controller already made — which is why the right-hand close hands back{" "}
-        <span className="text-ink">{saved} fewer items</span> and pays for fewer of its own decisions.
+        <span className="text-ink">{saved} fewer items</span> and needs less model work.
       </p>
     </div>
   );

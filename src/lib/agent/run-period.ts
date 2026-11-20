@@ -161,7 +161,7 @@ export async function persistRun(
       ledger_entry_ids: m.ledgerExternalIds.map((x) => ledId.get(x)).filter(Boolean),
       cardinality: m.cardinality, amount_delta_cents: m.amountDeltaCents,
       delta_reason: m.deltaReason, confidence: m.confidence,
-      decided_by: m.decidedBy,
+      decided_by: m.decidedBy, rule_id: m.ruleId ?? null,
       reasoning: `${m.bankExternalIds.join("+")} ← ${m.ledgerExternalIds.join("+")}${m.reasoning ? ` · ${m.reasoning}` : ""}`,
     })));
     if (error) throw new Error(`matches: ${error.message}`);
@@ -183,7 +183,7 @@ export async function persistRun(
       entity_id: entityId, period_id: periodId, close_run_id: closeRunId,
       subject_type: t.subjectType, subject_id: entityId,
       asserted_by: t.assertedBy, actor: t.assertedBy === "rule" ? "rulebook" : String(model),
-      confidence: t.confidence,
+      confidence: t.confidence, rule_id: t.ruleId ?? null,
       supersedes: latestFor.get(t.subjectRef) ?? null,
       evidence: [{ subjectRef: t.subjectRef, ...(t.evidence[0] ?? {}) }],
     })));

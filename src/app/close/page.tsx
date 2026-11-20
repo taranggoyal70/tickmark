@@ -139,7 +139,7 @@ export default async function ClosePage() {
           ]}
         />
 
-        <Panel className="p-5">
+        <Panel className="min-w-0 p-5">
           <h3 className="mb-1 text-[15px] font-medium text-ink">Per-period detail</h3>
           <p className="mb-4 text-[12px] text-ink-subtle">Every figure measured against ground truth the agent never sees.</p>
           <div className="overflow-x-auto">

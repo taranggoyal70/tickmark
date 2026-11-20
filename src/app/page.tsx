@@ -45,8 +45,11 @@ export default async function Home() {
         <div className="mx-auto flex h-14 w-full max-w-[1240px] items-center gap-2 px-6">
           <Mark className="h-4 w-4 text-[var(--primary)]" />
           <span className="text-[14px] font-semibold tracking-[-0.01em]">Tickmark</span>
-          <Link href="/close" className="focus-ring ml-auto rounded-[var(--radius-md)] bg-[var(--primary)] px-3.5 py-1.5 text-[13px] font-medium text-[var(--on-primary)] transition-colors hover:bg-[var(--primary-hover)]">
-            Open the close
+          <Link href="/ao" className="focus-ring ml-auto rounded-[var(--radius-sm)] px-3 py-1.5 text-[13px] text-ink-subtle transition-colors hover:bg-surface-1 hover:text-ink">
+            Built with AO
+          </Link>
+          <Link href="/close" className="focus-ring rounded-[var(--radius-md)] bg-[var(--primary)] px-3.5 py-1.5 text-[13px] font-medium text-[var(--on-primary)] transition-colors hover:bg-[var(--primary-hover)]">
+            Open demo close
           </Link>
         </div>
       </header>
@@ -56,6 +59,9 @@ export default async function Home() {
         <section className="mx-auto w-full max-w-[1240px] px-6 pt-20 pb-16 sm:pt-28">
           <div className="max-w-3xl">
             <div className="eyebrow mb-5">Office of the CFO · month-end close</div>
+            <div className="mb-4 inline-flex rounded-full border border-hairline bg-surface-1 px-2.5 py-1 text-[11px] font-medium text-ink-subtle">
+              Live product · synthetic finance data
+            </div>
             <h1 className="display-xl text-ink">
               The close that<br />gets cheaper every month.
             </h1>

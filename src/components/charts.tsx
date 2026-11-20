@@ -82,7 +82,7 @@ export function TrendLine({
   const accent = SERIES.rule.color;
 
   return (
-    <figure className="panel p-5 m-0">
+    <figure className="panel m-0 min-w-0 p-5">
       <figcaption className="mb-1 flex items-baseline justify-between gap-3">
         <h3 className="text-[15px] font-medium text-ink">{title}</h3>
         <button
@@ -196,7 +196,7 @@ export function DecisionMix({
   const cx = (i: number) => PAD_L + (PW / categories.length) * (i + 0.5);
 
   return (
-    <figure className="panel p-5 m-0">
+    <figure className="panel m-0 min-w-0 p-5">
       <figcaption className="mb-1">
         <h3 className="text-[15px] font-medium text-ink">{title}</h3>
       </figcaption>

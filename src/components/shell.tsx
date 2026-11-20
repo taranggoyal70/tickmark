@@ -11,6 +11,7 @@ const NAV = [
   { href: "/close/entries", label: "Entries" },
   { href: "/close/rulebook", label: "Rulebook" },
   { href: "/close/binder", label: "Binder" },
+  { href: "/ao", label: "AO build" },
   { href: "/setup", label: "Import" },
 ];
 
@@ -27,12 +28,12 @@ export function Shell({ children, active }: { children: ReactNode; active?: stri
   return (
     <div className="flex min-h-full flex-col">
       <header className="hairline-b sticky top-0 z-20 bg-[color-mix(in_oklab,var(--canvas)_88%,transparent)] backdrop-blur">
-        <div className="mx-auto flex h-14 w-full max-w-[1240px] items-center gap-6 px-6">
+        <div className="mx-auto flex h-14 w-full max-w-[1240px] items-center gap-4 px-4 sm:px-6">
           <Link href="/" className="focus-ring flex items-center gap-2 rounded">
             <Mark className="h-4 w-4 text-[var(--primary)]" />
             <span className="text-[14px] font-semibold tracking-[-0.01em]">Tickmark</span>
           </Link>
-          <nav className="flex items-center gap-1">
+          <nav aria-label="Close workspace" className="hidden items-center gap-1 lg:flex">
             {NAV.map((n) => (
               <Link
                 key={n.href}
@@ -46,12 +47,33 @@ export function Shell({ children, active }: { children: ReactNode; active?: stri
             ))}
           </nav>
           <div className="ml-auto flex items-center gap-3 text-[12px] text-ink-tertiary">
-            <span className="hidden sm:inline">Northwind Robotics, Inc.</span>
+            <span className="hidden xl:inline">Northwind Robotics, Inc. · synthetic demo</span>
             <UserButton appearance={{ elements: { avatarBox: { width: 26, height: 26 } } }} />
+            <details className="relative lg:hidden">
+              <summary className="focus-ring cursor-pointer list-none rounded-[var(--radius-md)] border border-hairline bg-surface-1 px-3 py-1.5 text-[13px] font-medium text-ink marker:content-none">
+                Menu
+              </summary>
+              <nav aria-label="Close workspace" className="panel absolute right-0 top-10 flex w-52 flex-col gap-1 p-2 shadow-lg">
+                <div className="px-2 py-1.5 text-[11px] leading-snug text-ink-tertiary">
+                  Northwind Robotics, Inc.<br />Synthetic demo data
+                </div>
+                {NAV.map((n) => (
+                  <Link
+                    key={n.href}
+                    href={n.href}
+                    className={`focus-ring rounded-[var(--radius-sm)] px-2.5 py-2 text-[13px] transition-colors ${
+                      active === n.href ? "bg-surface-3 text-ink" : "text-ink-subtle hover:bg-surface-1 hover:text-ink"
+                    }`}
+                  >
+                    {n.label}
+                  </Link>
+                ))}
+              </nav>
+            </details>
           </div>
         </div>
       </header>
-      <main className="mx-auto w-full max-w-[1240px] flex-1 px-6 py-8">{children}</main>
+      <main className="mx-auto w-full max-w-[1240px] flex-1 px-4 py-6 sm:px-6 sm:py-8">{children}</main>
       <footer className="hairline-t mt-16">
         <div className="mx-auto flex w-full max-w-[1240px] flex-wrap items-center gap-x-6 gap-y-2 px-6 py-6 text-[12px] text-ink-tertiary">
           <span>Tickmark</span>

@@ -22,6 +22,9 @@ export default async function EntriesPage() {
           arithmetically by the database, not taken from the model — and the approver has to be
           someone other than the preparer.
         </p>
+        <p className="mt-2 text-[12px] text-ink-tertiary">
+          Showing the latest persisted close run only, so reruns never duplicate the approval queue.
+        </p>
       </div>
 
       {pending.length ? (

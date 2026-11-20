@@ -17,9 +17,19 @@ export interface PendingEntry {
 
 export async function listEntries(status = "pending_approval"): Promise<PendingEntry[]> {
   const c = db();
+  const { data: latestRun } = await c
+    .from("close_runs")
+    .select("id")
+    .eq("status", "succeeded")
+    .order("started_at", { ascending: false })
+    .limit(1)
+    .maybeSingle();
+  if (!latestRun?.id) return [];
+
   const { data } = await c
     .from("journal_entries")
     .select("id, kind, memo, lines, preparer, status, created_at, periods(code)")
+    .eq("close_run_id", latestRun.id)
     .eq("status", status)
     .order("created_at", { ascending: false })
     .limit(50);

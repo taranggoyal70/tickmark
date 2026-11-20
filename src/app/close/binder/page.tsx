@@ -38,6 +38,9 @@ export default async function BinderPage(props: PageProps<"/close/binder">) {
             be a file — not a week of reconstructing it. Everything here is read back from the
             ledger; nothing is recomputed for the report.
           </p>
+          <p className="mt-2 text-[12px] text-ink-tertiary">
+            Snapshot scope: the latest successful persisted close run for this period.
+          </p>
         </div>
         <nav className="flex flex-wrap gap-1.5">
           {entity.periods.map((p) => (
@@ -57,10 +60,10 @@ export default async function BinderPage(props: PageProps<"/close/binder">) {
             <div className="grid gap-4 sm:grid-cols-5">
               {[
                 ["Tickmarks standing", String(b.counts.tickmarks)],
-                ["Exceptions", String(b.counts.exceptions)],
+                ["Exceptions in run", String(b.counts.exceptions)],
                 ["Still open", String(b.counts.unresolved)],
                 ["Journal entries", String(b.counts.entries)],
-                ["Rules in force", String(b.counts.rules)],
+                ["Rules linked", String(b.counts.rules)],
               ].map(([l, v]) => (
                 <div key={l}>
                   <div className="eyebrow mb-1.5">{l}</div>
@@ -139,10 +142,16 @@ export default async function BinderPage(props: PageProps<"/close/binder">) {
               </Panel>
 
               <Panel className="p-5">
-                <h3 className="mb-1 text-[15px] font-medium text-ink">Rules that decided anything</h3>
-                <p className="mb-3 text-[12px] text-ink-subtle">Each with the corrections that authorised it and its replay.</p>
+                <h3 className="mb-1 text-[15px] font-medium text-ink">Linked rule evidence</h3>
+                <p className="mb-3 text-[12px] text-ink-subtle">
+                  Included only when the persisted tickmark identifies the rule that decided it.
+                </p>
                 {b.rulesApplied.length === 0 ? (
-                  <p className="text-[13px] text-ink-subtle">No rules in force.</p>
+                  <p className="text-[13px] text-ink-subtle">
+                    {b.run && b.run.ruleHits > 0
+                      ? "This historical run predates rule-ID retention; new runs preserve the link."
+                      : "No linked rules in this run."}
+                  </p>
                 ) : (
                   <ul className="space-y-1.5">
                     {b.rulesApplied.map((r, i) => (

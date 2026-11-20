@@ -26,8 +26,8 @@ export default async function CloseRoomPage() {
         </h1>
         <p className="mt-3 max-w-2xl text-[14px] leading-relaxed text-ink-subtle">
           {cold.period} on the left, {trained.period} on the right — identical books, identical model.
-          Every decision is replayed from a recorded run at the speed it actually costs: a compiled rule
-          is a predicate check, a model call is not. Watch the right-hand queue stay short.
+          Every recorded decision is replayed in sequence: compiled rules settle instantly, while
+          model-decided items reveal where agent work remained. Watch the right-hand queue stay short.
         </p>
       </div>
 
