@@ -23,9 +23,14 @@ function isDark() {
   return window.matchMedia("(prefers-color-scheme: dark)").matches;
 }
 
+/** True or false once the client knows the theme; null during server render. */
+export function useIsDark() {
+  return useSyncExternalStore(subscribe, isDark, () => null);
+}
+
 export function ThemeToggle() {
   // null on the server: render a stable label until the client knows
-  const dark = useSyncExternalStore(subscribe, isDark, () => null);
+  const dark = useIsDark();
 
   const flip = () => {
     const next = isDark() ? "light" : "dark";

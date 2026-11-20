@@ -1,5 +1,4 @@
-import { SignIn } from "@clerk/nextjs";
-import { clerkAppearance } from "@/lib/clerk-appearance";
+import { ThemedSignIn } from "@/components/clerk-themed";
 import { Mark } from "@/components/shell";
 import { authConfigured } from "@/lib/auth";
 
@@ -11,7 +10,7 @@ export default function SignInPage() {
         <span className="text-[17px] font-semibold tracking-[-0.02em]">Tickmark</span>
       </div>
       {authConfigured() ? (
-        <SignIn appearance={clerkAppearance} />
+        <ThemedSignIn />
       ) : (
         <p className="max-w-sm text-center text-[14px] leading-relaxed text-ink-subtle">
           Sign-in is not configured on this deployment, so it runs read-only. Set the Clerk keys

@@ -1,4 +1,4 @@
-import { UserButton } from "@clerk/nextjs";
+import { ThemedUserButton } from "./clerk-themed";
 import Link from "next/link";
 import { authConfigured } from "@/lib/auth";
 import { ThemeToggle } from "./theme-toggle";
@@ -64,7 +64,7 @@ export function Shell({ children, active }: { children: ReactNode; active?: stri
           </nav>
           <div className="ml-auto flex items-center gap-2.5">
             <ThemeToggle />
-            {authConfigured() ? <UserButton appearance={{ elements: { avatarBox: { width: 26, height: 26 } } }} /> : null}
+            {authConfigured() ? <ThemedUserButton /> : null}
             <details className="relative min-[1180px]:hidden">
               <summary className="btn btn-sm cursor-pointer list-none marker:content-none">Menu</summary>
               <nav aria-label="Close workspace" className="panel-raised absolute right-0 top-11 flex w-56 flex-col gap-0.5 p-2">

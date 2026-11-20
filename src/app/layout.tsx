@@ -31,7 +31,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   if (!authConfigured()) return page;
   return (
     <ClerkProvider
-      appearance={clerkAppearance}
+      appearance={clerkAppearance()}
       // Clerk titles the widget with the application name, which the Vercel
       // integration created as "tickmark-auth". Say the product's name instead.
       localization={{
