@@ -8,9 +8,9 @@ const FILES = [
   { name: "bank", label: "Bank statement", hint: "external_id, posted_date, description, amount", required: true },
   { name: "invoices", label: "AP invoices", hint: "vendor, invoice_number, invoice_date, amount", required: true },
   { name: "ledger", label: "General ledger", hint: "external_id, entry_date, gl_code, amount, memo", required: false },
-  { name: "chart", label: "Chart of accounts", hint: "code, name, type — a standard one is used if omitted", required: false },
+  { name: "chart", label: "Chart of accounts", hint: "code, name, type; a standard one is used if omitted", required: false },
   { name: "vendors", label: "Vendor list", hint: "name, bank_aliases separated by |", required: false },
-  { name: "settlements", label: "Processor payouts", hint: "Dodo / Stripe breakup: gross, fee, net — expanded automatically", required: false },
+  { name: "settlements", label: "Processor payouts", hint: "Dodo / Stripe breakup: gross, fee, net; expanded automatically", required: false },
 ];
 
 export function ImportForm() {
@@ -49,7 +49,7 @@ export function ImportForm() {
         <h2 className="card-title mb-1 text-ink">Your books</h2>
         <p className="mb-4 text-[13px] text-ink-subtle">
           CSV exports, as they come out of your bank and your bookkeeping system. Headers are matched
-          loosely — <span className="nums">Posted Date</span>, <span className="nums">posted_date</span> and{" "}
+          loosely: <span className="nums">Posted Date</span>, <span className="nums">posted_date</span> and{" "}
           <span className="nums">POSTED-DATE</span> all work, and{" "}
           <span className="nums">$1,234.56</span>, <span className="nums">(1,234.56)</span> and{" "}
           <span className="nums">-1234.56</span> all mean the same thing.
@@ -59,7 +59,7 @@ export function ImportForm() {
             <label key={f.name} className="flex flex-wrap items-center gap-3 rounded-[var(--radius-md)] border border-hairline bg-surface-1 px-3 py-2.5">
               <span className="min-w-[9.5rem] text-[13px] font-medium text-ink">
                 {f.label}
-                {f.required ? <span className="text-[var(--danger)]"> *</span> : <span className="text-ink-tertiary"> — optional</span>}
+                {f.required ? <span className="text-[var(--danger)]"> *</span> : <span className="text-ink-tertiary"> · optional</span>}
               </span>
               <input type="file" name={f.name} accept=".csv,text/csv" required={f.required}
                 className="text-[12px] text-ink-subtle file:mr-3 file:rounded-[var(--radius-sm)] file:border file:border-hairline file:bg-surface-2 file:px-2.5 file:py-1 file:text-[12px] file:text-ink" />
@@ -94,7 +94,7 @@ export function ImportForm() {
           {outcome.warnings?.length ? (
             <ul className="mt-3 space-y-1">
               {outcome.warnings.map((w, i) => (
-                <li key={i} className="text-[12px] leading-snug text-[#8a5a00]">{w}</li>
+                <li key={i} className="text-[12px] leading-snug text-signal-ink">{w}</li>
               ))}
             </ul>
           ) : null}
@@ -106,7 +106,7 @@ export function ImportForm() {
               </p>
               <ul className="nums mt-1.5 space-y-0.5">
                 {outcome.rejected.map((r, i) => (
-                  <li key={i} className="text-[12px] text-ink-muted">{r.table} row {r.row} — {r.reason}</li>
+                  <li key={i} className="text-[12px] text-ink-muted">{r.table} row {r.row}: {r.reason}</li>
                 ))}
               </ul>
             </div>

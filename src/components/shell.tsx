@@ -1,6 +1,7 @@
 import { UserButton } from "@clerk/nextjs";
 import Link from "next/link";
 import { authConfigured } from "@/lib/auth";
+import { ThemeToggle } from "./theme-toggle";
 import type { ReactNode } from "react";
 
 const NAV = [
@@ -25,83 +26,86 @@ export function Mark({ className = "" }: { className?: string }) {
   );
 }
 
+/** The wordmark: the check in signal, the name in ink. */
+export function Logo() {
+  return (
+    <Link href="/" className="focus-ring flex shrink-0 items-center gap-2 rounded">
+      <Mark className="h-[15px] w-[15px] text-signal" />
+      <span className="text-[15px] font-semibold tracking-[-0.02em] text-ink">Tickmark</span>
+    </Link>
+  );
+}
+
+function NavLink({ href, label, active, block = false }: { href: string; label: string; active: boolean; block?: boolean }) {
+  return (
+    <Link
+      href={href}
+      aria-current={active ? "page" : undefined}
+      className={`focus-ring relative font-mono text-[12.5px] font-medium transition-colors ${
+        block ? "rounded-[var(--radius-sm)] px-2.5 py-2" : "py-1"
+      } ${active ? "text-ink" : "text-muted hover:text-ink"}`}
+    >
+      {label}
+      {active && !block ? (
+        <span aria-hidden="true" className="absolute -bottom-[9px] left-1/2 h-1 w-1 -translate-x-1/2 bg-signal" />
+      ) : null}
+    </Link>
+  );
+}
+
 export function Shell({ children, active }: { children: ReactNode; active?: string }) {
   return (
     <div className="flex min-h-full flex-col">
-      <header className="hairline-b sticky top-0 z-20 bg-[color-mix(in_oklab,var(--canvas)_88%,transparent)] backdrop-blur">
-        <div className="mx-auto flex h-14 w-full max-w-[1240px] items-center gap-4 px-4 sm:px-6">
-          <Link href="/" className="focus-ring flex items-center gap-2 rounded">
-            <Mark className="h-4 w-4 text-[var(--primary)]" />
-            <span className="text-[14px] font-semibold tracking-[-0.01em]">Tickmark</span>
-          </Link>
-          <nav aria-label="Close workspace" className="hidden items-center gap-1 lg:flex">
-            {NAV.map((n) => (
-              <Link
-                key={n.href}
-                href={n.href}
-                className={`focus-ring rounded-[var(--radius-sm)] px-2.5 py-1.5 text-[13px] transition-colors ${
-                  active === n.href ? "bg-surface-3 text-ink" : "text-ink-subtle hover:text-ink"
-                }`}
-              >
-                {n.label}
-              </Link>
-            ))}
+      <header className="sticky top-0 z-20 border-b border-line bg-[var(--nav-bg)] backdrop-blur-md backdrop-saturate-150">
+        <div className="wrap flex h-[60px] items-center gap-7">
+          <Logo />
+          <nav aria-label="Close workspace" className="hidden items-center gap-[18px] min-[1180px]:flex">
+            {NAV.map((n) => <NavLink key={n.href} {...n} active={active === n.href} />)}
           </nav>
-          <div className="ml-auto flex items-center gap-3 text-[12px] text-ink-tertiary">
-            <span className="hidden xl:inline">Northwind Robotics, Inc. · synthetic demo</span>
+          <div className="ml-auto flex items-center gap-2.5">
+            <ThemeToggle />
             {authConfigured() ? <UserButton appearance={{ elements: { avatarBox: { width: 26, height: 26 } } }} /> : null}
-            <details className="relative lg:hidden">
-              <summary className="focus-ring cursor-pointer list-none rounded-[var(--radius-md)] border border-hairline bg-surface-1 px-3 py-1.5 text-[13px] font-medium text-ink marker:content-none">
-                Menu
-              </summary>
-              <nav aria-label="Close workspace" className="panel absolute right-0 top-10 flex w-52 flex-col gap-1 p-2 shadow-lg">
-                <div className="px-2 py-1.5 text-[11px] leading-snug text-ink-tertiary">
-                  Northwind Robotics, Inc.<br />Synthetic demo data
-                </div>
-                {NAV.map((n) => (
-                  <Link
-                    key={n.href}
-                    href={n.href}
-                    className={`focus-ring rounded-[var(--radius-sm)] px-2.5 py-2 text-[13px] transition-colors ${
-                      active === n.href ? "bg-surface-3 text-ink" : "text-ink-subtle hover:bg-surface-1 hover:text-ink"
-                    }`}
-                  >
-                    {n.label}
-                  </Link>
-                ))}
+            <details className="relative min-[1180px]:hidden">
+              <summary className="btn btn-sm cursor-pointer list-none marker:content-none">Menu</summary>
+              <nav aria-label="Close workspace" className="panel-raised absolute right-0 top-11 flex w-56 flex-col gap-0.5 p-2">
+                <div className="label px-2.5 pt-1.5 pb-2 leading-snug">Northwind Robotics · synthetic books</div>
+                {NAV.map((n) => <NavLink key={n.href} {...n} active={active === n.href} block />)}
               </nav>
             </details>
           </div>
         </div>
       </header>
-      <main className="mx-auto w-full max-w-[1240px] flex-1 px-4 py-6 sm:px-6 sm:py-8">{children}</main>
-      <footer className="hairline-t mt-16">
-        <div className="mx-auto flex w-full max-w-[1240px] flex-wrap items-center gap-x-6 gap-y-2 px-6 py-6 text-[12px] text-ink-tertiary">
-          <span>Tickmark</span>
-          <span>Every automated decision traces to a Rule or a Close Run. No orphan decisions.</span>
+      <main className="wrap flex-1 py-8 sm:py-12">{children}</main>
+      <footer className="mt-16 border-t border-line">
+        <div className="wrap flex flex-wrap justify-between gap-x-6 gap-y-2 py-6 font-mono text-[11.5px] text-muted">
+          <span>Tickmark · every automated decision traces to a rule or a close run</span>
+          <span>Northwind Robotics, Inc. · synthetic books, no real financial data</span>
         </div>
       </footer>
     </div>
   );
 }
 
+/** A screen with nothing to show yet: say why, and what fills it. */
+export function Empty({ title, children }: { title: string; children: ReactNode }) {
+  return (
+    <div className="fig-frame rounded-[var(--radius-lg)] border border-line px-6 py-16 text-center">
+      <Mark className="mx-auto h-5 w-5 text-faint" />
+      <h2 className="headline mt-5 text-ink">{title}</h2>
+      <div className="mx-auto mt-3 max-w-md text-[14px] leading-relaxed text-muted">{children}</div>
+    </div>
+  );
+}
+
 export function EmptyRun() {
   return (
-    <div className="panel p-8 text-center">
-      <Mark className="mx-auto h-6 w-6 text-[var(--ink-tertiary)]" />
-      <h2 className="card-title mt-4 text-ink">No close run yet</h2>
-      <p className="mx-auto mt-2 max-w-md text-[13px] leading-relaxed text-ink-subtle">
-        The dashboard renders measured results only - nothing here is illustrative.
-        Run the harness to populate it:
+    <Empty title="No close run yet">
+      <p>This screen renders a recorded run and nothing illustrative. Record one with</p>
+      <pre className="mx-auto mt-4 w-fit rounded-[var(--radius-md)] border border-line bg-surface px-3 py-2 text-left font-mono text-[12px] text-ink-2">npm run simulate</pre>
+      <p className="mt-3 text-[12px]">
+        It needs a model credential: a card on the Vercel AI Gateway, or
+        <code className="mx-1 font-mono">ANTHROPIC_API_KEY</code> in <code className="font-mono">.env.local</code>.
       </p>
-      <pre className="mx-auto mt-4 w-fit rounded-[var(--radius-md)] border border-hairline bg-surface-2 px-3 py-2 text-left font-mono text-[12px] text-ink-muted">
-npm run simulate
-      </pre>
-      <p className="mx-auto mt-3 max-w-md text-[12px] text-ink-tertiary">
-        Needs a model credential: either a card on the Vercel AI Gateway, or
-        <code className="mx-1 rounded bg-surface-3 px-1 py-0.5 font-mono">ANTHROPIC_API_KEY</code>
-        in <code className="rounded bg-surface-3 px-1 py-0.5 font-mono">.env.local</code>.
-      </p>
-    </div>
+    </Empty>
   );
 }

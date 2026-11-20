@@ -8,21 +8,20 @@ export function ProvenanceBanner({ report }: { report: SimulationReport }) {
   const degraded = report.periods.some((p) => p.stats.modelFailures > 0 || p.gradientSkipped);
   if (report.provenance !== "mock" && !degraded) return null;
 
-  const title = report.provenance === "mock"
-    ? "Mechanism test, not a measured result."
-    : "Recorded safely during a model-provider outage.";
+  const title = report.provenance === "mock" ? "Mechanism test" : "Recorded during an outage";
   const detail = report.provenance === "mock"
-    ? <>These figures came from a deterministic stand-in that answers from ground truth — they show the loop is wired,
-        not how a real model performs. Run <code className="rounded bg-surface-3 px-1 py-0.5 font-mono text-[12px]">npm run simulate</code> for measured numbers.</>
+    ? <>These figures come from a deterministic stand-in that answers from ground truth. They show the loop is wired,
+        not how a real model performs. <code className="font-mono text-[12px] text-ink">npm run simulate</code> records measured numbers.</>
     : <>The Rulebook still ran and every undecided line went to the controller queue, but unavailable model batches and
-        gradient steps were skipped. These figures demonstrate fail-safe behavior, not model quality.</>;
+        gradient steps were skipped. These figures show fail-safe behaviour, not model quality.</>;
 
   return (
-    <div className="mb-6 rounded-[var(--radius-lg)] border border-[#fab219]/50 bg-[#fab219]/12 px-4 py-3">
-      <div className="flex flex-wrap items-baseline gap-x-2 gap-y-1 text-[13px]">
-        <span className="font-medium text-[#8a5a00]">{title}</span>
-        <span className="text-ink-muted">{detail}</span>
-      </div>
+    <div className="mb-8 flex flex-wrap items-baseline gap-x-4 gap-y-1.5 border-y border-line py-3 text-[13px] leading-relaxed">
+      <span className="label inline-flex shrink-0 items-center gap-2 text-ink">
+        <span aria-hidden="true" className="inline-block h-1.5 w-1.5 bg-signal" />
+        {title}
+      </span>
+      <span className="min-w-0 flex-1 basis-80 text-muted">{detail}</span>
     </div>
   );
 }

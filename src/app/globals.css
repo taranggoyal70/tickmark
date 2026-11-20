@@ -1,110 +1,309 @@
 @import "tailwindcss";
 
 /*
- * Design tokens ported from VoltAgent/awesome-design-md -> design-md/stripe.
- * A financial-infrastructure palette: white canvas, near-white card surfaces,
- * deep navy ink, one electric indigo accent, hairline borders. Light on
- * purpose - this is a tool a controller opens in daylight next to a
- * spreadsheet, not a code editor at midnight.
+ * Paper, ink and one signal colour. The page reads like a well-set working
+ * paper: warm off-white ground, near-black type, hairline rules, small
+ * monospace labels, and vermilion kept for the one thing that needs a person -
+ * the exception. Everything a rule settled is ink; everything still open is
+ * signal. Dark mode is chosen, not inverted: its own steps, checked against
+ * its own ground.
  */
 :root {
-  --canvas:         #ffffff;
-  --surface-1:      #f6f9fc;
-  --surface-2:      #ffffff;
-  --surface-3:      #eef3f9;
-  --surface-4:      #e7eef6;
-  --hairline:       #e3e8ee;
-  --hairline-strong:#cfd9e4;
-  --hairline-3:     #b9c6d6;
+  color-scheme: light;
+  --bg:         #f3f2ee;
+  --bg-2:       #eae8e2;
+  --surface:    #fbfaf8;
+  --line:       rgb(22 21 19 / 0.09);
+  --line-2:     rgb(22 21 19 / 0.17);
+  --line-3:     rgb(22 21 19 / 0.28);
+  --ink:        #161513;
+  --ink-2:      #44423d;
+  --muted:      #706d66;
+  --faint:      #b5b2aa;
+  --signal:     #e2501d;
+  --signal-ink: #b23a0f;
+  --signal-bg:  rgb(226 80 29 / 0.08);
+  --ok:         #2c7a4b;
+  --ok-bg:      rgb(44 122 75 / 0.09);
+  --on-ink:     #f3f2ee;
+  --nav-bg:     rgb(243 242 238 / 0.82);
+  --shadow:     0 1px 0 rgb(22 21 19 / 0.04), 0 12px 32px -18px rgb(40 32 20 / 0.22);
+  /* the decision that was left to the model: a warm mid grey between ink and paper */
+  --model:      #8e897f;
+}
 
-  --ink:            #0d253d;
-  --ink-muted:      #273951;
-  --ink-subtle:     #64748d;
-  --ink-tertiary:   #8a99ad;
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
+    --bg:         #0f0f0e;
+    --bg-2:       #0a0a09;
+    --surface:    #171716;
+    --line:       rgb(236 234 228 / 0.08);
+    --line-2:     rgb(236 234 228 / 0.15);
+    --line-3:     rgb(236 234 228 / 0.26);
+    --ink:        #eceae4;
+    --ink-2:      #b8b5ad;
+    --muted:      #8d8a83;
+    --faint:      #4b4945;
+    --signal:     #ff6a3d;
+    --signal-ink: #ff8a64;
+    --signal-bg:  rgb(255 106 61 / 0.1);
+    --ok:         #5dc48a;
+    --ok-bg:      rgb(93 196 138 / 0.1);
+    --on-ink:     #0f0f0e;
+    --nav-bg:     rgb(15 15 14 / 0.8);
+    --shadow:     0 1px 0 rgb(0 0 0 / 0.3), 0 12px 32px -18px rgb(0 0 0 / 0.6);
+    --model:      #6b675f;
+  }
+}
 
-  --primary:        #533afd;
-  --primary-hover:  #4434d4;
-  --primary-press:  #2e2b8c;
-  --primary-soft:   #665efd;
-  --on-primary:     #ffffff;
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --bg:         #0f0f0e;
+  --bg-2:       #0a0a09;
+  --surface:    #171716;
+  --line:       rgb(236 234 228 / 0.08);
+  --line-2:     rgb(236 234 228 / 0.15);
+  --line-3:     rgb(236 234 228 / 0.26);
+  --ink:        #eceae4;
+  --ink-2:      #b8b5ad;
+  --muted:      #8d8a83;
+  --faint:      #4b4945;
+  --signal:     #ff6a3d;
+  --signal-ink: #ff8a64;
+  --signal-bg:  rgb(255 106 61 / 0.1);
+  --ok:         #5dc48a;
+  --ok-bg:      rgb(93 196 138 / 0.1);
+  --on-ink:     #0f0f0e;
+  --nav-bg:     rgb(15 15 14 / 0.8);
+  --shadow:     0 1px 0 rgb(0 0 0 / 0.3), 0 12px 32px -18px rgb(0 0 0 / 0.6);
+  --model:      #6b675f;
+}
 
-  /* status: darkened for legible text on a white ground */
-  --success:        #0f7a34;
-  --warning:        #8a5a00;
-  --danger:         #b3261e;
+/*
+ * The names the app's screens were written against, pointed at the system
+ * above, so every screen changes with one set of tokens.
+ */
+:root {
+  --canvas:          var(--bg);
+  --surface-1:       var(--surface);
+  --surface-2:       var(--surface);
+  --surface-3:       var(--bg-2);
+  --surface-4:       var(--bg-2);
+  --hairline:        var(--line);
+  --hairline-strong: var(--line-2);
+  --hairline-3:      var(--line-3);
+  --ink-muted:       var(--ink-2);
+  --ink-subtle:      var(--muted);
+  --ink-tertiary:    var(--muted);
+  --primary:         var(--ink);
+  --primary-hover:   var(--ink-2);
+  --on-primary:      var(--on-ink);
+  --success:         var(--ok);
+  --warning:         var(--signal-ink);
+  --danger:          var(--signal-ink);
+  --maxw:            1200px;
+  --gutter:          clamp(16px, 4vw, 40px);
+  --ease:            cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-in-out:     cubic-bezier(0.65, 0, 0.35, 1);
 }
 
 @theme inline {
-  --color-canvas: var(--canvas);
-  --color-surface-1: var(--surface-1);
-  --color-surface-2: var(--surface-2);
-  --color-surface-3: var(--surface-3);
-  --color-surface-4: var(--surface-4);
-  --color-hairline: var(--hairline);
-  --color-hairline-strong: var(--hairline-strong);
+  --color-canvas: var(--bg);
+  --color-bg-2: var(--bg-2);
+  --color-surface: var(--surface);
+  --color-surface-1: var(--surface);
+  --color-surface-2: var(--surface);
+  --color-surface-3: var(--bg-2);
+  --color-surface-4: var(--bg-2);
+  --color-line: var(--line);
+  --color-line-2: var(--line-2);
+  --color-hairline: var(--line);
+  --color-hairline-strong: var(--line-2);
   --color-ink: var(--ink);
-  --color-ink-muted: var(--ink-muted);
-  --color-ink-subtle: var(--ink-subtle);
-  --color-ink-tertiary: var(--ink-tertiary);
-  --color-primary: var(--primary);
-  --color-primary-hover: var(--primary-hover);
-  --color-on-primary: var(--on-primary);
-  --color-success: var(--success);
-  --color-warning: var(--warning);
-  --color-danger: var(--danger);
+  --color-ink-2: var(--ink-2);
+  --color-ink-muted: var(--ink-2);
+  --color-ink-subtle: var(--muted);
+  --color-ink-tertiary: var(--muted);
+  --color-muted: var(--muted);
+  --color-faint: var(--faint);
+  --color-signal: var(--signal);
+  --color-signal-ink: var(--signal-ink);
+  --color-primary: var(--ink);
+  --color-primary-hover: var(--ink-2);
+  --color-on-primary: var(--on-ink);
+  --color-success: var(--ok);
+  --color-warning: var(--signal-ink);
+  --color-danger: var(--signal-ink);
 
-  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
-  --font-mono: var(--font-mono-face), ui-monospace, "SF Mono", monospace;
+  --font-sans: var(--font-geist), ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, "SF Mono", SFMono-Regular, Menlo, monospace;
 
   --radius-xs: 4px;
   --radius-sm: 6px;
   --radius-md: 8px;
-  --radius-lg: 12px;
-  --radius-xl: 16px;
-  --radius-2xl: 24px;
+  --radius-lg: 10px;
+  --radius-xl: 12px;
+  --radius-2xl: 16px;
 }
 
-html { color-scheme: light; }
+html { background: var(--bg); text-size-adjust: 100%; }
 
 body {
-  background: var(--canvas);
+  background: var(--bg);
   color: var(--ink);
-  font-family: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  font-family: var(--font-geist), ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-feature-settings: "ss01", "cv11";
+  text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
+  transition: background-color 0.3s, color 0.3s;
 }
 
-/* Display type: light weights with negative tracking, per the source system. */
-.display-xl { font-size: clamp(38px, 5.6vw, 56px); font-weight: 300; line-height: 1.03; letter-spacing: -0.025em; }
-.display-lg { font-size: clamp(30px, 4vw, 48px);  font-weight: 300; line-height: 1.10; letter-spacing: -0.02em; }
-.display-md { font-size: clamp(24px, 2.8vw, 32px);font-weight: 300; line-height: 1.12; letter-spacing: -0.02em; }
-.headline   { font-size: 26px; font-weight: 400; line-height: 1.15; letter-spacing: -0.012em; }
-.card-title { font-size: 20px; font-weight: 500; line-height: 1.25; letter-spacing: -0.01em; }
-.eyebrow    { font-size: 11px; font-weight: 600; line-height: 1.30; letter-spacing: 0.09em; text-transform: uppercase; color: var(--ink-subtle); }
+::selection { background: var(--ink); color: var(--on-ink); }
 
-/* Cards sit on near-white with a hairline and the faintest lift. */
+/* Component classes sit in a layer below utilities, so a utility on the same
+   element always wins. */
+@layer components {
+
+/* ── type ─────────────────────────────────────────────────────────────────── */
+
+/* Display type: medium weight, very tight tracking, set large. */
+.display-xl { font-size: clamp(48px, min(9vw, 13vh), 128px); font-weight: 500; line-height: 0.92; letter-spacing: -0.058em; }
+.display-lg { font-size: clamp(34px, 4.4vw, 60px); font-weight: 500; line-height: 1.02; letter-spacing: -0.042em; text-wrap: balance; }
+.display-md { font-size: clamp(30px, 3.4vw, 46px); font-weight: 500; line-height: 1.02; letter-spacing: -0.04em; text-wrap: balance; }
+.headline   { font-size: 26px; font-weight: 500; line-height: 1.12; letter-spacing: -0.03em; }
+.card-title { font-size: 18px; font-weight: 500; line-height: 1.25; letter-spacing: -0.02em; }
+.lede       { font-size: clamp(16px, 1.3vw, 18px); line-height: 1.6; color: var(--ink-2); text-wrap: pretty; }
+
+/* Labels are set in mono, small and spaced: the margin notes of the page. */
+.eyebrow, .label { font: 500 11px/1.2 var(--font-geist-mono), ui-monospace, monospace; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); }
+.mono { font-family: var(--font-geist-mono), ui-monospace, monospace; }
+
+/* ── surfaces ─────────────────────────────────────────────────────────────── */
+
 .panel {
-  background: var(--surface-2);
-  border: 1px solid var(--hairline);
+  background: var(--surface);
+  border: 1px solid var(--line);
   border-radius: var(--radius-lg);
-  box-shadow: 0 1px 2px rgb(13 37 61 / 0.04);
 }
-.panel-2 { background: var(--surface-1); border: 1px solid var(--hairline); border-radius: var(--radius-lg); }
+.panel-raised {
+  background: var(--surface);
+  border: 1px solid var(--line-2);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow);
+}
+.panel-2 { background: var(--bg-2); border: 1px solid var(--line); border-radius: var(--radius-lg); }
 
-.hairline-t { border-top: 1px solid var(--hairline); }
-.hairline-b { border-bottom: 1px solid var(--hairline); }
+.hairline-t { border-top: 1px solid var(--line); }
+.hairline-b { border-bottom: 1px solid var(--line); }
+
+/* A rule of ink opens a block of figures, like the head of a ledger. */
+.ink-rule { border-top: 1px solid var(--ink); }
+
+/* Figures sit on a faint dot grid between two hairlines. */
+.fig-frame {
+  position: relative;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  background-color: var(--bg);
+  background-image: radial-gradient(var(--line-2) 0.8px, transparent 0.8px);
+  background-size: 16px 16px;
+  background-position: center;
+}
+.fig-cap { display: flex; flex-wrap: wrap; gap: 6px 14px; padding: 14px 0; font: 12px/1.5 var(--font-geist-mono), ui-monospace, monospace; color: var(--muted); }
+.fig-cap .n { flex: 0 0 auto; color: var(--ink); }
+
+/* Sections open on a hairline with a crosshair at each edge of the column. */
+.sec { position: relative; border-top: 1px solid var(--line); }
+.sec::before, .sec::after {
+  content: ""; position: absolute; top: -5px; width: 9px; height: 9px; margin-left: -4px;
+  background:
+    linear-gradient(var(--muted), var(--muted)) center / 9px 1px no-repeat,
+    linear-gradient(var(--muted), var(--muted)) center / 1px 9px no-repeat;
+}
+.sec::before { left: max(4px, calc(50% - var(--maxw) / 2)); }
+.sec::after { left: min(calc(100% - 5px), calc(50% + var(--maxw) / 2)); }
+
+/* Two hairlines run down the page at the edges of the column. */
+.sheet {
+  position: relative;
+  --edge-l: max(0px, calc(50% - var(--maxw) / 2));
+  --edge-r: min(100%, calc(50% + var(--maxw) / 2 - 1px));
+  background:
+    linear-gradient(var(--line), var(--line)) var(--edge-l) 0 / 1px 100% no-repeat,
+    linear-gradient(var(--line), var(--line)) var(--edge-r) 0 / 1px 100% no-repeat;
+}
+
+.wrap { width: 100%; max-width: var(--maxw); margin: 0 auto; padding: 0 var(--gutter); }
+
+/* ── controls ─────────────────────────────────────────────────────────────── */
+
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+  height: 40px; padding: 0 16px; border: 1px solid var(--line-2); border-radius: 8px;
+  background: transparent; color: var(--ink);
+  font: 500 14px/1 var(--font-geist), ui-sans-serif, sans-serif; letter-spacing: -0.005em;
+  white-space: nowrap; cursor: pointer; user-select: none;
+  transition: transform 0.16s var(--ease), background 0.2s, border-color 0.2s, color 0.2s;
+}
+.btn:hover { border-color: var(--ink-2); }
+.btn:active { transform: scale(0.97); }
+.btn:disabled { opacity: 0.4; cursor: default; transform: none; }
+.btn-sm { height: 34px; padding: 0 12px; font-size: 13px; }
+.btn-primary { background: var(--ink); border-color: var(--ink); color: var(--on-ink); }
+.btn-primary:hover { background: var(--ink-2); border-color: var(--ink-2); }
+.btn-signal { background: var(--signal); border-color: var(--signal); color: #fff; }
+.btn-signal:hover { background: var(--signal-ink); border-color: var(--signal-ink); }
+.btn .arrow { transition: transform 0.25s var(--ease); }
+.btn:hover .arrow { transform: translateX(2px); }
+
+.tag {
+  display: inline-flex; align-items: center; gap: 6px; height: fit-content;
+  padding: 3px 6px; border-radius: 4px; background: var(--bg-2); color: var(--ink-2);
+  font: 500 10px/1.2 var(--font-geist-mono), ui-monospace, monospace; letter-spacing: 0.03em;
+  text-transform: uppercase; white-space: nowrap;
+}
+
+.kbd {
+  display: inline-grid; place-items: center; min-width: 18px; height: 18px; padding: 0 4px;
+  border: 1px solid currentColor; border-radius: 4px;
+  font: 500 10.5px/1 var(--font-geist-mono), ui-monospace, monospace; opacity: 0.6;
+}
 
 /* Tabular figures everywhere money or a metric is shown. */
 .nums { font-variant-numeric: tabular-nums; font-feature-settings: "tnum" 1; }
 
-.focus-ring:focus-visible { outline: 2px solid var(--primary); outline-offset: 2px; }
+:focus-visible { outline: 2px solid var(--signal); outline-offset: 3px; border-radius: 4px; }
+.focus-ring:focus-visible { outline: 2px solid var(--signal); outline-offset: 2px; }
 
-::selection { background: color-mix(in oklab, var(--primary) 22%, transparent); }
+/* ── motion ───────────────────────────────────────────────────────────────── */
+
+@keyframes rise { from { opacity: 0; transform: translateY(10px); } }
+@keyframes word { from { transform: translateY(108%); } }
+@keyframes grow-x { from { transform: scaleX(0); } }
+@keyframes cell { from { opacity: 0; transform: scaleY(0.2); } }
+@keyframes blink { 50% { opacity: 0.25; } }
+@keyframes breathe { 50% { opacity: 0.35; } }
+
+.rise { animation: rise 0.8s var(--ease) both; animation-delay: var(--d, 0s); }
+.split-line { display: inline-block; overflow: hidden; padding-bottom: 0.14em; margin-bottom: -0.14em; vertical-align: top; }
+.split-line > span { display: inline-block; animation: word 0.9s var(--ease) both; animation-delay: var(--d, 0s); }
 
 ::-webkit-scrollbar { width: 10px; height: 10px; }
 ::-webkit-scrollbar-track { background: transparent; }
-::-webkit-scrollbar-thumb { background: var(--hairline-strong); border-radius: 999px; border: 2px solid var(--canvas); }
-::-webkit-scrollbar-thumb:hover { background: var(--hairline-3); }
+::-webkit-scrollbar-thumb { background: var(--line-2); border-radius: 999px; border: 2px solid var(--bg); }
+::-webkit-scrollbar-thumb:hover { background: var(--line-3); }
 
 @media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; }
+  *, *::before, *::after { animation-duration: 0.001ms !important; animation-iteration-count: 1 !important; transition-duration: 0.001ms !important; scroll-behavior: auto !important; }
+}
+
+/* ── strips: one mark per decision ────────────────────────────────────────── */
+
+.strip { display: grid; grid-auto-flow: column; grid-auto-columns: minmax(0, 1fr); gap: 1px; height: 22px; }
+.strip i { display: block; background: var(--ink); transform-origin: bottom; animation: cell 0.5s var(--ease) both; animation-delay: calc(var(--row, 0) * 140ms + var(--i, 0) * 2.2ms + 0.3s); }
+.strip i[data-k="model"] { background: var(--model); }
+.strip i[data-k="exception"] { background: var(--signal); }
+@media (max-width: 640px) { .strip { gap: 0; height: 18px; } }
+
 }

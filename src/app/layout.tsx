@@ -1,12 +1,16 @@
 import { ClerkProvider } from "@clerk/nextjs";
 import type { Metadata } from "next";
-import { Inter, JetBrains_Mono } from "next/font/google";
+import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { clerkAppearance } from "@/lib/clerk-appearance";
 import { authConfigured } from "@/lib/auth";
 
-const inter = Inter({ variable: "--font-inter", subsets: ["latin"], display: "swap" });
-const mono = JetBrains_Mono({ variable: "--font-mono-face", subsets: ["latin"], display: "swap" });
+const geist = Geist({ variable: "--font-geist", subsets: ["latin"], display: "swap" });
+const mono = Geist_Mono({ variable: "--font-geist-mono", subsets: ["latin"], display: "swap" });
+
+// Applied before first paint so a chosen theme never flashes the other one.
+// It only reads localStorage; without it the page follows the OS setting.
+const THEME_INIT = `try{var t=localStorage.getItem("theme");if(t==="dark"||t==="light")document.documentElement.dataset.theme=t}catch(e){}`;
 
 export const metadata: Metadata = {
   title: "Tickmark - the month-end close that learns",
@@ -16,7 +20,10 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   const page = (
-    <html lang="en" className={`${inter.variable} ${mono.variable} h-full antialiased`}>
+    <html lang="en" className={`${geist.variable} ${mono.variable} h-full antialiased`} suppressHydrationWarning>
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: THEME_INIT }} />
+      </head>
       <body className="min-h-full flex flex-col">{children}</body>
     </html>
   );

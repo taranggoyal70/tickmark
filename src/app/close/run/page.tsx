@@ -18,16 +18,16 @@ export default async function CloseRoomPage() {
     <Shell active="/close/run">
       <ProvenanceBanner report={report} />
 
-      <div className="mb-6">
-        <div className="eyebrow mb-2">The close room</div>
-        <h1 className="display-md text-ink">
-          Watch the same close, twice.<br />
-          <span className="text-ink-subtle">Before it learned anything, and after.</span>
+      <div className="mb-10">
+        <div className="eyebrow mb-4">The close room</div>
+        <h1 className="display-md m-0 text-ink">
+          Same books, closed twice.<br />
+          <span className="text-muted">Before it learned, and after.</span>
         </h1>
-        <p className="mt-3 max-w-2xl text-[14px] leading-relaxed text-ink-subtle">
-          {cold.period} on the left, {trained.period} on the right — identical books, identical model.
-          Every recorded decision is replayed in sequence: compiled rules settle instantly, while
-          model-decided items reveal where agent work remained. Watch the right-hand queue stay short.
+        <p className="lede mt-5 max-w-[60ch]">
+          {cold.period} on the left, {trained.period} on the right: identical books, identical model.
+          Every recorded decision is replayed in order. Compiled rules settle instantly; model work
+          and the controller&rsquo;s queue are what is left. Watch the right-hand queue stay short.
         </p>
       </div>
 

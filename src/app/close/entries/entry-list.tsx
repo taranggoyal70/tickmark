@@ -38,8 +38,8 @@ export function EntryCard({ entry }: { entry: PendingEntry }) {
               <td className="py-1.5 text-ink-muted">
                 <span className="text-ink">{l.glCode}</span> {l.glName}
               </td>
-              <td className="py-1.5 text-right">{l.debitCents ? <Money cents={l.debitCents} /> : <span className="text-ink-tertiary">—</span>}</td>
-              <td className="py-1.5 text-right">{l.creditCents ? <Money cents={l.creditCents} /> : <span className="text-ink-tertiary">—</span>}</td>
+              <td className="py-1.5 text-right">{l.debitCents ? <Money cents={l.debitCents} /> : <span className="text-ink-tertiary">-</span>}</td>
+              <td className="py-1.5 text-right">{l.creditCents ? <Money cents={l.creditCents} /> : <span className="text-ink-tertiary">-</span>}</td>
             </tr>
           ))}
           <tr className="border-t border-[var(--hairline-strong)]">
