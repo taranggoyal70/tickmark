@@ -1,5 +1,6 @@
 import { Money, Panel } from "@/components/kit";
 import { Shell } from "@/components/shell";
+import { NoBooks } from "@/components/no-books";
 import { listEntitiesWithPeriods } from "@/lib/agent/run-period";
 import { reconcile, type ReconcilingItem } from "@/lib/close/reconciliation";
 import { queueEnabled } from "@/lib/store/queue";
@@ -41,10 +42,7 @@ export default async function ReconciliationPage(props: PageProps<"/close/reconc
   if (!entities.length) {
     return (
       <Shell active="/close/reconciliation">
-        <Panel className="p-8 text-center">
-          <h2 className="card-title text-ink">No books yet</h2>
-          <p className="mt-2 text-[13px] text-ink-subtle">Import a period first.</p>
-        </Panel>
+        <NoBooks view="The bank reconciliation" />
       </Shell>
     );
   }
@@ -60,14 +58,14 @@ export default async function ReconciliationPage(props: PageProps<"/close/reconc
     <Shell active="/close/reconciliation">
       <div className="mb-6 flex flex-wrap items-end justify-between gap-3">
         <div>
-          <div className="eyebrow mb-2">Bank reconciliation · {entity.name}</div>
-          <h1 className="headline text-ink">{period}</h1>
+          <div className="eyebrow mb-4">Bank reconciliation · {entity.name}</div>
+          <h1 className="display-md m-0 text-ink">{period}</h1>
         </div>
         <nav className="flex flex-wrap gap-1.5">
           {entity.periods.map((p) => (
             <a key={p} href={`/close/reconciliation?period=${p}`}
               className={`focus-ring nums rounded-[var(--radius-sm)] border px-2.5 py-1 text-[12px] ${
-                p === period ? "border-[var(--primary)]/40 bg-[var(--primary)]/8 text-[var(--primary-hover)]"
+                p === period ? "border-[var(--ink)] bg-[var(--ink)] text-[var(--on-ink)]"
                              : "border-hairline bg-surface-1 text-ink-subtle hover:bg-surface-3"}`}>
               {p}
             </a>
@@ -96,7 +94,7 @@ export default async function ReconciliationPage(props: PageProps<"/close/reconc
             <p className={`mt-4 text-[13px] ${rec.tiesOut ? "text-[var(--success)]" : "text-ink-muted"}`}>
               {rec.tiesOut
                 ? "Reconciled. Every line on the statement is explained by the ledger."
-                : `Not yet reconciled — ${rec.outstanding.length} statement lines and ${rec.inLedgerNotOnBank.length} ledger entries are still unexplained. They are listed below rather than summarised away.`}
+                : `Not yet reconciled: ${rec.outstanding.length} statement lines and ${rec.inLedgerNotOnBank.length} ledger entries are still unexplained. They are listed below rather than summarised away.`}
             </p>
           </Panel>
 

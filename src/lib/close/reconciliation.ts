@@ -35,10 +35,25 @@ export async function reconcile(entityName: string, periodCode: string): Promise
   const { data: per } = await c.from("periods").select("id").eq("entity_id", ent.id).eq("code", periodCode).maybeSingle();
   if (!per) return null;
 
+  const { data: latestRun } = await c
+    .from("close_runs")
+    .select("id")
+    .eq("period_id", per.id)
+    .eq("status", "succeeded")
+    .order("started_at", { ascending: false })
+    .limit(1)
+    .maybeSingle();
+
+  let matchesQuery = c
+    .from("matches")
+    .select("bank_line_ids, ledger_entry_ids, amount_delta_cents, delta_reason")
+    .eq("period_id", per.id);
+  if (latestRun?.id) matchesQuery = matchesQuery.eq("close_run_id", latestRun.id);
+
   const [{ data: bank }, { data: led }, { data: matches }] = await Promise.all([
     c.from("bank_lines").select("id, external_id, posted_date, description, amount_cents").eq("period_id", per.id),
     c.from("ledger_entries").select("id, external_id, entry_date, memo, amount_cents, source").eq("period_id", per.id),
-    c.from("matches").select("bank_line_ids, ledger_entry_ids, amount_delta_cents, delta_reason").eq("period_id", per.id),
+    matchesQuery,
   ]);
 
   const bankRows = (bank ?? []) as unknown as Record<string, unknown>[];

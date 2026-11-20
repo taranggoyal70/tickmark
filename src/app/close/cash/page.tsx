@@ -1,5 +1,6 @@
 import { Money, Panel } from "@/components/kit";
 import { Shell } from "@/components/shell";
+import { NoBooks } from "@/components/no-books";
 import { listEntitiesWithPeriods } from "@/lib/agent/run-period";
 import { cashView } from "@/lib/close/cash";
 import { queueEnabled } from "@/lib/store/queue";
@@ -13,10 +14,7 @@ export default async function CashPage() {
   if (!view) {
     return (
       <Shell active="/close/cash">
-        <Panel className="p-8 text-center">
-          <h2 className="card-title text-ink">No books yet</h2>
-          <p className="mt-2 text-[13px] text-ink-subtle">Import a period to see the cash position.</p>
-        </Panel>
+        <NoBooks view="The cash position" />
       </Shell>
     );
   }
@@ -27,11 +25,11 @@ export default async function CashPage() {
   return (
     <Shell active="/close/cash">
       <div className="mb-6 max-w-2xl">
-        <div className="eyebrow mb-2">Cash · {view.entity}</div>
-        <h1 className="headline text-ink">Position and the month ahead</h1>
+        <div className="eyebrow mb-4">Cash · {view.entity}</div>
+        <h1 className="display-md m-0 text-ink">Position and the month ahead</h1>
         <p className="mt-2 text-[14px] leading-relaxed text-ink-subtle">
           Actuals come from the bank statement, not from the ledger, because the bank is the source
-          of truth for cash. Every projected line says what it rests on — a vendor seen once is
+          of truth for cash. Every projected line says what it rests on: a vendor seen once is
           reported as an anecdote rather than averaged quietly into the total.
         </p>
       </div>

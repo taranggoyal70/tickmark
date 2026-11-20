@@ -1,73 +1,73 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1200" height="430" viewBox="0 0 1200 430" role="img" aria-labelledby="t d">
 <title id="t">Model calls fall as decisions move to compiled rules</title><desc id="d">Two bar charts from the offline eval over 3 held-out companies. Model calls per close: Jan 24, Feb 24, Mar 15, Apr 9, May 12, Jun 9. Share of decisions settled by a compiled rule: Jan 0.0%, Feb 0.0%, Mar 51.2%, Apr 79.0%, May 75.4%, Jun 77.1%.</desc>
 <g font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif">
-<rect width="1200" height="430" rx="20" fill="#ffffff"/>
-<rect x="0.5" y="0.5" width="1199" height="429" rx="19.5" fill="none" stroke="#e3e8ee"/>
-<text x="40" y="52" font-size="19" fill="#0d253d" font-weight="650">Model calls per close</text>
-<text x="40" y="76" font-size="14" fill="#64748d">3 held-out companies, close and gradient calls summed</text>
-<line x1="80" y1="360.0" x2="580" y2="360.0" stroke="#e3e8ee" />
-<text x="70" y="364" font-size="12" fill="#64748d" text-anchor="end">0</text>
-<line x1="80" y1="276.7" x2="580" y2="276.7" stroke="#e3e8ee" stroke-dasharray="2 4"/>
-<text x="70" y="280.6666666666667" font-size="12" fill="#64748d" text-anchor="end">10</text>
-<line x1="80" y1="193.3" x2="580" y2="193.3" stroke="#e3e8ee" stroke-dasharray="2 4"/>
-<text x="70" y="197.33333333333334" font-size="12" fill="#64748d" text-anchor="end">20</text>
-<line x1="80" y1="110.0" x2="580" y2="110.0" stroke="#e3e8ee" stroke-dasharray="2 4"/>
-<text x="70" y="114" font-size="12" fill="#64748d" text-anchor="end">30</text>
-<path d="M102 360V164Q102 160 106 160H155.7Q159.7 160 159.7 164V360Z" fill="#533afd"/>
-<text x="130.83333333333334" y="152" font-size="13" fill="#273951" text-anchor="middle" font-weight="600">24</text>
-<text x="130.83333333333334" y="382" font-size="13" fill="#64748d" text-anchor="middle">Jan</text>
-<text x="130.83333333333334" y="400" font-size="11" fill="#64748d" text-anchor="middle">close 1</text>
-<path d="M181.7 360V164Q181.7 160 185.7 160H235.39999999999998Q239.39999999999998 160 239.39999999999998 164V360Z" fill="#533afd"/>
-<text x="210.5" y="152" font-size="13" fill="#273951" text-anchor="middle" font-weight="600">24</text>
-<text x="210.5" y="382" font-size="13" fill="#64748d" text-anchor="middle">Feb</text>
-<text x="210.5" y="400" font-size="11" fill="#64748d" text-anchor="middle">close 2</text>
-<path d="M261.3 360V239Q261.3 235 265.3 235H315Q319 235 319 239V360Z" fill="#533afd"/>
-<text x="290.16666666666663" y="227" font-size="13" fill="#273951" text-anchor="middle" font-weight="600">15</text>
-<text x="290.16666666666663" y="382" font-size="13" fill="#64748d" text-anchor="middle">Mar</text>
-<text x="290.16666666666663" y="400" font-size="11" fill="#64748d" text-anchor="middle">close 3</text>
-<path d="M341 360V289Q341 285 345 285H394.7Q398.7 285 398.7 289V360Z" fill="#533afd"/>
-<text x="369.8333333333333" y="277" font-size="13" fill="#273951" text-anchor="middle" font-weight="600">9</text>
-<text x="369.8333333333333" y="382" font-size="13" fill="#64748d" text-anchor="middle">Apr</text>
-<text x="369.8333333333333" y="400" font-size="11" fill="#64748d" text-anchor="middle">close 4</text>
-<path d="M420.7 360V264Q420.7 260 424.7 260H474.4Q478.4 260 478.4 264V360Z" fill="#533afd"/>
-<text x="449.49999999999994" y="252" font-size="13" fill="#273951" text-anchor="middle" font-weight="600">12</text>
-<text x="449.49999999999994" y="382" font-size="13" fill="#64748d" text-anchor="middle">May</text>
-<text x="449.49999999999994" y="400" font-size="11" fill="#64748d" text-anchor="middle">close 5</text>
-<path d="M500.3 360V289Q500.3 285 504.3 285H554Q558 285 558 289V360Z" fill="#533afd"/>
-<text x="529.1666666666666" y="277" font-size="13" fill="#273951" text-anchor="middle" font-weight="600">9</text>
-<text x="529.1666666666666" y="382" font-size="13" fill="#64748d" text-anchor="middle">Jun</text>
-<text x="529.1666666666666" y="400" font-size="11" fill="#64748d" text-anchor="middle">close 6</text>
-<text x="620" y="52" font-size="19" fill="#0d253d" font-weight="650">Decisions settled by a compiled rule</text>
-<text x="620" y="76" font-size="14" fill="#64748d">share of invoice codings and bank matches made by a rule</text>
-<line x1="660" y1="360.0" x2="1160" y2="360.0" stroke="#e3e8ee" />
-<text x="650" y="364" font-size="12" fill="#64748d" text-anchor="end">0%</text>
-<line x1="660" y1="235.0" x2="1160" y2="235.0" stroke="#e3e8ee" stroke-dasharray="2 4"/>
-<text x="650" y="239" font-size="12" fill="#64748d" text-anchor="end">50%</text>
-<line x1="660" y1="110.0" x2="1160" y2="110.0" stroke="#e3e8ee" stroke-dasharray="2 4"/>
-<text x="650" y="114" font-size="12" fill="#64748d" text-anchor="end">100%</text>
+<rect width="1200" height="430" rx="20" fill="#f3f2ee"/>
+<rect x="0.5" y="0.5" width="1199" height="429" rx="19.5" fill="none" stroke="#dcdad4"/>
+<text x="40" y="52" font-size="19" fill="#161513" font-weight="650">Model calls per close</text>
+<text x="40" y="76" font-size="14" fill="#706d66">3 held-out companies, close and gradient calls summed</text>
+<line x1="80" y1="360.0" x2="580" y2="360.0" stroke="#dcdad4" />
+<text x="70" y="364" font-size="12" fill="#706d66" text-anchor="end">0</text>
+<line x1="80" y1="276.7" x2="580" y2="276.7" stroke="#dcdad4" stroke-dasharray="2 4"/>
+<text x="70" y="280.6666666666667" font-size="12" fill="#706d66" text-anchor="end">10</text>
+<line x1="80" y1="193.3" x2="580" y2="193.3" stroke="#dcdad4" stroke-dasharray="2 4"/>
+<text x="70" y="197.33333333333334" font-size="12" fill="#706d66" text-anchor="end">20</text>
+<line x1="80" y1="110.0" x2="580" y2="110.0" stroke="#dcdad4" stroke-dasharray="2 4"/>
+<text x="70" y="114" font-size="12" fill="#706d66" text-anchor="end">30</text>
+<path d="M102 360V164Q102 160 106 160H155.7Q159.7 160 159.7 164V360Z" fill="#cfccc4"/>
+<text x="130.83333333333334" y="152" font-size="13" fill="#44423d" text-anchor="middle" font-weight="600">24</text>
+<text x="130.83333333333334" y="382" font-size="13" fill="#706d66" text-anchor="middle">Jan</text>
+<text x="130.83333333333334" y="400" font-size="11" fill="#706d66" text-anchor="middle">close 1</text>
+<path d="M181.7 360V164Q181.7 160 185.7 160H235.39999999999998Q239.39999999999998 160 239.39999999999998 164V360Z" fill="#cfccc4"/>
+<text x="210.5" y="152" font-size="13" fill="#44423d" text-anchor="middle" font-weight="600">24</text>
+<text x="210.5" y="382" font-size="13" fill="#706d66" text-anchor="middle">Feb</text>
+<text x="210.5" y="400" font-size="11" fill="#706d66" text-anchor="middle">close 2</text>
+<path d="M261.3 360V239Q261.3 235 265.3 235H315Q319 235 319 239V360Z" fill="#cfccc4"/>
+<text x="290.16666666666663" y="227" font-size="13" fill="#44423d" text-anchor="middle" font-weight="600">15</text>
+<text x="290.16666666666663" y="382" font-size="13" fill="#706d66" text-anchor="middle">Mar</text>
+<text x="290.16666666666663" y="400" font-size="11" fill="#706d66" text-anchor="middle">close 3</text>
+<path d="M341 360V289Q341 285 345 285H394.7Q398.7 285 398.7 289V360Z" fill="#cfccc4"/>
+<text x="369.8333333333333" y="277" font-size="13" fill="#44423d" text-anchor="middle" font-weight="600">9</text>
+<text x="369.8333333333333" y="382" font-size="13" fill="#706d66" text-anchor="middle">Apr</text>
+<text x="369.8333333333333" y="400" font-size="11" fill="#706d66" text-anchor="middle">close 4</text>
+<path d="M420.7 360V264Q420.7 260 424.7 260H474.4Q478.4 260 478.4 264V360Z" fill="#cfccc4"/>
+<text x="449.49999999999994" y="252" font-size="13" fill="#44423d" text-anchor="middle" font-weight="600">12</text>
+<text x="449.49999999999994" y="382" font-size="13" fill="#706d66" text-anchor="middle">May</text>
+<text x="449.49999999999994" y="400" font-size="11" fill="#706d66" text-anchor="middle">close 5</text>
+<path d="M500.3 360V289Q500.3 285 504.3 285H554Q558 285 558 289V360Z" fill="#e2501d"/>
+<text x="529.1666666666666" y="277" font-size="13" fill="#44423d" text-anchor="middle" font-weight="600">9</text>
+<text x="529.1666666666666" y="382" font-size="13" fill="#706d66" text-anchor="middle">Jun</text>
+<text x="529.1666666666666" y="400" font-size="11" fill="#706d66" text-anchor="middle">close 6</text>
+<text x="620" y="52" font-size="19" fill="#161513" font-weight="650">Decisions settled by a compiled rule</text>
+<text x="620" y="76" font-size="14" fill="#706d66">share of invoice codings and bank matches made by a rule</text>
+<line x1="660" y1="360.0" x2="1160" y2="360.0" stroke="#dcdad4" />
+<text x="650" y="364" font-size="12" fill="#706d66" text-anchor="end">0%</text>
+<line x1="660" y1="235.0" x2="1160" y2="235.0" stroke="#dcdad4" stroke-dasharray="2 4"/>
+<text x="650" y="239" font-size="12" fill="#706d66" text-anchor="end">50%</text>
+<line x1="660" y1="110.0" x2="1160" y2="110.0" stroke="#dcdad4" stroke-dasharray="2 4"/>
+<text x="650" y="114" font-size="12" fill="#706d66" text-anchor="end">100%</text>
 
-<text x="710.8333333333334" y="352" font-size="13" fill="#273951" text-anchor="middle" font-weight="600">0.0%</text>
-<text x="710.8333333333334" y="382" font-size="13" fill="#64748d" text-anchor="middle">Jan</text>
-<text x="710.8333333333334" y="400" font-size="11" fill="#64748d" text-anchor="middle">close 1</text>
+<text x="710.8333333333334" y="352" font-size="13" fill="#44423d" text-anchor="middle" font-weight="600">0.0%</text>
+<text x="710.8333333333334" y="382" font-size="13" fill="#706d66" text-anchor="middle">Jan</text>
+<text x="710.8333333333334" y="400" font-size="11" fill="#706d66" text-anchor="middle">close 1</text>
 
-<text x="790.5" y="352" font-size="13" fill="#273951" text-anchor="middle" font-weight="600">0.0%</text>
-<text x="790.5" y="382" font-size="13" fill="#64748d" text-anchor="middle">Feb</text>
-<text x="790.5" y="400" font-size="11" fill="#64748d" text-anchor="middle">close 2</text>
-<path d="M841.3 360V235.9Q841.3 231.9 845.3 231.9H895Q899 231.9 899 235.9V360Z" fill="#533afd"/>
-<text x="870.1666666666666" y="223.875" font-size="13" fill="#273951" text-anchor="middle" font-weight="600">51.2%</text>
-<text x="870.1666666666666" y="382" font-size="13" fill="#64748d" text-anchor="middle">Mar</text>
-<text x="870.1666666666666" y="400" font-size="11" fill="#64748d" text-anchor="middle">close 3</text>
-<path d="M921 360V166.4Q921 162.4 925 162.4H974.7Q978.7 162.4 978.7 166.4V360Z" fill="#533afd"/>
-<text x="949.8333333333334" y="154.35042735042737" font-size="13" fill="#273951" text-anchor="middle" font-weight="600">79.0%</text>
-<text x="949.8333333333334" y="382" font-size="13" fill="#64748d" text-anchor="middle">Apr</text>
-<text x="949.8333333333334" y="400" font-size="11" fill="#64748d" text-anchor="middle">close 4</text>
-<path d="M1000.7 360V175.5Q1000.7 171.5 1004.7 171.5H1054.4Q1058.4 171.5 1058.4 175.5V360Z" fill="#533afd"/>
-<text x="1029.5" y="163.49193548387098" font-size="13" fill="#273951" text-anchor="middle" font-weight="600">75.4%</text>
-<text x="1029.5" y="382" font-size="13" fill="#64748d" text-anchor="middle">May</text>
-<text x="1029.5" y="400" font-size="11" fill="#64748d" text-anchor="middle">close 5</text>
-<path d="M1080.3 360V171.2Q1080.3 167.2 1084.3 167.2H1134Q1138 167.2 1138 171.2V360Z" fill="#533afd"/>
-<text x="1109.1666666666665" y="159.20338983050846" font-size="13" fill="#273951" text-anchor="middle" font-weight="600">77.1%</text>
-<text x="1109.1666666666665" y="382" font-size="13" fill="#64748d" text-anchor="middle">Jun</text>
-<text x="1109.1666666666665" y="400" font-size="11" fill="#64748d" text-anchor="middle">close 6</text>
+<text x="790.5" y="352" font-size="13" fill="#44423d" text-anchor="middle" font-weight="600">0.0%</text>
+<text x="790.5" y="382" font-size="13" fill="#706d66" text-anchor="middle">Feb</text>
+<text x="790.5" y="400" font-size="11" fill="#706d66" text-anchor="middle">close 2</text>
+<path d="M841.3 360V235.9Q841.3 231.9 845.3 231.9H895Q899 231.9 899 235.9V360Z" fill="#cfccc4"/>
+<text x="870.1666666666666" y="223.875" font-size="13" fill="#44423d" text-anchor="middle" font-weight="600">51.2%</text>
+<text x="870.1666666666666" y="382" font-size="13" fill="#706d66" text-anchor="middle">Mar</text>
+<text x="870.1666666666666" y="400" font-size="11" fill="#706d66" text-anchor="middle">close 3</text>
+<path d="M921 360V166.4Q921 162.4 925 162.4H974.7Q978.7 162.4 978.7 166.4V360Z" fill="#cfccc4"/>
+<text x="949.8333333333334" y="154.35042735042737" font-size="13" fill="#44423d" text-anchor="middle" font-weight="600">79.0%</text>
+<text x="949.8333333333334" y="382" font-size="13" fill="#706d66" text-anchor="middle">Apr</text>
+<text x="949.8333333333334" y="400" font-size="11" fill="#706d66" text-anchor="middle">close 4</text>
+<path d="M1000.7 360V175.5Q1000.7 171.5 1004.7 171.5H1054.4Q1058.4 171.5 1058.4 175.5V360Z" fill="#cfccc4"/>
+<text x="1029.5" y="163.49193548387098" font-size="13" fill="#44423d" text-anchor="middle" font-weight="600">75.4%</text>
+<text x="1029.5" y="382" font-size="13" fill="#706d66" text-anchor="middle">May</text>
+<text x="1029.5" y="400" font-size="11" fill="#706d66" text-anchor="middle">close 5</text>
+<path d="M1080.3 360V171.2Q1080.3 167.2 1084.3 167.2H1134Q1138 167.2 1138 171.2V360Z" fill="#e2501d"/>
+<text x="1109.1666666666665" y="159.20338983050846" font-size="13" fill="#44423d" text-anchor="middle" font-weight="600">77.1%</text>
+<text x="1109.1666666666665" y="382" font-size="13" fill="#706d66" text-anchor="middle">Jun</text>
+<text x="1109.1666666666665" y="400" font-size="11" fill="#706d66" text-anchor="middle">close 6</text>
 </g>
 </svg>

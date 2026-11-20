@@ -9,6 +9,8 @@ import { RunClose } from "@/components/run-close";
 
 export const dynamic = "force-dynamic";
 
+const COUNT: Record<number, string> = { 2: "Two", 3: "Three", 4: "Four", 5: "Five", 6: "Six", 7: "Seven", 8: "Eight" };
+
 export default async function ClosePage() {
   const report = await latestReport();
   // books that have actually been ingested, which is what a close can run on
@@ -33,22 +35,22 @@ export default async function ClosePage() {
           <RunClose entity={entities[0].name} periods={entities[0].periods} />
         </div>
       ) : null}
-      <div className="mb-8 flex flex-wrap items-end justify-between gap-4">
+      <div className="mb-10 flex flex-wrap items-end justify-between gap-6">
         <div>
-          <div className="eyebrow mb-2">Close performance · {report.entity}</div>
-          <h1 className="display-md text-ink">
-            Four closes. Same agent.<br />
-            <span className="text-ink-subtle">It learned the difference.</span>
+          <div className="eyebrow mb-4">Close performance · {report.entity}</div>
+          <h1 className="display-md m-0 text-ink">
+            {COUNT[P.length] ?? P.length} closes. Same agent.<br />
+            <span className="text-muted">It learned the difference.</span>
           </h1>
         </div>
-        <div className="text-right text-[12px] leading-relaxed text-ink-tertiary">
+        <div className="text-right font-mono text-[11.5px] leading-relaxed text-muted">
           <div className="nums">{report.model.replace("anthropic/", "")}</div>
           <div className="nums">{new Date(report.generatedAt).toLocaleString()}</div>
           <div>rulebook v{last.rulebookVersionOut} · {last.activeRules} active rules</div>
         </div>
       </div>
 
-      <div className="mb-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+      <div className="mb-12 grid gap-x-6 gap-y-8 sm:grid-cols-2 lg:grid-cols-4">
         <Stat
           label="Auto-cleared without a human"
           value={pct(last.stats.autoClearRate)}
@@ -80,7 +82,7 @@ export default async function ClosePage() {
           label="Auto-clear precision"
           value={pct(last.stats.autoClearPrecision, 1)}
           tone={precisionHeld ? "good" : "bad"}
-          sub={<>of what it cleared unattended was right{precisionHeld ? "" : " — below bar"}</>}
+          sub={<>of what it cleared unattended was right{precisionHeld ? "" : ", below the bar"}</>}
         />
       </div>
 
@@ -130,7 +132,7 @@ export default async function ClosePage() {
       <div className="mb-6 grid gap-4 lg:grid-cols-[1.15fr_1fr]">
         <DecisionMix
           title="Where each decision came from"
-          note="Blue is free. Every line the Rulebook settles costs zero tokens and never reaches a person."
+          note="Ink is free. Every line the Rulebook settles costs zero tokens and never reaches a person."
           categories={labels}
           series={[
             { key: "rule", values: P.map((p) => p.stats.ruleHits) },
@@ -139,13 +141,13 @@ export default async function ClosePage() {
           ]}
         />
 
-        <Panel className="p-5">
-          <h3 className="mb-1 text-[15px] font-medium text-ink">Per-period detail</h3>
+        <Panel className="min-w-0 p-5">
+          <h3 className="mb-1 text-[15px] font-medium tracking-[-0.015em] text-ink">Per-period detail</h3>
           <p className="mb-4 text-[12px] text-ink-subtle">Every figure measured against ground truth the agent never sees.</p>
           <div className="overflow-x-auto">
             <table className="w-full text-[13px] nums">
               <thead>
-                <tr className="text-left text-[11px] uppercase tracking-wide text-ink-tertiary">
+                <tr className="label text-left">
                   <th className="pb-2 font-medium">Period</th>
                   <th className="pb-2 text-right font-medium">Coding</th>
                   <th className="pb-2 text-right font-medium">Match</th>
@@ -158,7 +160,7 @@ export default async function ClosePage() {
               <tbody>
                 {P.map((p) => (
                   <tr key={p.period} className="border-t border-[var(--hairline)]">
-                    <td className="py-2 text-ink-muted">{p.period}</td>
+                    <td className="py-2 font-mono text-[12px] text-ink-2">{p.period}</td>
                     <td className="py-2 text-right text-ink">{pct(p.stats.codingAccuracy)}</td>
                     <td className="py-2 text-right text-ink">{pct(p.stats.matchAccuracy)}</td>
                     <td className="py-2 text-right text-ink">{p.stats.exceptionsOpened}</td>

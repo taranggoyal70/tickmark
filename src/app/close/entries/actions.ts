@@ -1,11 +1,12 @@
 "use server";
 
-import { auth, currentUser } from "@clerk/nextjs/server";
+import { currentUser } from "@clerk/nextjs/server";
+import { signedInUserId } from "@/lib/auth";
 import { revalidatePath } from "next/cache";
 import { decideEntry } from "@/lib/store/entries";
 
 export async function decideEntryAction(id: string, approve: boolean): Promise<{ ok: boolean; message: string }> {
-  const { userId } = await auth();
+  const userId = await signedInUserId();
   if (!userId) return { ok: false, message: "Sign in to approve an entry." };
   const u = await currentUser();
   const approver = u?.fullName ?? u?.primaryEmailAddress?.emailAddress ?? userId;

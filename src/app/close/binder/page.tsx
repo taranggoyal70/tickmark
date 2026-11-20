@@ -1,5 +1,6 @@
 import { Badge, Money, Panel } from "@/components/kit";
 import { Shell } from "@/components/shell";
+import { NoBooks } from "@/components/no-books";
 import { listEntitiesWithPeriods } from "@/lib/agent/run-period";
 import { buildBinder } from "@/lib/close/binder";
 import { queueEnabled } from "@/lib/store/queue";
@@ -11,10 +12,7 @@ export default async function BinderPage(props: PageProps<"/close/binder">) {
   if (!entities.length) {
     return (
       <Shell active="/close/binder">
-        <Panel className="p-8 text-center">
-          <h2 className="card-title text-ink">No books yet</h2>
-          <p className="mt-2 text-[13px] text-ink-subtle">Import a period first.</p>
-        </Panel>
+        <NoBooks view="The audit binder" />
       </Shell>
     );
   }
@@ -31,19 +29,22 @@ export default async function BinderPage(props: PageProps<"/close/binder">) {
     <Shell active="/close/binder">
       <div className="mb-6 flex flex-wrap items-end justify-between gap-3">
         <div className="max-w-2xl">
-          <div className="eyebrow mb-2">Close binder · {entity.name}</div>
-          <h1 className="headline text-ink">Audit support for {period}</h1>
+          <div className="eyebrow mb-4">Close binder · {entity.name}</div>
+          <h1 className="display-md m-0 text-ink">Audit support for {period}</h1>
           <p className="mt-2 text-[14px] leading-relaxed text-ink-subtle">
             When an auditor asks who checked something, when, and on what basis, the answer should
-            be a file — not a week of reconstructing it. Everything here is read back from the
+            be a file, not a week of reconstructing it. Everything here is read back from the
             ledger; nothing is recomputed for the report.
+          </p>
+          <p className="mt-2 text-[12px] text-ink-tertiary">
+            Snapshot scope: the latest successful persisted close run for this period.
           </p>
         </div>
         <nav className="flex flex-wrap gap-1.5">
           {entity.periods.map((p) => (
             <a key={p} href={`/close/binder?period=${p}`}
               className={`focus-ring nums rounded-[var(--radius-sm)] border px-2.5 py-1 text-[12px] ${
-                p === period ? "border-[var(--primary)]/40 bg-[var(--primary)]/8 text-[var(--primary-hover)]"
+                p === period ? "border-[var(--ink)] bg-[var(--ink)] text-[var(--on-ink)]"
                              : "border-hairline bg-surface-1 text-ink-subtle hover:bg-surface-3"}`}>{p}</a>
           ))}
         </nav>
@@ -57,10 +58,10 @@ export default async function BinderPage(props: PageProps<"/close/binder">) {
             <div className="grid gap-4 sm:grid-cols-5">
               {[
                 ["Tickmarks standing", String(b.counts.tickmarks)],
-                ["Exceptions", String(b.counts.exceptions)],
+                ["Exceptions in run", String(b.counts.exceptions)],
                 ["Still open", String(b.counts.unresolved)],
                 ["Journal entries", String(b.counts.entries)],
-                ["Rules in force", String(b.counts.rules)],
+                ["Rules linked", String(b.counts.rules)],
               ].map(([l, v]) => (
                 <div key={l}>
                   <div className="eyebrow mb-1.5">{l}</div>
@@ -129,7 +130,7 @@ export default async function BinderPage(props: PageProps<"/close/binder">) {
                         <div className="nums mt-0.5 flex flex-wrap gap-x-3 text-[11px] text-ink-tertiary">
                           <span>{j.status}</span>
                           <span>prepared {j.preparer}</span>
-                          <span>approved {j.approver ?? "—"}</span>
+                          <span>approved {j.approver ?? "-"}</span>
                           <span><Money cents={j.lines.reduce((s, l) => s + l.debitCents, 0)} /></span>
                         </div>
                       </li>
@@ -139,10 +140,16 @@ export default async function BinderPage(props: PageProps<"/close/binder">) {
               </Panel>
 
               <Panel className="p-5">
-                <h3 className="mb-1 text-[15px] font-medium text-ink">Rules that decided anything</h3>
-                <p className="mb-3 text-[12px] text-ink-subtle">Each with the corrections that authorised it and its replay.</p>
+                <h3 className="mb-1 text-[15px] font-medium text-ink">Linked rule evidence</h3>
+                <p className="mb-3 text-[12px] text-ink-subtle">
+                  Included only when the persisted tickmark identifies the rule that decided it.
+                </p>
                 {b.rulesApplied.length === 0 ? (
-                  <p className="text-[13px] text-ink-subtle">No rules in force.</p>
+                  <p className="text-[13px] text-ink-subtle">
+                    {b.run && b.run.ruleHits > 0
+                      ? "This historical run predates rule-ID retention; new runs preserve the link."
+                      : "No linked rules in this run."}
+                  </p>
                 ) : (
                   <ul className="space-y-1.5">
                     {b.rulesApplied.map((r, i) => (
@@ -152,7 +159,7 @@ export default async function BinderPage(props: PageProps<"/close/binder">) {
                           {r.selfEvidenced ? <Badge kind="warn">self-evidenced</Badge> : null}
                         </div>
                         <div className="nums mt-0.5 text-[11px] text-ink-tertiary">
-                          adopted by {r.adoptedBy ?? "—"} · {r.evidence.length} corrections
+                          adopted by {r.adoptedBy ?? "-"} · {r.evidence.length} corrections
                           {r.backtest ? ` · replay ${r.backtest.correct}/${r.backtest.fired} at ${(r.backtest.precision * 100).toFixed(0)}%` : ""}
                         </div>
                       </li>

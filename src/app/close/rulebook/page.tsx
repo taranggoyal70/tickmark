@@ -2,31 +2,9 @@ import { Badge, Panel } from "@/components/kit";
 import { EmptyRun, Shell } from "@/components/shell";
 import { ProvenanceBanner } from "@/components/provenance";
 import { latestReport } from "@/lib/report";
-import type { Rule } from "@/lib/agent/types";
+import { ActionSummary, OP } from "@/components/rule-parts";
 
 export const dynamic = "force-dynamic";
-
-const OP: Record<string, string> = {
-  vendor_is: "vendor is", desc_contains: "description contains", desc_matches: "description matches",
-  amount_gte: "amount ≥", amount_lte: "amount ≤", source_is: "source is", cadence_is: "cadence is",
-};
-
-function ActionSummary({ rule }: { rule: Rule }) {
-  const a = rule.action;
-  if (a.type === "code") {
-    return (
-      <span className="nums">
-        code to <span className="text-ink">{a.glCode}</span>
-        <span className="text-ink-tertiary"> · {Object.entries(a.deptSplit).map(([d, w]) => `${d} ${Math.round(w * 100)}%`).join(" / ")}</span>
-      </span>
-    );
-  }
-  if (a.type === "match") {
-    return <span>match against <span className="text-ink">{a.vendorName}</span> <span className="text-ink-tertiary">via {a.strategy.replace(/_/g, " ")}{a.deltaReason ? `, residual is ${a.deltaReason}` : ""}</span></span>;
-  }
-  if (a.type === "accrue") return <span>accrue to <span className="text-ink nums">{a.glCode}</span> <span className="text-ink-tertiary">at {a.basis.replace(/_/g, " ")}</span></span>;
-  return <span>always route to a human <span className="text-ink-tertiary">— {a.reason}</span></span>;
-}
 
 export default async function RulebookPage() {
   const report = await latestReport();
@@ -42,15 +20,15 @@ export default async function RulebookPage() {
     <Shell active="/close/rulebook">
       <ProvenanceBanner report={report} />
       <div className="mb-6">
-        <div className="eyebrow mb-2">Rulebook · the weights</div>
-        <h1 className="headline text-ink">
+        <div className="eyebrow mb-4">Rulebook · the weights</div>
+        <h1 className="display-md m-0 text-ink">
           {activeRules.length} active rules, learned from corrections
         </h1>
-        <p className="mt-2 max-w-2xl text-[14px] leading-relaxed text-ink-subtle">
+        <p className="lede mt-5 max-w-[64ch]">
           Each active rule was distilled from at least two distinct human corrections, replayed
           against every closed period, and only then activated. Equivalent later proposals stay
           inactive while keeping their own evidence for the audit trail. Active rules execute with
-          zero model calls - which is why the close gets cheaper as the agent learns more.
+          zero model calls, which is why the close gets cheaper as the agent learns more.
         </p>
         {duplicates.length > 0 ? (
           <p className="mt-2 text-[12px] text-ink-tertiary">
@@ -94,7 +72,7 @@ export default async function RulebookPage() {
 
               {r.backtest ? (
                 <div className="mb-4">
-                  <div className="eyebrow mb-2">
+                  <div className="eyebrow mb-4">
                     Backtest · replayed against {r.backtest.periodsReplayed.join(", ") || "no prior period"}
                   </div>
                   <div className="flex flex-wrap items-center gap-4 text-[13px] nums">
@@ -113,10 +91,10 @@ export default async function RulebookPage() {
               ) : null}
 
               <div>
-                <div className="eyebrow mb-2">Evidence · {r.evidence.length} corrections</div>
-                <ul className="space-y-1.5">
+                <div className="eyebrow mb-4">Evidence · {r.evidence.length} corrections</div>
+                <ul className="space-y-3">
                   {r.evidence.map((e) => (
-                    <li key={e.correctionId} className="rounded-[var(--radius-sm)] border-l-2 border-[var(--primary)]/40 bg-surface-1 py-1.5 pl-3 pr-2 text-[12px] leading-snug text-ink-muted">
+                    <li key={e.correctionId} className="border-l-2 border-[var(--signal)] py-0.5 pl-3 text-[12.5px] leading-snug text-ink-2">
                       <span className="font-mono text-ink-tertiary">{e.periodCode} · {e.subjectRef}</span>
                       <div className="mt-0.5">{e.quote}</div>
                     </li>

@@ -29,16 +29,23 @@ const companies = rows[0].companies;
 interface Theme {
   bg: string; panel: string; hairline: string; ink: string; ink2: string; mute: string;
   accent: string; accentSoft: string; card: string; cardInk: string; cardMute: string; cardLine: string;
+  /** every bar but the latest; the latest close is drawn in the accent */
+  barMute: string;
 }
+/*
+ * The app's paper, ink and signal (src/app/globals.css). Bars are grey with the
+ * latest close in signal, so the single hue marks "now" and never encodes a
+ * series; every bar carries its value as a direct label.
+ */
 const LIGHT: Theme = {
-  bg: "#ffffff", panel: "#f6f9fc", hairline: "#e3e8ee", ink: "#0d253d", ink2: "#273951", mute: "#64748d",
-  // validated with the dataviz palette checks against #ffffff
-  accent: "#533afd", accentSoft: "#eceafe", card: "#0d253d", cardInk: "#ffffff", cardMute: "#a9b6c9", cardLine: "#26405c",
+  bg: "#f3f2ee", panel: "#fbfaf8", hairline: "#dcdad4", ink: "#161513", ink2: "#44423d", mute: "#706d66",
+  accent: "#e2501d", accentSoft: "#f5ddd1", card: "#161513", cardInk: "#f3f2ee", cardMute: "#a29d92", cardLine: "#33312d",
+  barMute: "#cfccc4",
 };
 const DARK: Theme = {
-  bg: "#0b1020", panel: "#121933", hairline: "#232c47", ink: "#e8ecf5", ink2: "#c3cbe0", mute: "#8e98b0",
-  // validated against #0b1020
-  accent: "#7a6aff", accentSoft: "#1e2150", card: "#1a1f44", cardInk: "#ffffff", cardMute: "#a7b0cc", cardLine: "#2f3766",
+  bg: "#0f0f0e", panel: "#171716", hairline: "#2a2927", ink: "#eceae4", ink2: "#b8b5ad", mute: "#8d8a83",
+  accent: "#ff6a3d", accentSoft: "#33190f", card: "#eceae4", cardInk: "#0f0f0e", cardMute: "#6b675f", cardLine: "#cfccc4",
+  barMute: "#3a3936",
 };
 
 const SANS = "-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif";
@@ -175,7 +182,7 @@ function hero(t: Theme, L: HeroLayout): string {
     `<rect x="${R.x + 20}" y="${R.y + 18}" width="112" height="24" rx="12" fill="${t.accent}"/>`,
     text(R.x + 76, R.y + 34.5, "RULE · ACTIVE", 11.5, "#ffffff", `text-anchor="middle" letter-spacing="1.2" font-weight="700"`),
     `<circle cx="${R.x + R.w - 36}" cy="${R.y + 30}" r="14" fill="none" stroke="${t.accent}" stroke-width="2"/>`,
-    `<path class="${tickCls}" d="M${R.x + R.w - 42} ${R.y + 30}l4.5 4.5l8.5-9" fill="none" stroke="#ffffff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>`,
+    `<path class="${tickCls}" d="M${R.x + R.w - 42} ${R.y + 30}l4.5 4.5l8.5-9" fill="none" stroke="${t.accent}" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>`,
     text(R.x + 20, R.y + 72, "WHEN", 11.5, t.cardMute, `letter-spacing="1.4" font-weight="600"`),
     text(R.x + 20, R.y + 94, "vendor is Amazon Web Services", 16, t.cardInk),
     text(R.x + 20, R.y + 124, "THEN", 11.5, t.cardMute, `letter-spacing="1.4" font-weight="600"`),
@@ -196,7 +203,7 @@ function hero(t: Theme, L: HeroLayout): string {
     const x = C.x + i * (bw + gap);
     const cls = anim(`b${i}`, 38 + i * 4, 5, "scaleY(0)");
     css.push(`.${cls}{transform-box:fill-box;transform-origin:50% 100%}`);
-    body.push(`<g class="${cls}">${bar(x, base, bw, h, t.accent)}${text(x + bw / 2, base - h - 6, String(v), 13, t.ink2, `text-anchor="middle" font-weight="600"`)}</g>`);
+    body.push(`<g class="${cls}">${bar(x, base, bw, h, i === n - 1 ? t.accent : t.barMute)}${text(x + bw / 2, base - h - 6, String(v), 13, t.ink2, `text-anchor="middle" font-weight="600"`)}</g>`);
     body.push(text(x + bw / 2, base + 17, month(rows[i].period), 12, t.mute, `text-anchor="middle"`));
   });
 
@@ -239,7 +246,7 @@ function resultsChart(t: Theme): string {
     values.forEach((v, i) => {
       const h = ((base - top) * v) / max;
       const x = plotX + gap + i * (bw + gap);
-      body.push(bar(Number(x.toFixed(1)), base, Number(bw.toFixed(1)), Number(h.toFixed(1)), t.accent));
+      body.push(bar(Number(x.toFixed(1)), base, Number(bw.toFixed(1)), Number(h.toFixed(1)), i === n - 1 ? t.accent : t.barMute));
       body.push(text(x + bw / 2, base - h - 8, fmt(v), 13, t.ink2, `text-anchor="middle" font-weight="600"`));
       body.push(text(x + bw / 2, base + 22, `${month(rows[i].period)}`, 13, t.mute, `text-anchor="middle"`));
       body.push(text(x + bw / 2, base + 40, `close ${i + 1}`, 11, t.mute, `text-anchor="middle"`));

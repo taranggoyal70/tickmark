@@ -1,12 +1,13 @@
 "use server";
 
-import { auth, currentUser } from "@clerk/nextjs/server";
+import { currentUser } from "@clerk/nextjs/server";
+import { signedInUserId } from "@/lib/auth";
 import { revalidatePath } from "next/cache";
 import { adoptRule, resolveException, type ResolveOutcome } from "@/lib/store/queue";
 
 /** Whoever is signed in owns the judgment. Adoption has to name someone. */
 async function actorName(): Promise<string> {
-  const { userId } = await auth();
+  const userId = await signedInUserId();
   if (!userId) throw new Error("not signed in");
   const u = await currentUser();
   return u?.fullName ?? u?.primaryEmailAddress?.emailAddress ?? userId;

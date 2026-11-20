@@ -46,24 +46,44 @@ export async function buildBinder(entityName: string, periodCode: string): Promi
   const { data: per } = await c.from("periods").select("id").eq("entity_id", ent.id).eq("code", periodCode).maybeSingle();
   if (!per) return null;
 
-  const [runs, marks, exceptions, corrections, entries, rules, accounts, reconciliation] = await Promise.all([
-    c.from("close_runs").select("*").eq("period_id", per.id).order("started_at", { ascending: false }).limit(1),
-    c.from("tickmarks").select("*").eq("period_id", per.id).order("created_at"),
-    c.from("exceptions").select("*").eq("period_id", per.id),
+  const runs = await c.from("close_runs").select("*").eq("period_id", per.id)
+    .eq("status", "succeeded").order("started_at", { ascending: false }).limit(1);
+  const run = (runs.data ?? [])[0] as Record<string, unknown> | undefined;
+  const runId = run?.id ? String(run.id) : null;
+
+  let marksQuery = c.from("tickmarks").select("*").eq("period_id", per.id).order("created_at");
+  let exceptionsQuery = c.from("exceptions").select("*").eq("period_id", per.id);
+  let entriesQuery = c.from("journal_entries").select("*").eq("period_id", per.id);
+  if (runId) {
+    marksQuery = marksQuery.eq("close_run_id", runId);
+    exceptionsQuery = exceptionsQuery.eq("close_run_id", runId);
+    entriesQuery = entriesQuery.eq("close_run_id", runId);
+  }
+
+  const [marks, exceptions, corrections, entries, rules, accounts, reconciliation] = await Promise.all([
+    marksQuery,
+    exceptionsQuery,
     c.from("corrections").select("*").eq("period_id", per.id),
-    c.from("journal_entries").select("*").eq("period_id", per.id),
+    entriesQuery,
     c.from("rules").select("*").eq("entity_id", ent.id).eq("status", "active"),
     c.from("gl_accounts").select("id, code").eq("entity_id", ent.id),
     reconcile(entityName, periodCode),
   ]);
 
   const acct = new Map((accounts.data ?? []).map((a) => [String(a.id), String(a.code)]));
-  const run = (runs.data ?? [])[0] as Record<string, unknown> | undefined;
-
   const correctionByException = new Map<string, Record<string, unknown>>();
+  const currentExceptionIds = new Set(
+    ((exceptions.data ?? []) as unknown as Record<string, unknown>[]).map((e) => String(e.id)),
+  );
   for (const k of (corrections.data ?? []) as unknown as Record<string, unknown>[]) {
-    correctionByException.set(String(k.exception_id), k);
+    if (currentExceptionIds.has(String(k.exception_id))) correctionByException.set(String(k.exception_id), k);
   }
+
+  const appliedRuleIds = new Set(
+    ((marks.data ?? []) as unknown as Record<string, unknown>[])
+      .map((t) => t.rule_id ? String(t.rule_id) : "")
+      .filter(Boolean),
+  );
 
   const allMarks = ((marks.data ?? []) as unknown as Record<string, unknown>[]).map((t) => {
     const ev = ((t.evidence ?? []) as Record<string, unknown>[])[0] ?? {};
@@ -107,7 +127,9 @@ export async function buildBinder(entityName: string, periodCode: string): Promi
     })),
   }));
 
-  const rulesApplied: BinderRule[] = ((rules.data ?? []) as unknown as Record<string, unknown>[]).map((r) => {
+  const rulesApplied: BinderRule[] = ((rules.data ?? []) as unknown as Record<string, unknown>[])
+    .filter((r) => appliedRuleIds.has(String(r.id)))
+    .map((r) => {
     const b = (r.backtest ?? null) as Record<string, unknown> | null;
     return {
       name: String(r.name), kind: String(r.kind), status: String(r.status),
@@ -121,7 +143,7 @@ export async function buildBinder(entityName: string, periodCode: string): Promi
         precision: Number(b.precision ?? 0), periods: (b.periodsReplayed as string[] | undefined) ?? [],
       } : null,
     };
-  });
+    });
 
   return {
     entity: String(ent.name), periodCode, preparedAt: new Date().toISOString(),

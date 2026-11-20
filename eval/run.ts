@@ -22,7 +22,10 @@ import { effectiveModelId, providerLabel, setModelOverride } from "../src/lib/ag
 import { simulate, type PeriodReport, type SimulationReport } from "../src/lib/agent/simulate";
 import { ENTITY } from "../src/lib/seed/fixture";
 import { baselineModel } from "./baseline-model";
+import { heldOutByClose, type CloseRow, type CompanyResult, type EvalResults } from "./summary";
 import { DRIFT, EVAL_PERIODS, HELD_OUT_SEEDS, devCompany, driftCompany, heldOutCompany, type EvalCompany } from "./companies";
+
+export { heldOutByClose, type CloseRow, type CompanyResult, type EvalResults };
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 const RESULTS = path.join(HERE, "results");
@@ -32,65 +35,6 @@ const LIST_PRICE_MODEL = DEFAULT_MODEL;
 
 /** The audit rates the policy-change scenario compares. Fixed before the first run. */
 export const DRIFT_AUDIT_RATES = [0, 0.25] as const;
-
-export interface CloseRow {
-  close: number;
-  period: string;
-  activeRulesIn: number;
-  activeRulesOut: number;
-  modelCalls: number;
-  gradientCalls: number;
-  /** close plus gradient */
-  tokensIn: number;
-  tokensOut: number;
-  /** close plus gradient, priced at LIST_PRICE_MODEL's list price */
-  costMicrosAtListPrice: number;
-  invoices: number;
-  codingCorrect: number;
-  codingByRule: number;
-  codingByRuleCorrect: number;
-  truthMatches: number;
-  matchCorrect: number;
-  matchByRule: number;
-  matchByRuleCorrect: number;
-  bankLines: number;
-  decisions: number;
-  cleared: number;
-  clearedWrong: number;
-  exceptions: number;
-  corrections: number;
-  contradictions: number;
-  suspended: number;
-  modelFailures: number;
-}
-
-export interface CompanyResult {
-  id: string;
-  split: "dev" | "held-out";
-  round?: 1 | 2;
-  seed: number;
-  name: string;
-  auditRate: number;
-  closes: CloseRow[];
-  /** later corrections an active rule would have decided differently */
-  contradictions: { period: string; ruleSaid: string; humanSaid: string; subject: string }[];
-  drift?: { vendor: string; fromPeriod: string; perClose: { period: string; invoices: number; byRule: number; clearedWrong: number; corrected: number }[] };
-}
-
-export interface EvalResults {
-  schema: 1;
-  mode: "offline-baseline" | "model";
-  model: string;
-  provider: string;
-  tokenCounts: "estimated (characters / 4)" | "reported by the provider";
-  listPrice: { model: string; inPerMTok: number; outPerMTok: number };
-  periods: readonly string[];
-  adoption: typeof ADOPTION;
-  autoThreshold: number;
-  heldOutSeeds: readonly number[];
-  companies: CompanyResult[];
-  generatedAt?: string;
-}
 
 function rows(report: SimulationReport): CloseRow[] {
   return report.periods.map((p: PeriodReport, i): CloseRow => {
@@ -193,24 +137,6 @@ export async function runEval(mode: EvalResults["mode"], only: Set<string>, log:
 
 /** One decimal, truncated: a reported share is never rounded up. */
 const pct = (n: number, d: number) => (d === 0 ? "n/a" : `${(Math.floor((1000 * n) / d) / 10).toFixed(1)}%`);
-
-/** Held-out companies summed close by close, so every rate has its counts. */
-export function heldOutByClose(r: EvalResults, round: 1 | 2 = 2) {
-  const held = r.companies.filter((c) => c.split === "held-out" && c.round === round && !c.drift && c.auditRate === 0);
-  return r.periods.map((period, i) => {
-    const cs = held.map((c) => c.closes[i]);
-    const sum = (k: keyof CloseRow) => cs.reduce((s, c) => s + (c[k] as number), 0);
-    return {
-      close: i + 1, period, companies: cs.length,
-      activeRulesIn: sum("activeRulesIn"), modelCalls: sum("modelCalls"), gradientCalls: sum("gradientCalls"),
-      tokensIn: sum("tokensIn"), tokensOut: sum("tokensOut"), costMicros: sum("costMicrosAtListPrice"),
-      invoices: sum("invoices"), codingCorrect: sum("codingCorrect"), codingByRule: sum("codingByRule"), codingByRuleCorrect: sum("codingByRuleCorrect"),
-      truthMatches: sum("truthMatches"), matchCorrect: sum("matchCorrect"), matchByRule: sum("matchByRule"), matchByRuleCorrect: sum("matchByRuleCorrect"),
-      cleared: sum("cleared"), clearedWrong: sum("clearedWrong"), exceptions: sum("exceptions"),
-      contradictions: sum("contradictions"),
-    };
-  });
-}
 
 export function printSummary(r: EvalResults, log: (s: string) => void) {
   log(`\nmode ${r.mode} · model ${r.model} · tokens ${r.tokenCounts}`);

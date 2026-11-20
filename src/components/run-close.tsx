@@ -48,7 +48,7 @@ export function RunClose({ entity, periods }: { entity: string; periods: string[
             </p>
           ) : null}
           {outcome.degraded ? (
-            <p className="mt-1.5 text-[12px] text-[#8a5a00]">
+            <p className="mt-1.5 text-[12px] text-signal-ink">
               The model was unreachable, so the rulebook settled what it already knew and the rest went to the queue.
               The close still completed.
             </p>

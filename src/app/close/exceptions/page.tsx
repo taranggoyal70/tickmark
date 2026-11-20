@@ -35,13 +35,13 @@ export default async function ExceptionsPage() {
       <ProvenanceBanner report={report} />
 
       <div className="mb-6">
-        <div className="eyebrow mb-2">Exception queue · {queue?.periodCode || report.periods[report.periods.length - 1].period}</div>
-        <h1 className="headline text-ink">
+        <div className="eyebrow mb-4">Exception queue · {queue?.periodCode || report.periods[report.periods.length - 1].period}</div>
+        <h1 className="display-md m-0 text-ink">
           {items.length ? `${items.length} items need judgment` : "Queue is clear"}
         </h1>
         <p className="mt-2 max-w-2xl text-[14px] leading-relaxed text-ink-subtle">
           Down from {first.exceptions?.length ?? first.stats.exceptionsOpened} in {first.period}. An exception is not an
-          error — it is the agent correctly declining to assert something. Resolve one, and tick
+          error; it is the agent correctly declining to assert something. Resolve one, and tick
           <span className="text-ink"> &ldquo;always do this&rdquo;</span> to turn the judgment into standing policy.
           It takes two agreeing corrections before anything becomes a rule.
         </p>
@@ -57,18 +57,18 @@ export default async function ExceptionsPage() {
 
       {openIntents.length ? (
         <Panel className="mb-6 p-4">
-          <div className="eyebrow mb-2">Standing intents · waiting for a second correction</div>
+          <div className="eyebrow mb-4">Standing intents · waiting for a second correction</div>
           <ul className="flex flex-wrap gap-2">
             {openIntents.map((i) => (
-              <li key={i.id} className="rounded-[var(--radius-sm)] border border-[#fab219]/45 bg-[#fab219]/12 px-2.5 py-1 text-[12px] text-ink-muted">
+              <li key={i.id} className="rounded-[var(--radius-sm)] border border-[var(--signal)]/30 bg-[var(--signal-bg)] px-2.5 py-1 text-[12px] text-ink-muted">
                 <span className="text-ink">{Object.values(i.scope).join(" ")}</span>
                 <span className="text-ink-tertiary"> · {i.kind}</span>
               </li>
             ))}
           </ul>
           <p className="mt-2.5 text-[12px] leading-snug text-ink-tertiary">
-            These are instructions, not rules. Nothing here decides anything until a second correction agrees with it —
-            that is the evidence gate, and it is enforced in the database, not just described here.
+            These are instructions, not rules. Nothing here decides anything until a second correction agrees with it.
+            That is the evidence gate, and it is enforced in the database, not just described here.
           </p>
         </Panel>
       ) : null}

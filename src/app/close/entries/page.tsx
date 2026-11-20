@@ -1,4 +1,5 @@
 import { Panel } from "@/components/kit";
+import { NoBooks } from "@/components/no-books";
 import { Shell } from "@/components/shell";
 import { listEntries } from "@/lib/store/entries";
 import { queueEnabled } from "@/lib/store/queue";
@@ -7,20 +8,24 @@ import { EntryCard } from "./entry-list";
 export const dynamic = "force-dynamic";
 
 export default async function EntriesPage() {
+  if (!queueEnabled()) return <Shell active="/close/entries"><NoBooks view="The journal entry approval queue" /></Shell>;
   const pending = queueEnabled() ? await listEntries("pending_approval").catch(() => []) : [];
   const posted = queueEnabled() ? await listEntries("posted").catch(() => []) : [];
 
   return (
     <Shell active="/close/entries">
       <div className="mb-6 max-w-2xl">
-        <div className="eyebrow mb-2">Journal entries</div>
-        <h1 className="headline text-ink">
+        <div className="eyebrow mb-4">Journal entries</div>
+        <h1 className="display-md m-0 text-ink">
           {pending.length ? `${pending.length} ${pending.length === 1 ? "entry" : "entries"} waiting for approval` : "Nothing waiting for approval"}
         </h1>
         <p className="mt-2 text-[14px] leading-relaxed text-ink-subtle">
-          The agent drafts entries; it never posts them. Debits must equal credits — checked
-          arithmetically by the database, not taken from the model — and the approver has to be
+          The agent drafts entries; it never posts them. Debits must equal credits, checked
+          arithmetically by the database, not taken from the model, and the approver has to be
           someone other than the preparer.
+        </p>
+        <p className="mt-2 text-[12px] text-ink-tertiary">
+          Showing the latest persisted close run only, so reruns never duplicate the approval queue.
         </p>
       </div>
 

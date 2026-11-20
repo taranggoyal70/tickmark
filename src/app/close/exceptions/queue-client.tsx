@@ -33,7 +33,7 @@ function ProposalLine({ item }: { item: QueueItem }) {
     return <span className="text-ink-muted">accrue <Money cents={p.suggestedCents} /></span>;
   }
   if (typeof p.description === "string") {
-    return <span className="text-ink-muted">{p.description}{p.why ? <span className="text-ink-tertiary"> — {String(p.why)}</span> : null}</span>;
+    return <span className="text-ink-muted">{p.description}{p.why ? <span className="text-ink-tertiary"> · {String(p.why)}</span> : null}</span>;
   }
   return <span className="text-ink-tertiary">no proposal</span>;
 }
@@ -47,8 +47,8 @@ function Outcome({ outcome, onAdopt, busy }: {
   }
   if (outcome.kind === "intent_recorded") {
     return (
-      <div className="rounded-[var(--radius-md)] border border-[#fab219]/50 bg-[#fab219]/12 p-3">
-        <p className="text-[13px] text-[#8a5a00]">Noted — but not yet a rule.</p>
+      <div className="rounded-[var(--radius-md)] border border-[var(--signal)]/30 bg-[var(--signal-bg)] p-3">
+        <p className="text-[13px] text-signal-ink">Noted, but not yet a rule.</p>
         <p className="mt-1 text-[12px] leading-snug text-ink-muted">
           One correction is an anecdote. I&rsquo;ve recorded a standing intent for{" "}
           <span className="text-ink">{outcome.scope}</span> and will propose a rule the next time
@@ -61,7 +61,7 @@ function Outcome({ outcome, onAdopt, busy }: {
   return (
     <div className={`rounded-[var(--radius-md)] border p-3 ${weak ? "border-[var(--danger)]/30 bg-[var(--danger)]/6" : "border-[var(--primary)]/30 bg-[var(--primary)]/6"}`}>
       <p className={`text-[13px] ${weak ? "text-[var(--danger)]" : "text-[var(--primary-hover)]"}`}>
-        {weak ? "Seconded — but the replay says no." : "Seconded — rule proposed."}
+        {weak ? "Seconded, but the replay says no." : "Seconded: rule proposed."}
       </p>
       <p className="mt-1 nums text-[12px] text-ink-muted">
         <span className="text-ink">{outcome.ruleName}</span>
@@ -69,7 +69,7 @@ function Outcome({ outcome, onAdopt, busy }: {
       </p>
       {weak ? (
         <p className="mt-1.5 text-[12px] leading-snug text-ink-muted">
-          It did not clear the bar against closed periods, so it cannot be adopted. The instruction is kept —
+          It did not clear the bar against closed periods, so it cannot be adopted. The instruction is kept:
           a later period may give it the evidence it needs.
         </p>
       ) : null}
