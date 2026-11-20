@@ -1,6 +1,6 @@
 "use server";
 
-import { auth } from "@clerk/nextjs/server";
+import { signedInUserId } from "@/lib/auth";
 import { revalidatePath } from "next/cache";
 import { ensureChart, ensureEntity, ensureVendors, ingestPeriod } from "@/lib/ingest/ingest";
 import { parseCsv, parseMoneyCents } from "@/lib/ingest/schema";
@@ -31,7 +31,7 @@ const text = async (f: FormDataEntryValue | null) =>
  * front. What it will not do is guess at an amount or a date it cannot read.
  */
 export async function importPeriodAction(form: FormData): Promise<ImportOutcome> {
-  const { userId } = await auth();
+  const userId = await signedInUserId();
   if (!userId) return { ok: false, message: "Sign in to import books." };
 
   const entityName = String(form.get("entity") ?? "").trim();

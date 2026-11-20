@@ -1,4 +1,4 @@
-import { auth } from "@clerk/nextjs/server";
+import { signedInUserId } from "@/lib/auth";
 import { redirect } from "next/navigation";
 import { Shell } from "@/components/shell";
 import { ImportForm } from "./import-form";
@@ -6,7 +6,7 @@ import { ImportForm } from "./import-form";
 export const dynamic = "force-dynamic";
 
 export default async function SetupPage() {
-  const { userId } = await auth();
+  const userId = await signedInUserId();
   if (!userId) redirect("/sign-in");
 
   return (

@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import { Inter, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import { clerkAppearance } from "@/lib/clerk-appearance";
+import { authConfigured } from "@/lib/auth";
 
 const inter = Inter({ variable: "--font-inter", subsets: ["latin"], display: "swap" });
 const mono = JetBrains_Mono({ variable: "--font-mono-face", subsets: ["latin"], display: "swap" });
@@ -14,6 +15,13 @@ export const metadata: Metadata = {
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
+  const page = (
+    <html lang="en" className={`${inter.variable} ${mono.variable} h-full antialiased`}>
+      <body className="min-h-full flex flex-col">{children}</body>
+    </html>
+  );
+  // without Clerk keys the app runs read-only and needs no provider
+  if (!authConfigured()) return page;
   return (
     <ClerkProvider
       appearance={clerkAppearance}
@@ -30,9 +38,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       signInFallbackRedirectUrl="/close"
       signUpFallbackRedirectUrl="/close"
     >
-      <html lang="en" className={`${inter.variable} ${mono.variable} h-full antialiased`}>
-        <body className="min-h-full flex flex-col">{children}</body>
-      </html>
+      {page}
     </ClerkProvider>
   );
 }

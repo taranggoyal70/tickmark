@@ -1,5 +1,6 @@
 import { UserButton } from "@clerk/nextjs";
 import Link from "next/link";
+import { authConfigured } from "@/lib/auth";
 import type { ReactNode } from "react";
 
 const NAV = [
@@ -48,7 +49,7 @@ export function Shell({ children, active }: { children: ReactNode; active?: stri
           </nav>
           <div className="ml-auto flex items-center gap-3 text-[12px] text-ink-tertiary">
             <span className="hidden xl:inline">Northwind Robotics, Inc. · synthetic demo</span>
-            <UserButton appearance={{ elements: { avatarBox: { width: 26, height: 26 } } }} />
+            {authConfigured() ? <UserButton appearance={{ elements: { avatarBox: { width: 26, height: 26 } } }} /> : null}
             <details className="relative lg:hidden">
               <summary className="focus-ring cursor-pointer list-none rounded-[var(--radius-md)] border border-hairline bg-surface-1 px-3 py-1.5 text-[13px] font-medium text-ink marker:content-none">
                 Menu

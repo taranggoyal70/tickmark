@@ -1,6 +1,7 @@
 "use server";
 
-import { auth, currentUser } from "@clerk/nextjs/server";
+import { currentUser } from "@clerk/nextjs/server";
+import { signedInUserId } from "@/lib/auth";
 import { revalidatePath } from "next/cache";
 import { closePeriod } from "@/lib/agent/run-period";
 
@@ -21,7 +22,7 @@ export interface CloseOutcome {
 }
 
 export async function runCloseAction(entity: string, period: string): Promise<CloseOutcome> {
-  const { userId } = await auth();
+  const userId = await signedInUserId();
   if (!userId) return { ok: false, message: "Sign in to run a close — it writes to the ledger." };
   const who = await currentUser();
 

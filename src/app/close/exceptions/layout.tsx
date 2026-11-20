@@ -1,4 +1,4 @@
-import { auth } from "@clerk/nextjs/server";
+import { signedInUserId } from "@/lib/auth";
 import { redirect } from "next/navigation";
 
 /**
@@ -9,7 +9,7 @@ import { redirect } from "next/navigation";
  * the thing work.
  */
 export default async function ExceptionsLayout({ children }: LayoutProps<"/close/exceptions">) {
-  const { userId } = await auth();
+  const userId = await signedInUserId();
   if (!userId) redirect("/sign-in");
   return <>{children}</>;
 }

@@ -1,4 +1,6 @@
 import { clerkMiddleware } from "@clerk/nextjs/server";
+import { NextResponse } from "next/server";
+import { authConfigured } from "@/lib/auth";
 
 /**
  * Makes auth() available to the app. Deliberately does no route matching:
@@ -7,7 +9,9 @@ import { clerkMiddleware } from "@clerk/nextjs/server";
  * The check lives next to the data instead: every server action that writes,
  * src/app/close/exceptions/layout.tsx and src/app/api/binder/route.ts.
  */
-export default clerkMiddleware();
+// Without Clerk keys the app is read-only and every write path treats the
+// visitor as signed out (src/lib/auth.ts), so there is nothing to attach.
+export default authConfigured() ? clerkMiddleware() : () => NextResponse.next();
 
 export const config = {
   matcher: [

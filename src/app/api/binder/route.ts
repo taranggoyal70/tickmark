@@ -1,4 +1,4 @@
-import { auth } from "@clerk/nextjs/server";
+import { signedInUserId } from "@/lib/auth";
 import { NextResponse } from "next/server";
 import { buildBinder, tickmarksCsv } from "@/lib/close/binder";
 import { queueEnabled } from "@/lib/store/queue";
@@ -14,7 +14,7 @@ export const dynamic = "force-dynamic";
  */
 export async function GET(request: Request) {
   if (process.env.TICKMARK_PUBLIC_READ !== "1") {
-    const { userId } = await auth();
+    const userId = await signedInUserId();
     if (!userId) return NextResponse.json({ error: "sign in to download a binder" }, { status: 401 });
   }
 
