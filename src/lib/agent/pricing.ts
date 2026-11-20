@@ -1,3 +1,5 @@
+import { envNumber } from "../env";
+
 /**
  * Source of truth for model identity and price. Nothing else hardcodes a rate.
  * Rates are USD per 1M tokens, from the Claude API pricing table.
@@ -29,8 +31,8 @@ export function rateFor(model: ModelId): Rate {
   if (known) return known;
   return {
     label: model,
-    inPerMTok: Number(process.env.TICKMARK_PRICE_IN ?? 0),
-    outPerMTok: Number(process.env.TICKMARK_PRICE_OUT ?? 0),
+    inPerMTok: envNumber("TICKMARK_PRICE_IN", 0),
+    outPerMTok: envNumber("TICKMARK_PRICE_OUT", 0),
   };
 }
 

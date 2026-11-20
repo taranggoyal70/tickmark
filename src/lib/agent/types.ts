@@ -56,6 +56,17 @@ export interface Rule {
   duplicateOf?: string;
   activatedAt?: string;
   deduplicatedAt?: string;
+  /**
+   * The correction that contradicted this rule. A rule a human has overruled
+   * stops deciding immediately; it is retained, disabled, for the audit trail.
+   */
+  suspendedBy?: string;
+  suspendedAt?: string;
+  /**
+   * The first period the rule's evidence covers. Set when the rule replaces a
+   * policy that later corrections superseded, so its replay starts there.
+   */
+  effectiveFrom?: string;
 }
 
 // ── the things being closed ──────────────────────────────────────────────────
@@ -111,7 +122,9 @@ export type ExceptionCause =
   /** a fresh model suggestion has not yet earned authority to clear work */
   | "unverified_model_judgment"
   /** the model could not be reached; the Rulebook still ran */
-  | "model_unavailable";
+  | "model_unavailable"
+  /** a rule decision drawn for spot-checking, so a stale rule gets caught */
+  | "audit_sample";
 
 export interface Exception {
   id: string;

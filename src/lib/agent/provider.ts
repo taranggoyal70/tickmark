@@ -11,6 +11,7 @@
  *   3. otherwise          - the plain "provider/model" string via Vercel AI Gateway
  */
 import { createAnthropic } from "@ai-sdk/anthropic";
+import { createOpenAI } from "@ai-sdk/openai";
 import { createOpenAICompatible } from "@ai-sdk/openai-compatible";
 import type { LanguageModel } from "ai";
 import type { ModelId } from "./pricing";
@@ -30,6 +31,11 @@ export function resolveModel(id: ModelId): LanguageModel {
 
   const baseURL = process.env.TICKMARK_BASE_URL;
   if (baseURL) {
+    // OpenAI itself gets its own provider: newer models reject the generic
+    // `max_tokens` and need `max_completion_tokens`, which it knows per model.
+    if (new URL(baseURL).host === "api.openai.com") {
+      return createOpenAI({ baseURL, apiKey: process.env.TICKMARK_API_KEY })(process.env.TICKMARK_MODEL ?? bare(id));
+    }
     const provider = createOpenAICompatible({
       name: "tickmark-endpoint",
       baseURL,

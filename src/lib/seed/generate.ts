@@ -7,6 +7,25 @@
  */
 import { BANK_NOISE, DEPARTMENTS, PERIODS, VENDORS, type VendorSpec } from "./fixture";
 
+/**
+ * Knobs for generating a company other than the bundled one. The defaults
+ * reproduce the bundled sample company byte for byte, which the tests pin.
+ */
+export interface GenerateOptions {
+  /** 0 is the bundled company. Any other value re-draws every random choice. */
+  seed?: number;
+  /** The vendor catalogue, including each vendor's true coding policy. */
+  vendors?: VendorSpec[];
+  /**
+   * A policy change the books undergo mid-run: from `fromIndex` on, the named
+   * vendor is coded differently. Real companies reorganise; a rule learned
+   * before the change is wrong after it.
+   */
+  drift?: { vendor: string; fromIndex: number; glCode: string; deptSplit: Record<string, number> };
+  /** Which vendor goes silent, and when, so accrual completeness has work. */
+  silent?: { periodIndex: number; vendor: string } | null;
+}
+
 // ── deterministic PRNG (mulberry32) ───────────────────────────────────────────
 function rng(seed: number) {
   let a = seed >>> 0;
@@ -88,8 +107,16 @@ const billsThisPeriod = (v: VendorSpec, idx: number) => {
  */
 const SILENT = { periodIndex: 3, vendor: "Datadog" };
 
-export function generatePeriod(code: string, idx: number): GeneratedPeriod {
-  const r = rng(hash(code));
+export function generatePeriod(code: string, idx: number, opts: GenerateOptions = {}): GeneratedPeriod {
+  const seed = opts.seed ?? 0;
+  // seed 0 must leave every draw unchanged: the bundled books are pinned
+  const salt = (s: string) => (seed === 0 ? hash(s) : hash(`${seed}:${s}`));
+  const r = rng(salt(code));
+  const silentSpec = opts.silent === undefined ? SILENT : opts.silent;
+  const vendors = (opts.vendors ?? VENDORS).map((v) =>
+    opts.drift && v.name === opts.drift.vendor && idx >= opts.drift.fromIndex
+      ? { ...v, glCode: opts.drift.glCode, deptSplit: opts.drift.deptSplit }
+      : v);
   const { start, end, cutoff } = periodBounds(code);
 
   const bankLines: GenBankLine[] = [];
@@ -104,12 +131,12 @@ export function generatePeriod(code: string, idx: number): GeneratedPeriod {
 
   const alias = (v: VendorSpec) => v.bankAliases[Math.floor(r() * v.bankAliases.length)];
 
-  for (const v of VENDORS) {
-    const silent = idx === SILENT.periodIndex && v.name === SILENT.vendor;
+  for (const v of vendors) {
+    const silent = !!silentSpec && idx === silentSpec.periodIndex && v.name === silentSpec.vendor;
     if (silent) {
       truth.expectedAccruals.push({
         vendorName: v.name,
-        amountCents: jittered(v.baseCents, v.jitter * 0.3, rng(hash(code + v.name))),
+        amountCents: jittered(v.baseCents, v.jitter * 0.3, rng(salt(code + v.name))),
         glCode: v.glCode,
       });
       continue;
@@ -240,8 +267,8 @@ export function generatePeriod(code: string, idx: number): GeneratedPeriod {
   return { code, start, end, cutoff, bankLines, ledgerEntries, apInvoices, truth };
 }
 
-export function generateAll(): GeneratedPeriod[] {
-  return PERIODS.map((code, i) => generatePeriod(code, i));
+export function generateAll(opts: GenerateOptions & { periods?: readonly string[] } = {}): GeneratedPeriod[] {
+  return (opts.periods ?? PERIODS).map((code, i) => generatePeriod(code, i, opts));
 }
 
 export const DEPT_CODES = DEPARTMENTS.map((d) => d.code);

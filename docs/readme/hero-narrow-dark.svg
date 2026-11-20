@@ -1,0 +1,66 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="480" height="1190" viewBox="0 0 480 1190" role="img" aria-labelledby="t d">
+<title id="t">Tickmark: every correction becomes a rule, every rule retires a model call</title><desc id="d">Animated illustration. A controller corrects how an Amazon Web Services invoice is coded in January and again in February; the two agreeing corrections compile into an active rule (vendor is Amazon Web Services, code 6820 split ENG 60, DATA 25, PROD 15) that runs with zero model calls. A bar chart shows measured model calls per close across 3 held-out companies, Jan 24, Feb 24, Mar 15, Apr 9, May 12, Jun 9. 0 of 677 lines cleared unattended were wrong.</desc>
+<defs><marker id="head" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="5" markerHeight="5" orient="auto"><path d="M1 1L8 5L1 9" fill="none" stroke="#7a6aff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></marker></defs>
+<style>@keyframes card0{0%,1%{opacity:0;transform:translateY(10px)}7%,91%{opacity:1;transform:none}97%,100%{opacity:0;transform:none}}.card0{animation:card0 12s cubic-bezier(.2,.7,.2,1) -9s infinite both}@keyframes card1{0%,9%{opacity:0;transform:translateY(10px)}15%,91%{opacity:1;transform:none}97%,100%{opacity:0;transform:none}}.card1{animation:card1 12s cubic-bezier(.2,.7,.2,1) -9s infinite both}@keyframes arrow{0%,16%{opacity:0;transform:translate(0,0)}22%,91%{opacity:1;transform:none}97%,100%{opacity:0;transform:none}}.arrow{animation:arrow 12s cubic-bezier(.2,.7,.2,1) -9s infinite both}@keyframes rule{0%,22%{opacity:0;transform:scale(.97)}29%,91%{opacity:1;transform:none}97%,100%{opacity:0;transform:none}}.rule{animation:rule 12s cubic-bezier(.2,.7,.2,1) -9s infinite both}.rule{transform-box:fill-box;transform-origin:50% 50%}@keyframes tick{0%,30%{stroke-dashoffset:30}38%,100%{stroke-dashoffset:0}}.tick{stroke-dasharray:30;animation:tick 12s ease-out -9s infinite both}@keyframes b0{0%,38%{opacity:0;transform:scaleY(0)}43%,91%{opacity:1;transform:none}97%,100%{opacity:0;transform:none}}.b0{animation:b0 12s cubic-bezier(.2,.7,.2,1) -9s infinite both}.b0{transform-box:fill-box;transform-origin:50% 100%}@keyframes b1{0%,42%{opacity:0;transform:scaleY(0)}47%,91%{opacity:1;transform:none}97%,100%{opacity:0;transform:none}}.b1{animation:b1 12s cubic-bezier(.2,.7,.2,1) -9s infinite both}.b1{transform-box:fill-box;transform-origin:50% 100%}@keyframes b2{0%,46%{opacity:0;transform:scaleY(0)}51%,91%{opacity:1;transform:none}97%,100%{opacity:0;transform:none}}.b2{animation:b2 12s cubic-bezier(.2,.7,.2,1) -9s infinite both}.b2{transform-box:fill-box;transform-origin:50% 100%}@keyframes b3{0%,50%{opacity:0;transform:scaleY(0)}55%,91%{opacity:1;transform:none}97%,100%{opacity:0;transform:none}}.b3{animation:b3 12s cubic-bezier(.2,.7,.2,1) -9s infinite both}.b3{transform-box:fill-box;transform-origin:50% 100%}@keyframes b4{0%,54%{opacity:0;transform:scaleY(0)}59%,91%{opacity:1;transform:none}97%,100%{opacity:0;transform:none}}.b4{animation:b4 12s cubic-bezier(.2,.7,.2,1) -9s infinite both}.b4{transform-box:fill-box;transform-origin:50% 100%}@keyframes b5{0%,58%{opacity:0;transform:scaleY(0)}63%,91%{opacity:1;transform:none}97%,100%{opacity:0;transform:none}}.b5{animation:b5 12s cubic-bezier(.2,.7,.2,1) -9s infinite both}.b5{transform-box:fill-box;transform-origin:50% 100%}@media (prefers-reduced-motion:reduce){*{animation:none!important}}</style>
+<g font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif">
+<rect width="480" height="1190" rx="24" fill="#0b1020"/>
+<rect x="0.5" y="0.5" width="479" height="1189" rx="23.5" fill="none" stroke="#232c47"/>
+<rect x="28" y="44" width="36" height="36" rx="9" fill="#7a6aff"/>
+<path d="M37 63l6.5 6.5l12-13" fill="none" stroke="#fff" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="78" y="71" font-size="26" fill="#e8ecf5" font-weight="650">Tickmark</text>
+<text x="452" y="69" font-size="13" fill="#8e98b0" text-anchor="end" letter-spacing="2" font-weight="600">OPEN SOURCE · MIT</text>
+<text x="26" y="150" font-size="40" fill="#e8ecf5" font-weight="650" letter-spacing="-1.6">Every correction</text>
+<text x="26" y="196" font-size="40" fill="#e8ecf5" font-weight="650" letter-spacing="-1.6">becomes a rule.</text>
+<text x="26" y="242" font-size="40" fill="#e8ecf5" font-weight="650" letter-spacing="-1.6">Every rule retires</text>
+<text x="26" y="288" font-size="40" fill="#e8ecf5" font-weight="650" letter-spacing="-1.6">a model call.</text>
+<text x="28" y="334" font-size="17" fill="#8e98b0">Six closes at 3 held-out companies:</text>
+<text x="28" y="361" font-size="17" fill="#8e98b0">model calls 24 → 9; 0 of 677 lines</text>
+<text x="28" y="388" font-size="17" fill="#8e98b0">cleared unreviewed were wrong.</text>
+<line x1="28" y1="420" x2="452" y2="420" stroke="#232c47"/>
+<text x="28" y="456" font-size="12" fill="#8e98b0" letter-spacing="1.6" font-weight="600">1 · A CONTROLLER CORRECTS</text>
+<text x="28" y="740" font-size="12" fill="#8e98b0" letter-spacing="1.6" font-weight="600">2 · IT COMPILES INTO A RULE</text>
+<text x="28" y="996" font-size="12" fill="#8e98b0" letter-spacing="1.6" font-weight="600">3 · MODEL CALLS PER CLOSE</text>
+<g class="card0">
+<rect x="28" y="474" width="424" height="96" rx="12" fill="#121933" stroke="#232c47"/>
+<rect x="28" y="488" width="3" height="68" rx="1.5" fill="#7a6aff"/>
+<text x="48" y="502" font-size="11.5" fill="#8e98b0" letter-spacing="1.4" font-weight="600">JAN CLOSE · CORRECTION</text>
+<text x="48" y="528" font-size="17" fill="#e8ecf5" font-weight="600">Amazon Web Services</text>
+<text x="48" y="552" font-size="14" fill="#c3cbe0" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace">6820 · ENG 60 / DATA 25 / PROD 15</text>
+</g>
+<g class="card1">
+<rect x="28" y="582" width="424" height="96" rx="12" fill="#121933" stroke="#232c47"/>
+<rect x="28" y="596" width="3" height="68" rx="1.5" fill="#7a6aff"/>
+<text x="48" y="610" font-size="11.5" fill="#8e98b0" letter-spacing="1.4" font-weight="600">FEB CLOSE · CORRECTION</text>
+<text x="48" y="636" font-size="17" fill="#e8ecf5" font-weight="600">Amazon Web Services</text>
+<text x="48" y="660" font-size="14" fill="#c3cbe0" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace">6820 · ENG 60 / DATA 25 / PROD 15</text>
+<g><rect x="366" y="596" width="68" height="22" rx="11" fill="#1e2150"/><text x="400" y="611.5" font-size="12" fill="#7a6aff" text-anchor="middle" font-weight="600">agrees</text></g>
+</g>
+<path class="arrow" d="M240 686V708" stroke="#7a6aff" stroke-width="2.5" stroke-linecap="round" fill="none" marker-end="url(#head)"/>
+<g class="rule">
+<rect x="28" y="756" width="424" height="204" rx="14" fill="#1a1f44"/>
+<rect x="48" y="774" width="112" height="24" rx="12" fill="#7a6aff"/>
+<text x="104" y="790.5" font-size="11.5" fill="#ffffff" text-anchor="middle" letter-spacing="1.2" font-weight="700">RULE · ACTIVE</text>
+<circle cx="416" cy="786" r="14" fill="none" stroke="#7a6aff" stroke-width="2"/>
+<path class="tick" d="M410 786l4.5 4.5l8.5-9" fill="none" stroke="#ffffff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="48" y="828" font-size="11.5" fill="#a7b0cc" letter-spacing="1.4" font-weight="600">WHEN</text>
+<text x="48" y="850" font-size="16" fill="#ffffff">vendor is Amazon Web Services</text>
+<text x="48" y="880" font-size="11.5" fill="#a7b0cc" letter-spacing="1.4" font-weight="600">THEN</text>
+<text x="48" y="902" font-size="15" fill="#ffffff" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace">code 6820 · ENG 60 · DATA 25 · PROD 15</text>
+<line x1="48" y1="922" x2="432" y2="922" stroke="#2f3766"/>
+<text x="48" y="945" font-size="13" fill="#a7b0cc">backtested on closed months · runs with 0 model calls</text>
+</g>
+<line x1="28" y1="1138.5" x2="452" y2="1138.5" stroke="#232c47"/>
+<g class="b0"><path d="M28 1138V1032Q28 1028 32 1028H69Q73 1028 73 1032V1138Z" fill="#7a6aff"/><text x="50.5" y="1022" font-size="13" fill="#c3cbe0" text-anchor="middle" font-weight="600">24</text></g>
+<text x="50.5" y="1155" font-size="12" fill="#8e98b0" text-anchor="middle">Jan</text>
+<g class="b1"><path d="M103 1138V1032Q103 1028 107 1028H144Q148 1028 148 1032V1138Z" fill="#7a6aff"/><text x="125.5" y="1022" font-size="13" fill="#c3cbe0" text-anchor="middle" font-weight="600">24</text></g>
+<text x="125.5" y="1155" font-size="12" fill="#8e98b0" text-anchor="middle">Feb</text>
+<g class="b2"><path d="M178 1138V1073Q178 1069 182 1069H219Q223 1069 223 1073V1138Z" fill="#7a6aff"/><text x="200.5" y="1063" font-size="13" fill="#c3cbe0" text-anchor="middle" font-weight="600">15</text></g>
+<text x="200.5" y="1155" font-size="12" fill="#8e98b0" text-anchor="middle">Mar</text>
+<g class="b3"><path d="M253 1138V1101Q253 1097 257 1097H294Q298 1097 298 1101V1138Z" fill="#7a6aff"/><text x="275.5" y="1091" font-size="13" fill="#c3cbe0" text-anchor="middle" font-weight="600">9</text></g>
+<text x="275.5" y="1155" font-size="12" fill="#8e98b0" text-anchor="middle">Apr</text>
+<g class="b4"><path d="M328 1138V1087Q328 1083 332 1083H369Q373 1083 373 1087V1138Z" fill="#7a6aff"/><text x="350.5" y="1077" font-size="13" fill="#c3cbe0" text-anchor="middle" font-weight="600">12</text></g>
+<text x="350.5" y="1155" font-size="12" fill="#8e98b0" text-anchor="middle">May</text>
+<g class="b5"><path d="M403 1138V1101Q403 1097 407 1097H444Q448 1097 448 1101V1138Z" fill="#7a6aff"/><text x="425.5" y="1091" font-size="13" fill="#c3cbe0" text-anchor="middle" font-weight="600">9</text></g>
+<text x="425.5" y="1155" font-size="12" fill="#8e98b0" text-anchor="middle">Jun</text>
+</g>
+</svg>
