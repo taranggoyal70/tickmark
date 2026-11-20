@@ -10,10 +10,10 @@ and then it runs for free.
 
 <p align="center">
 <a href="https://github.com/taranggoyal70/tickmark/actions/workflows/ci.yml"><img alt="CI" src="https://github.com/taranggoyal70/tickmark/actions/workflows/ci.yml/badge.svg"></a>
-<a href="#verify-a-checkout"><img alt="Tests: 74 passing" src="https://img.shields.io/badge/tests-74%20passing-533afd"></a>
-<a href="#measured-results"><img alt="Held-out unattended clears wrong: 0 of 677" src="https://img.shields.io/badge/held--out%20unattended%20clears%20wrong-0%20of%20677-533afd"></a>
-<a href="LICENSE"><img alt="License: MIT" src="https://img.shields.io/badge/license-MIT-0d253d"></a>
-<a href="https://tickmark-kappa.vercel.app"><img alt="Demo" src="https://img.shields.io/badge/demo-tickmark--kappa.vercel.app-0d253d"></a>
+<a href="#verify-a-checkout"><img alt="Tests: 74 passing" src="https://img.shields.io/badge/tests-74%20passing-e2501d"></a>
+<a href="#measured-results"><img alt="Held-out unattended clears wrong: 0 of 677" src="https://img.shields.io/badge/held--out%20unattended%20clears%20wrong-0%20of%20677-e2501d"></a>
+<a href="LICENSE"><img alt="License: MIT" src="https://img.shields.io/badge/license-MIT-161513"></a>
+<a href="https://tickmark-kappa.vercel.app"><img alt="Demo" src="https://img.shields.io/badge/demo-tickmark--kappa.vercel.app-161513"></a>
 </p>
 
 <p align="center">
@@ -63,6 +63,23 @@ The track lists six workflows. Tickmark does all six on ingested books.
 | **Gathering audit support**<br>`/close/binder` · JSON / CSV | Assembles every tickmark, match and correction for a period into a binder an auditor can download (requires sign-in). |
 | **Preparing cash reports**<br>`/close/cash` | Reads actuals from the bank statement, not the ledger, because the bank is the source of truth for cash. |
 | **Updating forecasts**<br>`/close/cash` | Projects the next period with each line's basis and the number of periods behind it; a vendor seen once is labelled thin evidence, not averaged in. |
+
+## The app
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="docs/readme/screens/close-room-dark.png">
+  <img src="docs/readme/screens/close-room-light.png" width="100%" alt="The close room. Two closes of the same books run side by side: lane A is 2026-01, before the agent learned anything, and lane B is 2026-04, after 6 rules. Each lane counts lines cleared, items sent to the controller, lines settled by a rule and model cost as the recorded decisions replay. Press the right arrow key to start.">
+</picture>
+
+<table>
+<tr>
+<td width="50%"><picture><source media="(prefers-color-scheme: dark)" srcset="docs/readme/screens/home-dark.png"><img src="docs/readme/screens/home-light.png" alt="The landing page. Headline: Models guess. Rules don't. Below it, one strip per held-out close shows each decision as a cell, coloured by whether a rule settled it or it went to the controller."></picture></td>
+<td width="50%"><picture><source media="(prefers-color-scheme: dark)" srcset="docs/readme/screens/close-dark.png"><img src="docs/readme/screens/close-light.png" alt="The close dashboard. Four closes, same agent: auto-clear rate, cost per close, controller time and auto-clear precision, each with a trend chart across the periods."></picture></td>
+</tr>
+</table>
+
+Every screen ships light and dark, and runs read-only without sign-in or a database: the close
+room, the results and the rulebook work on the bundled sample company.
 
 ## Measured results
 
