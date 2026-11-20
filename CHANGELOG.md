@@ -13,6 +13,7 @@ Tickmark has no tagged releases yet; changes are grouped by month, newest first.
 
 ### Fixed
 
+- **model:** Route api.openai.com through OpenAI's own provider (e75470c)
 - **eval:** Truncate reported shares instead of rounding them (dd5d7c4)
 - **deps:** Pin neatlogs to 1.1.19 (f84a1cf)
 - **deps:** Next.js 16.4.6 for the critical RCE advisories (92d8e8e)
@@ -21,6 +22,8 @@ Tickmark has no tagged releases yet; changes are grouped by month, newest first.
 
 ### Maintenance
 
+- **eval:** Record gpt-6.2-sol over held-out round 2 (8a5c426)
+- Regenerate CHANGELOG.md (ad975a0)
 - **eval:** Record the llama3.2 3B run over held-out round 2 (73a385f)
 - **readme:** Keep the architecture diagram's stages left to right (3c39e92)
 - Generate CHANGELOG.md from git history (c101d3c)
