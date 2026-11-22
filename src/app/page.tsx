@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import type { CSSProperties, ReactNode } from "react";
 import { ActionSummary, OP } from "@/components/rule-parts";
@@ -9,6 +10,10 @@ import { latestReport } from "@/lib/report";
 import { modelRuns, offlineHeldOut, type CloseSummary } from "@/lib/results";
 
 export const dynamic = "force-dynamic";
+
+// The landing page is the one canonical URL; the root layout sets none, so
+// other pages never claim to be this one.
+export const metadata: Metadata = { alternates: { canonical: "/" } };
 
 const MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
 const month = (period: string) => MONTHS[Number(period.slice(5, 7)) - 1] ?? period;

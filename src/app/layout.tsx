@@ -18,13 +18,13 @@ export const metadata: Metadata = {
   title: { default: `${SITE.name}: ${SITE.tagline.toLowerCase()}`, template: `%s · ${SITE.name}` },
   description: SITE.description,
   applicationName: SITE.name,
-  alternates: { canonical: "/" },
+  // No canonical or og:url here: every page inherits the root's metadata, and
+  // a canonical of "/" would tell search engines each page is the homepage.
   openGraph: {
     type: "website",
     siteName: SITE.name,
     title: `${SITE.name}: models guess, rules don't`,
     description: SITE.description,
-    url: "/",
     locale: "en_US",
   },
   twitter: {
