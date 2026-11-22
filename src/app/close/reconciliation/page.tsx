@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import { EntityPicker, PeriodPicker } from "@/components/entity-picker";
 import { Money, Panel } from "@/components/kit";
 import { Shell } from "@/components/shell";
@@ -8,6 +9,12 @@ import { reconcile, type ReconcilingItem } from "@/lib/close/reconciliation";
 import { queueEnabled } from "@/lib/store/queue";
 
 export const dynamic = "force-dynamic";
+
+export const metadata: Metadata = {
+  title: "Bank reconciliation",
+  description:
+    "The bank statement against the ledger for a closed period, with every reconciling item and what explained it.",
+};
 
 function ItemTable({ title, note, items }: { title: string; note: string; items: ReconcilingItem[] }) {
   const total = items.reduce((s, i) => s + i.amountCents, 0);

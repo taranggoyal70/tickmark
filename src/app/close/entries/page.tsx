@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import { Panel } from "@/components/kit";
 import { NoBooks } from "@/components/no-books";
 import { Shell } from "@/components/shell";
@@ -8,6 +9,12 @@ import { queueEnabled } from "@/lib/store/queue";
 import { EntryCard } from "./entry-list";
 
 export const dynamic = "force-dynamic";
+
+export const metadata: Metadata = {
+  title: "Journal entries",
+  description:
+    "Entries the agent drafts and never posts: balanced by the database, and approved by someone other than the preparer.",
+};
 
 export default async function EntriesPage() {
   const userId = await signedInUserId();

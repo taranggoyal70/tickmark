@@ -52,18 +52,19 @@ export function Shell({ children, active }: { children: ReactNode; active?: stri
             <details className="relative min-[1180px]:hidden">
               <summary className="btn btn-sm cursor-pointer list-none marker:content-none">Menu</summary>
               <nav aria-label="Close workspace" className="panel-raised absolute right-0 top-11 flex w-56 flex-col gap-0.5 p-2">
-                <div className="label px-2.5 pt-1.5 pb-2 leading-snug">Northwind Robotics · synthetic books</div>
+                <div className="label px-2.5 pt-1.5 pb-2 leading-snug">Close workspace</div>
                 {NAV.map((n) => <NavLink key={n.href} {...n} active={active === n.href} block />)}
               </nav>
             </details>
           </div>
         </div>
       </header>
-      <main className="wrap flex-1 py-8 sm:py-12">{children}</main>
+      <main id="main" className="wrap flex-1 py-8 sm:py-12">{children}</main>
       <footer className="mt-16 border-t border-line">
         <div className="wrap flex flex-wrap justify-between gap-x-6 gap-y-2 py-6 font-mono text-[11.5px] text-muted">
           <span>Tickmark · every automated decision traces to a rule or a close run</span>
-          <span>Northwind Robotics, Inc. · synthetic books, no real financial data</span>
+          {/* signed-in controllers see their own books here too, so this speaks only for the demo */}
+          <span>The demo company, Northwind Robotics, is synthetic: no real financial data</span>
         </div>
       </footer>
     </div>

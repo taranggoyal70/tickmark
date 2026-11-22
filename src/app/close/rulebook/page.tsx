@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import { Badge, Panel } from "@/components/kit";
 import { EmptyRun, Shell } from "@/components/shell";
 import { ProvenanceBanner } from "@/components/provenance";
@@ -5,6 +6,12 @@ import { latestReport } from "@/lib/report";
 import { ActionSummary, OP } from "@/components/rule-parts";
 
 export const dynamic = "force-dynamic";
+
+export const metadata: Metadata = {
+  title: "Rulebook",
+  description:
+    "Every active rule, learned from at least two human corrections and replayed against every closed period before it was switched on.",
+};
 
 export default async function RulebookPage() {
   const report = await latestReport();

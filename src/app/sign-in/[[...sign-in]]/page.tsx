@@ -1,10 +1,13 @@
+import type { Metadata } from "next";
 import { ThemedSignIn } from "@/components/clerk-themed";
 import { Mark } from "@/components/shell";
 import { authConfigured } from "@/lib/auth";
 
+export const metadata: Metadata = { title: "Sign in" };
+
 export default function SignInPage() {
   return (
-    <div className="flex min-h-screen flex-1 flex-col items-center justify-center gap-8 px-6 py-20">
+    <main id="main" className="flex min-h-screen flex-1 flex-col items-center justify-center gap-8 px-6 py-20">
       <div className="flex items-center gap-2">
         <Mark className="h-5 w-5 text-signal" />
         <span className="text-[17px] font-semibold tracking-[-0.02em]">Tickmark</span>
@@ -18,9 +21,9 @@ export default function SignInPage() {
         </p>
       )}
       <p className="max-w-sm text-center text-[12px] leading-relaxed text-ink-tertiary">
-        Resolving an exception records a correction in your name, so the queue needs a
-        signed-in user. The results, the close room and the rulebook stay public.
+        Sign in to import your own books and work their exception queue. What you import is
+        visible only to you. The demo company&rsquo;s results, close room and rulebook stay public.
       </p>
-    </div>
+    </main>
   );
 }

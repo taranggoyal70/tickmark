@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import { EntityPicker } from "@/components/entity-picker";
 import { Money, Panel } from "@/components/kit";
 import { Shell } from "@/components/shell";
@@ -8,6 +9,12 @@ import { cashView } from "@/lib/close/cash";
 import { queueEnabled } from "@/lib/store/queue";
 
 export const dynamic = "force-dynamic";
+
+export const metadata: Metadata = {
+  title: "Cash",
+  description:
+    "Cash position from the bank statement and the month ahead, with every projected line saying what it rests on.",
+};
 
 export default async function CashPage(props: PageProps<"/close/cash">) {
   const userId = await signedInUserId();

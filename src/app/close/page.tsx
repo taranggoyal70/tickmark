@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import { DecisionMix, TrendLine } from "@/components/charts";
 import { Panel, Stat } from "@/components/kit";
 import { EmptyRun, Shell } from "@/components/shell";
@@ -9,6 +10,12 @@ import { queueEnabled } from "@/lib/store/queue";
 import { RunClose } from "@/components/run-close";
 
 export const dynamic = "force-dynamic";
+
+export const metadata: Metadata = {
+  title: "Close performance",
+  description:
+    "Month-end closes of the same books by the same agent: what compiled rules settled, what the model decided and what still went to a controller, close by close.",
+};
 
 const COUNT: Record<number, string> = { 2: "Two", 3: "Three", 4: "Four", 5: "Five", 6: "Six", 7: "Seven", 8: "Eight" };
 

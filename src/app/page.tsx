@@ -174,12 +174,12 @@ export default async function Home() {
         </div>
       </header>
 
-      <main className="flex-1">
+      <main id="main" className="flex-1">
         {/* hero */}
         <section className="relative">
           <div className="wrap pt-[clamp(56px,12vh,140px)]">
             <h1 className="display-xl m-0">
-              <span className="split-line"><span className="text-faint" style={{ "--d": "0.05s" } as CSSProperties}>Models guess.</span></span>
+              <span className="split-line"><span className="text-model" style={{ "--d": "0.05s" } as CSSProperties}>Models guess.</span></span>
               <br />
               <span className="split-line"><span style={{ "--d": "0.3s" } as CSSProperties}>Rules don&rsquo;t.</span></span>
             </h1>

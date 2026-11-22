@@ -47,8 +47,8 @@ export function EntryCard({ entry, canDecide, showEntity, signedIn }: {
               <td className="py-1.5 text-ink-2">
                 <span className="font-mono text-ink">{l.glCode}</span> {l.glName}
               </td>
-              <td className="py-1.5 text-right">{l.debitCents ? <Money cents={l.debitCents} /> : <span className="text-faint">-</span>}</td>
-              <td className="py-1.5 text-right">{l.creditCents ? <Money cents={l.creditCents} /> : <span className="text-faint">-</span>}</td>
+              <td className="py-1.5 text-right">{l.debitCents ? <Money cents={l.debitCents} /> : <span className="text-muted">-</span>}</td>
+              <td className="py-1.5 text-right">{l.creditCents ? <Money cents={l.creditCents} /> : <span className="text-muted">-</span>}</td>
             </tr>
           ))}
           <tr className="border-t border-[var(--line-3)]">

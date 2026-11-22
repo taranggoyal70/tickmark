@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import { EntityPicker, PeriodPicker } from "@/components/entity-picker";
 import { Badge, Money, Panel } from "@/components/kit";
 import { Shell } from "@/components/shell";
@@ -8,6 +9,12 @@ import { buildBinder } from "@/lib/close/binder";
 import { queueEnabled } from "@/lib/store/queue";
 
 export const dynamic = "force-dynamic";
+
+export const metadata: Metadata = {
+  title: "Close binder",
+  description:
+    "Audit support for a closed period, read back from the ledger: who checked what, when and on what basis.",
+};
 
 export default async function BinderPage(props: PageProps<"/close/binder">) {
   const userId = await signedInUserId();

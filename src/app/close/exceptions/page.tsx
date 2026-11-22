@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { Badge, Panel } from "@/components/kit";
 import { Empty, Shell } from "@/components/shell";
@@ -7,6 +8,8 @@ import { listIntents, listQueue, queueEnabled } from "@/lib/store/queue";
 import { QueueRow } from "./queue-client";
 
 export const dynamic = "force-dynamic";
+
+export const metadata: Metadata = { title: "Exceptions" };
 
 const CAUSE_LABEL: Record<string, string> = {
   over_materiality: "Over materiality", low_confidence: "Low confidence",

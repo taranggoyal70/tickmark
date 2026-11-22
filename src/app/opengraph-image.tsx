@@ -27,7 +27,6 @@ export const alt =
 const PAPER = "#f3f2ee";
 const INK = "#161513";
 const MUTED = "#706d66";
-const QUIET = "#a29e95";
 const MODEL = "#8e897f";
 const SIGNAL = "#e2501d";
 const LINE = "rgba(22, 21, 19, 0.1)";
@@ -62,7 +61,7 @@ export default function OpengraphImage() {
         </div>
 
         <div style={{ display: "flex", flexDirection: "column", padding: "34px 64px 0", fontSize: 98, lineHeight: 0.95, letterSpacing: "-5.4px" }}>
-          <span style={{ color: QUIET }}>Models guess.</span>
+          <span style={{ color: MODEL }}>Models guess.</span>
           <span>Rules don&rsquo;t.</span>
         </div>
 

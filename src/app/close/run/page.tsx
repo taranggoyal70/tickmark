@@ -1,9 +1,16 @@
+import type { Metadata } from "next";
 import { CloseRoom } from "@/components/close-room";
 import { EmptyRun, Shell } from "@/components/shell";
 import { ProvenanceBanner } from "@/components/provenance";
 import { latestReport } from "@/lib/report";
 
 export const dynamic = "force-dynamic";
+
+export const metadata: Metadata = {
+  title: "Close room",
+  description:
+    "The same books closed twice, before the agent learned anything and after, with every recorded decision replayed in order, side by side.",
+};
 
 export default async function CloseRoomPage() {
   const report = await latestReport();

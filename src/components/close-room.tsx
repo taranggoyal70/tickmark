@@ -96,20 +96,23 @@ function Lane({ period, frames, running, side, unpriced }: {
           {!seen.length ? <li className="px-4 py-3 font-mono text-[12px] text-muted">Waiting to start.</li> : null}
         </ol>
 
-        {done ? (
-          <div className="border-t border-line px-4 py-3.5">
-            <p className="m-0 text-[14px] text-ink">
-              Closed. <span className="text-signal">{exceptions}</span> {exceptions === 1 ? "item needs" : "items need"} you.
-            </p>
-            <p className="m-0 mt-1 font-mono text-[11.5px] text-muted">
-              {ruleHits
-                ? `${ruleHits} settled by rules, with no model call.`
-                : unpriced
-                  ? "Nothing learned yet: every decision went to the model."
-                  : "Nothing learned yet: every call was paid for."}
-            </p>
-          </div>
-        ) : null}
+        {/* always mounted, so a screen reader announces the result when it lands */}
+        <div role="status" className={done ? "border-t border-line px-4 py-3.5" : ""}>
+          {done ? (
+            <>
+              <p className="m-0 text-[14px] text-ink">
+                Closed. <span className="text-signal">{exceptions}</span> {exceptions === 1 ? "item needs" : "items need"} you.
+              </p>
+              <p className="m-0 mt-1 font-mono text-[11.5px] text-muted">
+                {ruleHits
+                  ? `${ruleHits} settled by rules, with no model call.`
+                  : unpriced
+                    ? "Nothing learned yet: every decision went to the model."
+                    : "Nothing learned yet: every call was paid for."}
+              </p>
+            </>
+          ) : null}
+        </div>
       </div>
     </section>
   );
