@@ -10,7 +10,7 @@ and then it runs for free.
 
 <p align="center">
 <a href="https://github.com/taranggoyal70/tickmark/actions/workflows/ci.yml"><img alt="CI" src="https://github.com/taranggoyal70/tickmark/actions/workflows/ci.yml/badge.svg"></a>
-<a href="#verify-a-checkout"><img alt="Tests: 74 passing" src="https://img.shields.io/badge/tests-74%20passing-e2501d"></a>
+<a href="#verify-a-checkout"><img alt="Tests: 83 passing" src="https://img.shields.io/badge/tests-83%20passing-e2501d"></a>
 <a href="#measured-results"><img alt="Held-out unattended clears wrong: 0 of 677" src="https://img.shields.io/badge/held--out%20unattended%20clears%20wrong-0%20of%20677-e2501d"></a>
 <a href="LICENSE"><img alt="License: MIT" src="https://img.shields.io/badge/license-MIT-161513"></a>
 <a href="https://tickmark-kappa.vercel.app"><img alt="Demo" src="https://img.shields.io/badge/demo-tickmark--kappa.vercel.app-161513"></a>
@@ -339,8 +339,8 @@ npm run eval -- --check
 ```
 
 ```
-ℹ tests 74
-ℹ pass 74
+ℹ tests 83
+ℹ pass 83
 ℹ fail 0
 eval: 9 runs reproduce eval/results/offline.json exactly
 ```
@@ -445,15 +445,20 @@ The app is a standard Next.js build; Vercel needs no configuration file.
 ```bash
 npm run verify        # lint, typecheck, tests, eval reproduction, README graphics check
 npm run build         # production build, no credentials needed
+npm run smoke         # starts that build and requests every public route
 npm run verify:all    # adds the database suites; needs Supabase with migrations applied
 ```
+
+Every page renders on request, so a passing build does not show that a page renders. `npm run
+smoke` does: it checks each route's status, content type and one thing its body must contain, plus
+the security headers. It only sends GET requests.
 
 The database suites include `npm run verify:tenancy`, which acts as two made-up users and checks
 that neither can read or change the other's books, that the close allowance holds under
 parallel clicks, and that the public key cannot call the functions that take a user id. Point it at
 a scratch database: it creates and removes its own companies but never touches the demo.
 
-CI runs the first two, plus `npm run selftest`, on every pull request. The README graphics in
+CI runs the first three, plus `npm run selftest`, on every pull request. The README graphics in
 `docs/readme/` are generated from the eval by `npm run readme:assets`, and CI fails if they drift
 from the data.
 
@@ -493,8 +498,10 @@ approval. A **rule** is not a prompt.
   `0007_audit_sample.sql` allows the cause, but the persisted close (`run-period.ts`) does not set
   a rate yet.
 - **Contradiction checks cover coding rules**, not matching rules.
-- **Known advisories.** Four high-severity advisories remain in `neatlogs`' OpenTelemetry
-  dependencies; `neatlogs` is only loaded when `NEATLOGS_API_KEY` is set.
+- **Known advisories.** `npm audit` reports 14 (4 high, 10 moderate), all in `neatlogs`'
+  OpenTelemetry dependencies. None can be fixed without the `neatlogs` release that breaks the
+  production build, and `neatlogs` is only imported when `NEATLOGS_API_KEY` is set, so a deployment
+  without tracing never loads the affected code.
 
 ## Contributing and security
 

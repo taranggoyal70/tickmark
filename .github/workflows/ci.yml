@@ -38,3 +38,5 @@ jobs:
         run: npm run readme:assets -- --check
       - name: Production build
         run: npm run build
+      - name: Every route answers in the built app
+        run: npm run smoke
