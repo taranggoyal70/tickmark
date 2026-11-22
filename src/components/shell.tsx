@@ -1,8 +1,11 @@
 import { ThemedUserButton } from "./clerk-themed";
 import Link from "next/link";
 import { authConfigured } from "@/lib/auth";
+import { Logo, Mark } from "./mark";
 import { ThemeToggle } from "./theme-toggle";
 import type { ReactNode } from "react";
+
+export { Logo, Mark };
 
 const NAV = [
   { href: "/close", label: "Close" },
@@ -16,25 +19,6 @@ const NAV = [
   { href: "/ao", label: "AO build" },
   { href: "/setup", label: "Import" },
 ];
-
-export function Mark({ className = "" }: { className?: string }) {
-  // The tickmark itself: the check an accountant writes beside a verified line.
-  return (
-    <svg viewBox="0 0 20 20" className={className} aria-hidden="true">
-      <path d="M3 10.5 L7.5 15.5 L17 4.5" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" />
-    </svg>
-  );
-}
-
-/** The wordmark: the check in signal, the name in ink. */
-export function Logo() {
-  return (
-    <Link href="/" className="focus-ring flex shrink-0 items-center gap-2 rounded">
-      <Mark className="h-[15px] w-[15px] text-signal" />
-      <span className="text-[15px] font-semibold tracking-[-0.02em] text-ink">Tickmark</span>
-    </Link>
-  );
-}
 
 function NavLink({ href, label, active, block = false }: { href: string; label: string; active: boolean; block?: boolean }) {
   return (
