@@ -2,11 +2,17 @@
  * Close a period against books that were actually ingested.
  *
  *   npm run close -- --entity "Northwind Robotics, Inc." --period 2026-04
+ *   npm run close -- --entity "Acme, Inc." --period 2026-05 --owner user_2abc...
+ *
+ * Without --owner it closes the operator's company of that name, as loaded by
+ * `npm run ingest` without --owner. With it, that Clerk user's own company, as
+ * loaded through the app or by `npm run ingest -- --owner`.
  *
  * Unlike the eval harness this reads the entity's real data, applies the
  * Rulebook it has actually earned, and writes back what it decided: tickmarks,
  * a queue, and accrual entries drafted for approval.
  */
+import { booksFor } from "../src/lib/access";
 import { closePeriod } from "../src/lib/agent/run-period";
 import { findOperatorEntity } from "../src/lib/ingest/ingest";
 import { fmtUsd, MODELS, type ModelId } from "../src/lib/agent/pricing";
@@ -36,9 +42,15 @@ async function main() {
   console.log(`period   ${period}`);
   console.log(`provider ${providerLabel()} · ${effectiveModelId(requested ?? "anthropic/claude-opus-5")}\n`);
 
-  // an operator entity by name; a customer's books are closed from the browser
-  const entityId = await findOperatorEntity(entity);
-  if (!entityId) { console.error(`no entity named "${entity}": ingest its books first`); process.exit(2); }
+  // the operator's company by name, or with --owner that person's own one
+  const owner = arg("owner");
+  const entityId = owner
+    ? (await booksFor(owner)).find((b) => b.member && b.name === entity)?.id ?? null
+    : await findOperatorEntity(entity);
+  if (!entityId) {
+    console.error(`no entity named "${entity}"${owner ? ` owned by ${owner}` : " without an owner"}: ingest its books first`);
+    process.exit(2);
+  }
   const { result, persisted, rulebookVersion } = await closePeriod(entityId, period, requested);
   const s = result.stats;
 
@@ -47,7 +59,7 @@ async function main() {
   console.log(`queue    ${persisted.exceptions} exceptions opened for review`);
   console.log(`ledger   ${persisted.tickmarks} tickmarks written, ${persisted.journalEntries} accrual entries drafted`);
   console.log(`cost     ${fmtUsd(s.costMicros)} across ${s.llmCalls} model calls in ${(s.durationMs / 1000).toFixed(1)}s`);
-  if (!s.scored) console.log(`\nno answer key on these books, so accuracy is not reported — only what was done.`);
+  if (!s.scored) console.log(`\nno answer key on these books, so accuracy is not reported, only what was done.`);
   await flushTracing();
 }
 
