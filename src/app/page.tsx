@@ -141,7 +141,13 @@ function Bench({ n, title, unit, values, labels, format = String }: {
 export default async function Home() {
   const off = offlineHeldOut();
   const runs = modelRuns();
-  const report = await latestReport();
+  // The front door must not go down with the database. Without the recorded
+  // run the page drops the two figures drawn from it and keeps the rest, which
+  // comes from the committed eval results.
+  const report = await latestReport().catch((e: unknown) => {
+    console.error("landing page: the recorded run is unavailable", e);
+    return null;
+  });
   const closes = off.closes;
   const c1 = closes[0];
   const cN = closes[closes.length - 1];
