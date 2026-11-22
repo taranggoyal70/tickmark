@@ -60,7 +60,7 @@ The track lists six workflows. Tickmark does all six on ingested books.
 | **Closing the books**<br>`npm run close` · dashboard | Applies the entity's earned rulebook first, sends only the residue to the model, and writes tickmarks with their evidence. A provider outage does not stop the close. |
 | **Reconciling accounts**<br>`/close/reconciliation` | Handles one-to-one, batch, instalment and lockbox matches, names every residual (`fx`, `bank_fee`, `partial`, `timing`) and lists each unreconciled line at its amount. |
 | **Processing invoices**<br>AP coding · `/close/exceptions` | Codes GL account and department split per invoice. Anything not settled by a backtested rule goes to the queue with the reason it stopped. |
-| **Gathering audit support**<br>`/close/binder` · JSON / CSV | Assembles every tickmark, match and correction for a period into a binder an auditor can download (requires sign-in). |
+| **Gathering audit support**<br>`/close/binder` · JSON / CSV | Assembles every tickmark, match and correction for a period into a binder an auditor can download (the demo's by anyone, your own books' by you). |
 | **Preparing cash reports**<br>`/close/cash` | Reads actuals from the bank statement, not the ledger, because the bank is the source of truth for cash. |
 | **Updating forecasts**<br>`/close/cash` | Projects the next period with each line's basis and the number of periods behind it; a vendor seen once is labelled thin evidence, not averaged in. |
 
@@ -266,6 +266,8 @@ proves each by violating it and requiring the database to refuse:
 4. **Preparer is not approver**, as a constraint rather than a convention.
 5. **No rule activates without a backtest** and evidence from at least two corrections.
 6. **Every decision traces** to a rule and its corrections, or a close run and its evidence.
+7. **A decided journal entry is final.** A trigger refuses to rewrite the status, approver or lines
+   of a posted or rejected entry (`npm run verify:tenancy` checks this one).
 
 ```
 PASS  unbalanced journal entry is refused            debits 100 <> credits 0
@@ -306,6 +308,7 @@ PASS  activating a rule with 1 correction is refused evidence gate
 | Results must be reproducible | Seeded generator, offline stand-in model, committed results, CI `--check` | The headline measures the mechanism, not a model's skill |
 | A provider outage must not stop a close | Rules settle what they can; the rest is labelled `model_unavailable` | The close does less, visibly, instead of failing |
 | Authorization must not drift from routing | Check auth next to the data (server actions, the queue layout, the binder route) rather than by path matching | Each new write path has to remember to check |
+| Books stay with whoever imported them | Pages read only public demos and the viewer's memberships; every write carries the member scope inside its query | A new query that forgets the scope would leak; `npm run verify:tenancy` exercises every path that exists today |
 | The product must run without provisioning | Persistence behind one seam: Supabase when configured, `data/` otherwise | Database-only guarantees (triggers) are verified only when Supabase is present |
 
 ### Technology
@@ -363,7 +366,7 @@ close  rules  calls  coding  by-rule  match  by-rule  cleared  wrong  exc  contr
 | `npm run eval:model` | a model | The same eval through a real model; writes `eval/results/model-<id>.json` |
 | `npm run selftest` | nothing | The whole loop (close, gate, queue, corrections, gradient, backtest, rulebook) with a stand-in |
 | `npm run simulate` | a model | The bundled sample company with a real model; the dashboard renders its report |
-| `npm run ingest` / `npm run close` | Supabase | Import your own books, then close a period with the rulebook that entity has earned |
+| `npm run ingest` / `npm run close` | Supabase | Import your own books, then close a period with the rulebook that company has earned |
 | `npm run dev` | Clerk | The dashboard on http://localhost:3000; signing in unlocks the queue and writes |
 
 ### Bring your own books
@@ -371,9 +374,15 @@ close  rules  calls  coding  by-rule  match  by-rule  cleared  wrong  exc  contr
 ```bash
 npm run ingest -- --entity "Acme, Inc." --period 2026-05 \
                   --bank bank.csv --ledger gl.csv --invoices ap.csv \
-                  --settlements payouts.csv --processor Dodo
+                  --settlements payouts.csv --processor Dodo \
+                  --owner user_2abc...
 npm run close -- --entity "Acme, Inc." --period 2026-05
 ```
+
+Books belong to whoever imported them. Through the app's Import page that is the signed-in
+person; from the command line it is the Clerk user id in `--owner`. Without `--owner` the books
+are loaded for the operator only, and nobody can see them in the app. Two people importing
+"Acme, Inc." get two separate companies.
 
 The reader is forgiving about headers and money formats (`Posted Date`, `posted_date` and
 `POSTED-DATE` agree; `$1,234.56`, `(1,234.56)` and `-1234.56` mean the same thing) and strict about
@@ -400,20 +409,36 @@ Copy `.env.example` to `.env.local`. Nothing is needed for `npm test`, `npm run 
 
 | Variable | Used for |
 |---|---|
-| `NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY`, `CLERK_SECRET_KEY` | Sign-in: running a close, the exception queue, importing books, approving entries, the binder |
+| `NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY`, `CLERK_SECRET_KEY` | Sign-in: importing books, closing them, their exception queue, approving entries, their binder |
 | `SUPABASE_URL`, `SUPABASE_SERVICE_ROLE_KEY` | The system of record. Server-side only; without it, reports go to `data/` |
+| `NEXT_PUBLIC_SITE_URL` | The public origin for canonical links, the share card, `robots.txt` and the sitemap. On Vercel the production domain is used when unset |
+| `TICKMARK_CLOSES_PER_DAY` | Closes each signed-in person may start in a rolling 24 hours (default 10), to bound model spend. `0` turns closing off |
 | `TICKMARK_BASE_URL`, `TICKMARK_API_KEY`, `TICKMARK_MODEL` | Any OpenAI-compatible endpoint (Ollama, OpenRouter, a gateway). Checked first |
 | `TICKMARK_SUPPORTS_STRUCTURED_OUTPUTS` | `1` only if that endpoint and model support JSON Schema outputs |
 | `ANTHROPIC_API_KEY` | The Anthropic API directly. Checked second; with neither, the Vercel AI Gateway is used |
 | `TICKMARK_PRICE_IN`, `TICKMARK_PRICE_OUT` | USD per million tokens for a custom endpoint, so cost is priced rather than reported as $0 |
 | `TICKMARK_MAX_OUTPUT_TOKENS`, `TICKMARK_MODEL_TIMEOUT_MS` | Bounds on one generation (defaults 4096 and 300000); an invalid value fails at start-up |
-| `TICKMARK_PUBLIC_READ` | `1` lets anyone download a binder. Only for a public demo over synthetic books |
 | `NEATLOGS_API_KEY` | Optional tracing |
 | `ALLOW_PARTIAL_VERIFY` | `1` lets `npm run verify:all` pass while skipping the database suites |
 
 Create the Supabase project with the Data API's "automatically expose new tables" switched off and
 apply `supabase/migrations/` in order. The migrations grant only `service_role` and revoke `anon`
 and `authenticated`, so the publishable key cannot reach a ledger row; RLS is on as defence in depth.
+`npm run ingest -- --sample` loads the synthetic demo company and marks it public, so signed-out
+visitors have something to watch.
+
+### Deploy
+
+The app is a standard Next.js build; Vercel needs no configuration file.
+
+1. Apply every migration in `supabase/migrations/` to the production database, in order, before
+   the deploy that needs it. `0008_tenancy.sql` is safe to apply while the previous release is
+   still serving.
+2. Load the demo: `npm run ingest -- --sample` with the production `SUPABASE_*` values.
+3. Set the variables above in the host: Supabase, Clerk production keys, one model credential,
+   `NEXT_PUBLIC_SITE_URL` once a custom domain is attached, and `TICKMARK_CLOSES_PER_DAY`.
+4. Deploy, then point an uptime monitor at `GET /api/health`. It answers 200 while the app can
+   serve and 503 when the database does not answer within three seconds, and names the commit.
 
 ## Verify a checkout
 
@@ -422,6 +447,11 @@ npm run verify        # lint, typecheck, tests, eval reproduction, README graphi
 npm run build         # production build, no credentials needed
 npm run verify:all    # adds the database suites; needs Supabase with migrations applied
 ```
+
+The database suites include `npm run verify:tenancy`, which acts as two made-up users and checks
+that neither can read or change the other's books, that the close allowance holds under
+parallel clicks, and that the public key cannot call the functions that take a user id. Point it at
+a scratch database: it creates and removes its own companies but never touches the demo.
 
 CI runs the first two, plus `npm run selftest`, on every pull request. The README graphics in
 `docs/readme/` are generated from the eval by `npm run readme:assets`, and CI fails if they drift
@@ -440,6 +470,7 @@ src/lib/agent/
   controller.ts     the human gate, simulated from ground truth
   simulate.ts       the multi-period harness
 src/lib/store/      Supabase adapter and filesystem fallback behind one interface
+src/lib/access.ts   who may read and act on which books
 eval/               companies, the offline stand-in, the runner and committed results
 scripts/            CLI entry points, verification suites, README graphics, changelog
 supabase/migrations the schema; invariants live here as triggers
@@ -454,12 +485,13 @@ approval. A **rule** is not a prompt.
 
 - **Synthetic data only.** The eval and the hosted demo run on generated books. Real books can be
   imported, but no measurement here comes from one.
-- **No tenant isolation.** `entity_members` exists in the schema but nothing enforces it: any
-  signed-in user can act on any entity. Do not import real books for more than one organization.
+- **One owner per company.** Books are readable and writable only by the person who imported
+  them; there is no way yet to invite a colleague to the same books. Books imported before
+  migration `0008_tenancy.sql` have no owner on record and are visible to nobody until an operator
+  adds an `entity_members` row or the owner imports them again.
 - **Audit sampling is measured, not yet live.** `runClose` supports it and migration
   `0007_audit_sample.sql` allows the cause, but the persisted close (`run-period.ts`) does not set
   a rate yet.
-- **The binder requires sign-in** unless `TICKMARK_PUBLIC_READ=1`.
 - **Contradiction checks cover coding rules**, not matching rules.
 - **Known advisories.** Four high-severity advisories remain in `neatlogs`' OpenTelemetry
   dependencies; `neatlogs` is only loaded when `NEATLOGS_API_KEY` is set.
