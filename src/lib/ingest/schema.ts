@@ -162,7 +162,7 @@ export function parseCsv(text: string): Record<string, string>[] {
      */
     if (r.length !== headers.length) {
       out[MALFORMED] = `expected ${headers.length} columns, found ${r.length}` +
-        (r.length > headers.length ? " — an unquoted comma inside a value, perhaps a thousands separator?" : "");
+        (r.length > headers.length ? ": an unquoted comma inside a value, perhaps a thousands separator?" : "");
     }
     return out;
   });

@@ -6,7 +6,7 @@
  * have taken work off the queue. No answer key, no fixture, no model - only
  * what the entity's own history supports.
  */
-import { db } from "../src/lib/ingest/ingest";
+import { db, findOperatorEntity } from "../src/lib/ingest/ingest";
 import { closePeriod } from "../src/lib/agent/run-period";
 import { adoptRule, listQueue, resolveException } from "../src/lib/store/queue";
 
@@ -27,12 +27,16 @@ const check = (name: string, ok: boolean, detail = "") => {
 const kindOf = (t: string) => (t === "ap_invoice" ? "coding" : t === "accrual" ? "accrual" : "matching");
 
 async function main() {
+  const entityId = await findOperatorEntity(ENTITY);
+  if (!entityId) { console.error(`no "${ENTITY}" to test on: run \`npm run ingest -- --sample\` first.`); process.exit(1); }
+  const scope = [entityId];
+
   console.log(`closing ${FIRST} on ingested books\n`);
-  const first = await closePeriod(ENTITY, FIRST);
+  const first = await closePeriod(entityId, FIRST);
   check("a close runs on ingested books", first.persisted.exceptions > 0 || first.result.tickmarks.length > 0,
     `${first.persisted.exceptions} exceptions, ${first.persisted.tickmarks} tickmarks`);
 
-  const queue = await listQueue(300);
+  const queue = await listQueue(scope, 300);
   if (!queue) { check("queue materialised", false); process.exit(1); }
 
   const byScope = new Map<string, typeof queue.items>();
@@ -43,26 +47,26 @@ async function main() {
   }
   const pair = [...byScope.entries()].find(([, xs]) => xs.length >= 2);
   if (!pair) { check("a vendor recurs in the queue", false, "nothing to teach it"); process.exit(1); }
-  const [scope, [a, b]] = pair;
-  console.log(`\n  teaching it: ${scope.replace("|", " · ")}\n`);
+  const [taught, [a, b]] = pair;
+  console.log(`\n  teaching it: ${taught.replace("|", " · ")}\n`);
 
-  const one = await resolveException(a.id, { action: "accept" }, "Controller A", true);
+  const one = await resolveException(a.id, { action: "accept" }, "Controller A", true, scope);
   check("one correction does not make a rule", one.kind === "intent_recorded", one.kind);
 
-  const two = await resolveException(b.id, { action: "accept" }, "Controller B", true);
+  const two = await resolveException(b.id, { action: "accept" }, "Controller B", true, scope);
   check("a second correction proposes one", two.kind === "rule_proposed",
     two.kind === "rule_proposed" ? `${two.ruleName} · fired ${two.fired}× @ ${(two.precision * 100).toFixed(0)}%` : two.kind);
 
   let adopted = false;
   if (two.kind === "rule_proposed" && two.adoptable) {
-    await adoptRule(two.ruleId, "Controller B", true);
+    await adoptRule(two.ruleId, "Controller B", true, scope);
     adopted = true;
   }
   check("the rule is adopted only if it survived the replay", adopted === (two.kind === "rule_proposed" && two.adoptable),
-    adopted ? "adopted" : "refused — replay too weak");
+    adopted ? "adopted" : "refused: replay too weak");
 
   console.log(`\nclosing ${NEXT} with the rulebook it earned\n`);
-  const next = await closePeriod(ENTITY, NEXT);
+  const next = await closePeriod(entityId, NEXT);
   check("the next close loads the earned rulebook", next.rulebookVersion > 0, `v${next.rulebookVersion}`);
   check("rules settle work at no cost", next.result.stats.ruleHits > 0, `${next.result.stats.ruleHits} rule hits`);
   check("tickmarks are written to the ledger", next.persisted.tickmarks > 0, `${next.persisted.tickmarks} tickmarks`);

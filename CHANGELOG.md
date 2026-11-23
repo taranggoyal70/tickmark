@@ -8,6 +8,10 @@ Tickmark has no tagged releases yet; changes are grouped by month, newest first.
 
 ### Added
 
+- **cli:** Close --owner closes a person's own books (b99a0d4)
+- **security:** HSTS and the CSP directives that cannot break sign-in (8d16790)
+- 404 and error pages, robots, sitemap, manifest and a health check (724a13a)
+- **brand:** Tickmark icons and a share card drawn from the eval (ce3773e)
 - **ui:** Paper and ink redesign (b41dcd5)
 - **auth:** Run read-only without Clerk keys (4d3b611)
 - AO page, security headers and honest unpriced wording (b391811)
@@ -16,6 +20,10 @@ Tickmark has no tagged releases yet; changes are grouped by month, newest first.
 
 ### Fixed
 
+- **landing:** The front page survives a database outage (4d33deb)
+- **a11y:** Page titles, skip link, landmarks, contrast and motion (856bb20)
+- **seo:** Only the landing page declares itself canonical (15b8d7a)
+- **security:** Scope every read and write to the books a user owns (a96d3fc)
 - **auth:** Theme Clerk widgets light and dark (2793881)
 - **model:** Route api.openai.com through OpenAI's own provider (e75470c)
 - **eval:** Truncate reported shares instead of rounding them (dd5d7c4)
@@ -26,6 +34,10 @@ Tickmark has no tagged releases yet; changes are grouped by month, newest first.
 
 ### Maintenance
 
+- **readme:** Retake the landing screenshots with the new headline grey (d002bed)
+- **ci:** Request every route of the production build (67d41e7)
+- Tenancy, deploy steps and the new settings (21fc211)
+- Regenerate CHANGELOG.md (c2cfa0c)
 - Regenerate CHANGELOG.md (8718202)
 - **readme:** Retheme graphics and add app screenshots (7a8f328)
 - **eval:** Move result types into eval/summary.ts (557e51a)

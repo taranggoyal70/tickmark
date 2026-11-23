@@ -89,7 +89,7 @@ function Outcome({ outcome, onAdopt, busy }: {
   );
 }
 
-export function QueueRow({ item }: { item: QueueItem }) {
+export function QueueRow({ item, showEntity = false }: { item: QueueItem; showEntity?: boolean }) {
   const [always, setAlways] = useState(false);
   const [outcome, setOutcome] = useState<ResolveOutcome | null>(null);
   const [adoption, setAdoption] = useState<AdoptionOutcome | null>(null);
@@ -108,6 +108,7 @@ export function QueueRow({ item }: { item: QueueItem }) {
     <div className={`panel p-4 transition-opacity ${outcome ? "opacity-95" : ""}`}>
       <div className="flex flex-wrap items-start justify-between gap-3">
         <div className="min-w-0 flex-1">
+          {showEntity ? <div className="label mb-1.5">{item.entity}</div> : null}
           <div className="mb-1.5 flex flex-wrap items-center gap-2">
             <span className="font-mono text-[12px] text-ink">{item.subjectRef}</span>
             <Badge kind={c.badge}>{c.label}</Badge>

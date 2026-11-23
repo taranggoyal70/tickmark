@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import type { CSSProperties, ReactNode } from "react";
 import { ActionSummary, OP } from "@/components/rule-parts";
@@ -9,6 +10,10 @@ import { latestReport } from "@/lib/report";
 import { modelRuns, offlineHeldOut, type CloseSummary } from "@/lib/results";
 
 export const dynamic = "force-dynamic";
+
+// The landing page is the one canonical URL; the root layout sets none, so
+// other pages never claim to be this one.
+export const metadata: Metadata = { alternates: { canonical: "/" } };
 
 const MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
 const month = (period: string) => MONTHS[Number(period.slice(5, 7)) - 1] ?? period;
@@ -136,7 +141,13 @@ function Bench({ n, title, unit, values, labels, format = String }: {
 export default async function Home() {
   const off = offlineHeldOut();
   const runs = modelRuns();
-  const report = await latestReport();
+  // The front door must not go down with the database. Without the recorded
+  // run the page drops the two figures drawn from it and keeps the rest, which
+  // comes from the committed eval results.
+  const report = await latestReport().catch((e: unknown) => {
+    console.error("landing page: the recorded run is unavailable", e);
+    return null;
+  });
   const closes = off.closes;
   const c1 = closes[0];
   const cN = closes[closes.length - 1];
@@ -169,12 +180,12 @@ export default async function Home() {
         </div>
       </header>
 
-      <main className="flex-1">
+      <main id="main" className="flex-1">
         {/* hero */}
         <section className="relative">
           <div className="wrap pt-[clamp(56px,12vh,140px)]">
             <h1 className="display-xl m-0">
-              <span className="split-line"><span className="text-faint" style={{ "--d": "0.05s" } as CSSProperties}>Models guess.</span></span>
+              <span className="split-line"><span className="text-model" style={{ "--d": "0.05s" } as CSSProperties}>Models guess.</span></span>
               <br />
               <span className="split-line"><span style={{ "--d": "0.3s" } as CSSProperties}>Rules don&rsquo;t.</span></span>
             </h1>

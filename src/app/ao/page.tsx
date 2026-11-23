@@ -3,7 +3,7 @@ import Link from "next/link";
 import { Mark, Shell } from "@/components/shell";
 
 export const metadata: Metadata = {
-  title: "Built with AO · Tickmark",
+  title: "Built with AO",
   description:
     "How Tickmark used AO sessions, isolated worktrees, and orchestrated review to build and verify a finance agent.",
 };

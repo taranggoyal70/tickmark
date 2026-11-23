@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { authConfigured, signedInUserId } from "@/lib/auth";
 import { redirect } from "next/navigation";
@@ -5,6 +6,8 @@ import { Empty, Shell } from "@/components/shell";
 import { ImportForm } from "./import-form";
 
 export const dynamic = "force-dynamic";
+
+export const metadata: Metadata = { title: "Import your books" };
 
 export default async function SetupPage() {
   // read-only deployment: explain in place rather than bounce to a sign-in

@@ -1,20 +1,29 @@
+import type { Metadata } from "next";
 import { DecisionMix, TrendLine } from "@/components/charts";
 import { Panel, Stat } from "@/components/kit";
 import { EmptyRun, Shell } from "@/components/shell";
 import { ProvenanceBanner } from "@/components/provenance";
 import { latestReport, minutes, pct, usdFromMicros } from "@/lib/report";
-import { listEntitiesWithPeriods } from "@/lib/agent/run-period";
+import { booksFor, closesPerDay } from "@/lib/access";
+import { signedInUserId } from "@/lib/auth";
 import { queueEnabled } from "@/lib/store/queue";
 import { RunClose } from "@/components/run-close";
 
 export const dynamic = "force-dynamic";
 
+export const metadata: Metadata = {
+  title: "Close performance",
+  description:
+    "Month-end closes of the same books by the same agent: what compiled rules settled, what the model decided and what still went to a controller, close by close.",
+};
+
 const COUNT: Record<number, string> = { 2: "Two", 3: "Three", 4: "Four", 5: "Five", 6: "Six", 7: "Seven", 8: "Eight" };
 
 export default async function ClosePage() {
   const report = await latestReport();
-  // books that have actually been ingested, which is what a close can run on
-  const entities = queueEnabled() ? await listEntitiesWithPeriods().catch(() => []) : [];
+  // books this person may close: their own imports, never the shared demo
+  const userId = await signedInUserId();
+  const mine = queueEnabled() && userId ? (await booksFor(userId)).filter((b) => b.member) : [];
   if (!report) return <Shell active="/close"><EmptyRun /></Shell>;
 
   const P = report.periods;
@@ -30,9 +39,9 @@ export default async function ClosePage() {
     <Shell active="/close">
       <ProvenanceBanner report={report} />
 
-      {entities.length ? (
-        <div className="mb-6">
-          <RunClose entity={entities[0].name} periods={entities[0].periods} />
+      {mine.length ? (
+        <div className="mb-10">
+          <RunClose books={mine.map(({ id, name, periods }) => ({ id, name, periods }))} limit={closesPerDay()} />
         </div>
       ) : null}
       <div className="mb-10 flex flex-wrap items-end justify-between gap-6">

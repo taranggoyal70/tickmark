@@ -44,9 +44,10 @@ const nextPeriod = (code: string) => {
 };
 const avg = (xs: number[]) => (xs.length ? Math.round(xs.reduce((a, b) => a + b, 0) / xs.length) : 0);
 
-export async function cashView(entityName: string): Promise<CashView | null> {
+/** The caller has already decided the viewer may read this entity (src/lib/access.ts). */
+export async function cashView(entityId: string): Promise<CashView | null> {
   const c = db();
-  const { data: ent } = await c.from("entities").select("id, name").eq("name", entityName).maybeSingle();
+  const { data: ent } = await c.from("entities").select("id, name").eq("id", entityId).maybeSingle();
   if (!ent) return null;
 
   const [{ data: pers }, { data: bank }, { data: inv }] = await Promise.all([
@@ -94,7 +95,7 @@ export async function cashView(entityName: string): Promise<CashView | null> {
       amountCents: -avg(amounts.slice(-3)),
       basis: amounts.length >= 2
         ? `average of the last ${Math.min(3, amounts.length)} invoices`
-        : "a single invoice — not yet a pattern",
+        : "a single invoice, not yet a pattern",
       observations: amounts.length,
       certain: false,
     }))
@@ -108,7 +109,7 @@ export async function cashView(entityName: string): Promise<CashView | null> {
     expectedOutflows.unshift({
       label: `${committed.length} invoices already received, unpaid`,
       amountCents: committedOutflowCents,
-      basis: "invoiced and outstanding — a commitment, not a projection",
+      basis: "invoiced and outstanding: a commitment, not a projection",
       observations: committed.length,
       certain: true,
     });

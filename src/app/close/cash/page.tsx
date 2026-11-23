@@ -1,20 +1,31 @@
+import type { Metadata } from "next";
+import { EntityPicker } from "@/components/entity-picker";
 import { Money, Panel } from "@/components/kit";
 import { Shell } from "@/components/shell";
 import { NoBooks } from "@/components/no-books";
-import { listEntitiesWithPeriods } from "@/lib/agent/run-period";
+import { booksFor, pickBooks } from "@/lib/access";
+import { signedInUserId } from "@/lib/auth";
 import { cashView } from "@/lib/close/cash";
 import { queueEnabled } from "@/lib/store/queue";
 
 export const dynamic = "force-dynamic";
 
-export default async function CashPage() {
-  const entities = queueEnabled() ? await listEntitiesWithPeriods().catch(() => []) : [];
-  const view = entities.length ? await cashView(entities[0].name) : null;
+export const metadata: Metadata = {
+  title: "Cash",
+  description:
+    "Cash position from the bank statement and the month ahead, with every projected line saying what it rests on.",
+};
 
-  if (!view) {
+export default async function CashPage(props: PageProps<"/close/cash">) {
+  const userId = await signedInUserId();
+  const books = queueEnabled() ? await booksFor(userId) : [];
+  const entity = pickBooks(books, (await props.searchParams)?.entity);
+  const view = entity ? await cashView(entity.id) : null;
+
+  if (!entity || !view) {
     return (
       <Shell active="/close/cash">
-        <NoBooks view="The cash position" />
+        <NoBooks view="The cash position" signedIn={Boolean(userId)} />
       </Shell>
     );
   }
@@ -24,6 +35,7 @@ export default async function CashPage() {
 
   return (
     <Shell active="/close/cash">
+      <EntityPicker books={books} current={entity} href={(b) => `/close/cash?entity=${b.id}`} />
       <div className="mb-6 max-w-2xl">
         <div className="eyebrow mb-4">Cash · {view.entity}</div>
         <h1 className="display-md m-0 text-ink">Position and the month ahead</h1>

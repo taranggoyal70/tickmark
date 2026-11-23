@@ -46,6 +46,8 @@ the pull request.
 
 Keep them focused, describe the behaviour change and how you verified it, and
 make sure `npm run verify` passes. CI runs the same checks plus a production
-build.
+build and `npm run smoke`, which starts that build and requests every public
+route. A new page belongs in its list in `scripts/smoke.ts`, and in
+`src/app/sitemap.ts` if anyone may read it.
 
 Report security issues privately; see [SECURITY.md](SECURITY.md).

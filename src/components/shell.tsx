@@ -1,8 +1,11 @@
 import { ThemedUserButton } from "./clerk-themed";
 import Link from "next/link";
 import { authConfigured } from "@/lib/auth";
+import { Logo, Mark } from "./mark";
 import { ThemeToggle } from "./theme-toggle";
 import type { ReactNode } from "react";
+
+export { Logo, Mark };
 
 const NAV = [
   { href: "/close", label: "Close" },
@@ -16,25 +19,6 @@ const NAV = [
   { href: "/ao", label: "AO build" },
   { href: "/setup", label: "Import" },
 ];
-
-export function Mark({ className = "" }: { className?: string }) {
-  // The tickmark itself: the check an accountant writes beside a verified line.
-  return (
-    <svg viewBox="0 0 20 20" className={className} aria-hidden="true">
-      <path d="M3 10.5 L7.5 15.5 L17 4.5" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" />
-    </svg>
-  );
-}
-
-/** The wordmark: the check in signal, the name in ink. */
-export function Logo() {
-  return (
-    <Link href="/" className="focus-ring flex shrink-0 items-center gap-2 rounded">
-      <Mark className="h-[15px] w-[15px] text-signal" />
-      <span className="text-[15px] font-semibold tracking-[-0.02em] text-ink">Tickmark</span>
-    </Link>
-  );
-}
 
 function NavLink({ href, label, active, block = false }: { href: string; label: string; active: boolean; block?: boolean }) {
   return (
@@ -68,18 +52,19 @@ export function Shell({ children, active }: { children: ReactNode; active?: stri
             <details className="relative min-[1180px]:hidden">
               <summary className="btn btn-sm cursor-pointer list-none marker:content-none">Menu</summary>
               <nav aria-label="Close workspace" className="panel-raised absolute right-0 top-11 flex w-56 flex-col gap-0.5 p-2">
-                <div className="label px-2.5 pt-1.5 pb-2 leading-snug">Northwind Robotics · synthetic books</div>
+                <div className="label px-2.5 pt-1.5 pb-2 leading-snug">Close workspace</div>
                 {NAV.map((n) => <NavLink key={n.href} {...n} active={active === n.href} block />)}
               </nav>
             </details>
           </div>
         </div>
       </header>
-      <main className="wrap flex-1 py-8 sm:py-12">{children}</main>
+      <main id="main" className="wrap flex-1 py-8 sm:py-12">{children}</main>
       <footer className="mt-16 border-t border-line">
         <div className="wrap flex flex-wrap justify-between gap-x-6 gap-y-2 py-6 font-mono text-[11.5px] text-muted">
           <span>Tickmark · every automated decision traces to a rule or a close run</span>
-          <span>Northwind Robotics, Inc. · synthetic books, no real financial data</span>
+          {/* signed-in controllers see their own books here too, so this speaks only for the demo */}
+          <span>The demo company, Northwind Robotics, is synthetic: no real financial data</span>
         </div>
       </footer>
     </div>
