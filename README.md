@@ -429,7 +429,9 @@ visitors have something to watch.
 
 ### Deploy
 
-The app is a standard Next.js build; Vercel needs no configuration file.
+The app is a standard Next.js build; Vercel needs no configuration file. The Vercel project is
+connected to this repository, so a merge to `main` deploys production and a pull request gets a
+preview.
 
 1. Apply every migration in `supabase/migrations/` to the production database, in order, before
    the deploy that needs it. `0008_tenancy.sql` is safe to apply while the previous release is
@@ -437,8 +439,10 @@ The app is a standard Next.js build; Vercel needs no configuration file.
 2. Load the demo: `npm run ingest -- --sample` with the production `SUPABASE_*` values.
 3. Set the variables above in the host: Supabase, Clerk production keys, one model credential,
    `NEXT_PUBLIC_SITE_URL` once a custom domain is attached, and `TICKMARK_CLOSES_PER_DAY`.
-4. Deploy, then point an uptime monitor at `GET /api/health`. It answers 200 while the app can
-   serve and 503 when the database does not answer within three seconds, and names the commit.
+4. Merge, then watch `GET /api/health`. It answers 200 while the app can serve and 503 when the
+   database does not answer within three seconds, and names the commit. The `Uptime` workflow
+   asks it every 15 minutes and fails, which emails the maintainer, after three bad answers a
+   minute apart. Set the repository variable `HEALTH_URL` to watch another deployment.
 
 ## Verify a checkout
 

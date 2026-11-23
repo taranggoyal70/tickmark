@@ -1,0 +1,33 @@
+name: Uptime
+
+# Asks the production health check every 15 minutes. A failed run is GitHub's
+# alert: it emails whoever last changed this schedule. Point it elsewhere with
+# the repository variable HEALTH_URL.
+on:
+  schedule:
+    - cron: "7,22,37,52 * * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  health:
+    name: Production answers and its database is up
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    env:
+      HEALTH_URL: ${{ vars.HEALTH_URL || 'https://tickmark-kappa.vercel.app/api/health' }}
+    steps:
+      - name: GET /api/health, three tries a minute apart
+        run: |
+          for try in 1 2 3; do
+            code=$(curl -s -o body.json -w '%{http_code}' --max-time 15 "$HEALTH_URL" || echo 000)
+            echo "try $try: HTTP $code $(cat body.json 2>/dev/null)"
+            if [ "$code" = 200 ] && jq -e '.status == "ok" and .database == "ok"' body.json > /dev/null; then
+              exit 0
+            fi
+            [ "$try" = 3 ] || sleep 60
+          done
+          echo "::error::$HEALTH_URL is not healthy"
+          exit 1
